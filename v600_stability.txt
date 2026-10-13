@@ -1,0 +1,813 @@
+==============================================================================
+v600 STABILITY CHECK -- READ-ONLY
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Design:
+  - No quantile recomputation. No tag redefinition. No new filters.
+  - Periods fixed BEFORE looking at results: DISCOVERY / VALIDATION / OOS.
+  - Horizons fixed BEFORE: H1, H3, H6, H12, H24.
+  - Reach levels fixed BEFORE: +-0.10%, +-0.20%.
+  - Dependence handled by BLOCK BOOTSTRAP OVER SESSIONS.
+    (Each session is one block; intra-session bars are not independent.)
+  - Every rate reported with 95% block-bootstrap CI.
+  - Baseline (all bars, no tag filter) reported per period.
+  - Macro price drift: v600 dataset has NO close price; cannot be verified here.
+
+  WARNING: CIs here describe WITHIN-SAMPLE uncertainty of a conditional
+  rate, given the chosen block structure. They do NOT certify the effect
+  as a strategy edge, and they do NOT replace out-of-sample confirmation.
+
+Rows total: 25856
+
+REAL PRICE DRIFT BY PERIOD
+------------------------------------------------------------------------------
+For each period: first-bar close, last-bar close, absolute and
+percent drift, and mean close over the period.
+
+  DISCOVERY    first_close=304.00  last_close=315.45  drift=+11.45 (+3.77%)  mean_close=300.21
+  VALIDATION   first_close=315.05  last_close=320.24  drift=+5.19 (+1.65%)  mean_close=319.84
+  OOS          first_close=321.55  last_close=281.65  drift=-39.90 (-12.41%)  mean_close=290.50
+  ALL          first_close=304.00  last_close=285.11  drift=-18.89 (-6.21%)  mean_close=302.29
+
+==============================================================================
+BASELINE (no tag filter), BY PERIOD
+==============================================================================
+
+BASELINE (no tag filter)  |  PERIOD: DISCOVERY
+  N_rows=11615  sessions=115
+    H 1  UP= 13.77% DOWN= 15.65% NEITHER= 69.22% BOTH=  1.36%  (DOWN-UP)= +1.89 pp
+    H 3  UP= 27.01% DOWN= 31.69% NEITHER= 39.62% BOTH=  1.68%  (DOWN-UP)= +4.68 pp
+    H 6  UP= 34.26% DOWN= 40.64% NEITHER= 23.38% BOTH=  1.72%  (DOWN-UP)= +6.38 pp
+    H12  UP= 37.06% DOWN= 43.81% NEITHER= 17.49% BOTH=  1.64%  (DOWN-UP)= +6.74 pp
+    H24  UP= 33.73% DOWN= 39.85% NEITHER= 25.01% BOTH=  1.40%  (DOWN-UP)= +6.12 pp
+
+BASELINE (no tag filter)  |  PERIOD: VALIDATION
+  N_rows=6565  sessions=65
+    H 1  UP=  7.48% DOWN=  8.48% NEITHER= 83.84% BOTH=  0.20%  (DOWN-UP)= +1.01 pp
+    H 3  UP= 20.32% DOWN= 22.89% NEITHER= 56.51% BOTH=  0.27%  (DOWN-UP)= +2.57 pp
+    H 6  UP= 29.38% DOWN= 34.41% NEITHER= 35.81% BOTH=  0.40%  (DOWN-UP)= +5.03 pp
+    H12  UP= 34.58% DOWN= 41.52% NEITHER= 23.37% BOTH=  0.53%  (DOWN-UP)= +6.95 pp
+    H24  UP= 32.70% DOWN= 40.61% NEITHER= 26.18% BOTH=  0.50%  (DOWN-UP)= +7.91 pp
+
+BASELINE (no tag filter)  |  PERIOD: OOS
+  N_rows=7575  sessions=75
+    H 1  UP= 20.83% DOWN= 22.90% NEITHER= 52.88% BOTH=  3.38%  (DOWN-UP)= +2.07 pp
+    H 3  UP= 33.27% DOWN= 37.29% NEITHER= 25.52% BOTH=  3.92%  (DOWN-UP)= +4.03 pp
+    H 6  UP= 37.31% DOWN= 42.94% NEITHER= 15.84% BOTH=  3.91%  (DOWN-UP)= +5.64 pp
+    H12  UP= 37.23% DOWN= 43.87% NEITHER= 15.10% BOTH=  3.80%  (DOWN-UP)= +6.64 pp
+    H24  UP= 32.99% DOWN= 39.09% NEITHER= 24.69% BOTH=  3.23%  (DOWN-UP)= +6.10 pp
+
+BASELINE (no tag filter)  |  PERIOD: ALL
+  N_rows=25856  sessions=256
+    H 1  UP= 14.23% DOWN= 15.93% NEITHER= 68.19% BOTH=  1.65%  (DOWN-UP)= +1.71 pp
+    H 3  UP= 27.14% DOWN= 31.07% NEITHER= 39.81% BOTH=  1.97%  (DOWN-UP)= +3.93 pp
+    H 6  UP= 33.94% DOWN= 39.72% NEITHER= 24.32% BOTH=  2.02%  (DOWN-UP)= +5.78 pp
+    H12  UP= 36.51% DOWN= 43.24% NEITHER= 18.27% BOTH=  1.99%  (DOWN-UP)= +6.73 pp
+    H24  UP= 33.27% DOWN= 39.82% NEITHER= 25.21% BOTH=  1.71%  (DOWN-UP)= +6.55 pp
+
+==============================================================================
+UP-GROUP TAGS
+==============================================================================
+
+TAG: state_trend_up  |  PERIOD: DISCOVERY
+  N_rows=3879  sessions=104
+    H 1  UP= 12.74% DOWN= 14.90% NEITHER= 71.36% BOTH=  1.01%  (DOWN-UP)= +2.17 pp
+             reach+0.1%: N=3836 rate= 13.89% CI95=[ 11.50%,  15.94%]
+             reach-0.1%: N=3836 rate= 16.08% CI95=[ 13.72%,  18.44%]
+             reach+0.2%: N=3836 rate=  3.83% CI95=[  2.78%,   4.80%]
+             reach-0.2%: N=3836 rate=  3.36% CI95=[  2.50%,   4.29%]
+    H 3  UP= 24.62% DOWN= 31.94% NEITHER= 42.18% BOTH=  1.26%  (DOWN-UP)= +7.32 pp
+             reach+0.1%: N=3754 rate= 29.17% CI95=[ 25.29%,  32.59%]
+             reach-0.1%: N=3754 rate= 36.55% CI95=[ 32.96%,  40.05%]
+             reach+0.2%: N=3754 rate= 11.00% CI95=[  8.48%,  13.13%]
+             reach-0.2%: N=3754 rate= 12.81% CI95=[ 10.14%,  15.22%]
+    H 6  UP= 30.63% DOWN= 41.71% NEITHER= 26.32% BOTH=  1.34%  (DOWN-UP)=+11.09 pp
+             reach+0.1%: N=3636 rate= 40.29% CI95=[ 35.83%,  44.53%]
+             reach-0.1%: N=3636 rate= 52.92% CI95=[ 48.57%,  57.41%]
+             reach+0.2%: N=3636 rate= 19.00% CI95=[ 15.41%,  22.30%]
+             reach-0.2%: N=3636 rate= 24.45% CI95=[ 20.33%,  28.43%]
+    H12  UP= 33.67% DOWN= 45.63% NEITHER= 19.39% BOTH=  1.31%  (DOWN-UP)=+11.96 pp
+             reach+0.1%: N=3418 rate= 52.19% CI95=[ 46.48%,  56.62%]
+             reach-0.1%: N=3418 rate= 67.26% CI95=[ 62.19%,  72.15%]
+             reach+0.2%: N=3418 rate= 28.73% CI95=[ 23.63%,  33.26%]
+             reach-0.2%: N=3418 rate= 39.64% CI95=[ 34.11%,  45.16%]
+    H24  UP= 31.81% DOWN= 43.10% NEITHER= 23.87% BOTH=  1.21%  (DOWN-UP)=+11.29 pp
+             reach+0.1%: N=3043 rate= 62.57% CI95=[ 57.14%,  67.80%]
+             reach-0.1%: N=3043 rate= 79.43% CI95=[ 74.31%,  84.43%]
+             reach+0.2%: N=3043 rate= 38.45% CI95=[ 32.26%,  44.44%]
+             reach-0.2%: N=3043 rate= 58.46% CI95=[ 51.76%,  65.43%]
+
+TAG: state_trend_up  |  PERIOD: VALIDATION
+  N_rows=2019  sessions=57
+    H 1  UP=  7.38% DOWN=  8.82% NEITHER= 83.75% BOTH=  0.05%  (DOWN-UP)= +1.44 pp
+             reach+0.1%: N=2001 rate=  7.50% CI95=[  5.74%,   9.31%]
+             reach-0.1%: N=2001 rate=  8.95% CI95=[  7.29%,  10.89%]
+             reach+0.2%: N=2001 rate=  1.70% CI95=[  1.08%,   2.23%]
+             reach-0.2%: N=2001 rate=  1.40% CI95=[  0.77%,   2.06%]
+    H 3  UP= 18.47% DOWN= 24.32% NEITHER= 57.06% BOTH=  0.15%  (DOWN-UP)= +5.84 pp
+             reach+0.1%: N=1962 rate= 19.83% CI95=[ 16.51%,  22.99%]
+             reach-0.1%: N=1962 rate= 25.84% CI95=[ 21.86%,  29.67%]
+             reach+0.2%: N=1962 rate=  6.17% CI95=[  4.32%,   7.95%]
+             reach-0.2%: N=1962 rate=  6.42% CI95=[  4.60%,   8.56%]
+    H 6  UP= 25.21% DOWN= 37.25% NEITHER= 37.25% BOTH=  0.30%  (DOWN-UP)=+12.04 pp
+             reach+0.1%: N=1910 rate= 29.48% CI95=[ 24.95%,  34.07%]
+             reach-0.1%: N=1910 rate= 42.88% CI95=[ 38.12%,  48.51%]
+             reach+0.2%: N=1910 rate= 11.10% CI95=[  8.03%,  14.25%]
+             reach-0.2%: N=1910 rate= 16.02% CI95=[ 12.67%,  19.79%]
+    H12  UP= 29.42% DOWN= 46.46% NEITHER= 23.68% BOTH=  0.45%  (DOWN-UP)=+17.04 pp
+             reach+0.1%: N=1807 rate= 40.84% CI95=[ 34.83%,  46.00%]
+             reach-0.1%: N=1807 rate= 61.32% CI95=[ 56.15%,  67.69%]
+             reach+0.2%: N=1807 rate= 18.43% CI95=[ 13.58%,  23.19%]
+             reach-0.2%: N=1807 rate= 33.59% CI95=[ 28.82%,  39.47%]
+    H24  UP= 29.87% DOWN= 45.27% NEITHER= 24.37% BOTH=  0.50%  (DOWN-UP)=+15.40 pp
+             reach+0.1%: N=1582 rate= 56.45% CI95=[ 48.39%,  63.13%]
+             reach-0.1%: N=1582 rate= 77.31% CI95=[ 70.91%,  83.82%]
+             reach+0.2%: N=1582 rate= 32.24% CI95=[ 24.13%,  39.84%]
+             reach-0.2%: N=1582 rate= 54.17% CI95=[ 46.27%,  62.13%]
+
+TAG: state_trend_up  |  PERIOD: OOS
+  N_rows=2402  sessions=63
+    H 1  UP= 18.03% DOWN= 21.82% NEITHER= 57.95% BOTH=  2.21%  (DOWN-UP)= +3.79 pp
+             reach+0.1%: N=2385 rate= 20.38% CI95=[ 16.44%,  24.23%]
+             reach-0.1%: N=2385 rate= 24.19% CI95=[ 19.73%,  28.34%]
+             reach+0.2%: N=2385 rate=  7.00% CI95=[  5.22%,   8.99%]
+             reach-0.2%: N=2385 rate=  7.46% CI95=[  5.38%,   9.76%]
+    H 3  UP= 29.81% DOWN= 38.18% NEITHER= 29.23% BOTH=  2.79%  (DOWN-UP)= +8.37 pp
+             reach+0.1%: N=2354 rate= 37.68% CI95=[ 32.31%,  42.63%]
+             reach-0.1%: N=2354 rate= 46.09% CI95=[ 40.88%,  51.50%]
+             reach+0.2%: N=2354 rate= 18.73% CI95=[ 15.05%,  22.36%]
+             reach-0.2%: N=2354 rate= 21.28% CI95=[ 17.20%,  25.94%]
+    H 6  UP= 34.18% DOWN= 46.17% NEITHER= 16.86% BOTH=  2.79%  (DOWN-UP)=+11.99 pp
+             reach+0.1%: N=2305 rate= 48.89% CI95=[ 42.59%,  54.40%]
+             reach-0.1%: N=2305 rate= 60.78% CI95=[ 55.08%,  66.55%]
+             reach+0.2%: N=2305 rate= 29.02% CI95=[ 23.63%,  33.70%]
+             reach-0.2%: N=2305 rate= 35.62% CI95=[ 29.91%,  41.79%]
+    H12  UP= 35.64% DOWN= 48.79% NEITHER= 12.78% BOTH=  2.79%  (DOWN-UP)=+13.16 pp
+             reach+0.1%: N=2215 rate= 59.55% CI95=[ 53.27%,  65.39%]
+             reach-0.1%: N=2215 rate= 73.18% CI95=[ 67.86%,  78.82%]
+             reach+0.2%: N=2215 rate= 39.46% CI95=[ 33.01%,  45.91%]
+             reach-0.2%: N=2215 rate= 52.55% CI95=[ 47.23%,  59.22%]
+    H24  UP= 34.05% DOWN= 44.38% NEITHER= 19.07% BOTH=  2.50%  (DOWN-UP)=+10.32 pp
+             reach+0.1%: N=1973 rate= 70.81% CI95=[ 64.94%,  75.67%]
+             reach-0.1%: N=1973 rate= 82.51% CI95=[ 77.41%,  87.62%]
+             reach+0.2%: N=1973 rate= 53.22% CI95=[ 45.12%,  60.02%]
+             reach-0.2%: N=1973 rate= 68.12% CI95=[ 61.89%,  75.04%]
+
+TAG: state_trend_up  |  PERIOD: ALL
+  N_rows=8356  sessions=225
+    H 1  UP= 12.94% DOWN= 15.40% NEITHER= 70.55% BOTH=  1.11%  (DOWN-UP)= +2.47 pp
+             reach+0.1%: N=8278 rate= 14.18% CI95=[ 12.27%,  16.01%]
+             reach-0.1%: N=8278 rate= 16.67% CI95=[ 14.84%,  18.75%]
+             reach+0.2%: N=8278 rate=  4.22% CI95=[  3.42%,   5.10%]
+             reach-0.2%: N=8278 rate=  4.06% CI95=[  3.22%,   5.02%]
+    H 3  UP= 24.64% DOWN= 31.91% NEITHER= 42.03% BOTH=  1.42%  (DOWN-UP)= +7.26 pp
+             reach+0.1%: N=8126 rate= 29.37% CI95=[ 26.73%,  31.89%]
+             reach-0.1%: N=8126 rate= 36.71% CI95=[ 34.18%,  39.28%]
+             reach+0.2%: N=8126 rate= 12.06% CI95=[ 10.24%,  14.03%]
+             reach-0.2%: N=8126 rate= 13.73% CI95=[ 11.93%,  15.66%]
+    H 6  UP= 30.40% DOWN= 41.97% NEITHER= 26.14% BOTH=  1.50%  (DOWN-UP)=+11.57 pp
+             reach+0.1%: N=7907 rate= 40.22% CI95=[ 37.10%,  43.69%]
+             reach-0.1%: N=7907 rate= 52.80% CI95=[ 49.64%,  55.78%]
+             reach+0.2%: N=7907 rate= 20.02% CI95=[ 17.55%,  22.80%]
+             reach-0.2%: N=7907 rate= 25.69% CI95=[ 22.84%,  28.73%]
+    H12  UP= 33.27% DOWN= 46.80% NEITHER= 18.41% BOTH=  1.52%  (DOWN-UP)=+13.54 pp
+             reach+0.1%: N=7496 rate= 51.73% CI95=[ 48.19%,  55.38%]
+             reach-0.1%: N=7496 rate= 67.61% CI95=[ 64.12%,  70.95%]
+             reach+0.2%: N=7496 rate= 29.51% CI95=[ 25.95%,  33.29%]
+             reach-0.2%: N=7496 rate= 42.06% CI95=[ 38.32%,  45.71%]
+    H24  UP= 32.06% DOWN= 44.04% NEITHER= 22.50% BOTH=  1.40%  (DOWN-UP)=+11.98 pp
+             reach+0.1%: N=6650 rate= 63.79% CI95=[ 60.09%,  67.36%]
+             reach-0.1%: N=6650 rate= 79.91% CI95=[ 76.50%,  83.20%]
+             reach+0.2%: N=6650 rate= 41.58% CI95=[ 37.35%,  45.97%]
+             reach-0.2%: N=6650 rate= 60.41% CI95=[ 55.67%,  64.51%]
+
+TAG: state_move_up_6  |  PERIOD: DISCOVERY
+  N_rows=2902  sessions=115
+    H 1  UP= 18.19% DOWN= 19.85% NEITHER= 59.99% BOTH=  1.96%  (DOWN-UP)= +1.65 pp
+             reach+0.1%: N=2875 rate= 20.35% CI95=[ 17.93%,  22.46%]
+             reach-0.1%: N=2875 rate= 22.02% CI95=[ 19.38%,  24.39%]
+             reach+0.2%: N=2875 rate=  7.03% CI95=[  5.62%,   8.52%]
+             reach-0.2%: N=2875 rate=  5.15% CI95=[  3.88%,   6.52%]
+    H 3  UP= 29.88% DOWN= 37.59% NEITHER= 30.29% BOTH=  2.24%  (DOWN-UP)= +7.72 pp
+             reach+0.1%: N=2819 rate= 36.86% CI95=[ 33.38%,  39.85%]
+             reach-0.1%: N=2819 rate= 44.55% CI95=[ 41.11%,  47.56%]
+             reach+0.2%: N=2819 rate= 17.38% CI95=[ 14.67%,  19.84%]
+             reach-0.2%: N=2819 rate= 16.71% CI95=[ 13.87%,  19.59%]
+    H 6  UP= 34.46% DOWN= 45.45% NEITHER= 17.82% BOTH=  2.27%  (DOWN-UP)=+10.99 pp
+             reach+0.1%: N=2721 rate= 48.77% CI95=[ 44.61%,  52.47%]
+             reach-0.1%: N=2721 rate= 59.24% CI95=[ 55.68%,  62.48%]
+             reach+0.2%: N=2721 rate= 27.31% CI95=[ 23.36%,  30.57%]
+             reach-0.2%: N=2721 rate= 29.69% CI95=[ 26.00%,  33.19%]
+    H12  UP= 35.04% DOWN= 46.21% NEITHER= 16.71% BOTH=  2.03%  (DOWN-UP)=+11.16 pp
+             reach+0.1%: N=2523 rate= 59.89% CI95=[ 56.18%,  63.36%]
+             reach-0.1%: N=2523 rate= 69.92% CI95=[ 66.75%,  73.19%]
+             reach+0.2%: N=2523 rate= 38.13% CI95=[ 33.86%,  42.15%]
+             reach-0.2%: N=2523 rate= 43.32% CI95=[ 38.73%,  47.50%]
+    H24  UP= 32.36% DOWN= 41.66% NEITHER= 24.22% BOTH=  1.76%  (DOWN-UP)= +9.30 pp
+             reach+0.1%: N=2217 rate= 70.32% CI95=[ 66.43%,  73.66%]
+             reach-0.1%: N=2217 rate= 79.70% CI95=[ 76.74%,  82.78%]
+             reach+0.2%: N=2217 rate= 48.85% CI95=[ 43.40%,  53.79%]
+             reach-0.2%: N=2217 rate= 59.99% CI95=[ 55.04%,  65.02%]
+
+TAG: state_move_up_6  |  PERIOD: VALIDATION
+  N_rows=1362  sessions=65
+    H 1  UP= 11.82% DOWN= 11.60% NEITHER= 76.51% BOTH=  0.07%  (DOWN-UP)= -0.22 pp
+             reach+0.1%: N=1350 rate= 12.00% CI95=[  9.60%,  14.17%]
+             reach-0.1%: N=1350 rate= 11.78% CI95=[  9.40%,  14.30%]
+             reach+0.2%: N=1350 rate=  3.11% CI95=[  2.18%,   3.95%]
+             reach-0.2%: N=1350 rate=  1.63% CI95=[  0.98%,   2.35%]
+    H 3  UP= 24.82% DOWN= 29.00% NEITHER= 45.96% BOTH=  0.22%  (DOWN-UP)= +4.19 pp
+             reach+0.1%: N=1330 rate= 26.84% CI95=[ 23.53%,  29.66%]
+             reach-0.1%: N=1330 rate= 30.75% CI95=[ 26.48%,  34.89%]
+             reach+0.2%: N=1330 rate=  9.70% CI95=[  6.88%,  12.17%]
+             reach-0.2%: N=1330 rate=  6.39% CI95=[  4.84%,   7.89%]
+    H 6  UP= 31.28% DOWN= 41.56% NEITHER= 26.80% BOTH=  0.37%  (DOWN-UP)=+10.28 pp
+             reach+0.1%: N=1296 rate= 37.04% CI95=[ 32.70%,  40.86%]
+             reach-0.1%: N=1296 rate= 49.07% CI95=[ 43.66%,  54.01%]
+             reach+0.2%: N=1296 rate= 16.67% CI95=[ 13.04%,  20.00%]
+             reach-0.2%: N=1296 rate= 16.51% CI95=[ 13.11%,  19.39%]
+    H12  UP= 33.99% DOWN= 47.28% NEITHER= 18.36% BOTH=  0.37%  (DOWN-UP)=+13.29 pp
+             reach+0.1%: N=1212 rate= 48.51% CI95=[ 44.40%,  52.36%]
+             reach-0.1%: N=1212 rate= 66.01% CI95=[ 61.27%,  70.62%]
+             reach+0.2%: N=1212 rate= 24.26% CI95=[ 19.99%,  28.29%]
+             reach-0.2%: N=1212 rate= 33.00% CI95=[ 29.12%,  37.18%]
+    H24  UP= 32.01% DOWN= 44.79% NEITHER= 22.83% BOTH=  0.37%  (DOWN-UP)=+12.78 pp
+             reach+0.1%: N=1069 rate= 59.59% CI95=[ 54.42%,  64.32%]
+             reach-0.1%: N=1069 rate= 79.14% CI95=[ 75.16%,  83.31%]
+             reach+0.2%: N=1069 rate= 35.73% CI95=[ 30.37%,  40.66%]
+             reach-0.2%: N=1069 rate= 53.41% CI95=[ 48.30%,  58.73%]
+
+TAG: state_move_up_6  |  PERIOD: OOS
+  N_rows=2360  sessions=75
+    H 1  UP= 21.82% DOWN= 26.95% NEITHER= 46.48% BOTH=  4.75%  (DOWN-UP)= +5.13 pp
+             reach+0.1%: N=2336 rate= 26.84% CI95=[ 23.46%,  29.84%]
+             reach-0.1%: N=2336 rate= 32.02% CI95=[ 27.79%,  35.37%]
+             reach+0.2%: N=2336 rate= 10.87% CI95=[  8.65%,  12.91%]
+             reach-0.2%: N=2336 rate= 11.09% CI95=[  8.62%,  13.22%]
+    H 3  UP= 32.63% DOWN= 41.14% NEITHER= 20.68% BOTH=  5.55%  (DOWN-UP)= +8.52 pp
+             reach+0.1%: N=2291 rate= 45.09% CI95=[ 40.88%,  49.08%]
+             reach-0.1%: N=2291 rate= 53.56% CI95=[ 48.97%,  57.42%]
+             reach+0.2%: N=2291 rate= 24.31% CI95=[ 20.52%,  27.71%]
+             reach-0.2%: N=2291 rate= 27.59% CI95=[ 23.07%,  31.68%]
+    H 6  UP= 35.64% DOWN= 46.27% NEITHER= 12.71% BOTH=  5.38%  (DOWN-UP)=+10.64 pp
+             reach+0.1%: N=2219 rate= 56.69% CI95=[ 51.97%,  60.60%]
+             reach-0.1%: N=2219 rate= 67.28% CI95=[ 63.01%,  71.26%]
+             reach+0.2%: N=2219 rate= 35.87% CI95=[ 31.10%,  40.07%]
+             reach-0.2%: N=2219 rate= 43.85% CI95=[ 38.19%,  48.97%]
+    H12  UP= 35.13% DOWN= 46.53% NEITHER= 13.26% BOTH=  5.08%  (DOWN-UP)=+11.40 pp
+             reach+0.1%: N=2085 rate= 66.52% CI95=[ 62.17%,  70.28%]
+             reach-0.1%: N=2085 rate= 78.56% CI95=[ 74.58%,  82.24%]
+             reach+0.2%: N=2085 rate= 46.76% CI95=[ 41.13%,  51.54%]
+             reach-0.2%: N=2085 rate= 58.51% CI95=[ 52.62%,  63.35%]
+    H24  UP= 31.91% DOWN= 41.10% NEITHER= 22.42% BOTH=  4.58%  (DOWN-UP)= +9.19 pp
+             reach+0.1%: N=1834 rate= 76.61% CI95=[ 72.74%,  80.01%]
+             reach-0.1%: N=1834 rate= 86.75% CI95=[ 82.99%,  90.15%]
+             reach+0.2%: N=1834 rate= 59.76% CI95=[ 54.32%,  64.64%]
+             reach-0.2%: N=1834 rate= 73.12% CI95=[ 68.05%,  78.03%]
+
+TAG: state_move_up_6  |  PERIOD: ALL
+  N_rows=6660  sessions=256
+    H 1  UP= 18.14% DOWN= 20.65% NEITHER= 58.66% BOTH=  2.55%  (DOWN-UP)= +2.51 pp
+             reach+0.1%: N=6597 rate= 20.89% CI95=[ 19.00%,  22.71%]
+             reach-0.1%: N=6597 rate= 23.42% CI95=[ 21.12%,  25.74%]
+             reach+0.2%: N=6597 rate=  7.56% CI95=[  6.45%,   8.70%]
+             reach-0.2%: N=6597 rate=  6.52% CI95=[  5.33%,   7.89%]
+    H 3  UP= 29.77% DOWN= 37.07% NEITHER= 30.17% BOTH=  2.99%  (DOWN-UP)= +7.30 pp
+             reach+0.1%: N=6476 rate= 37.65% CI95=[ 35.39%,  39.96%]
+             reach-0.1%: N=6476 rate= 44.84% CI95=[ 42.38%,  47.32%]
+             reach+0.2%: N=6476 rate= 18.21% CI95=[ 16.16%,  20.18%]
+             reach-0.2%: N=6476 rate= 18.44% CI95=[ 16.17%,  20.99%]
+    H 6  UP= 34.22% DOWN= 44.97% NEITHER= 17.84% BOTH=  2.97%  (DOWN-UP)=+10.75 pp
+             reach+0.1%: N=6272 rate= 49.08% CI95=[ 46.49%,  51.51%]
+             reach-0.1%: N=6272 rate= 59.98% CI95=[ 57.54%,  62.29%]
+             reach+0.2%: N=6272 rate= 28.08% CI95=[ 25.62%,  30.53%]
+             reach-0.2%: N=6272 rate= 31.97% CI95=[ 29.10%,  34.93%]
+    H12  UP= 34.88% DOWN= 46.58% NEITHER= 15.78% BOTH=  2.76%  (DOWN-UP)=+11.70 pp
+             reach+0.1%: N=5854 rate= 59.89% CI95=[ 57.21%,  62.03%]
+             reach-0.1%: N=5854 rate= 72.19% CI95=[ 69.99%,  74.47%]
+             reach+0.2%: N=5854 rate= 38.30% CI95=[ 35.29%,  41.21%]
+             reach-0.2%: N=5854 rate= 46.60% CI95=[ 43.48%,  49.59%]
+    H24  UP= 32.16% DOWN= 42.15% NEITHER= 23.23% BOTH=  2.46%  (DOWN-UP)= +9.98 pp
+             reach+0.1%: N=5152 rate= 70.44% CI95=[ 67.99%,  72.67%]
+             reach-0.1%: N=5152 rate= 82.14% CI95=[ 80.13%,  84.20%]
+             reach+0.2%: N=5152 rate= 49.96% CI95=[ 46.76%,  53.19%]
+             reach-0.2%: N=5152 rate= 63.39% CI95=[ 60.16%,  66.58%]
+
+TAG: state_above_vwap_high  |  PERIOD: DISCOVERY
+  N_rows=2901  sessions=109
+    H 1  UP= 15.34% DOWN= 16.68% NEITHER= 66.49% BOTH=  1.48%  (DOWN-UP)= +1.34 pp
+             reach+0.1%: N=2856 rate= 17.09% CI95=[ 14.02%,  20.78%]
+             reach-0.1%: N=2856 rate= 18.45% CI95=[ 15.41%,  21.63%]
+             reach+0.2%: N=2856 rate=  5.74% CI95=[  4.20%,   7.47%]
+             reach-0.2%: N=2856 rate=  3.89% CI95=[  2.70%,   5.23%]
+    H 3  UP= 27.34% DOWN= 33.78% NEITHER= 37.02% BOTH=  1.86%  (DOWN-UP)= +6.45 pp
+             reach+0.1%: N=2765 rate= 33.67% CI95=[ 29.03%,  38.72%]
+             reach-0.1%: N=2765 rate= 40.25% CI95=[ 35.98%,  44.47%]
+             reach+0.2%: N=2765 rate= 15.05% CI95=[ 11.64%,  18.56%]
+             reach-0.2%: N=2765 rate= 14.32% CI95=[ 11.15%,  17.67%]
+    H 6  UP= 31.99% DOWN= 42.05% NEITHER= 24.16% BOTH=  1.79%  (DOWN-UP)=+10.07 pp
+             reach+0.1%: N=2627 rate= 45.30% CI95=[ 39.87%,  50.95%]
+             reach-0.1%: N=2627 rate= 56.57% CI95=[ 51.95%,  61.06%]
+             reach+0.2%: N=2627 rate= 24.55% CI95=[ 19.95%,  29.12%]
+             reach-0.2%: N=2627 rate= 26.72% CI95=[ 22.40%,  31.52%]
+    H12  UP= 32.16% DOWN= 42.74% NEITHER= 23.51% BOTH=  1.59%  (DOWN-UP)=+10.58 pp
+             reach+0.1%: N=2366 rate= 56.17% CI95=[ 49.64%,  61.71%]
+             reach-0.1%: N=2366 rate= 69.06% CI95=[ 63.89%,  73.58%]
+             reach+0.2%: N=2366 rate= 35.33% CI95=[ 28.24%,  41.66%]
+             reach-0.2%: N=2366 rate= 40.19% CI95=[ 34.33%,  46.58%]
+    H24  UP= 26.58% DOWN= 35.88% NEITHER= 36.26% BOTH=  1.28%  (DOWN-UP)= +9.31 pp
+             reach+0.1%: N=1901 rate= 66.02% CI95=[ 59.24%,  72.42%]
+             reach-0.1%: N=1901 rate= 78.64% CI95=[ 73.33%,  83.92%]
+             reach+0.2%: N=1901 rate= 45.55% CI95=[ 36.91%,  53.62%]
+             reach-0.2%: N=1901 rate= 56.34% CI95=[ 48.92%,  63.45%]
+
+TAG: state_above_vwap_high  |  PERIOD: VALIDATION
+  N_rows=1717  sessions=64
+    H 1  UP=  8.62% DOWN=  9.26% NEITHER= 82.06% BOTH=  0.06%  (DOWN-UP)= +0.64 pp
+             reach+0.1%: N=1694 rate=  8.80% CI95=[  6.74%,  10.91%]
+             reach-0.1%: N=1694 rate=  9.45% CI95=[  7.52%,  11.62%]
+             reach+0.2%: N=1694 rate=  2.13% CI95=[  1.36%,   2.88%]
+             reach-0.2%: N=1694 rate=  1.53% CI95=[  0.92%,   2.31%]
+    H 3  UP= 19.57% DOWN= 27.90% NEITHER= 52.30% BOTH=  0.23%  (DOWN-UP)= +8.33 pp
+             reach+0.1%: N=1653 rate= 21.23% CI95=[ 17.18%,  24.82%]
+             reach-0.1%: N=1653 rate= 29.95% CI95=[ 25.54%,  34.09%]
+             reach+0.2%: N=1653 rate=  6.90% CI95=[  4.96%,   8.92%]
+             reach-0.2%: N=1653 rate=  7.62% CI95=[  5.70%,   9.85%]
+    H 6  UP= 25.63% DOWN= 41.18% NEITHER= 32.79% BOTH=  0.41%  (DOWN-UP)=+15.55 pp
+             reach+0.1%: N=1595 rate= 30.91% CI95=[ 25.90%,  35.42%]
+             reach-0.1%: N=1595 rate= 48.71% CI95=[ 42.66%,  54.87%]
+             reach+0.2%: N=1595 rate= 11.72% CI95=[  8.82%,  14.59%]
+             reach-0.2%: N=1595 rate= 19.25% CI95=[ 15.30%,  23.51%]
+    H12  UP= 27.20% DOWN= 47.87% NEITHER= 24.34% BOTH=  0.58%  (DOWN-UP)=+20.68 pp
+             reach+0.1%: N=1476 rate= 40.85% CI95=[ 34.23%,  46.86%]
+             reach-0.1%: N=1476 rate= 66.94% CI95=[ 60.28%,  73.93%]
+             reach+0.2%: N=1476 rate= 18.22% CI95=[ 13.76%,  22.07%]
+             reach-0.2%: N=1476 rate= 38.01% CI95=[ 30.57%,  45.77%]
+    H24  UP= 23.70% DOWN= 43.91% NEITHER= 31.80% BOTH=  0.58%  (DOWN-UP)=+20.21 pp
+             reach+0.1%: N=1222 rate= 51.64% CI95=[ 43.25%,  58.82%]
+             reach-0.1%: N=1222 rate= 81.91% CI95=[ 75.16%,  88.13%]
+             reach+0.2%: N=1222 rate= 26.35% CI95=[ 19.34%,  32.94%]
+             reach-0.2%: N=1222 rate= 57.36% CI95=[ 46.77%,  67.28%]
+
+TAG: state_above_vwap_high  |  PERIOD: OOS
+  N_rows=1922  sessions=70
+    H 1  UP= 19.09% DOWN= 24.87% NEITHER= 52.81% BOTH=  3.23%  (DOWN-UP)= +5.78 pp
+             reach+0.1%: N=1899 rate= 22.59% CI95=[ 17.91%,  27.16%]
+             reach-0.1%: N=1899 rate= 28.44% CI95=[ 23.42%,  32.53%]
+             reach+0.2%: N=1899 rate=  8.64% CI95=[  5.81%,  11.39%]
+             reach-0.2%: N=1899 rate=  9.32% CI95=[  6.44%,  12.02%]
+    H 3  UP= 29.45% DOWN= 40.48% NEITHER= 26.01% BOTH=  4.06%  (DOWN-UP)=+11.03 pp
+             reach+0.1%: N=1858 rate= 39.94% CI95=[ 33.20%,  46.15%]
+             reach-0.1%: N=1858 rate= 51.51% CI95=[ 45.12%,  56.88%]
+             reach+0.2%: N=1858 rate= 20.51% CI95=[ 15.04%,  25.75%]
+             reach-0.2%: N=1858 rate= 25.19% CI95=[ 20.25%,  29.91%]
+    H 6  UP= 32.62% DOWN= 46.46% NEITHER= 16.96% BOTH=  3.95%  (DOWN-UP)=+13.84 pp
+             reach+0.1%: N=1785 rate= 51.32% CI95=[ 43.21%,  57.86%]
+             reach-0.1%: N=1785 rate= 66.22% CI95=[ 59.83%,  72.41%]
+             reach+0.2%: N=1785 rate= 31.88% CI95=[ 24.65%,  38.20%]
+             reach-0.2%: N=1785 rate= 42.02% CI95=[ 36.19%,  48.38%]
+    H12  UP= 31.84% DOWN= 45.84% NEITHER= 18.42% BOTH=  3.90%  (DOWN-UP)=+14.00 pp
+             reach+0.1%: N=1651 rate= 60.99% CI95=[ 52.81%,  67.67%]
+             reach-0.1%: N=1651 rate= 77.71% CI95=[ 70.17%,  84.67%]
+             reach+0.2%: N=1651 rate= 41.37% CI95=[ 32.56%,  48.61%]
+             reach-0.2%: N=1651 rate= 60.93% CI95=[ 53.84%,  68.49%]
+    H24  UP= 26.59% DOWN= 39.13% NEITHER= 30.80% BOTH=  3.49%  (DOWN-UP)=+12.54 pp
+             reach+0.1%: N=1372 rate= 69.46% CI95=[ 61.87%,  75.28%]
+             reach-0.1%: N=1372 rate= 83.82% CI95=[ 75.51%,  91.75%]
+             reach+0.2%: N=1372 rate= 53.13% CI95=[ 42.65%,  60.83%]
+             reach-0.2%: N=1372 rate= 73.18% CI95=[ 65.62%,  81.82%]
+
+TAG: state_above_vwap_high  |  PERIOD: ALL
+  N_rows=6573  sessions=244
+    H 1  UP= 14.67% DOWN= 17.15% NEITHER= 66.58% BOTH=  1.61%  (DOWN-UP)= +2.48 pp
+             reach+0.1%: N=6482 rate= 16.51% CI95=[ 14.30%,  18.85%]
+             reach-0.1%: N=6482 rate= 19.02% CI95=[ 16.83%,  21.42%]
+             reach+0.2%: N=6482 rate=  5.63% CI95=[  4.53%,   6.84%]
+             reach-0.2%: N=6482 rate=  4.86% CI95=[  3.78%,   6.15%]
+    H 3  UP= 25.92% DOWN= 34.25% NEITHER= 37.76% BOTH=  2.07%  (DOWN-UP)= +8.32 pp
+             reach+0.1%: N=6309 rate= 32.24% CI95=[ 29.14%,  35.17%]
+             reach-0.1%: N=6309 rate= 40.88% CI95=[ 38.05%,  44.14%]
+             reach+0.2%: N=6309 rate= 14.49% CI95=[ 12.18%,  16.90%]
+             reach-0.2%: N=6309 rate= 15.82% CI95=[ 13.54%,  18.26%]
+    H 6  UP= 30.53% DOWN= 43.18% NEITHER= 24.24% BOTH=  2.05%  (DOWN-UP)=+12.64 pp
+             reach+0.1%: N=6040 rate= 43.25% CI95=[ 39.56%,  47.02%]
+             reach-0.1%: N=6040 rate= 57.38% CI95=[ 54.20%,  60.66%]
+             reach+0.2%: N=6040 rate= 23.29% CI95=[ 20.30%,  26.90%]
+             reach-0.2%: N=6040 rate= 29.34% CI95=[ 26.03%,  32.76%]
+    H12  UP= 30.81% DOWN= 45.08% NEITHER= 22.12% BOTH=  1.99%  (DOWN-UP)=+14.27 pp
+             reach+0.1%: N=5526 rate= 53.53% CI95=[ 49.28%,  57.20%]
+             reach-0.1%: N=5526 rate= 71.17% CI95=[ 67.78%,  74.66%]
+             reach+0.2%: N=5526 rate= 32.61% CI95=[ 28.70%,  36.71%]
+             reach-0.2%: N=5526 rate= 45.98% CI95=[ 41.79%,  50.40%]
+    H24  UP= 25.89% DOWN= 38.99% NEITHER= 33.38% BOTH=  1.73%  (DOWN-UP)=+13.10 pp
+             reach+0.1%: N=4524 rate= 63.24% CI95=[ 59.09%,  67.16%]
+             reach-0.1%: N=4524 rate= 81.23% CI95=[ 77.36%,  85.28%]
+             reach+0.2%: N=4524 rate= 42.77% CI95=[ 38.00%,  47.36%]
+             reach-0.2%: N=4524 rate= 61.98% CI95=[ 57.23%,  67.13%]
+
+==============================================================================
+DOWN-GROUP TAGS
+==============================================================================
+
+TAG: state_trend_down  |  PERIOD: DISCOVERY
+  N_rows=3906  sessions=102
+    H 1  UP= 15.36% DOWN= 17.51% NEITHER= 65.44% BOTH=  1.69%  (DOWN-UP)= +2.15 pp
+             reach+0.1%: N=3864 rate= 17.24% CI95=[ 14.70%,  19.61%]
+             reach-0.1%: N=3864 rate= 19.41% CI95=[ 16.83%,  21.69%]
+             reach+0.2%: N=3864 rate=  4.61% CI95=[  3.40%,   5.83%]
+             reach-0.2%: N=3864 rate=  5.36% CI95=[  3.89%,   6.71%]
+    H 3  UP= 29.90% DOWN= 32.62% NEITHER= 35.54% BOTH=  1.95%  (DOWN-UP)= +2.71 pp
+             reach+0.1%: N=3784 rate= 36.47% CI95=[ 33.12%,  39.70%]
+             reach-0.1%: N=3784 rate= 38.64% CI95=[ 35.36%,  41.55%]
+             reach+0.2%: N=3784 rate= 14.27% CI95=[ 11.46%,  16.78%]
+             reach-0.2%: N=3784 rate= 16.91% CI95=[ 14.01%,  19.67%]
+    H 6  UP= 38.38% DOWN= 40.09% NEITHER= 19.59% BOTH=  1.95%  (DOWN-UP)= +1.72 pp
+             reach+0.1%: N=3667 rate= 51.98% CI95=[ 48.09%,  55.40%]
+             reach-0.1%: N=3667 rate= 52.99% CI95=[ 49.26%,  56.55%]
+             reach+0.2%: N=3667 rate= 24.38% CI95=[ 20.75%,  27.63%]
+             reach-0.2%: N=3667 rate= 28.50% CI95=[ 24.95%,  32.11%]
+    H12  UP= 40.42% DOWN= 42.04% NEITHER= 15.64% BOTH=  1.89%  (DOWN-UP)= +1.61 pp
+             reach+0.1%: N=3436 rate= 65.13% CI95=[ 60.98%,  69.08%]
+             reach-0.1%: N=3436 rate= 66.12% CI95=[ 62.11%,  69.62%]
+             reach+0.2%: N=3436 rate= 38.59% CI95=[ 33.70%,  42.92%]
+             reach-0.2%: N=3436 rate= 42.58% CI95=[ 37.67%,  46.74%]
+    H24  UP= 36.12% DOWN= 38.45% NEITHER= 23.78% BOTH=  1.64%  (DOWN-UP)= +2.33 pp
+             reach+0.1%: N=2999 rate= 74.99% CI95=[ 69.81%,  79.77%]
+             reach-0.1%: N=2999 rate= 77.23% CI95=[ 73.50%,  80.75%]
+             reach+0.2%: N=2999 rate= 53.85% CI95=[ 47.17%,  60.09%]
+             reach-0.2%: N=2999 rate= 60.55% CI95=[ 55.20%,  65.17%]
+
+TAG: state_trend_down  |  PERIOD: VALIDATION
+  N_rows=2128  sessions=60
+    H 1  UP=  8.79% DOWN=  8.88% NEITHER= 82.05% BOTH=  0.28%  (DOWN-UP)= +0.09 pp
+             reach+0.1%: N=2104 rate=  9.17% CI95=[  7.65%,  10.83%]
+             reach-0.1%: N=2104 rate=  9.27% CI95=[  7.57%,  10.99%]
+             reach+0.2%: N=2104 rate=  1.62% CI95=[  0.96%,   2.31%]
+             reach-0.2%: N=2104 rate=  1.90% CI95=[  1.27%,   2.65%]
+    H 3  UP= 24.48% DOWN= 20.58% NEITHER= 54.56% BOTH=  0.38%  (DOWN-UP)= -3.90 pp
+             reach+0.1%: N=2058 rate= 27.02% CI95=[ 24.06%,  30.50%]
+             reach-0.1%: N=2058 rate= 22.84% CI95=[ 19.88%,  25.65%]
+             reach+0.2%: N=2058 rate=  6.56% CI95=[  5.08%,   8.27%]
+             reach-0.2%: N=2058 rate=  7.58% CI95=[  6.01%,   9.09%]
+    H 6  UP= 36.51% DOWN= 29.09% NEITHER= 33.93% BOTH=  0.47%  (DOWN-UP)= -7.42 pp
+             reach+0.1%: N=1997 rate= 43.72% CI95=[ 39.88%,  48.37%]
+             reach-0.1%: N=1997 rate= 35.40% CI95=[ 30.94%,  39.35%]
+             reach+0.2%: N=1997 rate= 15.22% CI95=[ 12.43%,  18.72%]
+             reach-0.2%: N=1997 rate= 14.72% CI95=[ 11.52%,  17.70%]
+    H12  UP= 42.86% DOWN= 34.35% NEITHER= 22.13% BOTH=  0.66%  (DOWN-UP)= -8.51 pp
+             reach+0.1%: N=1886 rate= 59.86% CI95=[ 55.92%,  65.07%]
+             reach-0.1%: N=1886 rate= 48.67% CI95=[ 43.07%,  53.85%]
+             reach+0.2%: N=1886 rate= 29.06% CI95=[ 24.62%,  34.79%]
+             reach-0.2%: N=1886 rate= 25.50% CI95=[ 20.48%,  30.67%]
+    H24  UP= 40.70% DOWN= 34.40% NEITHER= 24.34% BOTH=  0.56%  (DOWN-UP)= -6.30 pp
+             reach+0.1%: N=1649 rate= 72.77% CI95=[ 66.93%,  79.15%]
+             reach-0.1%: N=1649 rate= 63.92% CI95=[ 57.26%,  69.75%]
+             reach+0.2%: N=1649 rate= 44.57% CI95=[ 38.00%,  52.59%]
+             reach-0.2%: N=1649 rate= 41.18% CI95=[ 33.35%,  48.50%]
+
+TAG: state_trend_down  |  PERIOD: OOS
+  N_rows=2602  sessions=64
+    H 1  UP= 23.17% DOWN= 23.48% NEITHER= 49.46% BOTH=  3.88%  (DOWN-UP)= +0.31 pp
+             reach+0.1%: N=2575 rate= 27.34% CI95=[ 23.58%,  31.23%]
+             reach-0.1%: N=2575 rate= 27.65% CI95=[ 23.23%,  31.19%]
+             reach+0.2%: N=2575 rate=  9.59% CI95=[  7.40%,  11.80%]
+             reach-0.2%: N=2575 rate= 10.80% CI95=[  8.20%,  13.17%]
+    H 3  UP= 36.32% DOWN= 37.24% NEITHER= 22.06% BOTH=  4.38%  (DOWN-UP)= +0.92 pp
+             reach+0.1%: N=2526 rate= 48.10% CI95=[ 43.33%,  52.70%]
+             reach-0.1%: N=2526 rate= 47.35% CI95=[ 42.63%,  51.22%]
+             reach+0.2%: N=2526 rate= 24.90% CI95=[ 20.54%,  29.15%]
+             reach-0.2%: N=2526 rate= 24.58% CI95=[ 20.22%,  28.73%]
+    H 6  UP= 40.39% DOWN= 41.47% NEITHER= 13.64% BOTH=  4.50%  (DOWN-UP)= +1.08 pp
+             reach+0.1%: N=2451 rate= 60.91% CI95=[ 55.89%,  65.41%]
+             reach-0.1%: N=2451 rate= 59.20% CI95=[ 54.08%,  63.53%]
+             reach+0.2%: N=2451 rate= 38.19% CI95=[ 32.81%,  43.37%]
+             reach-0.2%: N=2451 rate= 36.96% CI95=[ 31.42%,  42.12%]
+    H12  UP= 40.47% DOWN= 41.74% NEITHER= 13.37% BOTH=  4.42%  (DOWN-UP)= +1.27 pp
+             reach+0.1%: N=2300 rate= 72.57% CI95=[ 67.40%,  77.45%]
+             reach-0.1%: N=2300 rate= 71.13% CI95=[ 66.48%,  75.41%]
+             reach+0.2%: N=2300 rate= 52.57% CI95=[ 46.10%,  59.16%]
+             reach-0.2%: N=2300 rate= 50.96% CI95=[ 44.50%,  56.45%]
+    H24  UP= 35.40% DOWN= 36.51% NEITHER= 24.71% BOTH=  3.38%  (DOWN-UP)= +1.11 pp
+             reach+0.1%: N=1970 rate= 80.46% CI95=[ 75.30%,  85.42%]
+             reach-0.1%: N=1970 rate= 81.52% CI95=[ 76.69%,  85.73%]
+             reach+0.2%: N=1970 rate= 63.65% CI95=[ 56.31%,  71.24%]
+             reach-0.2%: N=1970 rate= 66.85% CI95=[ 58.74%,  73.20%]
+
+TAG: state_trend_down  |  PERIOD: ALL
+  N_rows=8638  sessions=227
+    H 1  UP= 16.09% DOWN= 17.18% NEITHER= 64.73% BOTH=  2.00%  (DOWN-UP)= +1.09 pp
+             reach+0.1%: N=8544 rate= 18.29% CI95=[ 16.37%,  20.20%]
+             reach-0.1%: N=8544 rate= 19.39% CI95=[ 17.31%,  21.56%]
+             reach+0.2%: N=8544 rate=  5.37% CI95=[  4.40%,   6.40%]
+             reach-0.2%: N=8544 rate=  6.14% CI95=[  5.02%,   7.34%]
+    H 3  UP= 30.49% DOWN= 31.04% NEITHER= 36.18% BOTH=  2.29%  (DOWN-UP)= +0.54 pp
+             reach+0.1%: N=8368 rate= 37.66% CI95=[ 35.06%,  40.56%]
+             reach-0.1%: N=8368 rate= 37.38% CI95=[ 34.70%,  39.98%]
+             reach+0.2%: N=8368 rate= 15.58% CI95=[ 13.54%,  17.89%]
+             reach-0.2%: N=8368 rate= 16.93% CI95=[ 14.73%,  19.20%]
+    H 6  UP= 38.52% DOWN= 37.79% NEITHER= 21.35% BOTH=  2.35%  (DOWN-UP)= -0.73 pp
+             reach+0.1%: N=8115 rate= 52.64% CI95=[ 49.95%,  55.48%]
+             reach-0.1%: N=8115 rate= 50.54% CI95=[ 47.53%,  53.26%]
+             reach+0.2%: N=8115 rate= 26.30% CI95=[ 23.63%,  29.21%]
+             reach-0.2%: N=8115 rate= 27.66% CI95=[ 24.86%,  30.48%]
+    H12  UP= 41.03% DOWN= 40.04% NEITHER= 16.58% BOTH=  2.35%  (DOWN-UP)= -0.98 pp
+             reach+0.1%: N=7622 rate= 66.07% CI95=[ 63.12%,  69.13%]
+             reach-0.1%: N=7622 rate= 63.32% CI95=[ 60.55%,  66.03%]
+             reach+0.2%: N=7622 rate= 40.45% CI95=[ 36.94%,  44.42%]
+             reach-0.2%: N=7622 rate= 40.88% CI95=[ 37.58%,  44.26%]
+    H24  UP= 37.02% DOWN= 36.86% NEITHER= 24.22% BOTH=  1.90%  (DOWN-UP)= -0.16 pp
+             reach+0.1%: N=6618 rate= 76.07% CI95=[ 72.42%,  79.15%]
+             reach-0.1%: N=6618 rate= 75.19% CI95=[ 72.44%,  77.88%]
+             reach+0.2%: N=6618 rate= 54.46% CI95=[ 49.69%,  58.95%]
+             reach-0.2%: N=6618 rate= 57.60% CI95=[ 53.75%,  61.44%]
+
+TAG: state_move_down_6  |  PERIOD: DISCOVERY
+  N_rows=2902  sessions=114
+    H 1  UP= 18.30% DOWN= 19.75% NEITHER= 59.55% BOTH=  2.41%  (DOWN-UP)= +1.45 pp
+             reach+0.1%: N=2880 rate= 20.87% CI95=[ 18.25%,  23.39%]
+             reach-0.1%: N=2880 rate= 22.33% CI95=[ 19.73%,  24.76%]
+             reach+0.2%: N=2880 rate=  5.59% CI95=[  4.15%,   7.09%]
+             reach-0.2%: N=2880 rate=  6.49% CI95=[  5.05%,   7.98%]
+    H 3  UP= 34.73% DOWN= 34.49% NEITHER= 27.84% BOTH=  2.93%  (DOWN-UP)= -0.24 pp
+             reach+0.1%: N=2832 rate= 42.55% CI95=[ 39.00%,  45.75%]
+             reach-0.1%: N=2832 rate= 42.06% CI95=[ 38.91%,  45.09%]
+             reach+0.2%: N=2832 rate= 16.70% CI95=[ 13.93%,  19.55%]
+             reach-0.2%: N=2832 rate= 18.96% CI95=[ 16.14%,  21.65%]
+    H 6  UP= 42.21% DOWN= 41.04% NEITHER= 13.92% BOTH=  2.83%  (DOWN-UP)= -1.17 pp
+             reach+0.1%: N=2760 rate= 56.99% CI95=[ 53.78%,  59.76%]
+             reach-0.1%: N=2760 rate= 55.98% CI95=[ 52.91%,  59.21%]
+             reach+0.2%: N=2760 rate= 27.07% CI95=[ 23.77%,  30.52%]
+             reach-0.2%: N=2760 rate= 31.99% CI95=[ 28.33%,  35.33%]
+    H12  UP= 42.73% DOWN= 42.73% NEITHER= 11.78% BOTH=  2.76%  (DOWN-UP)= +0.00 pp
+             reach+0.1%: N=2611 rate= 68.40% CI95=[ 65.10%,  71.26%]
+             reach-0.1%: N=2611 rate= 69.86% CI95=[ 67.04%,  72.52%]
+             reach+0.2%: N=2611 rate= 40.98% CI95=[ 36.91%,  45.26%]
+             reach-0.2%: N=2611 rate= 46.96% CI95=[ 43.25%,  50.78%]
+    H24  UP= 37.53% DOWN= 38.84% NEITHER= 21.36% BOTH=  2.27%  (DOWN-UP)= +1.31 pp
+             reach+0.1%: N=2286 rate= 77.56% CI95=[ 74.27%,  81.13%]
+             reach-0.1%: N=2286 rate= 81.36% CI95=[ 78.44%,  83.88%]
+             reach+0.2%: N=2286 rate= 53.94% CI95=[ 49.00%,  59.19%]
+             reach-0.2%: N=2286 rate= 63.95% CI95=[ 59.51%,  68.03%]
+
+TAG: state_move_down_6  |  PERIOD: VALIDATION
+  N_rows=1306  sessions=65
+    H 1  UP= 10.72% DOWN= 12.79% NEITHER= 75.80% BOTH=  0.69%  (DOWN-UP)= +2.07 pp
+             reach+0.1%: N=1294 rate= 11.51% CI95=[  9.77%,  13.54%]
+             reach-0.1%: N=1294 rate= 13.60% CI95=[ 11.77%,  15.52%]
+             reach+0.2%: N=1294 rate=  2.01% CI95=[  1.32%,   2.76%]
+             reach-0.2%: N=1294 rate=  2.86% CI95=[  1.95%,   3.89%]
+    H 3  UP= 26.80% DOWN= 27.41% NEITHER= 44.95% BOTH=  0.84%  (DOWN-UP)= +0.61 pp
+             reach+0.1%: N=1269 rate= 30.18% CI95=[ 26.80%,  33.85%]
+             reach-0.1%: N=1269 rate= 30.58% CI95=[ 26.77%,  34.33%]
+             reach+0.2%: N=1269 rate=  7.80% CI95=[  6.04%,   9.83%]
+             reach-0.2%: N=1269 rate=  9.85% CI95=[  7.37%,  12.18%]
+    H 6  UP= 36.45% DOWN= 35.15% NEITHER= 27.41% BOTH=  1.00%  (DOWN-UP)= -1.30 pp
+             reach+0.1%: N=1234 rate= 45.71% CI95=[ 41.81%,  50.13%]
+             reach-0.1%: N=1234 rate= 42.71% CI95=[ 38.85%,  46.81%]
+             reach+0.2%: N=1234 rate= 15.88% CI95=[ 12.72%,  19.02%]
+             reach-0.2%: N=1234 rate= 17.10% CI95=[ 13.53%,  21.06%]
+    H12  UP= 42.57% DOWN= 40.66% NEITHER= 15.70% BOTH=  1.07%  (DOWN-UP)= -1.91 pp
+             reach+0.1%: N=1170 rate= 63.59% CI95=[ 59.84%,  67.97%]
+             reach-0.1%: N=1170 rate= 56.41% CI95=[ 51.87%,  60.27%]
+             reach+0.2%: N=1170 rate= 31.71% CI95=[ 27.36%,  36.50%]
+             reach-0.2%: N=1170 rate= 29.15% CI95=[ 24.61%,  33.39%]
+    H24  UP= 40.74% DOWN= 38.59% NEITHER= 19.75% BOTH=  0.92%  (DOWN-UP)= -2.14 pp
+             reach+0.1%: N=1057 rate= 76.35% CI95=[ 72.42%,  81.04%]
+             reach-0.1%: N=1057 rate= 66.98% CI95=[ 61.77%,  71.41%]
+             reach+0.2%: N=1057 rate= 49.67% CI95=[ 44.23%,  56.39%]
+             reach-0.2%: N=1057 rate= 40.96% CI95=[ 35.28%,  46.94%]
+
+TAG: state_move_down_6  |  PERIOD: OOS
+  N_rows=2359  sessions=75
+    H 1  UP= 28.70% DOWN= 25.10% NEITHER= 41.46% BOTH=  4.75%  (DOWN-UP)= -3.60 pp
+             reach+0.1%: N=2333 rate= 33.82% CI95=[ 30.18%,  37.27%]
+             reach-0.1%: N=2333 rate= 30.18% CI95=[ 26.48%,  33.13%]
+             reach+0.2%: N=2333 rate= 11.19% CI95=[  8.92%,  13.59%]
+             reach-0.2%: N=2333 rate= 12.52% CI95=[  9.74%,  14.98%]
+    H 3  UP= 40.99% DOWN= 37.22% NEITHER= 16.62% BOTH=  5.17%  (DOWN-UP)= -3.77 pp
+             reach+0.1%: N=2288 rate= 54.20% CI95=[ 50.28%,  58.27%]
+             reach-0.1%: N=2288 rate= 49.52% CI95=[ 45.40%,  52.64%]
+             reach+0.2%: N=2288 rate= 29.81% CI95=[ 26.10%,  34.02%]
+             reach-0.2%: N=2288 rate= 28.06% CI95=[ 23.83%,  31.57%]
+    H 6  UP= 43.37% DOWN= 40.06% NEITHER= 11.49% BOTH=  5.09%  (DOWN-UP)= -3.31 pp
+             reach+0.1%: N=2209 rate= 65.28% CI95=[ 61.24%,  69.37%]
+             reach-0.1%: N=2209 rate= 61.25% CI95=[ 57.05%,  64.50%]
+             reach+0.2%: N=2209 rate= 43.19% CI95=[ 38.58%,  48.22%]
+             reach-0.2%: N=2209 rate= 39.88% CI95=[ 34.92%,  44.36%]
+    H12  UP= 42.18% DOWN= 38.96% NEITHER= 13.86% BOTH=  5.00%  (DOWN-UP)= -3.22 pp
+             reach+0.1%: N=2066 rate= 76.57% CI95=[ 72.95%,  80.35%]
+             reach-0.1%: N=2066 rate= 72.12% CI95=[ 67.80%,  75.10%]
+             reach+0.2%: N=2066 rate= 57.79% CI95=[ 52.96%,  63.03%]
+             reach-0.2%: N=2066 rate= 52.90% CI95=[ 47.11%,  57.84%]
+    H24  UP= 36.80% DOWN= 34.85% NEITHER= 24.16% BOTH=  4.20%  (DOWN-UP)= -1.95 pp
+             reach+0.1%: N=1793 rate= 83.49% CI95=[ 80.14%,  87.15%]
+             reach-0.1%: N=1793 rate= 80.87% CI95=[ 77.02%,  83.75%]
+             reach+0.2%: N=1793 rate= 68.43% CI95=[ 63.18%,  73.42%]
+             reach-0.2%: N=1793 rate= 66.70% CI95=[ 60.13%,  71.17%]
+
+TAG: state_move_down_6  |  PERIOD: ALL
+  N_rows=6589  sessions=255
+    H 1  UP= 20.52% DOWN= 20.25% NEITHER= 56.34% BOTH=  2.90%  (DOWN-UP)= -0.27 pp
+             reach+0.1%: N=6529 rate= 23.63% CI95=[ 21.39%,  25.73%]
+             reach-0.1%: N=6529 rate= 23.36% CI95=[ 21.25%,  25.33%]
+             reach+0.2%: N=6529 rate=  6.88% CI95=[  5.71%,   8.10%]
+             reach-0.2%: N=6529 rate=  7.90% CI95=[  6.54%,   9.25%]
+    H 3  UP= 35.42% DOWN= 34.01% NEITHER= 27.26% BOTH=  3.31%  (DOWN-UP)= -1.41 pp
+             reach+0.1%: N=6410 rate= 44.26% CI95=[ 41.75%,  46.58%]
+             reach-0.1%: N=6410 rate= 42.37% CI95=[ 39.79%,  44.56%]
+             reach+0.2%: N=6410 rate= 19.64% CI95=[ 17.24%,  21.89%]
+             reach-0.2%: N=6410 rate= 20.36% CI95=[ 18.09%,  22.51%]
+    H 6  UP= 41.55% DOWN= 39.46% NEITHER= 15.72% BOTH=  3.26%  (DOWN-UP)= -2.09 pp
+             reach+0.1%: N=6224 rate= 57.76% CI95=[ 55.36%,  59.96%]
+             reach-0.1%: N=6224 rate= 55.11% CI95=[ 52.56%,  57.55%]
+             reach+0.2%: N=6224 rate= 30.62% CI95=[ 27.90%,  33.34%]
+             reach-0.2%: N=6224 rate= 31.75% CI95=[ 28.89%,  34.53%]
+    H12  UP= 42.60% DOWN= 40.90% NEITHER= 13.28% BOTH=  3.22%  (DOWN-UP)= -1.70 pp
+             reach+0.1%: N=5868 rate= 70.42% CI95=[ 68.11%,  72.65%]
+             reach-0.1%: N=5868 rate= 67.81% CI95=[ 65.39%,  70.03%]
+             reach+0.2%: N=5868 rate= 45.13% CI95=[ 42.28%,  48.16%]
+             reach-0.2%: N=5868 rate= 45.35% CI95=[ 42.24%,  48.40%]
+    H24  UP= 37.94% DOWN= 37.30% NEITHER= 22.07% BOTH=  2.69%  (DOWN-UP)= -0.64 pp
+             reach+0.1%: N=5152 rate= 79.43% CI95=[ 77.25%,  81.62%]
+             reach-0.1%: N=5152 rate= 78.12% CI95=[ 76.08%,  80.04%]
+             reach+0.2%: N=5152 rate= 58.19% CI95=[ 55.14%,  61.42%]
+             reach-0.2%: N=5152 rate= 60.02% CI95=[ 56.54%,  63.11%]
+
+TAG: state_below_vwap_high  |  PERIOD: DISCOVERY
+  N_rows=2901  sessions=109
+    H 1  UP= 16.55% DOWN= 17.20% NEITHER= 64.74% BOTH=  1.52%  (DOWN-UP)= +0.65 pp
+             reach+0.1%: N=2862 rate= 18.31% CI95=[ 15.77%,  21.15%]
+             reach-0.1%: N=2862 rate= 18.97% CI95=[ 16.25%,  21.60%]
+             reach+0.2%: N=2862 rate=  4.86% CI95=[  3.48%,   6.51%]
+             reach-0.2%: N=2862 rate=  5.07% CI95=[  3.72%,   6.76%]
+    H 3  UP= 31.92% DOWN= 32.23% NEITHER= 33.99% BOTH=  1.86%  (DOWN-UP)= +0.31 pp
+             reach+0.1%: N=2778 rate= 38.91% CI95=[ 35.16%,  42.77%]
+             reach-0.1%: N=2778 rate= 38.59% CI95=[ 34.25%,  42.31%]
+             reach+0.2%: N=2778 rate= 14.83% CI95=[ 12.34%,  17.75%]
+             reach-0.2%: N=2778 rate= 16.34% CI95=[ 12.86%,  19.97%]
+    H 6  UP= 39.09% DOWN= 39.40% NEITHER= 19.65% BOTH=  1.86%  (DOWN-UP)= +0.31 pp
+             reach+0.1%: N=2655 rate= 54.58% CI95=[ 50.51%,  58.39%]
+             reach-0.1%: N=2655 rate= 53.37% CI95=[ 48.90%,  57.00%]
+             reach+0.2%: N=2655 rate= 25.65% CI95=[ 21.94%,  29.15%]
+             reach-0.2%: N=2655 rate= 28.21% CI95=[ 23.53%,  32.74%]
+    H12  UP= 39.12% DOWN= 39.57% NEITHER= 19.51% BOTH=  1.79%  (DOWN-UP)= +0.45 pp
+             reach+0.1%: N=2412 rate= 68.12% CI95=[ 63.71%,  72.40%]
+             reach-0.1%: N=2412 rate= 65.96% CI95=[ 60.95%,  70.29%]
+             reach+0.2%: N=2412 rate= 40.67% CI95=[ 35.86%,  45.56%]
+             reach-0.2%: N=2412 rate= 42.50% CI95=[ 36.25%,  47.96%]
+    H24  UP= 32.64% DOWN= 33.68% NEITHER= 32.23% BOTH=  1.45%  (DOWN-UP)= +1.03 pp
+             reach+0.1%: N=1974 rate= 77.51% CI95=[ 72.88%,  82.65%]
+             reach-0.1%: N=1974 rate= 77.20% CI95=[ 72.64%,  81.52%]
+             reach+0.2%: N=1974 rate= 55.52% CI95=[ 49.63%,  62.30%]
+             reach-0.2%: N=1974 rate= 60.33% CI95=[ 53.89%,  66.20%]
+
+TAG: state_below_vwap_high  |  PERIOD: VALIDATION
+  N_rows=1442  sessions=60
+    H 1  UP=  9.22% DOWN=  9.50% NEITHER= 81.00% BOTH=  0.28%  (DOWN-UP)= +0.28 pp
+             reach+0.1%: N=1421 rate=  9.64% CI95=[  7.45%,  11.67%]
+             reach-0.1%: N=1421 rate=  9.92% CI95=[  8.16%,  11.86%]
+             reach+0.2%: N=1421 rate=  1.41% CI95=[  0.71%,   2.20%]
+             reach-0.2%: N=1421 rate=  2.53% CI95=[  1.69%,   3.58%]
+    H 3  UP= 26.56% DOWN= 21.98% NEITHER= 51.11% BOTH=  0.35%  (DOWN-UP)= -4.58 pp
+             reach+0.1%: N=1376 rate= 29.58% CI95=[ 25.56%,  33.63%]
+             reach-0.1%: N=1376 rate= 24.64% CI95=[ 21.12%,  28.23%]
+             reach+0.2%: N=1376 rate=  7.34% CI95=[  5.41%,   9.30%]
+             reach-0.2%: N=1376 rate=  8.43% CI95=[  6.64%,  10.82%]
+    H 6  UP= 39.04% DOWN= 29.96% NEITHER= 30.51% BOTH=  0.49%  (DOWN-UP)= -9.08 pp
+             reach+0.1%: N=1321 rate= 47.77% CI95=[ 43.51%,  52.32%]
+             reach-0.1%: N=1321 rate= 37.02% CI95=[ 31.96%,  41.86%]
+             reach+0.2%: N=1321 rate= 17.94% CI95=[ 14.46%,  21.50%]
+             reach-0.2%: N=1321 rate= 16.58% CI95=[ 13.17%,  20.59%]
+    H12  UP= 44.38% DOWN= 33.98% NEITHER= 21.01% BOTH=  0.62%  (DOWN-UP)=-10.40 pp
+             reach+0.1%: N=1221 rate= 64.29% CI95=[ 58.93%,  69.93%]
+             reach-0.1%: N=1221 rate= 49.63% CI95=[ 43.87%,  55.01%]
+             reach+0.2%: N=1221 rate= 34.89% CI95=[ 30.03%,  41.20%]
+             reach-0.2%: N=1221 rate= 26.04% CI95=[ 20.92%,  31.84%]
+    H24  UP= 39.18% DOWN= 28.78% NEITHER= 31.62% BOTH=  0.42%  (DOWN-UP)=-10.40 pp
+             reach+0.1%: N=995 rate= 79.30% CI95=[ 73.14%,  85.71%]
+             reach-0.1%: N=995 rate= 58.49% CI95=[ 51.26%,  64.70%]
+             reach+0.2%: N=995 rate= 55.48% CI95=[ 47.55%,  63.41%]
+             reach-0.2%: N=995 rate= 37.29% CI95=[ 29.13%,  45.08%]
+
+TAG: state_below_vwap_high  |  PERIOD: OOS
+  N_rows=1904  sessions=70
+    H 1  UP= 26.37% DOWN= 23.53% NEITHER= 46.11% BOTH=  3.99%  (DOWN-UP)= -2.84 pp
+             reach+0.1%: N=1876 rate= 30.81% CI95=[ 26.32%,  36.03%]
+             reach-0.1%: N=1876 rate= 27.93% CI95=[ 23.55%,  31.98%]
+             reach+0.2%: N=1876 rate= 10.61% CI95=[  7.99%,  13.57%]
+             reach-0.2%: N=1876 rate= 11.51% CI95=[  8.85%,  14.45%]
+    H 3  UP= 39.08% DOWN= 35.98% NEITHER= 20.43% BOTH=  4.52%  (DOWN-UP)= -3.10 pp
+             reach+0.1%: N=1821 rate= 51.89% CI95=[ 46.35%,  57.58%]
+             reach-0.1%: N=1821 rate= 47.28% CI95=[ 42.37%,  51.67%]
+             reach+0.2%: N=1821 rate= 27.95% CI95=[ 22.92%,  33.65%]
+             reach-0.2%: N=1821 rate= 27.40% CI95=[ 22.72%,  31.97%]
+    H 6  UP= 41.75% DOWN= 39.39% NEITHER= 14.39% BOTH=  4.46%  (DOWN-UP)= -2.36 pp
+             reach+0.1%: N=1732 rate= 64.38% CI95=[ 58.79%,  69.95%]
+             reach-0.1%: N=1732 rate= 59.99% CI95=[ 55.07%,  64.15%]
+             reach+0.2%: N=1732 rate= 41.63% CI95=[ 35.32%,  48.32%]
+             reach-0.2%: N=1732 rate= 40.53% CI95=[ 34.94%,  46.02%]
+    H12  UP= 39.81% DOWN= 37.13% NEITHER= 18.96% BOTH=  4.10%  (DOWN-UP)= -2.68 pp
+             reach+0.1%: N=1554 rate= 75.74% CI95=[ 70.11%,  81.26%]
+             reach-0.1%: N=1554 rate= 70.66% CI95=[ 65.29%,  74.71%]
+             reach+0.2%: N=1554 rate= 57.85% CI95=[ 51.10%,  64.58%]
+             reach-0.2%: N=1554 rate= 52.45% CI95=[ 46.19%,  58.20%]
+    H24  UP= 31.51% DOWN= 29.15% NEITHER= 36.08% BOTH=  3.26%  (DOWN-UP)= -2.36 pp
+             reach+0.1%: N=1217 rate= 82.58% CI95=[ 77.77%,  87.65%]
+             reach-0.1%: N=1217 rate= 79.21% CI95=[ 73.74%,  83.59%]
+             reach+0.2%: N=1217 rate= 69.60% CI95=[ 62.39%,  77.08%]
+             reach-0.2%: N=1217 rate= 66.47% CI95=[ 58.91%,  73.29%]
+
+TAG: state_below_vwap_high  |  PERIOD: ALL
+  N_rows=6249  sessions=240
+    H 1  UP= 17.86% DOWN= 17.35% NEITHER= 62.81% BOTH=  1.98%  (DOWN-UP)= -0.51 pp
+             reach+0.1%: N=6160 rate= 20.13% CI95=[ 17.82%,  22.44%]
+             reach-0.1%: N=6160 rate= 19.61% CI95=[ 17.32%,  21.57%]
+             reach+0.2%: N=6160 rate=  5.81% CI95=[  4.66%,   6.96%]
+             reach-0.2%: N=6160 rate=  6.44% CI95=[  5.07%,   7.72%]
+    H 3  UP= 32.87% DOWN= 31.00% NEITHER= 33.81% BOTH=  2.32%  (DOWN-UP)= -1.87 pp
+             reach+0.1%: N=5976 rate= 40.73% CI95=[ 37.92%,  43.64%]
+             reach-0.1%: N=5976 rate= 38.02% CI95=[ 35.01%,  40.71%]
+             reach+0.2%: N=5976 rate= 17.10% CI95=[ 14.72%,  19.50%]
+             reach-0.2%: N=5976 rate= 17.89% CI95=[ 15.36%,  20.12%]
+    H 6  UP= 39.89% DOWN= 37.21% NEITHER= 20.56% BOTH=  2.34%  (DOWN-UP)= -2.69 pp
+             reach+0.1%: N=5709 rate= 55.98% CI95=[ 53.02%,  58.87%]
+             reach-0.1%: N=5709 rate= 51.59% CI95=[ 48.30%,  54.37%]
+             reach+0.2%: N=5709 rate= 28.73% CI95=[ 25.75%,  31.80%]
+             reach-0.2%: N=5709 rate= 29.25% CI95=[ 25.83%,  32.20%]
+    H12  UP= 40.55% DOWN= 37.53% NEITHER= 19.70% BOTH=  2.22%  (DOWN-UP)= -3.02 pp
+             reach+0.1%: N=5188 rate= 69.51% CI95=[ 66.30%,  72.38%]
+             reach-0.1%: N=5188 rate= 63.51% CI95=[ 60.21%,  66.61%]
+             reach+0.2%: N=5188 rate= 44.47% CI95=[ 40.65%,  47.79%]
+             reach-0.2%: N=5188 rate= 41.60% CI95=[ 37.55%,  45.45%]
+    H24  UP= 33.81% DOWN= 31.16% NEITHER= 33.27% BOTH=  1.76%  (DOWN-UP)= -2.66 pp
+             reach+0.1%: N=4187 rate= 79.41% CI95=[ 76.47%,  82.81%]
+             reach-0.1%: N=4187 rate= 73.32% CI95=[ 69.89%,  76.41%]
+             reach+0.2%: N=4187 rate= 59.61% CI95=[ 55.54%,  64.38%]
+             reach-0.2%: N=4187 rate= 56.63% CI95=[ 51.85%,  61.08%]
+
+==============================================================================
+COMPACT SUMMARY: (DOWN - UP) in pp, per tag / period / horizon
+==============================================================================
+
+Only H6, H12, H24 shown here for readability.
+Full per-H details are above.
+
+  tag                                 H  DISCOVERY VALIDATION        OOS
+  --------------------------------------------------------------------------
+  state_trend_up                   H6   +11.09 pp  +12.04 pp  +11.99 pp 
+  state_trend_up                   H12  +11.96 pp  +17.04 pp  +13.16 pp 
+  state_trend_up                   H24  +11.29 pp  +15.40 pp  +10.32 pp 
+  state_move_up_6                  H6   +10.99 pp  +10.28 pp  +10.64 pp 
+  state_move_up_6                  H12  +11.16 pp  +13.29 pp  +11.40 pp 
+  state_move_up_6                  H24   +9.30 pp  +12.78 pp   +9.19 pp 
+  state_above_vwap_high            H6   +10.07 pp  +15.55 pp  +13.84 pp 
+  state_above_vwap_high            H12  +10.58 pp  +20.68 pp  +14.00 pp 
+  state_above_vwap_high            H24   +9.31 pp  +20.21 pp  +12.54 pp 
+  state_trend_down                 H6    +1.72 pp   -7.42 pp   +1.08 pp 
+  state_trend_down                 H12   +1.61 pp   -8.51 pp   +1.27 pp 
+  state_trend_down                 H24   +2.33 pp   -6.30 pp   +1.11 pp 
+  state_move_down_6                H6    -1.17 pp   -1.30 pp   -3.31 pp 
+  state_move_down_6                H12   +0.00 pp   -1.91 pp   -3.22 pp 
+  state_move_down_6                H24   +1.31 pp   -2.14 pp   -1.95 pp 
+  state_below_vwap_high            H6    +0.31 pp   -9.08 pp   -2.36 pp 
+  state_below_vwap_high            H12   +0.45 pp  -10.40 pp   -2.68 pp 
+  state_below_vwap_high            H24   +1.03 pp  -10.40 pp   -2.36 pp 
+
+==============================================================================
+DRIFT-NORMALIZED TAG EFFECT = tag(DOWN-UP) - baseline(DOWN-UP), in pp
+==============================================================================
+
+For each tag/period/horizon, subtract the baseline (DOWN-UP) of
+that same period. This isolates the tag effect from the aggregate
+directional drift of the period. All numbers are just descriptive.
+
+  tag                              H     DISCOVERY    VALIDATION           OOS
+  ----------------------------------------------------------------------------
+  state_trend_up                 H6          +4.71         +7.01         +6.35 
+  state_trend_up                 H12         +5.22        +10.09         +6.52 
+  state_trend_up                 H24         +5.17         +7.50         +4.23 
+  state_move_up_6                H6          +4.61         +5.25         +5.00 
+  state_move_up_6                H12         +4.42         +6.34         +4.76 
+  state_move_up_6                H24         +3.18         +4.87         +3.10 
+  state_above_vwap_high          H6          +3.69        +10.52         +8.20 
+  state_above_vwap_high          H12         +3.84        +13.73         +7.36 
+  state_above_vwap_high          H24         +3.19        +12.30         +6.44 
+  state_trend_down               H6          -4.66        -12.45         -4.56 
+  state_trend_down               H12         -5.13        -15.45         -5.37 
+  state_trend_down               H24         -3.79        -14.20         -4.98 
+  state_move_down_6              H6          -7.55         -6.33         -8.94 
+  state_move_down_6              H12         -6.74         -8.86         -9.86 
+  state_move_down_6              H24         -4.81        -10.05         -8.05 
+  state_below_vwap_high          H6          -6.07        -14.11         -8.00 
+  state_below_vwap_high          H12         -6.29        -17.35         -9.32 
+  state_below_vwap_high          H24         -5.09        -18.31         -8.46 
+
+Reading: positive = tag tilts DOWN more than period baseline.
+         negative = tag tilts UP more than period baseline.
+Baseline itself is NOT subtracted from per-tag reach rates above;
+this block is a separate view for clarity.
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

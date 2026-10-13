@@ -1,0 +1,108 @@
+==============================================================================
+v600 AUDIT -- causality, sessions, horizons, frozen thresholds
+STRATEGY LOGIC: UNCHANGED -- RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+ROWS: 25856
+PERIOD SPLIT: DISCOVERY=11615  VALIDATION=6565  OOS=7575  OUT_OF_RANGE=101
+
+1. STATE CAUSALITY (negative control)
+------------------------------------------------------------------------------
+   total mismatches: 0
+   expected: 0
+
+2. _debug_max_idx_used vs index
+------------------------------------------------------------------------------
+   finite rows: 25856 / 25856
+   violations (dbg >= idx): 0
+
+3. FORWARD LABELS are future-only
+------------------------------------------------------------------------------
+   design: labels are computed strictly from T0+1..T0+H.
+   partial windows at session end: marked with label_partial_window_H = True.
+   H 1: partial windows = 256
+   H 2: partial windows = 512
+   H 3: partial windows = 768
+   H 4: partial windows = 1024
+   H 6: partial windows = 1536
+   H 8: partial windows = 2048
+   H12: partial windows = 3072
+   H18: partial windows = 4608
+   H24: partial windows = 6144
+
+4. FROZEN DISCOVERY QUANTILES (never recomputed for VAL/OOS)
+------------------------------------------------------------------------------
+   ema9_21_spread_atr           n=11602  q25=+0.248184  q50=+0.535405  q75=+0.910120  q90=+1.377464
+   ema21_50_spread_atr          n=11602  q25=+0.485402  q50=+0.956272  q75=+1.590968  q90=+2.256460
+   close_ema21_signed_atr       n=11602  q25=-0.977625  q50=-0.008772  q75=+0.958607  q90=+1.991088
+   return_6_signed              n=11609  q25=-0.103471  q50=-0.003294  q75=+0.092052  q90=+0.229979
+   return_12_signed             n=11603  q25=-0.154560  q50=-0.006798  q75=+0.138654  q90=+0.361249
+   vwap_dev_signed_atr          n=11602  q25=-1.335102  q50=-0.112440  q75=+0.978406  q90=+2.471005
+   volume_ratio                 n=11596  q25=+0.373783  q50=+0.703616  q75=+1.325558  q90=+2.362619
+   range_atr                    n=11602  q25=+0.548357  q50=+0.821108  q75=+1.184550  q90=+1.679872
+   atr14                        n=11602  q25=+0.230325  q50=+0.296830  q75=+0.397545  q90=+0.522195
+
+5. SESSION SAFETY
+------------------------------------------------------------------------------
+   forward labels use only bars with the same session_key as T0.
+   no forward bar from another session is ever included.
+
+6. STATE TAG COUNT
+------------------------------------------------------------------------------
+   total: 30
+   state_trend_up                                 N_true=  8356
+   state_trend_down                               N_true=  8638
+   state_trend_flat                               N_true=  8862
+   state_ema_spread_high                          N_true=  6439
+   state_ema_spread_low                           N_true=  6775
+   state_move_up_6                                N_true=  6660
+   state_move_down_6                              N_true=  6589
+   state_move_up_12                               N_true=  6579
+   state_move_down_12                             N_true=  6594
+   state_quiet_6                                  N_true= 12601
+   state_ema9_21_cross_recent                     N_true=  3119
+   state_above_vwap_high                          N_true=  6573
+   state_below_vwap_high                          N_true=  6249
+   state_at_vwap                                  N_true= 13021
+   state_vwap_recent_reclaim_or_reject            N_true=  5095
+   state_volume_expansion                         N_true=  6350
+   state_volume_contraction                       N_true=  6281
+   state_volume_spike_recent                      N_true=  6999
+   state_range_expansion                          N_true=  6502
+   state_range_compression                        N_true=  6588
+   state_atr_high                                 N_true=  7034
+   state_atr_low                                  N_true=  7080
+   state_prev_swing_high_hh                       N_true= 10097
+   state_prev_swing_high_lh                       N_true= 10982
+   state_prev_swing_low_hl                        N_true= 10587
+   state_prev_swing_low_ll                        N_true= 10811
+   state_first_hour                               N_true=  3072
+   state_mid_session                              N_true=  9472
+   state_last_hour                                N_true=  3072
+   state_day_edge_zone                            N_true= 14791
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================
+
+==============================================================================
+v600 NEGATIVE CONTROL -- state causal check
+STRATEGY LOGIC: UNCHANGED -- RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Method: pick N random bars, truncate df_5m AFTER T0+30, rebuild
+state tags for bar T0 using only the truncated df. Compare with
+full-run tags. If identical -> no leakage.
+
+index=2307 session=2025-10-15 00:00:00 cut_after=2337 mismatches=0
+index=11196 session=2026-02-23 00:00:00 cut_after=11226 mismatches=0
+index=11347 session=2026-02-25 00:00:00 cut_after=11377 mismatches=0
+index=16923 session=2026-05-13 00:00:00 cut_after=16953 mismatches=0
+index=20009 session=2026-06-25 00:00:00 cut_after=20039 mismatches=0
+
+Total mismatches: 0
+Expected: 0. Non-zero -> leakage in state tags.
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

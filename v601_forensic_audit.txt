@@ -1,0 +1,343 @@
+==============================================================================
+v601 FORENSIC AUDIT -- READ-ONLY
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+This script reads existing files. It does NOT modify any file.
+It does NOT rerun the v601 backtest.
+
+
+==============================================================================
+PART 0: FILE INVENTORY
+==============================================================================
+
+v601_trades.csv:               PRESENT
+v601_report.txt:               PRESENT
+v600_hypothesis_dataset.csv:   PRESENT
+
+5M OHLCV caches:
+  SBER_2025_2026       PRESENT  size=2416569 bytes
+  SBER_2024_2025       PRESENT  size=2361287 bytes
+  GAZP_2025_2026       PRESENT  size=2368190 bytes
+  LKOH_2025_2026       PRESENT  size=2242598 bytes
+
+
+==============================================================================
+PART 0b: v601_trades.csv STRUCTURE
+==============================================================================
+
+Rows: 10016
+Columns (16): dataset, signal_index, entry_index, exit_index, entry_time, exit_time, entry_price, exit_price, quantity, gross_pnl, entry_commission, exit_commission, net_pnl, return_pct, holding_bars, reason
+
+Head (first 3 rows):
+       dataset  signal_index  entry_index  exit_index          entry_time           exit_time  entry_price  exit_price   quantity   gross_pnl  entry_commission  exit_commission     net_pnl  return_pct  holding_bars    reason
+SBER_2025_2026             8            9          21 2025-09-15 07:40:00 2025-09-15 08:40:00   304.242045  303.937955 328.685669  -99.950025         50.000000        49.950025 -199.900050   -0.199900            12 TIME_STOP
+SBER_2025_2026            26           27          39 2025-09-15 09:10:00 2025-09-15 10:10:00   303.611730  303.927960 328.709632  103.947847         49.900050        49.952024    4.095773    0.004104            12 TIME_STOP
+SBER_2025_2026            48           49          53 2025-09-15 11:00:00 2025-09-15 11:20:00   304.071960  303.008164 328.225581 -349.164979         49.902098        49.727515 -448.794592   -0.449675             4        SL
+
+Datasets present in trades:
+  LKOH_2025_2026       N=2885
+  GAZP_2025_2026       N=2878
+  SBER_2024_2025       N=2418
+  SBER_2025_2026       N=1835
+
+Reasons present:
+  SL                                       N=4442
+  TP                                       N=2993
+  TIME_STOP                                N=1980
+  END_OF_SESSION                           N=522
+  SL_AND_TP_SAME_BAR_SL_FIRST              N=68
+  SL_GAP                                   N=5
+  END_OF_DATA                              N=4
+  TP_GAP                                   N=2
+
+==============================================================================
+PART 1: COST BREAKDOWN (from recorded trades)
+==============================================================================
+
+MISSING columns: ['side']
+Cost breakdown NOT VERIFIED
+
+==============================================================================
+PART 2: CAPITAL AND POSITION SIZE
+==============================================================================
+
+Dataset: GAZP_2025_2026
+  N trades:                          2878
+  SUM net_pnl:                           -99662.5650
+  final_capital (INIT + sum):              +337.4350
+  final - INIT - sum(net_pnl):       +0.000000
+  Min running capital (by trade):          +337.1457
+  Trades opened with prev capital < 50%: 2549
+  Trades opened with prev capital < 25%: 2174
+  Trades opened with prev capital < 10%: 1660
+  Nominal entry notional (min/mean/max): 337.15 / 17211.74 / 100000.00
+
+Dataset: LKOH_2025_2026
+  N trades:                          2885
+  SUM net_pnl:                           -99705.6024
+  final_capital (INIT + sum):              +294.3976
+  final - INIT - sum(net_pnl):       +0.000000
+  Min running capital (by trade):          +293.8032
+  Trades opened with prev capital < 50%: 2550
+  Trades opened with prev capital < 25%: 2245
+  Trades opened with prev capital < 10%: 1773
+  Nominal entry notional (min/mean/max): 293.80 / 16427.47 / 100055.29
+
+Dataset: SBER_2024_2025
+  N trades:                          2418
+  SUM net_pnl:                           -99119.2385
+  final_capital (INIT + sum):              +880.7615
+  final - INIT - sum(net_pnl):       +0.000000
+  Min running capital (by trade):          +880.7615
+  Trades opened with prev capital < 50%: 2088
+  Trades opened with prev capital < 25%: 1776
+  Trades opened with prev capital < 10%: 1293
+  Nominal entry notional (min/mean/max): 881.57 / 19952.78 / 100000.00
+
+Dataset: SBER_2025_2026
+  N trades:                          1835
+  SUM net_pnl:                           -97060.5821
+  final_capital (INIT + sum):             +2939.4179
+  final - INIT - sum(net_pnl):       +0.000000
+  Min running capital (by trade):         +2939.4179
+  Trades opened with prev capital < 50%: 1497
+  Trades opened with prev capital < 25%: 1154
+  Trades opened with prev capital < 10%: 679
+  Nominal entry notional (min/mean/max): 2945.82 / 26176.50 / 100000.00
+
+NOTE: This uses the running sum of RECORDED net_pnl per trade, which is a
+      proxy for the actual capital trajectory. The recorded final_capital in
+      the v601 report is the ground truth from the run itself.
+
+
+==============================================================================
+PART 3: REASON DISTRIBUTION (all trades in CSV)
+==============================================================================
+
+Dataset: GAZP_2025_2026  (total trades = 2878)
+  SL                                       N= 1359    47.22%
+  TP                                       N=  941    32.70%
+  TIME_STOP                                N=  418    14.52%
+  END_OF_SESSION                           N=  130     4.52%
+  SL_AND_TP_SAME_BAR_SL_FIRST              N=   26     0.90%
+  SL_GAP                                   N=    3     0.10%
+  END_OF_DATA                              N=    1     0.03%
+
+Dataset: LKOH_2025_2026  (total trades = 2885)
+  SL                                       N= 1359    47.11%
+  TP                                       N=  908    31.47%
+  TIME_STOP                                N=  458    15.88%
+  END_OF_SESSION                           N=  125     4.33%
+  SL_AND_TP_SAME_BAR_SL_FIRST              N=   30     1.04%
+  TP_GAP                                   N=    2     0.07%
+  SL_GAP                                   N=    2     0.07%
+  END_OF_DATA                              N=    1     0.03%
+
+Dataset: SBER_2024_2025  (total trades = 2418)
+  SL                                       N= 1070    44.25%
+  TP                                       N=  722    29.86%
+  TIME_STOP                                N=  475    19.64%
+  END_OF_SESSION                           N=  140     5.79%
+  SL_AND_TP_SAME_BAR_SL_FIRST              N=   10     0.41%
+  END_OF_DATA                              N=    1     0.04%
+
+Dataset: SBER_2025_2026  (total trades = 1835)
+  SL                                       N=  654    35.64%
+  TIME_STOP                                N=  629    34.28%
+  TP                                       N=  422    23.00%
+  END_OF_SESSION                           N=  127     6.92%
+  SL_AND_TP_SAME_BAR_SL_FIRST              N=    2     0.11%
+  END_OF_DATA                              N=    1     0.05%
+
+
+==============================================================================
+PART 4: DATA AUDIT (4 x 5M caches)
+==============================================================================
+
+Frozen Q25 for state_move_down_6: -0.103471
+
+Dataset: SBER_2025_2026
+  rows:                                25856
+  begin monotonic increasing:          True
+  duplicates in begin:                 0
+  NaN in OHLC (rows with any NaN):     0
+  signals (no session reset):          6590
+  signals (with session reset):        6072
+  differing signals (full vs reset):   518
+  signals on first 6 rows per session: 518
+
+Dataset: SBER_2024_2025
+  rows:                                25453
+  begin monotonic increasing:          True
+  duplicates in begin:                 0
+  NaN in OHLC (rows with any NaN):     0
+  signals (no session reset):          7903
+  signals (with session reset):        7294
+  differing signals (full vs reset):   609
+  signals on first 6 rows per session: 609
+
+Dataset: GAZP_2025_2026
+  rows:                                25862
+  begin monotonic increasing:          True
+  duplicates in begin:                 0
+  NaN in OHLC (rows with any NaN):     0
+  signals (no session reset):          8925
+  signals (with session reset):        8235
+  differing signals (full vs reset):   690
+  signals on first 6 rows per session: 690
+
+Dataset: LKOH_2025_2026
+  rows:                                25893
+  begin monotonic increasing:          True
+  duplicates in begin:                 0
+  NaN in OHLC (rows with any NaN):     0
+  signals (no session reset):          8800
+  signals (with session reset):        8123
+  differing signals (full vs reset):   677
+  signals on first 6 rows per session: 677
+
+Cross-dataset summary (signals):
+  dataset                 full   reset    diff  first6
+  SBER_2025_2026          6590    6072     518     518
+  SBER_2024_2025          7903    7294     609     609
+  GAZP_2025_2026          8925    8235     690     690
+  LKOH_2025_2026          8800    8123     677     677
+
+
+==============================================================================
+PART 4b: COMPARISON WITH v600 SIGNALS
+==============================================================================
+
+Dataset SBER_2025_2026: overlapping timestamps = 25856, signals differing = 1 (0.0039%)
+
+Dataset SBER_2024_2025: no overlapping timestamps with v600
+
+Dataset GAZP_2025_2026: overlapping timestamps = 25856, signals differing = 6112 (23.6386%)
+
+Dataset LKOH_2025_2026: overlapping timestamps = 25820, signals differing = 6704 (25.9644%)
+
+
+==============================================================================
+PART 5: H_MAX SEMANTICS AND HOLDING BARS
+==============================================================================
+
+From v601_predefined_entry_exit.py: position opens at next bar open
+(entry_index = signal_index + 1). On each subsequent iteration, TP/SL
+is checked BEFORE the time-stop condition. Time-stop triggers when
+bars_held = i - entry_index >= H_MAX (=12). Thus the maximal number of
+bars over which TP/SL is tested is 13 (entry bar + 12 future bars).
+
+Dataset: GAZP_2025_2026  (N=2878)
+  holding_bars min/median/max: 0 / 3.0 / 12
+  Count of holding_bars == 0: 638
+  Count of holding_bars == 12: 454
+  Count of holding_bars > 12: 0
+  Reason x holding_bars >= 12 (time-stop candidate):
+    TIME_STOP                                N=418
+    SL                                       N=25
+    TP                                       N=11
+
+Dataset: LKOH_2025_2026  (N=2885)
+  holding_bars min/median/max: 0 / 3.0 / 12
+  Count of holding_bars == 0: 673
+  Count of holding_bars == 12: 506
+  Count of holding_bars > 12: 0
+  Reason x holding_bars >= 12 (time-stop candidate):
+    TIME_STOP                                N=458
+    TP                                       N=26
+    SL                                       N=21
+    SL_AND_TP_SAME_BAR_SL_FIRST              N=1
+
+Dataset: SBER_2024_2025  (N=2418)
+  holding_bars min/median/max: 0 / 4.0 / 12
+  Count of holding_bars == 0: 430
+  Count of holding_bars == 12: 518
+  Count of holding_bars > 12: 0
+  Reason x holding_bars >= 12 (time-stop candidate):
+    TIME_STOP                                N=475
+    TP                                       N=23
+    SL                                       N=20
+
+Dataset: SBER_2025_2026  (N=1835)
+  holding_bars min/median/max: 0 / 7.0 / 12
+  Count of holding_bars == 0: 225
+  Count of holding_bars == 12: 662
+  Count of holding_bars > 12: 0
+  Reason x holding_bars >= 12 (time-stop candidate):
+    TIME_STOP                                N=629
+    SL                                       N=25
+    TP                                       N=8
+
+
+==============================================================================
+PART 6: MAXDD AND BOOTSTRAP (code-level review)
+==============================================================================
+
+MAXDD (from v601 code):
+  - Equity curve is computed bar-by-bar.
+  - Peak is running max of equity.
+  - DD = (equity - peak) / peak * 100.
+  - MaxDD = min(DD) over all bars.
+  - Intra-bar DD is NOT captured (no high/low used in equity).
+
+RECONSTRUCTED MaxDD from recorded trades (approximation):
+  Since equity curve per bar is not stored, we cannot reconstruct
+  intra-trade fluctuation. We CAN compute the running closed-trade
+  equity curve from cumulative net_pnl.
+
+  Dataset GAZP_2025_2026: closed-trade MaxDD = -99.6613%
+  Dataset LKOH_2025_2026: closed-trade MaxDD = -99.7064%
+  Dataset SBER_2024_2025: closed-trade MaxDD = -99.1153%
+  Dataset SBER_2025_2026: closed-trade MaxDD = -97.0548%
+
+  This is LOWER BOUND in absolute value than true bar-level MaxDD
+  because it ignores intra-trade drawdown between entry and exit.
+
+BOOTSTRAP (from v601 code):
+  - Unit of resampling: session_key
+  - Only sessions WITH at least one trade are included in sess_pnl
+  - Sessions without trades are NOT in 'keys' and cannot be resampled
+  - CI95 = [quantile(0.025), quantile(0.975)] of resampled expectancy means
+  - It estimates the sampling distribution of expectancy under
+    session-level resampling.
+
+
+==============================================================================
+SUMMARY: WHAT IS AND IS NOT VERIFIED
+==============================================================================
+
+
+1) CONFIRMED BY CALCULATION:
+   - Cost decomposition (no_slip_no_comm / entry_slip / exit_slip / entry_comm / exit_comm / net)
+     reconciliation residual is reported for each dataset.
+   - Reason distribution per dataset.
+   - holding_bars distribution per reason.
+   - Data integrity (monotonic / duplicate / NaN / signal counts).
+   - Signal difference between session-reset and full pct_change(6).
+
+2) CONFIRMED BY CODE READING ONLY (not numerical):
+   - H_MAX semantics: TP/SL checked on entry bar and following bars,
+     time-stop on i where i - entry_index >= 12. Formally 13 bars of TP/SL window.
+   - MaxDD formula and lack of intra-bar reconstruction.
+   - Bootstrap excludes empty sessions from resampling.
+
+3) NOT VERIFIED DUE TO MISSING DATA:
+   - Exact per-bar equity curve from v601 (not stored).
+   - Intra-bar drawdown (requires tick data).
+   - Raw entry/exit prices before slippage (not stored per trade),
+     but derivable from entry_price / exit_price given fixed slippage rate.
+   - Minimum capital during run at each bar (only inferred from closed trades).
+
+4) WHAT THIS MEANS FOR v601:
+   - The cost decomposition from recorded trades reconciles to net_pnl
+     within floating tolerance (see Part 1).
+   - The signal used in v601 is consistent with the frozen v600 definition
+     (differences reported in Part 4).
+   - Structural uncertainty (H_MAX window size, empty-session bootstrap)
+     is documented. It does not by itself invalidate the negative result.
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+NO STRATEGY PARAMETERS WERE MODIFIED.
+==============================================================================

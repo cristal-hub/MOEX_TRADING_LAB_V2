@@ -1,0 +1,181 @@
+==============================================================================
+v5.23 CATEGORY STABILITY CHECK
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Purpose: check whether swing-label distributions differ
+between BAD_FROM_OUTSET and GOOD_ENGINE_EARNED in each period.
+Descriptive only. Not a filter, not a rule, not a recommendation.
+
+Rows total: 319
+
+Group N (ALL):
+  BAD_FROM_OUTSET      188
+  GOOD_ENGINE_EARNED   30
+  INTERMEDIATE         101
+
+Group N by period:
+  DISCOVERY    BAD   =96  GOOD  =14  INTERMEDIATE=51
+  VALIDATION   BAD   =45  GOOD  =5  INTERMEDIATE=16
+  OOS          BAD   =46  GOOD  =11  INTERMEDIATE=33
+
+==============================================================================
+CATEGORY: pre_bos_5m_prev_swing_high_label
+==============================================================================
+
+PERIOD: ALL
+------------------------------------------------------------------------------
+  N:  BAD=188  GOOD=30  INT=101
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LH              107       12       55      56.9%    40.0%    54.5%
+  HH               76       17       45      40.4%    56.7%    44.6%
+  EQUAL             5        1        1       2.7%     3.3%     1.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LH         +16.9 pp
+    HH         -16.2 pp
+    EQUAL      -0.7 pp
+    NAN        +0.0 pp
+
+PERIOD: DISCOVERY
+------------------------------------------------------------------------------
+  N:  BAD=96  GOOD=14  INT=51
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LH               57        5       25      59.4%    35.7%    49.0%
+  HH               38        8       25      39.6%    57.1%    49.0%
+  EQUAL             1        1        1       1.0%     7.1%     2.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LH         +23.7 pp
+    HH         -17.6 pp
+    EQUAL      -6.1 pp
+    NAN        +0.0 pp
+
+PERIOD: VALIDATION
+------------------------------------------------------------------------------
+  N:  BAD=45  GOOD=5  INT=16
+  [LOW POWER] GOOD N=5 -- percentages not statistically meaningful.
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LH               28        2       11      62.2%    40.0%    68.8%
+  HH               15        3        5      33.3%    60.0%    31.2%
+  EQUAL             2        0        0       4.4%     0.0%     0.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LH         +22.2 pp
+    HH         -26.7 pp
+    EQUAL      +4.4 pp
+    NAN        +0.0 pp
+
+PERIOD: OOS
+------------------------------------------------------------------------------
+  N:  BAD=46  GOOD=11  INT=33
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LH               22        5       19      47.8%    45.5%    57.6%
+  HH               22        6       14      47.8%    54.5%    42.4%
+  EQUAL             2        0        0       4.3%     0.0%     0.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LH         +2.4 pp
+    HH         -6.7 pp
+    EQUAL      +4.3 pp
+    NAN        +0.0 pp
+
+
+==============================================================================
+CATEGORY: pre_bos_5m_prev_swing_low_label
+==============================================================================
+
+PERIOD: ALL
+------------------------------------------------------------------------------
+  N:  BAD=188  GOOD=30  INT=101
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LL               98       12       51      52.1%    40.0%    50.5%
+  HL               83       16       48      44.1%    53.3%    47.5%
+  EQUAL             7        2        2       3.7%     6.7%     2.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LL         +12.1 pp
+    HL         -9.2 pp
+    EQUAL      -2.9 pp
+    NAN        +0.0 pp
+
+PERIOD: DISCOVERY
+------------------------------------------------------------------------------
+  N:  BAD=96  GOOD=14  INT=51
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LL               51        5       29      53.1%    35.7%    56.9%
+  HL               42        9       22      43.8%    64.3%    43.1%
+  EQUAL             3        0        0       3.1%     0.0%     0.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LL         +17.4 pp
+    HL         -20.5 pp
+    EQUAL      +3.1 pp
+    NAN        +0.0 pp
+
+PERIOD: VALIDATION
+------------------------------------------------------------------------------
+  N:  BAD=45  GOOD=5  INT=16
+  [LOW POWER] GOOD N=5 -- percentages not statistically meaningful.
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LL               25        3        8      55.6%    60.0%    50.0%
+  HL               17        2        6      37.8%    40.0%    37.5%
+  EQUAL             3        0        2       6.7%     0.0%    12.5%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LL         -4.4 pp
+    HL         -2.2 pp
+    EQUAL      +6.7 pp
+    NAN        +0.0 pp
+
+PERIOD: OOS
+------------------------------------------------------------------------------
+  N:  BAD=46  GOOD=11  INT=33
+  label         BAD_n   GOOD_n    INT_n      BAD_%   GOOD_%    INT_%
+  LL               22        4       14      47.8%    36.4%    42.4%
+  HL               23        5       19      50.0%    45.5%    57.6%
+  EQUAL             1        2        0       2.2%    18.2%     0.0%
+  NAN               0        0        0       0.0%     0.0%     0.0%
+
+  BAD vs GOOD delta (pp):
+    LL         +11.5 pp
+    HL         +4.5 pp
+    EQUAL      -16.0 pp
+    NAN        +0.0 pp
+
+
+==============================================================================
+FORENSIC SUMMARY -- CATEGORY STABILITY
+==============================================================================
+
+Focus deltas (BAD% - GOOD%), one line per period:
+
+HIGH: HH vs LH
+  ALL          N_bad=188  N_good= 30  delta(HH)= -16.2 pp  delta(LH)=  +16.9 pp
+  DISCOVERY    N_bad= 96  N_good= 14  delta(HH)= -17.6 pp  delta(LH)=  +23.7 pp
+  VALIDATION   N_bad= 45  N_good=  5  delta(HH)= -26.7 pp  delta(LH)=  +22.2 pp
+  OOS          N_bad= 46  N_good= 11  delta(HH)=  -6.7 pp  delta(LH)=   +2.4 pp
+
+LOW:  HL vs LL
+  ALL          N_bad=188  N_good= 30  delta(HL)=  -9.2 pp  delta(LL)=  +12.1 pp
+  DISCOVERY    N_bad= 96  N_good= 14  delta(HL)= -20.5 pp  delta(LL)=  +17.4 pp
+  VALIDATION   N_bad= 45  N_good=  5  delta(HL)=  -2.2 pp  delta(LL)=   -4.4 pp
+  OOS          N_bad= 46  N_good= 11  delta(HL)=  +4.5 pp  delta(LL)=  +11.5 pp
+
+POWER CAVEAT
+------------------------------------------------------------------------------
+  VALIDATION GOOD N=5 -- any percentage there is dominated by noise.
+  OOS GOOD N=11 -- still low power.
+  DISCOVERY GOOD N=14 -- low power, borderline.
+  Only ALL (GOOD N=30) has N large enough to describe, not to prove.
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

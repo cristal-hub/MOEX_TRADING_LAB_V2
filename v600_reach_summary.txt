@@ -1,0 +1,192 @@
+==============================================================================
+v600 REACH SUMMARY -- descriptive reach rates by state x horizon
+STRATEGY LOGIC: UNCHANGED -- RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+For each state tag, report for H in [1, 2, 3, 4, 6, 8, 12, 18, 24]
+the fraction of observations with label_reach_plus_*_H = True
+and label_reach_minus_*_H = True, for each reach level.
+
+Tag: state_trend_up  N=8356
+  reach +-0.1%:  H1:up=14/dn=17  H2:up=23/dn=28  H3:up=29/dn=37  H4:up=34/dn=43  H6:up=40/dn=53  H8:up=45/dn=59  H12:up=52/dn=68  H18:up=59/dn=75  H24:up=64/dn=80  
+  reach +-0.2%:  H1:up=4/dn=4  H2:up=8/dn=9  H3:up=12/dn=14  H4:up=15/dn=18  H6:up=20/dn=26  H8:up=24/dn=32  H12:up=30/dn=42  H18:up=36/dn=53  H24:up=42/dn=60  
+  reach +-0.3%:  H1:up=1/dn=2  H2:up=4/dn=4  H3:up=6/dn=6  H4:up=8/dn=8  H6:up=11/dn=13  H8:up=14/dn=17  H12:up=19/dn=24  H18:up=24/dn=35  H24:up=29/dn=43  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=2/dn=1  H4:up=2/dn=2  H6:up=4/dn=3  H8:up=6/dn=5  H12:up=8/dn=9  H18:up=12/dn=15  H24:up=16/dn=21  
+
+Tag: state_trend_down  N=8638
+  reach +-0.1%:  H1:up=18/dn=19  H2:up=30/dn=30  H3:up=38/dn=37  H4:up=44/dn=43  H6:up=53/dn=51  H8:up=59/dn=56  H12:up=66/dn=63  H18:up=72/dn=70  H24:up=76/dn=75  
+  reach +-0.2%:  H1:up=5/dn=6  H2:up=11/dn=12  H3:up=16/dn=17  H4:up=20/dn=21  H6:up=26/dn=28  H8:up=32/dn=33  H12:up=40/dn=41  H18:up=49/dn=50  H24:up=54/dn=58  
+  reach +-0.3%:  H1:up=2/dn=3  H2:up=5/dn=6  H3:up=7/dn=9  H4:up=10/dn=11  H6:up=14/dn=16  H8:up=18/dn=20  H12:up=25/dn=27  H18:up=32/dn=36  H24:up=38/dn=44  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=1/dn=1  H3:up=2/dn=3  H4:up=3/dn=4  H6:up=5/dn=6  H8:up=7/dn=8  H12:up=11/dn=13  H18:up=16/dn=19  H24:up=20/dn=25  
+
+Tag: state_trend_flat  N=8862
+  reach +-0.1%:  H1:up=16/dn=17  H2:up=25/dn=28  H3:up=32/dn=36  H4:up=37/dn=42  H6:up=44/dn=51  H8:up=50/dn=57  H12:up=57/dn=66  H18:up=64/dn=73  H24:up=69/dn=78  
+  reach +-0.2%:  H1:up=5/dn=5  H2:up=9/dn=10  H3:up=13/dn=15  H4:up=17/dn=19  H6:up=22/dn=26  H8:up=26/dn=32  H12:up=33/dn=41  H18:up=41/dn=50  H24:up=46/dn=58  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=5  H3:up=6/dn=7  H4:up=9/dn=10  H6:up=12/dn=14  H8:up=16/dn=18  H12:up=21/dn=25  H18:up=28/dn=34  H24:up=34/dn=41  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=6/dn=7  H12:up=9/dn=11  H18:up=14/dn=17  H24:up=19/dn=22  
+
+Tag: state_ema_spread_high  N=6439
+  reach +-0.1%:  H1:up=19/dn=19  H2:up=30/dn=31  H3:up=38/dn=39  H4:up=43/dn=44  H6:up=50/dn=52  H8:up=56/dn=58  H12:up=63/dn=65  H18:up=69/dn=74  H24:up=73/dn=80  
+  reach +-0.2%:  H1:up=6/dn=6  H2:up=11/dn=11  H3:up=16/dn=16  H4:up=20/dn=21  H6:up=26/dn=27  H8:up=31/dn=33  H12:up=39/dn=42  H18:up=46/dn=52  H24:up=51/dn=60  
+  reach +-0.3%:  H1:up=2/dn=3  H2:up=5/dn=5  H3:up=7/dn=8  H4:up=10/dn=10  H6:up=14/dn=15  H8:up=18/dn=19  H12:up=24/dn=26  H18:up=29/dn=35  H24:up=35/dn=43  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=6/dn=7  H12:up=10/dn=11  H18:up=14/dn=17  H24:up=18/dn=22  
+
+Tag: state_ema_spread_low  N=6775
+  reach +-0.1%:  H1:up=14/dn=17  H2:up=23/dn=27  H3:up=30/dn=35  H4:up=35/dn=41  H6:up=42/dn=50  H8:up=48/dn=56  H12:up=55/dn=65  H18:up=62/dn=72  H24:up=67/dn=76  
+  reach +-0.2%:  H1:up=4/dn=5  H2:up=8/dn=10  H3:up=12/dn=14  H4:up=15/dn=19  H6:up=21/dn=26  H8:up=25/dn=31  H12:up=32/dn=40  H18:up=40/dn=50  H24:up=46/dn=57  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=4  H3:up=6/dn=6  H4:up=8/dn=9  H6:up=12/dn=14  H8:up=15/dn=18  H12:up=20/dn=25  H18:up=27/dn=33  H24:up=32/dn=40  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=4  H8:up=6/dn=7  H12:up=9/dn=11  H18:up=14/dn=16  H24:up=18/dn=21  
+
+Tag: state_move_up_6  N=6660
+  reach +-0.1%:  H1:up=21/dn=23  H2:up=31/dn=36  H3:up=38/dn=45  H4:up=43/dn=51  H6:up=49/dn=60  H8:up=54/dn=65  H12:up=60/dn=72  H18:up=66/dn=78  H24:up=70/dn=82  
+  reach +-0.2%:  H1:up=8/dn=7  H2:up=13/dn=13  H3:up=18/dn=18  H4:up=22/dn=23  H6:up=28/dn=32  H8:up=32/dn=38  H12:up=38/dn=47  H18:up=45/dn=56  H24:up=50/dn=63  
+  reach +-0.3%:  H1:up=3/dn=3  H2:up=7/dn=6  H3:up=10/dn=9  H4:up=12/dn=12  H6:up=17/dn=17  H8:up=21/dn=22  H12:up=27/dn=29  H18:up=33/dn=39  H24:up=38/dn=47  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=2/dn=1  H3:up=3/dn=2  H4:up=5/dn=3  H6:up=7/dn=5  H8:up=9/dn=8  H12:up=13/dn=13  H18:up=16/dn=20  H24:up=21/dn=27  
+
+Tag: state_move_down_6  N=6589
+  reach +-0.1%:  H1:up=24/dn=23  H2:up=36/dn=35  H3:up=44/dn=42  H4:up=50/dn=48  H6:up=58/dn=55  H8:up=63/dn=61  H12:up=70/dn=68  H18:up=76/dn=74  H24:up=79/dn=78  
+  reach +-0.2%:  H1:up=7/dn=8  H2:up=14/dn=15  H3:up=20/dn=20  H4:up=24/dn=25  H6:up=31/dn=32  H8:up=36/dn=37  H12:up=45/dn=45  H18:up=53/dn=54  H24:up=58/dn=60  
+  reach +-0.3%:  H1:up=3/dn=3  H2:up=6/dn=7  H3:up=9/dn=11  H4:up=12/dn=14  H6:up=17/dn=19  H8:up=21/dn=23  H12:up=29/dn=31  H18:up=36/dn=40  H24:up=42/dn=46  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=2  H3:up=3/dn=3  H4:up=4/dn=5  H6:up=6/dn=7  H8:up=8/dn=10  H12:up=13/dn=14  H18:up=19/dn=20  H24:up=23/dn=26  
+
+Tag: state_move_up_12  N=6579
+  reach +-0.1%:  H1:up=20/dn=23  H2:up=30/dn=36  H3:up=38/dn=44  H4:up=43/dn=50  H6:up=49/dn=58  H8:up=53/dn=64  H12:up=59/dn=71  H18:up=64/dn=79  H24:up=69/dn=83  
+  reach +-0.2%:  H1:up=7/dn=6  H2:up=13/dn=13  H3:up=18/dn=18  H4:up=22/dn=23  H6:up=27/dn=31  H8:up=31/dn=37  H12:up=37/dn=46  H18:up=43/dn=56  H24:up=48/dn=64  
+  reach +-0.3%:  H1:up=3/dn=2  H2:up=6/dn=5  H3:up=9/dn=8  H4:up=12/dn=11  H6:up=17/dn=16  H8:up=20/dn=21  H12:up=25/dn=29  H18:up=31/dn=39  H24:up=35/dn=47  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=1  H3:up=3/dn=2  H4:up=5/dn=3  H6:up=7/dn=6  H8:up=9/dn=8  H12:up=12/dn=13  H18:up=15/dn=20  H24:up=20/dn=26  
+
+Tag: state_move_down_12  N=6594
+  reach +-0.1%:  H1:up=23/dn=24  H2:up=35/dn=35  H3:up=44/dn=43  H4:up=50/dn=48  H6:up=58/dn=55  H8:up=64/dn=60  H12:up=70/dn=66  H18:up=77/dn=73  H24:up=79/dn=78  
+  reach +-0.2%:  H1:up=7/dn=8  H2:up=14/dn=15  H3:up=19/dn=21  H4:up=24/dn=25  H6:up=31/dn=32  H8:up=37/dn=37  H12:up=46/dn=45  H18:up=54/dn=53  H24:up=59/dn=60  
+  reach +-0.3%:  H1:up=3/dn=4  H2:up=6/dn=8  H3:up=9/dn=11  H4:up=12/dn=14  H6:up=18/dn=19  H8:up=22/dn=24  H12:up=29/dn=31  H18:up=36/dn=38  H24:up=42/dn=45  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=2  H3:up=3/dn=4  H4:up=4/dn=5  H6:up=6/dn=8  H8:up=9/dn=10  H12:up=14/dn=14  H18:up=19/dn=20  H24:up=24/dn=25  
+
+Tag: state_quiet_6  N=12601
+  reach +-0.1%:  H1:up=9/dn=12  H2:up=18/dn=22  H3:up=25/dn=29  H4:up=30/dn=36  H6:up=38/dn=45  H8:up=44/dn=52  H12:up=51/dn=61  H18:up=59/dn=70  H24:up=64/dn=75  
+  reach +-0.2%:  H1:up=2/dn=3  H2:up=5/dn=7  H3:up=8/dn=11  H4:up=11/dn=14  H6:up=16/dn=21  H8:up=20/dn=27  H12:up=27/dn=36  H18:up=34/dn=47  H24:up=40/dn=55  
+  reach +-0.3%:  H1:up=1/dn=1  H2:up=2/dn=3  H3:up=4/dn=5  H4:up=5/dn=6  H6:up=8/dn=10  H8:up=11/dn=14  H12:up=16/dn=21  H18:up=22/dn=30  H24:up=27/dn=39  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=0/dn=1  H3:up=1/dn=1  H4:up=1/dn=2  H6:up=3/dn=3  H8:up=4/dn=5  H12:up=6/dn=8  H18:up=10/dn=13  H24:up=14/dn=19  
+
+Tag: state_ema9_21_cross_recent  N=3119
+  reach +-0.1%:  H1:up=17/dn=20  H2:up=26/dn=31  H3:up=34/dn=39  H4:up=39/dn=45  H6:up=46/dn=53  H8:up=51/dn=59  H12:up=59/dn=67  H18:up=65/dn=73  H24:up=69/dn=77  
+  reach +-0.2%:  H1:up=5/dn=6  H2:up=11/dn=11  H3:up=15/dn=17  H4:up=18/dn=21  H6:up=23/dn=28  H8:up=27/dn=34  H12:up=36/dn=43  H18:up=44/dn=51  H24:up=48/dn=57  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=5/dn=5  H3:up=8/dn=8  H4:up=10/dn=11  H6:up=14/dn=16  H8:up=17/dn=20  H12:up=23/dn=26  H18:up=30/dn=35  H24:up=34/dn=42  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=2  H3:up=3/dn=2  H4:up=4/dn=3  H6:up=6/dn=5  H8:up=8/dn=7  H12:up=11/dn=12  H18:up=15/dn=17  H24:up=20/dn=22  
+
+Tag: state_above_vwap_high  N=6573
+  reach +-0.1%:  H1:up=17/dn=19  H2:up=26/dn=32  H3:up=32/dn=41  H4:up=37/dn=48  H6:up=43/dn=57  H8:up=48/dn=64  H12:up=54/dn=71  H18:up=59/dn=78  H24:up=63/dn=81  
+  reach +-0.2%:  H1:up=6/dn=5  H2:up=11/dn=11  H3:up=14/dn=16  H4:up=18/dn=21  H6:up=23/dn=29  H8:up=27/dn=36  H12:up=33/dn=46  H18:up=39/dn=56  H24:up=43/dn=62  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=5/dn=4  H3:up=7/dn=7  H4:up=10/dn=10  H6:up=14/dn=15  H8:up=17/dn=20  H12:up=22/dn=28  H18:up=27/dn=39  H24:up=32/dn=46  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=7/dn=7  H12:up=10/dn=11  H18:up=14/dn=19  H24:up=19/dn=25  
+
+Tag: state_below_vwap_high  N=6249
+  reach +-0.1%:  H1:up=20/dn=20  H2:up=32/dn=31  H3:up=41/dn=38  H4:up=47/dn=44  H6:up=56/dn=52  H8:up=62/dn=57  H12:up=70/dn=64  H18:up=76/dn=69  H24:up=79/dn=73  
+  reach +-0.2%:  H1:up=6/dn=6  H2:up=12/dn=13  H3:up=17/dn=18  H4:up=21/dn=22  H6:up=29/dn=29  H8:up=35/dn=34  H12:up=44/dn=42  H18:up=54/dn=50  H24:up=60/dn=57  
+  reach +-0.3%:  H1:up=2/dn=3  H2:up=5/dn=6  H3:up=8/dn=10  H4:up=11/dn=12  H6:up=15/dn=18  H8:up=20/dn=22  H12:up=27/dn=29  H18:up=36/dn=37  H24:up=42/dn=44  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=1/dn=1  H3:up=2/dn=3  H4:up=3/dn=4  H6:up=6/dn=6  H8:up=8/dn=9  H12:up=12/dn=13  H18:up=18/dn=18  H24:up=23/dn=23  
+
+Tag: state_at_vwap  N=13021
+  reach +-0.1%:  H1:up=14/dn=16  H2:up=23/dn=27  H3:up=30/dn=34  H4:up=35/dn=40  H6:up=42/dn=49  H8:up=48/dn=55  H12:up=56/dn=64  H18:up=64/dn=72  H24:up=68/dn=78  
+  reach +-0.2%:  H1:up=4/dn=5  H2:up=8/dn=10  H3:up=12/dn=14  H4:up=15/dn=18  H6:up=20/dn=24  H8:up=24/dn=30  H12:up=31/dn=39  H18:up=39/dn=49  H24:up=45/dn=58  
+  reach +-0.3%:  H1:up=1/dn=2  H2:up=3/dn=4  H3:up=5/dn=6  H4:up=7/dn=8  H6:up=11/dn=12  H8:up=14/dn=16  H12:up=19/dn=23  H18:up=26/dn=32  H24:up=31/dn=41  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=2/dn=2  H6:up=4/dn=4  H8:up=5/dn=6  H12:up=8/dn=10  H18:up=12/dn=16  H24:up=16/dn=21  
+
+Tag: state_vwap_recent_reclaim_or_reject  N=5095
+  reach +-0.1%:  H1:up=16/dn=17  H2:up=25/dn=28  H3:up=32/dn=35  H4:up=37/dn=41  H6:up=44/dn=50  H8:up=49/dn=56  H12:up=57/dn=65  H18:up=64/dn=73  H24:up=68/dn=79  
+  reach +-0.2%:  H1:up=4/dn=5  H2:up=9/dn=10  H3:up=13/dn=14  H4:up=16/dn=18  H6:up=21/dn=25  H8:up=25/dn=30  H12:up=33/dn=40  H18:up=40/dn=50  H24:up=46/dn=59  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=4  H3:up=7/dn=7  H4:up=8/dn=9  H6:up=12/dn=13  H8:up=15/dn=17  H12:up=21/dn=24  H18:up=27/dn=33  H24:up=32/dn=42  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=4/dn=5  H8:up=6/dn=6  H12:up=9/dn=10  H18:up=13/dn=16  H24:up=17/dn=22  
+
+Tag: state_volume_expansion  N=6350
+  reach +-0.1%:  H1:up=22/dn=23  H2:up=32/dn=35  H3:up=40/dn=42  H4:up=45/dn=48  H6:up=52/dn=56  H8:up=56/dn=61  H12:up=62/dn=69  H18:up=69/dn=75  H24:up=73/dn=79  
+  reach +-0.2%:  H1:up=8/dn=7  H2:up=14/dn=13  H3:up=19/dn=19  H4:up=23/dn=23  H6:up=29/dn=31  H8:up=33/dn=36  H12:up=41/dn=46  H18:up=48/dn=55  H24:up=53/dn=61  
+  reach +-0.3%:  H1:up=3/dn=3  H2:up=6/dn=6  H3:up=9/dn=9  H4:up=12/dn=12  H6:up=16/dn=17  H8:up=20/dn=22  H12:up=26/dn=30  H18:up=33/dn=41  H24:up=38/dn=46  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=2  H3:up=3/dn=3  H4:up=4/dn=4  H6:up=6/dn=6  H8:up=8/dn=8  H12:up=12/dn=13  H18:up=18/dn=20  H24:up=22/dn=26  
+
+Tag: state_volume_contraction  N=6281
+  reach +-0.1%:  H1:up=12/dn=13  H2:up=21/dn=23  H3:up=27/dn=30  H4:up=33/dn=36  H6:up=41/dn=45  H8:up=47/dn=51  H12:up=55/dn=60  H18:up=62/dn=69  H24:up=66/dn=75  
+  reach +-0.2%:  H1:up=3/dn=3  H2:up=7/dn=7  H3:up=10/dn=11  H4:up=13/dn=14  H6:up=18/dn=20  H8:up=22/dn=25  H12:up=29/dn=33  H18:up=36/dn=44  H24:up=41/dn=53  
+  reach +-0.3%:  H1:up=1/dn=1  H2:up=3/dn=3  H3:up=5/dn=5  H4:up=6/dn=7  H6:up=10/dn=10  H8:up=13/dn=13  H12:up=18/dn=19  H18:up=23/dn=28  H24:up=27/dn=37  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=1/dn=1  H4:up=2/dn=2  H6:up=3/dn=3  H8:up=4/dn=4  H12:up=6/dn=7  H18:up=10/dn=12  H24:up=13/dn=18  
+
+Tag: state_volume_spike_recent  N=6999
+  reach +-0.1%:  H1:up=21/dn=22  H2:up=31/dn=33  H3:up=38/dn=41  H4:up=44/dn=47  H6:up=50/dn=55  H8:up=56/dn=60  H12:up=63/dn=68  H18:up=70/dn=74  H24:up=74/dn=77  
+  reach +-0.2%:  H1:up=7/dn=7  H2:up=13/dn=13  H3:up=18/dn=18  H4:up=22/dn=22  H6:up=28/dn=29  H8:up=32/dn=34  H12:up=41/dn=44  H18:up=49/dn=53  H24:up=54/dn=59  
+  reach +-0.3%:  H1:up=3/dn=3  H2:up=6/dn=6  H3:up=9/dn=9  H4:up=11/dn=11  H6:up=16/dn=16  H8:up=20/dn=20  H12:up=27/dn=28  H18:up=33/dn=38  H24:up=40/dn=44  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=2  H3:up=3/dn=3  H4:up=4/dn=4  H6:up=6/dn=6  H8:up=8/dn=8  H12:up=12/dn=12  H18:up=18/dn=19  H24:up=23/dn=24  
+
+Tag: state_range_expansion  N=6502
+  reach +-0.1%:  H1:up=22/dn=23  H2:up=32/dn=34  H3:up=40/dn=41  H4:up=45/dn=47  H6:up=52/dn=55  H8:up=56/dn=60  H12:up=62/dn=68  H18:up=68/dn=74  H24:up=73/dn=78  
+  reach +-0.2%:  H1:up=7/dn=7  H2:up=13/dn=13  H3:up=18/dn=18  H4:up=22/dn=22  H6:up=28/dn=29  H8:up=32/dn=34  H12:up=39/dn=43  H18:up=46/dn=52  H24:up=51/dn=58  
+  reach +-0.3%:  H1:up=3/dn=3  H2:up=6/dn=6  H3:up=9/dn=9  H4:up=12/dn=12  H6:up=16/dn=17  H8:up=19/dn=20  H12:up=25/dn=28  H18:up=31/dn=37  H24:up=37/dn=44  
+  reach +-0.5%:  H1:up=1/dn=1  H2:up=2/dn=2  H3:up=3/dn=3  H4:up=4/dn=4  H6:up=6/dn=6  H8:up=8/dn=8  H12:up=12/dn=12  H18:up=17/dn=18  H24:up=21/dn=24  
+
+Tag: state_range_compression  N=6588
+  reach +-0.1%:  H1:up=12/dn=14  H2:up=22/dn=25  H3:up=28/dn=33  H4:up=34/dn=39  H6:up=41/dn=48  H8:up=47/dn=55  H12:up=54/dn=63  H18:up=62/dn=72  H24:up=66/dn=77  
+  reach +-0.2%:  H1:up=4/dn=4  H2:up=7/dn=9  H3:up=11/dn=13  H4:up=14/dn=17  H6:up=19/dn=24  H8:up=23/dn=30  H12:up=30/dn=39  H18:up=38/dn=49  H24:up=44/dn=58  
+  reach +-0.3%:  H1:up=1/dn=2  H2:up=3/dn=4  H3:up=5/dn=6  H4:up=7/dn=8  H6:up=10/dn=12  H8:up=14/dn=16  H12:up=19/dn=23  H18:up=25/dn=32  H24:up=30/dn=42  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=1/dn=2  H4:up=2/dn=2  H6:up=3/dn=4  H8:up=5/dn=5  H12:up=7/dn=9  H18:up=11/dn=15  H24:up=15/dn=22  
+
+Tag: state_atr_high  N=7034
+  reach +-0.1%:  H1:up=33/dn=35  H2:up=46/dn=48  H3:up=54/dn=56  H4:up=59/dn=62  H6:up=65/dn=69  H8:up=70/dn=73  H12:up=75/dn=78  H18:up=80/dn=83  H24:up=82/dn=86  
+  reach +-0.2%:  H1:up=12/dn=12  H2:up=23/dn=23  H3:up=29/dn=31  H4:up=35/dn=37  H6:up=42/dn=46  H8:up=48/dn=51  H12:up=55/dn=59  H18:up=62/dn=67  H24:up=67/dn=72  
+  reach +-0.3%:  H1:up=5/dn=5  H2:up=11/dn=12  H3:up=16/dn=17  H4:up=21/dn=22  H6:up=27/dn=29  H8:up=33/dn=35  H12:up=40/dn=43  H18:up=48/dn=53  H24:up=54/dn=60  
+  reach +-0.5%:  H1:up=2/dn=1  H2:up=3/dn=3  H3:up=6/dn=5  H4:up=8/dn=8  H6:up=12/dn=12  H8:up=15/dn=15  H12:up=22/dn=23  H18:up=28/dn=31  H24:up=34/dn=39  
+
+Tag: state_atr_low  N=7080
+  reach +-0.1%:  H1:up=5/dn=6  H2:up=11/dn=14  H3:up=17/dn=20  H4:up=22/dn=27  H6:up=30/dn=36  H8:up=36/dn=43  H12:up=44/dn=53  H18:up=53/dn=62  H24:up=59/dn=68  
+  reach +-0.2%:  H1:up=1/dn=1  H2:up=2/dn=3  H3:up=4/dn=5  H4:up=6/dn=8  H6:up=10/dn=13  H8:up=13/dn=18  H12:up=20/dn=27  H18:up=28/dn=37  H24:up=34/dn=45  
+  reach +-0.3%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=1/dn=2  H4:up=2/dn=3  H6:up=4/dn=5  H8:up=6/dn=8  H12:up=11/dn=13  H18:up=16/dn=22  H24:up=21/dn=29  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=0/dn=0  H3:up=0/dn=0  H4:up=1/dn=0  H6:up=1/dn=1  H8:up=2/dn=2  H12:up=4/dn=3  H18:up=7/dn=7  H24:up=11/dn=11  
+
+Tag: state_prev_swing_high_hh  N=10097
+  reach +-0.1%:  H1:up=16/dn=18  H2:up=26/dn=30  H3:up=33/dn=38  H4:up=39/dn=45  H6:up=46/dn=55  H8:up=51/dn=61  H12:up=58/dn=68  H18:up=65/dn=75  H24:up=69/dn=79  
+  reach +-0.2%:  H1:up=5/dn=5  H2:up=10/dn=11  H3:up=14/dn=16  H4:up=18/dn=20  H6:up=24/dn=28  H8:up=28/dn=35  H12:up=35/dn=44  H18:up=43/dn=54  H24:up=48/dn=61  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=5/dn=5  H3:up=7/dn=7  H4:up=9/dn=10  H6:up=13/dn=15  H8:up=17/dn=20  H12:up=23/dn=28  H18:up=29/dn=39  H24:up=36/dn=45  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=7/dn=8  H12:up=10/dn=12  H18:up=16/dn=19  H24:up=21/dn=25  
+
+Tag: state_prev_swing_high_lh  N=10982
+  reach +-0.1%:  H1:up=16/dn=18  H2:up=27/dn=30  H3:up=34/dn=38  H4:up=40/dn=44  H6:up=48/dn=53  H8:up=53/dn=59  H12:up=60/dn=67  H18:up=67/dn=74  H24:up=71/dn=77  
+  reach +-0.2%:  H1:up=5/dn=5  H2:up=10/dn=12  H3:up=14/dn=17  H4:up=18/dn=21  H6:up=24/dn=29  H8:up=29/dn=35  H12:up=37/dn=44  H18:up=45/dn=53  H24:up=50/dn=59  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=5  H3:up=7/dn=8  H4:up=9/dn=11  H6:up=13/dn=16  H8:up=17/dn=21  H12:up=23/dn=28  H18:up=30/dn=37  H24:up=36/dn=45  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=7/dn=8  H12:up=11/dn=12  H18:up=15/dn=18  H24:up=20/dn=24  
+
+Tag: state_prev_swing_low_hl  N=10587
+  reach +-0.1%:  H1:up=16/dn=18  H2:up=25/dn=30  H3:up=32/dn=38  H4:up=37/dn=45  H6:up=45/dn=54  H8:up=50/dn=60  H12:up=57/dn=68  H18:up=64/dn=75  H24:up=68/dn=78  
+  reach +-0.2%:  H1:up=5/dn=5  H2:up=10/dn=11  H3:up=14/dn=16  H4:up=17/dn=21  H6:up=23/dn=29  H8:up=27/dn=35  H12:up=34/dn=44  H18:up=42/dn=54  H24:up=47/dn=60  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=5  H3:up=7/dn=7  H4:up=9/dn=10  H6:up=13/dn=16  H8:up=16/dn=20  H12:up=22/dn=28  H18:up=29/dn=38  H24:up=34/dn=45  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=6  H8:up=7/dn=8  H12:up=10/dn=12  H18:up=15/dn=18  H24:up=19/dn=24  
+
+Tag: state_prev_swing_low_ll  N=10811
+  reach +-0.1%:  H1:up=17/dn=18  H2:up=27/dn=29  H3:up=35/dn=37  H4:up=41/dn=43  H6:up=49/dn=52  H8:up=55/dn=58  H12:up=62/dn=66  H18:up=68/dn=73  H24:up=72/dn=77  
+  reach +-0.2%:  H1:up=5/dn=5  H2:up=10/dn=11  H3:up=15/dn=16  H4:up=19/dn=20  H6:up=25/dn=27  H8:up=30/dn=33  H12:up=38/dn=43  H18:up=46/dn=52  H24:up=51/dn=59  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=5  H3:up=7/dn=8  H4:up=9/dn=10  H6:up=14/dn=15  H8:up=18/dn=19  H12:up=24/dn=27  H18:up=31/dn=37  H24:up=37/dn=44  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=7/dn=7  H12:up=11/dn=11  H18:up=16/dn=18  H24:up=21/dn=24  
+
+Tag: state_first_hour  N=3072
+  reach +-0.1%:  H1:up=17/dn=17  H2:up=26/dn=27  H3:up=32/dn=33  H4:up=37/dn=37  H6:up=43/dn=43  H8:up=49/dn=48  H12:up=56/dn=54  H18:up=64/dn=67  H24:up=68/dn=75  
+  reach +-0.2%:  H1:up=5/dn=6  H2:up=9/dn=9  H3:up=12/dn=12  H4:up=15/dn=14  H6:up=19/dn=18  H8:up=22/dn=21  H12:up=28/dn=26  H18:up=35/dn=37  H24:up=40/dn=50  
+  reach +-0.3%:  H1:up=2/dn=3  H2:up=4/dn=4  H3:up=6/dn=6  H4:up=7/dn=7  H6:up=10/dn=9  H8:up=13/dn=11  H12:up=17/dn=13  H18:up=21/dn=21  H24:up=26/dn=32  
+  reach +-0.5%:  H1:up=0/dn=1  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=2/dn=2  H6:up=3/dn=3  H8:up=4/dn=3  H12:up=6/dn=5  H18:up=8/dn=9  H24:up=10/dn=13  
+
+Tag: state_mid_session  N=9472
+  reach +-0.1%:  H1:up=15/dn=18  H2:up=25/dn=30  H3:up=32/dn=39  H4:up=38/dn=45  H6:up=45/dn=55  H8:up=51/dn=62  H12:up=58/dn=70  H18:up=65/dn=77  H24:up=70/dn=80  
+  reach +-0.2%:  H1:up=4/dn=5  H2:up=10/dn=11  H3:up=14/dn=16  H4:up=17/dn=21  H6:up=23/dn=30  H8:up=28/dn=37  H12:up=36/dn=48  H18:up=44/dn=58  H24:up=50/dn=65  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=4/dn=5  H3:up=7/dn=8  H4:up=9/dn=11  H6:up=13/dn=16  H8:up=17/dn=21  H12:up=23/dn=30  H18:up=31/dn=41  H24:up=37/dn=49  
+  reach +-0.5%:  H1:up=0/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=7/dn=8  H12:up=11/dn=13  H18:up=16/dn=20  H24:up=21/dn=27  
+
+Tag: state_last_hour  N=3072
+  reach +-0.1%:  H1:up=15/dn=15  H2:up=25/dn=26  H3:up=32/dn=34  H4:up=38/dn=40  H6:up=45/dn=48  H8:up=50/dn=55  H12:up=-1/dn=-1  H18:up=-1/dn=-1  H24:up=-1/dn=-1  
+  reach +-0.2%:  H1:up=4/dn=4  H2:up=9/dn=9  H3:up=13/dn=14  H4:up=17/dn=18  H6:up=21/dn=25  H8:up=25/dn=31  H12:up=-1/dn=-1  H18:up=-1/dn=-1  H24:up=-1/dn=-1  
+  reach +-0.3%:  H1:up=2/dn=1  H2:up=4/dn=4  H3:up=6/dn=6  H4:up=8/dn=8  H6:up=12/dn=13  H8:up=14/dn=17  H12:up=-1/dn=-1  H18:up=-1/dn=-1  H24:up=-1/dn=-1  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=1  H4:up=3/dn=2  H6:up=5/dn=3  H8:up=7/dn=6  H12:up=-1/dn=-1  H18:up=-1/dn=-1  H24:up=-1/dn=-1  
+
+Tag: state_day_edge_zone  N=14791
+  reach +-0.1%:  H1:up=18/dn=19  H2:up=28/dn=31  H3:up=35/dn=38  H4:up=41/dn=45  H6:up=48/dn=53  H8:up=53/dn=59  H12:up=60/dn=67  H18:up=67/dn=74  H24:up=71/dn=78  
+  reach +-0.2%:  H1:up=5/dn=6  H2:up=11/dn=11  H3:up=15/dn=16  H4:up=19/dn=21  H6:up=25/dn=28  H8:up=29/dn=34  H12:up=37/dn=43  H18:up=44/dn=53  H24:up=50/dn=60  
+  reach +-0.3%:  H1:up=2/dn=2  H2:up=5/dn=5  H3:up=7/dn=8  H4:up=10/dn=10  H6:up=14/dn=15  H8:up=17/dn=20  H12:up=23/dn=27  H18:up=30/dn=37  H24:up=35/dn=44  
+  reach +-0.5%:  H1:up=1/dn=0  H2:up=1/dn=1  H3:up=2/dn=2  H4:up=3/dn=3  H6:up=5/dn=5  H8:up=7/dn=7  H12:up=10/dn=11  H18:up=15/dn=17  H24:up=19/dn=23  
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

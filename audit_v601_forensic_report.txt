@@ -1,0 +1,458 @@
+V601 FORENSIC AUDIT -- READ ONLY
+audit_v601_forensic.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+No source file, cache, or existing report is modified.
+All outputs written as new audit_v601_* files.
+
+
+
+==============================================================================
+SECTION 1 -- INPUT INTEGRITY
+==============================================================================
+
+Source files:
+  OK      v601_predefined_entry_exit.py
+          size=24031
+          sha256=ad1ad0ee5bc513febf99c5006e4c2e603b2995dcbe0423c30e3b9b8d9c472260
+  OK      v601_trades.csv
+          size=2248063
+          sha256=a44b178cb2d78d0605a79a87cabd60afced7a530160a26760fa646c4b1c79815
+  OK      cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+          size=2416569
+          sha256=33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+  OK      cache_2024_2025/5m/SBER_TQBR_2024-09-15_2025-09-14_5m.csv
+          size=2361287
+          sha256=6ad3e4646a260aac3a7d9c518e6cf3ad3c21f1a66a90a08f21564ca4733a38fa
+  OK      cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+          size=2368190
+          sha256=054640f72aa6f855120d9ee78ab103d73723e8a0c95067137fae79ac5e3597d7
+  OK      cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+          size=2242598
+          sha256=7542703e984e26987e5d86396823dd116247c95163ad7cd5082d5e62a549c924
+
+OHLCV integrity per dataset:
+------------------------------------------------------------------------------
+  dataset: SBER_2025_2026
+    rows=25856
+    columns=['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+    NaN in open: 0
+    NaN in high: 0
+    NaN in low: 0
+    NaN in close: 0
+    NaN in volume: 0
+    total NaN in OHLCV: 0
+    non-positive open: 0
+    non-positive high: 0
+    non-positive low: 0
+    non-positive close: 0
+    negative volume: 0
+    bars failing low <= min(o,c): 0
+    bars failing high >= max(o,c): 0
+    duplicate begin timestamps: 0
+    monotonic begin: True
+    sessions (distinct dates): 256
+    bars per session: min=101 median=101 max=101
+
+  dataset: SBER_2024_2025
+    rows=25453
+    columns=['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+    NaN in open: 0
+    NaN in high: 0
+    NaN in low: 0
+    NaN in close: 0
+    NaN in volume: 0
+    total NaN in OHLCV: 0
+    non-positive open: 0
+    non-positive high: 0
+    non-positive low: 0
+    non-positive close: 0
+    negative volume: 0
+    bars failing low <= min(o,c): 0
+    bars failing high >= max(o,c): 0
+    duplicate begin timestamps: 0
+    monotonic begin: True
+    sessions (distinct dates): 252
+    bars per session: min=100 median=101 max=102
+
+  dataset: GAZP_2025_2026
+    rows=25862
+    columns=['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+    NaN in open: 0
+    NaN in high: 0
+    NaN in low: 0
+    NaN in close: 0
+    NaN in volume: 0
+    total NaN in OHLCV: 0
+    non-positive open: 0
+    non-positive high: 0
+    non-positive low: 0
+    non-positive close: 0
+    negative volume: 0
+    bars failing low <= min(o,c): 0
+    bars failing high >= max(o,c): 0
+    duplicate begin timestamps: 0
+    monotonic begin: True
+    sessions (distinct dates): 256
+    bars per session: min=101 median=101 max=103
+
+  dataset: LKOH_2025_2026
+    rows=25893
+    columns=['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+    NaN in open: 0
+    NaN in high: 0
+    NaN in low: 0
+    NaN in close: 0
+    NaN in volume: 0
+    total NaN in OHLCV: 0
+    non-positive open: 0
+    non-positive high: 0
+    non-positive low: 0
+    non-positive close: 0
+    negative volume: 0
+    bars failing low <= min(o,c): 0
+    bars failing high >= max(o,c): 0
+    duplicate begin timestamps: 0
+    monotonic begin: True
+    sessions (distinct dates): 256
+    bars per session: min=101 median=101 max=107
+
+Ledger integrity (v601_trades.csv):
+------------------------------------------------------------------------------
+  rows=10016
+  columns=['dataset', 'signal_index', 'entry_index', 'exit_index', 'entry_time', 'exit_time', 'entry_price', 'exit_price', 'quantity', 'gross_pnl', 'entry_commission', 'exit_commission', 'net_pnl', 'return_pct', 'holding_bars', 'reason']
+  rows in duplicated (dataset, signal_index): 0
+  SBER_2025_2026: entry_index out of bounds=0, exit_index out of bounds=0
+  SBER_2024_2025: entry_index out of bounds=0, exit_index out of bounds=0
+  GAZP_2025_2026: entry_index out of bounds=0, exit_index out of bounds=0
+  LKOH_2025_2026: entry_index out of bounds=0, exit_index out of bounds=0
+  max |gross_pnl - (exit-entry)*qty| : 3.271e-11
+  max |net_pnl - gross - comm|        : 1.137e-13
+
+
+
+==============================================================================
+SECTION 2 -- TP EXECUTION FORENSICS
+==============================================================================
+
+Ordinary TP trades (reason == TP): 2993
+TP_GAP trades (audited separately): 2
+
+Identity: exit_price == entry_price * (1 + TP_PCT) * (1 - SLIP)
+  max abs error: 9.095e-13
+  rows exceeding 1e-9: 0
+
+Gross price return (before commission):
+  min=0.249850 median=0.249850 mean=0.249850 max=0.249850
+  theoretical constant = 0.249850
+
+Reachability checks on exit bar:
+  ordinary TP where high < tp_level: 0
+  ordinary TP where low <= sl_level: 0
+  ordinary TP where open >= tp_level: 0
+
+Deviation metrics (ordinary TP, exit bar):
+  high - exit_fill: min=0.042971 median=0.383813 mean=3.398550 p95=15.943933 max=120.907720
+  high - tp_level:  min=0.000443 median=0.255901 mean=2.571628 p95=13.536262 max=118.466953
+  high / tp_level - 1 (bp):  min=0.004440 median=8.153805 mean=14.268728 p95=47.074604 max=242.683911
+
+Sample: largest (high - exit_fill):
+  LKOH_2025_2026 si=4591 ei=4592 entry=4866.932250 exit_fill=4879.092280 high=5000.000000 high-exit_fill=120.907720
+  LKOH_2025_2026 si=3378 ei=3380 entry=5429.713500 exit_fill=5443.279639 high=5560.000000 high-exit_fill=116.720361
+  LKOH_2025_2026 si=22234 ei=22235 entry=4574.786250 exit_fill=4586.216353 high=4690.000000 high-exit_fill=103.783647
+  LKOH_2025_2026 si=6472 ei=6473 entry=5655.826500 exit_fill=5669.957583 high=5765.000000 high-exit_fill=95.042417
+  LKOH_2025_2026 si=12153 ei=12154 entry=6043.520250 exit_fill=6058.619985 high=6148.000000 high-exit_fill=89.380015
+  LKOH_2025_2026 si=21652 ei=21653 entry=4062.530250 exit_fill=4072.680482 high=4150.000000 high-exit_fill=77.319518
+  LKOH_2025_2026 si=21537 ei=21539 entry=4351.174500 exit_fill=4362.045909 high=4438.000000 high-exit_fill=75.954091
+  LKOH_2025_2026 si=21656 ei=21657 entry=4122.060000 exit_fill=4132.358967 high=4205.000000 high-exit_fill=72.641033
+  LKOH_2025_2026 si=22233 ei=22234 entry=4548.773250 exit_fill=4560.138360 high=4626.500000 high-exit_fill=66.361640
+  LKOH_2025_2026 si=23799 ei=23800 entry=4197.597750 exit_fill=4208.085448 high=4268.500000 high-exit_fill=60.414552
+
+Interpretation:
+  gross TP price return is a constant because the simulated exit fill
+  is constructed deterministically as entry_price * 1.003 * 0.9995.
+  This is a simulated fill, not an observed market execution.
+  Whether the market actually traded at or above tp_level on the exit
+  bar can be partially checked via high >= tp_level, but the actual
+  executed price in a real market would depend on order flow.
+
+
+
+==============================================================================
+SECTION 3 -- EXIT REASON AUDIT
+==============================================================================
+
+Counts by dataset and reason:
+------------------------------------------------------------------------------
+reason          END_OF_DATA  END_OF_SESSION    SL  SL_AND_TP_SAME_BAR_SL_FIRST  SL_GAP  TIME_STOP    TP  TP_GAP  TOTAL
+dataset                                                                                                               
+GAZP_2025_2026            1             130  1359                           26       3        418   941       0   2878
+LKOH_2025_2026            1             125  1359                           30       2        458   908       2   2885
+SBER_2024_2025            1             140  1070                           10       0        475   722       0   2418
+SBER_2025_2026            1             127   654                            2       0        629   422       0   1835
+TOTAL                     4             522  4442                           68       5       1980  2993       2  10016
+
+Shares by dataset:
+------------------------------------------------------------------------------
+reason          END_OF_DATA  END_OF_SESSION       SL  SL_AND_TP_SAME_BAR_SL_FIRST  SL_GAP  TIME_STOP       TP  TP_GAP
+dataset                                                                                                              
+GAZP_2025_2026       0.0347          4.5170  47.2203                       0.9034  0.1042    14.5240  32.6963  0.0000
+LKOH_2025_2026       0.0347          4.3328  47.1057                       1.0399  0.0693    15.8752  31.4731  0.0693
+SBER_2024_2025       0.0414          5.7899  44.2514                       0.4136  0.0000    19.6443  29.8594  0.0000
+SBER_2025_2026       0.0545          6.9210  35.6403                       0.1090  0.0000    34.2779  22.9973  0.0000
+
+TP_GAP audit (bars where low <= sl_level on same exit bar):
+------------------------------------------------------------------------------
+  TP_GAP total: 2
+  TP_GAP where low <= sl_level (SL-first would have applied): 0
+  STATUS: NO DEFECT FOUND -- no TP_GAP bar also reached SL.
+
+Holding bars by dataset:
+------------------------------------------------------------------------------
+                min  median    mean  max
+dataset                                 
+GAZP_2025_2026    0     3.0  4.4819   12
+LKOH_2025_2026    0     3.0  4.4059   12
+SBER_2024_2025    0     4.0  5.0653   12
+SBER_2025_2026    0     7.0  6.7450   12
+  trades with holding_bars > H_MAX (12): 0
+
+
+
+==============================================================================
+SECTION 4 -- EQUITY CURVE AUDIT
+==============================================================================
+
+Comparing original v601 equity logic (mark on signal bar with close[i])
+against diagnostic equity (mark only from entry_index onward).
+
+  dataset: SBER_2025_2026
+    rows=25856
+    final equity orig=2939.4179 diag=88335.0749
+    max DD orig=-97.0606 % diag=-25.2254 %
+    max abs equity difference: 90169.8051
+    bars with |diff| > 1e-6: 25324
+
+    bar 19233  orig=10586.4696 diag=100756.2747 diff=-90169.8051
+    bar 19243  orig=10586.4696 diag=100746.9750 diff=-90160.5055
+    bar 19245  orig=10586.4696 diag=100746.9750 diff=-90160.5055
+    bar 19231  orig=10586.4696 diag=100743.8751 diff=-90157.4056
+    bar 19242  orig=10586.4696 diag=100728.3758 diff=-90141.9062
+
+  dataset: SBER_2024_2025
+    rows=25453
+    final equity orig=880.7615 diag=115278.0155
+    max DD orig=-99.1193 % diag=-19.8818 %
+    max abs equity difference: 122548.1277
+    bars with |diff| > 1e-6: 25397
+
+    bar 21261  orig=1397.3745 diag=123945.5022 diff=-122548.1277
+    bar 21265  orig=1397.3745 diag=123911.5712 diff=-122514.1967
+    bar 21263  orig=1397.3745 diag=123790.9276 diff=-122393.5531
+    bar 21259  orig=1397.3745 diag=123783.3874 diff=-122386.0129
+    bar 21264  orig=1397.3745 diag=123775.8472 diff=-122378.4727
+
+  dataset: GAZP_2025_2026
+    rows=25862
+    final equity orig=337.4350 diag=74920.0189
+    max DD orig=-99.6636 % diag=-43.6456 %
+    max abs equity difference: 99643.1833
+    bars with |diff| > 1e-6: 25816
+
+    bar 13577  orig=9402.2355 diag=109045.4188 diff=-99643.1833
+    bar 13576  orig=9402.2355 diag=108770.7203 diff=-99368.4848
+    bar 13581  orig=9402.2355 diag=108747.1748 diff=-99344.9393
+    bar 13586  orig=9400.9814 diag=108700.0836 diff=-99299.1022
+    bar 13582  orig=9402.2355 diag=108676.5380 diff=-99274.3025
+
+  dataset: LKOH_2025_2026
+    rows=25893
+    final equity orig=294.3976 diag=82658.0149
+    max DD orig=-99.7071 % diag=-38.4034 %
+    max abs equity difference: 85722.2303
+    bars with |diff| > 1e-6: 25847
+
+    bar 12145  orig=9370.0465 diag=95092.2768 diff=-85722.2303
+    bar 12154  orig=9341.8780 diag=94614.3325 diff=-85272.4545
+    bar 12155  orig=9341.8780 diag=94460.1569 diff=-85118.2789
+    bar 12156  orig=9341.8780 diag=94321.3988 diff=-84979.5209
+    bar 12157  orig=9341.8780 diag=94275.1461 diff=-84933.2682
+
+Interpretation:
+  - Trade-level PnL is NOT affected: it is computed in close_position()
+    from real fills, independent of the equity curve.
+  - The equity curve in v601 marks a position on the signal bar using
+    close[signal_index], while the actual entry occurs at open[signal_index+1].
+    This produces a transient, incorrect mark on every entry bar.
+  - Max drawdown reported by v601 is therefore computed on a curve
+    that contains this transient artifact.
+  - The magnitude of the artifact is quantified above per dataset.
+
+
+
+==============================================================================
+SECTION 5 -- TIMING, LOOK-AHEAD, SESSION HANDLING
+==============================================================================
+
+Signal formula (from v601 source):
+  r6 = close.pct_change(6) * 100
+  signal = r6 < -0.103471, NaN -> False
+  -> uses closes [i-6, i]. No future data.
+
+Ledger check: entry_index != signal_index + 1: 0
+
+Cross-session entries (signal on prev day, entry on next day): 0
+  v601 code blocks these via _next_session_first_bar().
+  STATUS: NO DEFECT FOUND on ledger; confirmed by zero count if 0.
+
+Session-boundary closure:
+  v601 closes any open position at close[i-1] when session_key changes.
+  STATUS: CONFIRMED MODELING LIMITATION
+          (close[i-1] assumed executable; slippage applied inside close_position).
+
+Negative control in v601 (negative_control):
+  It truncates df after T0+30, rebuilds tag, and compares signal decisions
+  on [0, T0]. If identical, it shows the tag decision at bar <= T0 does
+  not depend on data after T0+30.
+  It does NOT prove absence of look-ahead in entry/exit or in sizing.
+  STATUS: CONFIRMED MODELING LIMITATION (limited scope).
+
+Intra-bar TP/SL ordering:
+  NOT TESTED. OHLCV does not allow reconstruction of intra-bar path.
+  The code applies SL_FIRST = True when both hit on the same bar.
+  STATUS: CONFIRMED MODELING LIMITATION.
+
+
+
+==============================================================================
+SECTION 6 -- COMMISSION AND SLIPPAGE ACCOUNTING
+==============================================================================
+
+Implied commission rate, entry side:
+  min=0.00050000 median=0.00050000 mean=0.00050000 max=0.00050000
+  configured: 0.0005
+
+Implied commission rate, exit side:
+  min=0.00050000 median=0.00050000 mean=0.00050000 max=0.00050000
+  configured: 0.0005
+
+Implied exit slippage on ordinary TP trades:
+  min=0.00050000 median=0.00050000 mean=0.00050000 max=0.00050000
+  configured: 0.0005
+
+Gross / net / commissions by exit reason (aggregated across datasets):
+------------------------------------------------------------------------------
+                     reason    N      gross_pnl  entry_commission  exit_commission        net_pnl
+                END_OF_DATA    4      -3.700480          2.230085         2.228235      -8.158800
+             END_OF_SESSION  522   -6981.324791       5121.654857      5118.164194  -17221.143842
+                         SL 4442 -308443.719111      44082.280850     43928.058991 -396454.058952
+SL_AND_TP_SAME_BAR_SL_FIRST   68   -3560.567802        508.870631       507.090347   -4576.528779
+                     SL_GAP    5    -194.321814         27.610573        27.513412    -249.445799
+                  TIME_STOP 1980  -20510.145111      19394.489173     19384.234100  -59288.868384
+                         TP 2993  137235.003026      27463.478692     27532.096194   82239.428140
+                     TP_GAP    2      17.907834          3.555207         3.564160      10.788467
+
+Interpretation of 0.20 percent round-trip:
+  0.20 percent is the sum of nominal per-side rates (2 * 0.05 comm +
+  2 * 0.05 slip). It is NOT an exact price-move break-even threshold.
+  The exact price move needed for zero net PnL is:
+    (1 + slip) / (1 - slip) - 1 at fill level, plus commission effect.
+  Numerically: (1.0005 / 0.9995 - 1) * 100 = 0.1000 percent per side
+  of commission-equivalent, hence ~0.2002 percent round-trip.
+
+Why ordinary TP gross return is not net profitability:
+  gross TP price return = 1.003 * 0.9995 - 1 = +0.24985 percent.
+  But net PnL also subtracts entry and exit commissions (2 * 0.05 percent
+  of notional). So even a TP trade can be net negative if notional is small
+  relative to fixed costs and slippage effects compound.
+
+
+
+==============================================================================
+SECTION 7 -- SOURCE-CODE-SPECIFIC DEFECT REVIEW
+==============================================================================
+
+A. Equity marking after entry
+   status: CONFIRMED DEFECT
+   location: backtest_one(), equity block after open_position(i).
+   evidence: mark = close[i] used against entry_price = open[i+1]*(1+slip).
+   impact: equity_curve and max_dd_pct computed on a curve with transient
+           artifact at every entry bar. Trade-level PnL unaffected.
+   confidence: high.
+
+B. Last-bar and session-boundary logic
+   status: NO DEFECT FOUND (with one modeling note)
+   location: session-boundary block, and END_OF_DATA block.
+   evidence: position is closed at close[i-1] before new session opens;
+             END_OF_DATA closes any open position at last bar's close.
+             No path closes the same position twice: after each close
+             position is set to None.
+   confidence: high.
+
+C. OHLC execution -- intra-bar TP vs SL
+   status: CONFIRMED MODELING LIMITATION
+   evidence: OHLCV cannot determine intra-bar order. Code uses SL_FIRST=True.
+             This is a conservative assumption, not a defect.
+   confidence: high.
+
+D. TP gap handling
+   status: POTENTIAL ISSUE -- REQUIRES DATA
+   evidence: branch order is SL_GAP, TP_GAP, SL_AND_TP, SL, TP.
+             If a bar opens >= tp_level AND also touches sl_level,
+             TP_GAP branch is evaluated before SL_AND_TP_SAME_BAR.
+             That overrides SL-first on such bars.
+   quantitative check: see Section 3 (TP_GAP with low <= sl_level).
+   confidence: high (code structure), data-dependent for impact.
+
+E. TIME_STOP
+   status: NO DEFECT FOUND
+   evidence: bars_held = i - entry_index; trigger at bars_held >= H_MAX.
+             Trade window spans [entry_index, entry_index + H_MAX] = 13 bars,
+             consistent with stated rule.
+   confidence: high.
+
+F. Session and data boundaries
+   status: NO DEFECT FOUND
+   evidence: END_OF_DATA closes any open position at last bar close.
+             Signals with no valid next bar -> open_position returns None.
+   confidence: high.
+
+G. Capital accounting
+   status: CONFIRMED MODELING LIMITATION
+   evidence: capital is a PnL accumulator, not a full cash account.
+             Position notional is not subtracted from capital on entry.
+             Commission is debited at entry; at exit, gross - exit_comm
+             is credited. final_capital - INIT - sum(net_pnl) = 0 (verified
+             in prior v601 forensic audit).
+   impact: modeling limitation, not an internal inconsistency.
+   confidence: high.
+
+H. Bootstrap
+   status: CONFIRMED MODELING LIMITATION
+   evidence: session-block bootstrap over session_key of entry.
+             Sessions with one trade contribute a single sample.
+             This can produce narrow CI; treat as limitation, not defect.
+   confidence: medium-high.
+
+
+
+==============================================================================
+SECTION 8 -- ROW-LEVEL RECONCILIATION
+==============================================================================
+
+Max abs error gross:      3.271e-11
+Max abs error net:        3.274e-11
+Max abs error return_pct: 4.358e-14
+
+==============================================================================
+END OF AUDIT
+==============================================================================
+
+No strategy logic was changed.
+No original file was modified.
+No live orders were sent.

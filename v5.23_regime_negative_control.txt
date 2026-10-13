@@ -1,0 +1,21 @@
+==============================================================================
+v5.23 REGIME STUDY -- LEAKAGE NEGATIVE CONTROL
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Method: for N random events, truncate df_5m / df_15m immediately
+after T0+30 and rebuild pre_bos_* features. If identical -> no
+look-ahead. If different -> leakage.
+
+event_index=19771 dir=SHORT cut_after=19801 mismatches=0
+event_index=10038 dir=SHORT cut_after=10068 mismatches=0
+event_index=16007 dir=LONG cut_after=16037 mismatches=0
+event_index=2568 dir=LONG cut_after=2598 mismatches=0
+event_index=9996 dir=SHORT cut_after=10026 mismatches=0
+
+Total mismatched features across sample: 0
+Expected: 0. Non-zero -> lookahead leakage.
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

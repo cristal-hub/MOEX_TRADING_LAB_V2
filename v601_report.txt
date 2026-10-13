@@ -1,0 +1,235 @@
+==============================================================================
+PREDEFINED ENTRY/EXIT RULE RESEARCH -- state_move_down_6
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+FIXED RULE (chosen before calculation):
+  Tag:       state_move_down_6
+  Direction: LONG
+  Entry:     open(T0+1) + slippage
+  TP:        +0.30% (limit fill at TP level)
+  SL:        -0.30% (stop fill at SL level)
+  H_max:     12 bars
+  Conflict:  SL first (conservative)
+  Gap:       fill at open price
+  Session:   close at last bar of session
+  Cost base: 0.20% round-trip (0.05% comm + 0.05% slip per side)
+
+NOTE: The tag state_move_down_6 was selected AFTER examining previous
+      research. This backtest is EXPLORATORY, not independent confirmation.
+
+==============================================================================
+DATASET: SBER_2025_2026
+==============================================================================
+Rows 5M: 25856
+Sessions: 256
+Negative control (signal causal): PASS
+
+MAIN SCENARIO -- Cost 0.20% round-trip
+------------------------------------------------------------------------------
+  Trades N:              1835
+  Gross PnL:             -49051.23
+  Net PnL:               -97060.58
+  Net expectancy/trade:  -52.8941
+  Expectancy CI95:       [-61.7938, -45.1879]
+  Win rate:              27.25 %
+  Profit factor:         0.147
+  Max drawdown:          -97.06 %
+  Avg hold (bars):       6.74
+  Total commission:      48009.35
+  Verdict (base):        FAIL_NEGATIVE
+
+SENSITIVITY
+------------------------------------------------------------------------------
+  Cost 0.10% round-trip:
+    Net PnL:          -81135.78
+    Expectancy:       -44.9506
+    Expectancy CI95:  [-51.7354, -38.9585]
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.20% round-trip:
+    Net PnL:          -97060.58
+    Expectancy:       -52.8941
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.40% round-trip:
+    Net PnL:          -99960.60
+    Expectancy:       -50.1307
+    Expectancy CI95:  [-63.7715, -38.1545]
+    Verdict:          FAIL_NEGATIVE
+
+BASELINES (cost 0.20%)
+------------------------------------------------------------------------------
+  Random entry (same frequency, seed=7):
+    N:              2301
+    Net PnL:        -99226.51
+    Expectancy:     -43.1232
+    Expectancy CI95:[-52.0414, -35.2150]
+  Always LONG:
+    N:              3293
+    Net PnL:        -99888.04
+    Expectancy:     -30.3334
+    Expectancy CI95:[-37.7153, -23.7217]
+
+==============================================================================
+DATASET: SBER_2024_2025
+==============================================================================
+Rows 5M: 25453
+Sessions: 252
+Negative control (signal causal): PASS
+
+MAIN SCENARIO -- Cost 0.20% round-trip
+------------------------------------------------------------------------------
+  Trades N:              2418
+  Gross PnL:             -50898.86
+  Net PnL:               -99119.24
+  Net expectancy/trade:  -40.9922
+  Expectancy CI95:       [-48.9286, -33.2850]
+  Win rate:              33.21 %
+  Profit factor:         0.193
+  Max drawdown:          -99.12 %
+  Avg hold (bars):       5.07
+  Total commission:      48220.38
+  Verdict (base):        FAIL_NEGATIVE
+
+SENSITIVITY
+------------------------------------------------------------------------------
+  Cost 0.10% round-trip:
+    Net PnL:          -90127.55
+    Expectancy:       -38.3848
+    Expectancy CI95:  [-44.2943, -32.6739]
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.20% round-trip:
+    Net PnL:          -99119.24
+    Expectancy:       -40.9922
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.40% round-trip:
+    Net PnL:          -99997.10
+    Expectancy:       -38.0796
+    Expectancy CI95:  [-49.8865, -27.8402]
+    Verdict:          FAIL_NEGATIVE
+
+BASELINES (cost 0.20%)
+------------------------------------------------------------------------------
+  Random entry (same frequency, seed=7):
+    N:              2928
+    Net PnL:        -99818.69
+    Expectancy:     -34.0911
+    Expectancy CI95:[-41.7316, -27.4089]
+  Always LONG:
+    N:              4185
+    Net PnL:        -99982.70
+    Expectancy:     -23.8907
+    Expectancy CI95:[-30.2262, -18.2308]
+
+==============================================================================
+DATASET: GAZP_2025_2026
+==============================================================================
+Rows 5M: 25862
+Sessions: 256
+Negative control (signal causal): PASS
+
+MAIN SCENARIO -- Cost 0.20% round-trip
+------------------------------------------------------------------------------
+  Trades N:              2878
+  Gross PnL:             -50152.26
+  Net PnL:               -99662.57
+  Net expectancy/trade:  -34.6291
+  Expectancy CI95:       [-42.8198, -27.8681]
+  Win rate:              35.02 %
+  Profit factor:         0.190
+  Max drawdown:          -99.66 %
+  Avg hold (bars):       4.48
+  Total commission:      49510.31
+  Verdict (base):        FAIL_NEGATIVE
+
+SENSITIVITY
+------------------------------------------------------------------------------
+  Cost 0.10% round-trip:
+    Net PnL:          -94103.19
+    Expectancy:       -33.4411
+    Expectancy CI95:  [-39.2023, -28.3451]
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.20% round-trip:
+    Net PnL:          -99662.57
+    Expectancy:       -34.6291
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.40% round-trip:
+    Net PnL:          -99999.49
+    Expectancy:       -32.3414
+    Expectancy CI95:  [-43.2251, -22.8965]
+    Verdict:          FAIL_NEGATIVE
+
+BASELINES (cost 0.20%)
+------------------------------------------------------------------------------
+  Random entry (same frequency, seed=7):
+    N:              3469
+    Net PnL:        -99957.52
+    Expectancy:     -28.8145
+    Expectancy CI95:[-36.8824, -22.0237]
+  Always LONG:
+    N:              5030
+    Net PnL:        -99997.79
+    Expectancy:     -19.8803
+    Expectancy CI95:[-26.2995, -14.5272]
+
+==============================================================================
+DATASET: LKOH_2025_2026
+==============================================================================
+Rows 5M: 25893
+Sessions: 256
+Negative control (signal causal): PASS
+
+MAIN SCENARIO -- Cost 0.20% round-trip
+------------------------------------------------------------------------------
+  Trades N:              2885
+  Gross PnL:             -52338.52
+  Net PnL:               -99705.60
+  Net expectancy/trade:  -34.5600
+  Expectancy CI95:       [-43.0414, -27.6498]
+  Win rate:              33.93 %
+  Profit factor:         0.177
+  Max drawdown:          -99.71 %
+  Avg hold (bars):       4.41
+  Total commission:      47367.08
+  Verdict (base):        FAIL_NEGATIVE
+
+SENSITIVITY
+------------------------------------------------------------------------------
+  Cost 0.10% round-trip:
+    Net PnL:          -94319.93
+    Expectancy:       -33.4349
+    Expectancy CI95:  [-39.9157, -28.3342]
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.20% round-trip:
+    Net PnL:          -99705.60
+    Expectancy:       -34.5600
+    Verdict:          FAIL_NEGATIVE
+  Cost 0.40% round-trip:
+    Net PnL:          -99999.50
+    Expectancy:       -32.6263
+    Expectancy CI95:  [-43.3395, -23.8781]
+    Verdict:          FAIL_NEGATIVE
+
+BASELINES (cost 0.20%)
+------------------------------------------------------------------------------
+  Random entry (same frequency, seed=7):
+    N:              3402
+    Net PnL:        -99946.90
+    Expectancy:     -29.3789
+    Expectancy CI95:[-36.5074, -23.2963]
+  Always LONG:
+    N:              5087
+    Net PnL:        -99998.03
+    Expectancy:     -19.6576
+    Expectancy CI95:[-25.5269, -14.7802]
+
+==============================================================================
+GENERAL NOTES
+------------------------------------------------------------------------------
+- Tag selection was exploratory (post-hoc). Independent confirmation
+  would require a new, previously unexamined period.
+- Positive result on already-examined data is NOT independent evidence.
+- No parameter optimization. No filter. No strategy change.
+- Session-block bootstrap, n_iter=1000, seed=42.
+- No live orders were sent.
+==============================================================================

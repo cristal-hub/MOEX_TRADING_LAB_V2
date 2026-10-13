@@ -1,0 +1,79 @@
+==============================================================================
+v5.23 REGIME STUDY -- TEMPORAL STABILITY (BAD vs GOOD)
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+Robust effect = (median_BAD - median_GOOD) / IQR_GOOD, per period.
+Sign stability across DISCOVERY / VALIDATION / OOS is the point.
+==============================================================================
+
+  feature                                              DISC        VAL        OOS   N_bad N_good
+  pre_bos_1m_ret_5m                                  -0.115     -0.578     -0.111      96     14
+  pre_bos_1m_ret_10m                                 -0.009     -0.377      0.043      96     14
+  pre_bos_1m_ret_20m                                 -0.612      0.071      0.279      96     14
+  pre_bos_1m_ret_30m                                 -0.058      0.714     -0.035      96     14
+  pre_bos_1m_range_5m_pct                            -0.285      0.170      0.318      96     14
+  pre_bos_1m_range_20m_pct                           -0.341      2.162      0.176      96     14
+  pre_bos_1m_range_atr_5m                             0.145     -0.048      0.545      96     14
+  pre_bos_1m_range_atr_20m                            0.034      0.114      0.107      96     14
+  pre_bos_1m_vol_ratio_5m                            -0.722     -0.125      0.932      96     14
+  pre_bos_1m_vol_ratio_20m                           -0.722     -0.125      0.932      96     14
+  pre_bos_1m_compression_ratio                       -0.442      0.019      0.854      96     14
+  pre_bos_1m_hh_count_20m                             0.167      0.333      0.000      96     14
+  pre_bos_1m_ll_count_20m                            -0.545      1.000     -0.167      96     14
+  pre_bos_1m_pullback_depth_atr_20m                   0.310      3.441     -0.055      96     14
+  pre_bos_1m_consec_same_dir                          0.364      0.000      0.000      96     14
+  pre_bos_1m_last_body_pct                            0.544        n/a      0.099      96     14
+  pre_bos_1m_last_upper_wick_pct                     -0.136        n/a      0.495      96     14
+  pre_bos_1m_last_lower_wick_pct                     -0.414        n/a     -0.144      96     14
+  pre_bos_5m_atr14                                   -0.178      0.528      0.388      96     14
+  pre_bos_5m_atr_ratio_20                             0.025      1.386      0.171      96     14
+  pre_bos_5m_ema9_21_signed                           0.186      0.480     -0.141      96     14
+  pre_bos_5m_ema21_50_signed                          0.565     -2.050     -0.232      96     14
+  pre_bos_5m_close_ema21_signed                      -0.187      1.517     -0.005      96     14
+  pre_bos_5m_rsi14                                   -0.190     -2.223      0.135      96     14
+  pre_bos_5m_rsi_delta_3                             -0.518     -0.192      0.259      96     14
+  pre_bos_5m_macd_hist_atr                           -0.064     -0.954      0.093      96     14
+  pre_bos_5m_macd_hist_delta_3                       -0.028     -0.217      0.277      96     14
+  pre_bos_5m_vwap_distance_pct_signed                 0.076      0.607     -0.187      96     14
+  pre_bos_5m_volume_ratio                            -0.076     -0.383      1.185      96     14
+  pre_bos_5m_range_atr_current                        0.087     -0.120      0.723      96     14
+  pre_bos_5m_range_atr_prev                           0.860      0.568     -0.668      96     14
+  pre_bos_5m_prev_swing_high_label                      n/a        n/a        n/a       0      0
+  pre_bos_5m_prev_swing_low_label                       n/a        n/a        n/a       0      0
+  pre_bos_5m_prev_impulse_size_atr                   -0.052      1.234     -0.722      96     14
+  pre_bos_5m_prev_pullback_depth_atr                 -0.845     -0.935     -0.011      96     14
+  pre_bos_5m_structure_state                            n/a        n/a        n/a       0      0
+  pre_bos_5m_current_trend                              n/a        n/a        n/a       0      0
+  pre_bos_15m_ema9_21_signed                          0.464     -0.365     -0.194      96     14
+  pre_bos_15m_ema21_50_signed                         0.268      0.483     -0.144      96     14
+  pre_bos_15m_close_vs_ema21_signed                   0.266      0.624      0.061      96     14
+  pre_bos_15m_trend                                     n/a        n/a        n/a       0      0
+  pre_bos_15m_atr14                                  -0.275      2.061      0.459      96     14
+  pre_bos_15m_atr_ratio_20                           -0.122      0.205     -0.457      96     14
+  pre_bos_15m_range_current                          -0.033      0.571     -0.016      96     14
+  pre_bos_15m_range_avg5                             -0.171      0.263      0.208      96     14
+  pre_bos_15m_position_in_range                      -0.511     -1.663      0.101      96     14
+  pre_bos_mkt_session_minutes_from_open               0.199     -0.269      0.000      96     14
+  pre_bos_mkt_session_minutes_to_close               -0.199      0.269      0.000      96     14
+  pre_bos_mkt_day_range_pct                          -0.011      1.561     -0.240      96     14
+  pre_bos_mkt_day_position                           -0.293     -0.896      1.139      96     14
+  pre_bos_mkt_dist_session_open_atr                   1.288      0.094      0.009      96     14
+  pre_bos_mkt_dist_prev_day_high_atr                  0.355      1.294     -0.031      96     14
+  pre_bos_mkt_dist_prev_day_low_atr                   0.045     -2.556      0.018      96     14
+  pre_bos_mkt_prev_day_range_pct                      0.024      1.334     -0.023      96     14
+  pre_bos_mkt_prev_day_close_atr                      0.330     -0.526     -0.348      96     14
+  pre_bos_mkt_day_open_gap_pct                        0.309      0.263     -0.265      96     14
+  pre_bos_mkt_volatility_regime                         n/a        n/a        n/a       0      0
+  pre_bos_mkt_day_type                                  n/a        n/a        n/a       0      0
+
+FEATURES WITH SIGN-STABLE EFFECT ACROSS ALL THREE PERIODS
+------------------------------------------------------------------------------
+  pre_bos_1m_ret_5m                              eff=-0.115 / -0.578 / -0.111
+  pre_bos_1m_range_atr_20m                       eff=0.034 / 0.114 / 0.107
+  pre_bos_5m_atr_ratio_20                        eff=0.025 / 1.386 / 0.171
+  pre_bos_5m_prev_pullback_depth_atr             eff=-0.845 / -0.935 / -0.011
+  pre_bos_15m_close_vs_ema21_signed              eff=0.266 / 0.624 / 0.061
+  pre_bos_mkt_dist_session_open_atr              eff=1.288 / 0.094 / 0.009
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

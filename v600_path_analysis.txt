@@ -1,0 +1,2019 @@
+==============================================================================
+v600 PATH ANALYSIS -- READ-ONLY
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Design notes:
+  - MFE_first_bar = 1-based offset of the first bar whose high equals
+    the maximum high in the horizon window (T0+1..T0+H).
+  - MAE_first_bar = 1-based offset of the first bar whose low equals
+    the minimum low in the horizon window.
+  - MFE_first / MAE_first / SAME_BAR compare those two bars.
+  - first_reach_dir for +-0.20% and +-0.30% uses classical first-touch.
+  - All horizons are strictly session-safe.
+  - N_eff ~= N / H, approximate independent observation count.
+  - Block bootstrap over sessions (N_boot=400) gives CI95 for means/proportions.
+
+WARNING: MFE is NOT realized profit. It is maximum favorable excursion
+within the window. Path ordering is descriptive only.
+
+Total rows: 25856
+Horizons: [1, 3, 6, 12, 24]
+Tags up:   ['state_trend_up', 'state_move_up_6', 'state_above_vwap_high']
+Tags down: ['state_trend_down', 'state_move_down_6', 'state_below_vwap_high']
+
+==============================================================================
+PART A: PATH SUMMARY BY TAG, PERIOD, HORIZON
+==============================================================================
+
+------------------------------------------------------------------------------
+TAG: state_trend_up
+------------------------------------------------------------------------------
+  Period: DISCOVERY  N=3879
+    TAG=state_trend_up  P=DISCOVERY  H=1  N=3879  N_eff~=3879
+      MFE      = +0.05%  CI95=[+0.04%, +0.05%]
+      MAE      = -0.05%  CI95=[-0.06%, -0.05%]
+      TERM     = -0.00%  CI95=[-0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.9%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=3.6% DOWN=3.2% NEITHER=91.9% BOTH=0.2%
+      first_reach +-0.30%: UP=1.3% DOWN=1.1% NEITHER=96.4% BOTH=0.0%
+    TAG=state_trend_up  P=DISCOVERY  H=3  N=3879  N_eff~=1293
+      MFE      = +0.09%  CI95=[+0.08%, +0.10%]
+      MAE      = -0.10%  CI95=[-0.11%, -0.09%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.00%]
+      MFE_first rate = 44.6%  CI95=[42.8%, 46.5%]
+      MAE_first rate = 37.1%  CI95=[35.2%, 39.0%]
+      SAME_bar rate  = 17.1%
+      mean mfe_first_bar = 1.76
+      mean mae_first_bar = 1.88
+      first_reach +-0.20%: UP=10.3% DOWN=12.0% NEITHER=76.4% BOTH=0.2%
+      first_reach +-0.30%: UP=5.3% DOWN=4.6% NEITHER=88.9% BOTH=0.0%
+    TAG=state_trend_up  P=DISCOVERY  H=6  N=3879  N_eff~=646
+      MFE      = +0.12%  CI95=[+0.11%, +0.14%]
+      MAE      = -0.14%  CI95=[-0.15%, -0.12%]
+      TERM     = -0.01%  CI95=[-0.02%, +0.01%]
+      MFE_first rate = 52.7%  CI95=[50.1%, 55.2%]
+      MAE_first rate = 40.9%  CI95=[38.2%, 43.0%]
+      SAME_bar rate  = 5.3%
+      mean mfe_first_bar = 2.92
+      mean mae_first_bar = 3.30
+      first_reach +-0.20%: UP=16.9% DOWN=21.9% NEITHER=59.8% BOTH=0.3%
+      first_reach +-0.30%: UP=9.8% DOWN=9.8% NEITHER=79.2% BOTH=0.0%
+    TAG=state_trend_up  P=DISCOVERY  H=12  N=3879  N_eff~=323
+      MFE      = +0.17%  CI95=[+0.15%, +0.20%]
+      MAE      = -0.19%  CI95=[-0.22%, -0.17%]
+      TERM     = -0.01%  CI95=[-0.04%, +0.01%]
+      MFE_first rate = 56.0%  CI95=[52.6%, 59.2%]
+      MAE_first rate = 40.4%  CI95=[37.0%, 43.4%]
+      SAME_bar rate  = 2.5%
+      mean mfe_first_bar = 5.00
+      mean mae_first_bar = 6.01
+      first_reach +-0.20%: UP=23.7% DOWN=33.5% NEITHER=41.4% BOTH=0.3%
+      first_reach +-0.30%: UP=16.6% DOWN=19.5% NEITHER=62.8% BOTH=0.0%
+    TAG=state_trend_up  P=DISCOVERY  H=24  N=3879  N_eff~=161
+      MFE      = +0.23%  CI95=[+0.20%, +0.27%]
+      MAE      = -0.28%  CI95=[-0.31%, -0.25%]
+      TERM     = -0.04%  CI95=[-0.08%, +0.01%]
+      MFE_first rate = 58.2%  CI95=[53.4%, 62.7%]
+      MAE_first rate = 38.8%  CI95=[34.3%, 43.4%]
+      SAME_bar rate  = 1.9%
+      mean mfe_first_bar = 8.85
+      mean mae_first_bar = 12.00
+      first_reach +-0.20%: UP=29.1% DOWN=44.8% NEITHER=24.7% BOTH=0.3%
+      first_reach +-0.30%: UP=22.2% DOWN=33.8% NEITHER=42.9% BOTH=0.0%
+
+  Period: VALIDATION  N=2019
+    TAG=state_trend_up  P=VALIDATION  H=1  N=2019  N_eff~=2019
+      MFE      = +0.03%  CI95=[+0.03%, +0.04%]
+      MAE      = -0.04%  CI95=[-0.04%, -0.04%]
+      TERM     = -0.00%  CI95=[-0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=1.7% DOWN=1.4% NEITHER=96.0% BOTH=0.0%
+      first_reach +-0.30%: UP=0.4% DOWN=0.3% NEITHER=98.4% BOTH=0.0%
+    TAG=state_trend_up  P=VALIDATION  H=3  N=2019  N_eff~=673
+      MFE      = +0.06%  CI95=[+0.05%, +0.07%]
+      MAE      = -0.07%  CI95=[-0.08%, -0.07%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.00%]
+      MFE_first rate = 44.8%  CI95=[42.2%, 47.4%]
+      MAE_first rate = 36.2%  CI95=[33.1%, 39.1%]
+      SAME_bar rate  = 18.1%
+      mean mfe_first_bar = 1.72
+      mean mae_first_bar = 1.85
+      first_reach +-0.20%: UP=6.0% DOWN=6.2% NEITHER=86.9% BOTH=0.0%
+      first_reach +-0.30%: UP=2.9% DOWN=1.8% NEITHER=94.5% BOTH=0.0%
+    TAG=state_trend_up  P=VALIDATION  H=6  N=2019  N_eff~=336
+      MFE      = +0.09%  CI95=[+0.08%, +0.10%]
+      MAE      = -0.11%  CI95=[-0.12%, -0.10%]
+      TERM     = -0.01%  CI95=[-0.02%, +0.00%]
+      MFE_first rate = 53.3%  CI95=[49.1%, 57.0%]
+      MAE_first rate = 39.1%  CI95=[35.5%, 42.8%]
+      SAME_bar rate  = 6.7%
+      mean mfe_first_bar = 2.78
+      mean mae_first_bar = 3.30
+      first_reach +-0.20%: UP=10.8% DOWN=15.0% NEITHER=73.4% BOTH=0.0%
+      first_reach +-0.30%: UP=6.0% DOWN=4.9% NEITHER=88.2% BOTH=0.0%
+    TAG=state_trend_up  P=VALIDATION  H=12  N=2019  N_eff~=168
+      MFE      = +0.12%  CI95=[+0.10%, +0.15%]
+      MAE      = -0.16%  CI95=[-0.18%, -0.15%]
+      TERM     = -0.03%  CI95=[-0.05%, -0.01%]
+      MFE_first rate = 56.5%  CI95=[51.3%, 62.0%]
+      MAE_first rate = 38.4%  CI95=[33.5%, 42.8%]
+      SAME_bar rate  = 4.2%
+      mean mfe_first_bar = 4.68
+      mean mae_first_bar = 6.03
+      first_reach +-0.20%: UP=17.2% DOWN=30.0% NEITHER=51.9% BOTH=0.0%
+      first_reach +-0.30%: UP=10.3% DOWN=13.4% NEITHER=75.4% BOTH=0.0%
+    TAG=state_trend_up  P=VALIDATION  H=24  N=2019  N_eff~=84
+      MFE      = +0.18%  CI95=[+0.14%, +0.21%]
+      MAE      = -0.24%  CI95=[-0.27%, -0.21%]
+      TERM     = -0.05%  CI95=[-0.09%, -0.01%]
+      MFE_first rate = 57.7%  CI95=[50.9%, 64.3%]
+      MAE_first rate = 38.2%  CI95=[31.7%, 44.7%]
+      SAME_bar rate  = 3.3%
+      mean mfe_first_bar = 8.71
+      mean mae_first_bar = 11.59
+      first_reach +-0.20%: UP=25.5% DOWN=44.2% NEITHER=29.4% BOTH=0.0%
+      first_reach +-0.30%: UP=17.6% DOWN=28.5% NEITHER=53.0% BOTH=0.0%
+
+  Period: OOS  N=2402
+    TAG=state_trend_up  P=OOS  H=1  N=2402  N_eff~=2402
+      MFE      = +0.06%  CI95=[+0.05%, +0.07%]
+      MAE      = -0.07%  CI95=[-0.08%, -0.06%]
+      TERM     = -0.01%  CI95=[-0.01%, -0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.3%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=6.7% DOWN=7.2% NEITHER=85.1% BOTH=0.2%
+      first_reach +-0.30%: UP=2.4% DOWN=3.2% NEITHER=93.6% BOTH=0.1%
+    TAG=state_trend_up  P=OOS  H=3  N=2402  N_eff~=800
+      MFE      = +0.11%  CI95=[+0.10%, +0.13%]
+      MAE      = -0.14%  CI95=[-0.15%, -0.12%]
+      TERM     = -0.01%  CI95=[-0.03%, -0.00%]
+      MFE_first rate = 46.3%  CI95=[43.8%, 48.5%]
+      MAE_first rate = 36.6%  CI95=[34.0%, 39.0%]
+      SAME_bar rate  = 16.4%
+      mean mfe_first_bar = 1.75
+      mean mae_first_bar = 1.91
+      first_reach +-0.20%: UP=17.8% DOWN=20.0% NEITHER=61.3% BOTH=0.2%
+      first_reach +-0.30%: UP=8.5% DOWN=10.6% NEITHER=80.1% BOTH=0.1%
+    TAG=state_trend_up  P=OOS  H=6  N=2402  N_eff~=400
+      MFE      = +0.16%  CI95=[+0.13%, +0.19%]
+      MAE      = -0.20%  CI95=[-0.22%, -0.17%]
+      TERM     = -0.03%  CI95=[-0.05%, -0.01%]
+      MFE_first rate = 53.3%  CI95=[50.4%, 56.6%]
+      MAE_first rate = 40.4%  CI95=[37.1%, 43.3%]
+      SAME_bar rate  = 5.6%
+      mean mfe_first_bar = 2.89
+      mean mae_first_bar = 3.36
+      first_reach +-0.20%: UP=26.3% DOWN=31.4% NEITHER=41.4% BOTH=0.2%
+      first_reach +-0.30%: UP=15.4% DOWN=20.6% NEITHER=63.2% BOTH=0.1%
+    TAG=state_trend_up  P=OOS  H=12  N=2402  N_eff~=200
+      MFE      = +0.22%  CI95=[+0.18%, +0.25%]
+      MAE      = -0.29%  CI95=[-0.32%, -0.25%]
+      TERM     = -0.05%  CI95=[-0.09%, -0.01%]
+      MFE_first rate = 55.4%  CI95=[50.4%, 60.0%]
+      MAE_first rate = 41.5%  CI95=[36.9%, 46.6%]
+      SAME_bar rate  = 2.3%
+      mean mfe_first_bar = 5.15
+      mean mae_first_bar = 6.16
+      first_reach +-0.20%: UP=32.0% DOWN=42.9% NEITHER=24.2% BOTH=0.2%
+      first_reach +-0.30%: UP=23.1% DOWN=32.3% NEITHER=43.9% BOTH=0.1%
+    TAG=state_trend_up  P=OOS  H=24  N=2402  N_eff~=100
+      MFE      = +0.30%  CI95=[+0.24%, +0.35%]
+      MAE      = -0.42%  CI95=[-0.48%, -0.35%]
+      TERM     = -0.09%  CI95=[-0.16%, -0.01%]
+      MFE_first rate = 57.6%  CI95=[49.9%, 63.8%]
+      MAE_first rate = 39.7%  CI95=[33.2%, 46.8%]
+      SAME_bar rate  = 2.0%
+      mean mfe_first_bar = 9.77
+      mean mae_first_bar = 11.98
+      first_reach +-0.20%: UP=35.8% DOWN=51.1% NEITHER=12.2% BOTH=0.2%
+      first_reach +-0.30%: UP=29.8% DOWN=44.4% NEITHER=25.1% BOTH=0.1%
+
+  Period: ALL  N=8356
+    TAG=state_trend_up  P=ALL  H=1  N=8356  N_eff~=8356
+      MFE      = +0.05%  CI95=[+0.04%, +0.05%]
+      MAE      = -0.06%  CI95=[-0.06%, -0.05%]
+      TERM     = -0.00%  CI95=[-0.01%, -0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=4.0% DOWN=3.9% NEITHER=91.0% BOTH=0.1%
+      first_reach +-0.30%: UP=1.4% DOWN=1.5% NEITHER=96.1% BOTH=0.0%
+    TAG=state_trend_up  P=ALL  H=3  N=8356  N_eff~=2785
+      MFE      = +0.09%  CI95=[+0.08%, +0.10%]
+      MAE      = -0.10%  CI95=[-0.11%, -0.10%]
+      TERM     = -0.01%  CI95=[-0.01%, -0.00%]
+      MFE_first rate = 45.2%  CI95=[43.9%, 46.4%]
+      MAE_first rate = 36.8%  CI95=[35.4%, 38.2%]
+      SAME_bar rate  = 17.1%
+      mean mfe_first_bar = 1.75
+      mean mae_first_bar = 1.88
+      first_reach +-0.20%: UP=11.4% DOWN=12.9% NEITHER=74.6% BOTH=0.2%
+      first_reach +-0.30%: UP=5.6% DOWN=5.7% NEITHER=87.7% BOTH=0.0%
+    TAG=state_trend_up  P=ALL  H=6  N=8356  N_eff~=1392
+      MFE      = +0.13%  CI95=[+0.11%, +0.14%]
+      MAE      = -0.15%  CI95=[-0.16%, -0.14%]
+      TERM     = -0.01%  CI95=[-0.02%, -0.00%]
+      MFE_first rate = 53.0%  CI95=[51.3%, 55.0%]
+      MAE_first rate = 40.4%  CI95=[38.5%, 42.0%]
+      SAME_bar rate  = 5.7%
+      mean mfe_first_bar = 2.88
+      mean mae_first_bar = 3.31
+      first_reach +-0.20%: UP=18.2% DOWN=23.0% NEITHER=57.7% BOTH=0.2%
+      first_reach +-0.30%: UP=10.5% DOWN=11.7% NEITHER=76.8% BOTH=0.0%
+    TAG=state_trend_up  P=ALL  H=12  N=8356  N_eff~=696
+      MFE      = +0.17%  CI95=[+0.16%, +0.19%]
+      MAE      = -0.21%  CI95=[-0.23%, -0.20%]
+      TERM     = -0.03%  CI95=[-0.04%, -0.01%]
+      MFE_first rate = 55.9%  CI95=[53.6%, 58.6%]
+      MAE_first rate = 40.4%  CI95=[37.8%, 42.7%]
+      SAME_bar rate  = 2.8%
+      mean mfe_first_bar = 4.98
+      mean mae_first_bar = 6.05
+      first_reach +-0.20%: UP=24.6% DOWN=35.4% NEITHER=38.9% BOTH=0.2%
+      first_reach +-0.30%: UP=16.9% DOWN=21.7% NEITHER=60.4% BOTH=0.0%
+    TAG=state_trend_up  P=ALL  H=24  N=8356  N_eff~=348
+      MFE      = +0.24%  CI95=[+0.21%, +0.27%]
+      MAE      = -0.31%  CI95=[-0.33%, -0.28%]
+      TERM     = -0.05%  CI95=[-0.08%, -0.02%]
+      MFE_first rate = 57.8%  CI95=[54.3%, 61.6%]
+      MAE_first rate = 39.0%  CI95=[35.3%, 42.1%]
+      SAME_bar rate  = 2.2%
+      mean mfe_first_bar = 9.12
+      mean mae_first_bar = 11.89
+      first_reach +-0.20%: UP=30.2% DOWN=46.5% NEITHER=22.1% BOTH=0.2%
+      first_reach +-0.30%: UP=23.4% DOWN=35.5% NEITHER=40.1% BOTH=0.0%
+
+------------------------------------------------------------------------------
+TAG: state_move_up_6
+------------------------------------------------------------------------------
+  Period: DISCOVERY  N=2902
+    TAG=state_move_up_6  P=DISCOVERY  H=1  N=2902  N_eff~=2902
+      MFE      = +0.06%  CI95=[+0.06%, +0.07%]
+      MAE      = -0.07%  CI95=[-0.07%, -0.06%]
+      TERM     = -0.00%  CI95=[-0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=6.7% DOWN=4.8% NEITHER=87.3% BOTH=0.3%
+      first_reach +-0.30%: UP=2.5% DOWN=1.7% NEITHER=94.8% BOTH=0.1%
+    TAG=state_move_up_6  P=DISCOVERY  H=3  N=2902  N_eff~=967
+      MFE      = +0.11%  CI95=[+0.10%, +0.13%]
+      MAE      = -0.11%  CI95=[-0.13%, -0.11%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.01%]
+      MFE_first rate = 45.4%  CI95=[43.0%, 47.6%]
+      MAE_first rate = 37.1%  CI95=[35.0%, 39.5%]
+      SAME_bar rate  = 16.6%
+      mean mfe_first_bar = 1.74
+      mean mae_first_bar = 1.88
+      first_reach +-0.20%: UP=16.2% DOWN=15.4% NEITHER=67.1% BOTH=0.3%
+      first_reach +-0.30%: UP=9.1% DOWN=6.3% NEITHER=83.6% BOTH=0.1%
+    TAG=state_move_up_6  P=DISCOVERY  H=6  N=2902  N_eff~=483
+      MFE      = +0.16%  CI95=[+0.14%, +0.18%]
+      MAE      = -0.16%  CI95=[-0.17%, -0.14%]
+      TERM     = +0.00%  CI95=[-0.01%, +0.02%]
+      MFE_first rate = 50.4%  CI95=[47.3%, 53.5%]
+      MAE_first rate = 42.9%  CI95=[40.0%, 46.1%]
+      SAME_bar rate  = 5.8%
+      mean mfe_first_bar = 2.94
+      mean mae_first_bar = 3.21
+      first_reach +-0.20%: UP=24.3% DOWN=26.2% NEITHER=48.0% BOTH=0.5%
+      first_reach +-0.30%: UP=15.4% DOWN=12.6% NEITHER=71.0% BOTH=0.1%
+    TAG=state_move_up_6  P=DISCOVERY  H=12  N=2902  N_eff~=241
+      MFE      = +0.22%  CI95=[+0.20%, +0.25%]
+      MAE      = -0.22%  CI95=[-0.24%, -0.20%]
+      TERM     = -0.00%  CI95=[-0.03%, +0.02%]
+      MFE_first rate = 52.4%  CI95=[48.7%, 56.1%]
+      MAE_first rate = 43.8%  CI95=[40.2%, 47.4%]
+      SAME_bar rate  = 2.9%
+      mean mfe_first_bar = 4.99
+      mean mae_first_bar = 5.75
+      first_reach +-0.20%: UP=31.8% DOWN=36.2% NEITHER=30.5% BOTH=0.6%
+      first_reach +-0.30%: UP=24.4% DOWN=23.1% NEITHER=51.5% BOTH=0.1%
+    TAG=state_move_up_6  P=DISCOVERY  H=24  N=2902  N_eff~=120
+      MFE      = +0.29%  CI95=[+0.25%, +0.33%]
+      MAE      = -0.31%  CI95=[-0.34%, -0.28%]
+      TERM     = -0.02%  CI95=[-0.05%, +0.02%]
+      MFE_first rate = 55.2%  CI95=[50.7%, 59.3%]
+      MAE_first rate = 41.8%  CI95=[37.7%, 46.2%]
+      SAME_bar rate  = 2.0%
+      mean mfe_first_bar = 8.70
+      mean mae_first_bar = 11.14
+      first_reach +-0.20%: UP=36.6% DOWN=44.3% NEITHER=17.7% BOTH=0.6%
+      first_reach +-0.30%: UP=30.5% DOWN=34.5% NEITHER=33.9% BOTH=0.1%
+
+  Period: VALIDATION  N=1362
+    TAG=state_move_up_6  P=VALIDATION  H=1  N=1362  N_eff~=1362
+      MFE      = +0.04%  CI95=[+0.04%, +0.05%]
+      MAE      = -0.05%  CI95=[-0.05%, -0.04%]
+      TERM     = +0.00%  CI95=[-0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=3.1% DOWN=1.6% NEITHER=94.4% BOTH=0.0%
+      first_reach +-0.30%: UP=0.9% DOWN=0.5% NEITHER=97.7% BOTH=0.0%
+    TAG=state_move_up_6  P=VALIDATION  H=3  N=1362  N_eff~=454
+      MFE      = +0.08%  CI95=[+0.07%, +0.09%]
+      MAE      = -0.08%  CI95=[-0.09%, -0.07%]
+      TERM     = +0.00%  CI95=[-0.01%, +0.01%]
+      MFE_first rate = 44.7%  CI95=[41.7%, 47.4%]
+      MAE_first rate = 36.3%  CI95=[33.6%, 39.8%]
+      SAME_bar rate  = 18.1%
+      mean mfe_first_bar = 1.71
+      mean mae_first_bar = 1.86
+      first_reach +-0.20%: UP=9.5% DOWN=6.1% NEITHER=83.6% BOTH=0.0%
+      first_reach +-0.30%: UP=4.3% DOWN=2.3% NEITHER=92.6% BOTH=0.0%
+    TAG=state_move_up_6  P=VALIDATION  H=6  N=1362  N_eff~=227
+      MFE      = +0.11%  CI95=[+0.10%, +0.13%]
+      MAE      = -0.12%  CI95=[-0.12%, -0.11%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.01%]
+      MFE_first rate = 53.3%  CI95=[49.4%, 56.7%]
+      MAE_first rate = 39.5%  CI95=[36.3%, 43.3%]
+      SAME_bar rate  = 6.3%
+      mean mfe_first_bar = 2.76
+      mean mae_first_bar = 3.29
+      first_reach +-0.20%: UP=16.2% DOWN=15.3% NEITHER=67.6% BOTH=0.0%
+      first_reach +-0.30%: UP=9.0% DOWN=4.9% NEITHER=85.2% BOTH=0.0%
+    TAG=state_move_up_6  P=VALIDATION  H=12  N=1362  N_eff~=113
+      MFE      = +0.15%  CI95=[+0.13%, +0.17%]
+      MAE      = -0.17%  CI95=[-0.18%, -0.15%]
+      TERM     = -0.01%  CI95=[-0.03%, +0.02%]
+      MFE_first rate = 55.9%  CI95=[51.5%, 60.1%]
+      MAE_first rate = 40.5%  CI95=[36.8%, 44.4%]
+      SAME_bar rate  = 2.7%
+      mean mfe_first_bar = 4.79
+      mean mae_first_bar = 5.98
+      first_reach +-0.20%: UP=22.5% DOWN=29.0% NEITHER=47.6% BOTH=0.0%
+      first_reach +-0.30%: UP=13.7% DOWN=12.6% NEITHER=72.8% BOTH=0.0%
+    TAG=state_move_up_6  P=VALIDATION  H=24  N=1362  N_eff~=56
+      MFE      = +0.19%  CI95=[+0.17%, +0.22%]
+      MAE      = -0.23%  CI95=[-0.26%, -0.21%]
+      TERM     = -0.03%  CI95=[-0.06%, +0.01%]
+      MFE_first rate = 54.8%  CI95=[50.2%, 59.7%]
+      MAE_first rate = 41.4%  CI95=[36.7%, 46.0%]
+      SAME_bar rate  = 2.9%
+      mean mfe_first_bar = 8.47
+      mean mae_first_bar = 10.87
+      first_reach +-0.20%: UP=29.6% DOWN=41.6% NEITHER=27.9% BOTH=0.0%
+      first_reach +-0.30%: UP=20.8% DOWN=26.5% NEITHER=51.8% BOTH=0.0%
+
+  Period: OOS  N=2360
+    TAG=state_move_up_6  P=OOS  H=1  N=2360  N_eff~=2360
+      MFE      = +0.08%  CI95=[+0.07%, +0.09%]
+      MAE      = -0.09%  CI95=[-0.10%, -0.08%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.0%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=10.3% DOWN=10.5% NEITHER=77.7% BOTH=0.5%
+      first_reach +-0.30%: UP=4.4% DOWN=4.6% NEITHER=90.0% BOTH=0.1%
+    TAG=state_move_up_6  P=OOS  H=3  N=2360  N_eff~=786
+      MFE      = +0.14%  CI95=[+0.12%, +0.16%]
+      MAE      = -0.16%  CI95=[-0.18%, -0.14%]
+      TERM     = -0.01%  CI95=[-0.02%, +0.00%]
+      MFE_first rate = 45.6%  CI95=[43.2%, 48.1%]
+      MAE_first rate = 36.6%  CI95=[34.1%, 39.2%]
+      SAME_bar rate  = 16.7%
+      mean mfe_first_bar = 1.74
+      mean mae_first_bar = 1.89
+      first_reach +-0.20%: UP=21.8% DOWN=25.4% NEITHER=51.4% BOTH=0.5%
+      first_reach +-0.30%: UP=12.2% DOWN=14.6% NEITHER=72.2% BOTH=0.1%
+    TAG=state_move_up_6  P=OOS  H=6  N=2360  N_eff~=393
+      MFE      = +0.20%  CI95=[+0.17%, +0.23%]
+      MAE      = -0.23%  CI95=[-0.26%, -0.21%]
+      TERM     = -0.03%  CI95=[-0.05%, -0.01%]
+      MFE_first rate = 52.6%  CI95=[49.2%, 55.7%]
+      MAE_first rate = 39.7%  CI95=[36.7%, 42.4%]
+      SAME_bar rate  = 6.7%
+      mean mfe_first_bar = 2.87
+      mean mae_first_bar = 3.36
+      first_reach +-0.20%: UP=29.6% DOWN=37.4% NEITHER=31.4% BOTH=0.5%
+      first_reach +-0.30%: UP=20.0% DOWN=25.9% NEITHER=53.0% BOTH=0.1%
+    TAG=state_move_up_6  P=OOS  H=12  N=2360  N_eff~=196
+      MFE      = +0.28%  CI95=[+0.24%, +0.32%]
+      MAE      = -0.33%  CI95=[-0.37%, -0.29%]
+      TERM     = -0.04%  CI95=[-0.08%, -0.01%]
+      MFE_first rate = 54.9%  CI95=[51.1%, 58.9%]
+      MAE_first rate = 41.1%  CI95=[37.3%, 45.2%]
+      SAME_bar rate  = 3.1%
+      mean mfe_first_bar = 4.97
+      mean mae_first_bar = 6.15
+      first_reach +-0.20%: UP=34.5% DOWN=47.0% NEITHER=16.9% BOTH=0.5%
+      first_reach +-0.30%: UP=27.2% DOWN=36.7% NEITHER=35.0% BOTH=0.1%
+    TAG=state_move_up_6  P=OOS  H=24  N=2360  N_eff~=98
+      MFE      = +0.37%  CI95=[+0.32%, +0.42%]
+      MAE      = -0.47%  CI95=[-0.53%, -0.42%]
+      TERM     = -0.08%  CI95=[-0.14%, -0.01%]
+      MFE_first rate = 55.2%  CI95=[50.6%, 59.7%]
+      MAE_first rate = 41.4%  CI95=[36.7%, 45.9%]
+      SAME_bar rate  = 2.4%
+      mean mfe_first_bar = 9.27
+      mean mae_first_bar = 11.31
+      first_reach +-0.20%: UP=36.8% DOWN=52.8% NEITHER=8.9% BOTH=0.5%
+      first_reach +-0.30%: UP=33.3% DOWN=46.1% NEITHER=19.4% BOTH=0.1%
+
+  Period: ALL  N=6660
+    TAG=state_move_up_6  P=ALL  H=1  N=6660  N_eff~=6660
+      MFE      = +0.07%  CI95=[+0.06%, +0.07%]
+      MAE      = -0.07%  CI95=[-0.07%, -0.06%]
+      TERM     = -0.00%  CI95=[-0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=7.2% DOWN=6.2% NEITHER=85.4% BOTH=0.3%
+      first_reach +-0.30%: UP=2.8% DOWN=2.4% NEITHER=93.7% BOTH=0.1%
+    TAG=state_move_up_6  P=ALL  H=3  N=6660  N_eff~=2220
+      MFE      = +0.12%  CI95=[+0.11%, +0.13%]
+      MAE      = -0.12%  CI95=[-0.13%, -0.11%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.00%]
+      MFE_first rate = 45.4%  CI95=[44.0%, 46.7%]
+      MAE_first rate = 36.8%  CI95=[35.5%, 38.3%]
+      SAME_bar rate  = 16.9%
+      mean mfe_first_bar = 1.74
+      mean mae_first_bar = 1.88
+      first_reach +-0.20%: UP=16.8% DOWN=17.1% NEITHER=64.9% BOTH=0.3%
+      first_reach +-0.30%: UP=9.2% DOWN=8.4% NEITHER=81.4% BOTH=0.1%
+    TAG=state_move_up_6  P=ALL  H=6  N=6660  N_eff~=1110
+      MFE      = +0.17%  CI95=[+0.15%, +0.18%]
+      MAE      = -0.18%  CI95=[-0.19%, -0.16%]
+      TERM     = -0.01%  CI95=[-0.02%, +0.00%]
+      MFE_first rate = 51.8%  CI95=[49.9%, 53.5%]
+      MAE_first rate = 41.1%  CI95=[39.6%, 42.9%]
+      SAME_bar rate  = 6.2%
+      mean mfe_first_bar = 2.88
+      mean mae_first_bar = 3.28
+      first_reach +-0.20%: UP=24.5% DOWN=27.9% NEITHER=46.2% BOTH=0.4%
+      first_reach +-0.30%: UP=15.7% DOWN=15.7% NEITHER=67.6% BOTH=0.1%
+    TAG=state_move_up_6  P=ALL  H=12  N=6660  N_eff~=555
+      MFE      = +0.23%  CI95=[+0.21%, +0.25%]
+      MAE      = -0.25%  CI95=[-0.27%, -0.23%]
+      TERM     = -0.02%  CI95=[-0.04%, +0.00%]
+      MFE_first rate = 53.9%  CI95=[51.9%, 56.2%]
+      MAE_first rate = 42.2%  CI95=[40.2%, 44.3%]
+      SAME_bar rate  = 2.9%
+      mean mfe_first_bar = 4.95
+      mean mae_first_bar = 5.93
+      first_reach +-0.20%: UP=30.8% DOWN=38.6% NEITHER=29.2% BOTH=0.4%
+      first_reach +-0.30%: UP=23.2% DOWN=25.7% NEITHER=50.1% BOTH=0.1%
+    TAG=state_move_up_6  P=ALL  H=24  N=6660  N_eff~=277
+      MFE      = +0.30%  CI95=[+0.27%, +0.33%]
+      MAE      = -0.35%  CI95=[-0.38%, -0.32%]
+      TERM     = -0.04%  CI95=[-0.07%, -0.01%]
+      MFE_first rate = 55.2%  CI95=[52.5%, 57.9%]
+      MAE_first rate = 41.6%  CI95=[38.9%, 44.1%]
+      SAME_bar rate  = 2.3%
+      mean mfe_first_bar = 8.88
+      mean mae_first_bar = 11.14
+      first_reach +-0.20%: UP=35.2% DOWN=46.8% NEITHER=16.7% BOTH=0.4%
+      first_reach +-0.30%: UP=29.5% DOWN=37.0% NEITHER=32.5% BOTH=0.1%
+
+------------------------------------------------------------------------------
+TAG: state_above_vwap_high
+------------------------------------------------------------------------------
+  Period: DISCOVERY  N=2901
+    TAG=state_above_vwap_high  P=DISCOVERY  H=1  N=2901  N_eff~=2901
+      MFE      = +0.06%  CI95=[+0.05%, +0.07%]
+      MAE      = -0.06%  CI95=[-0.06%, -0.05%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.4%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=5.4% DOWN=3.6% NEITHER=89.2% BOTH=0.2%
+      first_reach +-0.30%: UP=2.1% DOWN=1.1% NEITHER=95.2% BOTH=0.1%
+    TAG=state_above_vwap_high  P=DISCOVERY  H=3  N=2901  N_eff~=967
+      MFE      = +0.10%  CI95=[+0.09%, +0.12%]
+      MAE      = -0.10%  CI95=[-0.12%, -0.09%]
+      TERM     = -0.00%  CI95=[-0.01%, +0.01%]
+      MFE_first rate = 44.4%  CI95=[42.1%, 47.2%]
+      MAE_first rate = 36.3%  CI95=[34.2%, 38.7%]
+      SAME_bar rate  = 17.8%
+      mean mfe_first_bar = 1.76
+      mean mae_first_bar = 1.88
+      first_reach +-0.20%: UP=13.9% DOWN=12.9% NEITHER=71.4% BOTH=0.3%
+      first_reach +-0.30%: UP=7.5% DOWN=5.1% NEITHER=85.8% BOTH=0.1%
+    TAG=state_above_vwap_high  P=DISCOVERY  H=6  N=2901  N_eff~=483
+      MFE      = +0.14%  CI95=[+0.12%, +0.17%]
+      MAE      = -0.15%  CI95=[-0.16%, -0.13%]
+      TERM     = +0.00%  CI95=[-0.02%, +0.02%]
+      MFE_first rate = 50.5%  CI95=[47.4%, 53.5%]
+      MAE_first rate = 41.3%  CI95=[38.2%, 44.1%]
+      SAME_bar rate  = 6.7%
+      mean mfe_first_bar = 2.91
+      mean mae_first_bar = 3.25
+      first_reach +-0.20%: UP=21.2% DOWN=22.9% NEITHER=53.9% BOTH=0.4%
+      first_reach +-0.30%: UP=13.3% DOWN=11.1% NEITHER=73.9% BOTH=0.1%
+    TAG=state_above_vwap_high  P=DISCOVERY  H=12  N=2901  N_eff~=241
+      MFE      = +0.20%  CI95=[+0.16%, +0.23%]
+      MAE      = -0.20%  CI95=[-0.23%, -0.18%]
+      TERM     = -0.00%  CI95=[-0.04%, +0.03%]
+      MFE_first rate = 52.9%  CI95=[48.3%, 57.5%]
+      MAE_first rate = 41.9%  CI95=[37.7%, 46.4%]
+      SAME_bar rate  = 3.6%
+      mean mfe_first_bar = 4.86
+      mean mae_first_bar = 5.64
+      first_reach +-0.20%: UP=27.9% DOWN=32.3% NEITHER=37.7% BOTH=0.6%
+      first_reach +-0.30%: UP=21.1% DOWN=20.6% NEITHER=56.6% BOTH=0.1%
+    TAG=state_above_vwap_high  P=DISCOVERY  H=24  N=2901  N_eff~=120
+      MFE      = +0.26%  CI95=[+0.21%, +0.32%]
+      MAE      = -0.28%  CI95=[-0.33%, -0.24%]
+      TERM     = -0.01%  CI95=[-0.07%, +0.05%]
+      MFE_first rate = 52.8%  CI95=[46.2%, 58.4%]
+      MAE_first rate = 42.8%  CI95=[37.1%, 49.5%]
+      SAME_bar rate  = 2.8%
+      mean mfe_first_bar = 8.40
+      mean mae_first_bar = 10.40
+      first_reach +-0.20%: UP=32.3% DOWN=39.9% NEITHER=25.7% BOTH=0.6%
+      first_reach +-0.30%: UP=26.5% DOWN=31.4% NEITHER=40.5% BOTH=0.1%
+
+  Period: VALIDATION  N=1717
+    TAG=state_above_vwap_high  P=VALIDATION  H=1  N=1717  N_eff~=1717
+      MFE      = +0.04%  CI95=[+0.03%, +0.04%]
+      MAE      = -0.04%  CI95=[-0.05%, -0.04%]
+      TERM     = -0.00%  CI95=[-0.01%, -0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.7%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=2.1% DOWN=1.5% NEITHER=95.0% BOTH=0.0%
+      first_reach +-0.30%: UP=0.5% DOWN=0.5% NEITHER=97.6% BOTH=0.0%
+    TAG=state_above_vwap_high  P=VALIDATION  H=3  N=1717  N_eff~=572
+      MFE      = +0.07%  CI95=[+0.06%, +0.07%]
+      MAE      = -0.08%  CI95=[-0.09%, -0.07%]
+      TERM     = -0.01%  CI95=[-0.02%, -0.00%]
+      MFE_first rate = 46.3%  CI95=[43.6%, 48.9%]
+      MAE_first rate = 33.9%  CI95=[30.7%, 36.4%]
+      SAME_bar rate  = 18.5%
+      mean mfe_first_bar = 1.69
+      mean mae_first_bar = 1.89
+      first_reach +-0.20%: UP=6.6% DOWN=7.3% NEITHER=84.7% BOTH=0.0%
+      first_reach +-0.30%: UP=3.1% DOWN=2.5% NEITHER=93.0% BOTH=0.0%
+    TAG=state_above_vwap_high  P=VALIDATION  H=6  N=1717  N_eff~=286
+      MFE      = +0.09%  CI95=[+0.08%, +0.10%]
+      MAE      = -0.12%  CI95=[-0.13%, -0.11%]
+      TERM     = -0.02%  CI95=[-0.04%, -0.01%]
+      MFE_first rate = 55.2%  CI95=[51.7%, 58.8%]
+      MAE_first rate = 36.4%  CI95=[32.5%, 40.0%]
+      SAME_bar rate  = 7.1%
+      mean mfe_first_bar = 2.67
+      mean mae_first_bar = 3.34
+      first_reach +-0.20%: UP=11.3% DOWN=17.6% NEITHER=69.8% BOTH=0.0%
+      first_reach +-0.30%: UP=6.4% DOWN=6.3% NEITHER=85.9% BOTH=0.0%
+    TAG=state_above_vwap_high  P=VALIDATION  H=12  N=1717  N_eff~=143
+      MFE      = +0.12%  CI95=[+0.10%, +0.14%]
+      MAE      = -0.18%  CI95=[-0.20%, -0.16%]
+      TERM     = -0.05%  CI95=[-0.07%, -0.02%]
+      MFE_first rate = 59.3%  CI95=[54.6%, 64.6%]
+      MAE_first rate = 34.7%  CI95=[29.4%, 39.5%]
+      SAME_bar rate  = 4.7%
+      mean mfe_first_bar = 4.47
+      mean mae_first_bar = 6.14
+      first_reach +-0.20%: UP=16.6% DOWN=32.8% NEITHER=49.2% BOTH=0.0%
+      first_reach +-0.30%: UP=9.8% DOWN=16.1% NEITHER=72.7% BOTH=0.0%
+    TAG=state_above_vwap_high  P=VALIDATION  H=24  N=1717  N_eff~=71
+      MFE      = +0.16%  CI95=[+0.13%, +0.19%]
+      MAE      = -0.24%  CI95=[-0.29%, -0.21%]
+      TERM     = -0.06%  CI95=[-0.11%, -0.03%]
+      MFE_first rate = 59.1%  CI95=[53.2%, 65.9%]
+      MAE_first rate = 35.4%  CI95=[28.4%, 41.2%]
+      SAME_bar rate  = 4.1%
+      mean mfe_first_bar = 7.69
+      mean mae_first_bar = 10.95
+      first_reach +-0.20%: UP=21.8% DOWN=43.3% NEITHER=33.5% BOTH=0.0%
+      first_reach +-0.30%: UP=14.8% DOWN=28.7% NEITHER=55.2% BOTH=0.0%
+
+  Period: OOS  N=1922
+    TAG=state_above_vwap_high  P=OOS  H=1  N=1922  N_eff~=1922
+      MFE      = +0.07%  CI95=[+0.06%, +0.08%]
+      MAE      = -0.08%  CI95=[-0.10%, -0.07%]
+      TERM     = -0.01%  CI95=[-0.01%, -0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.8%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=8.4% DOWN=9.1% NEITHER=81.2% BOTH=0.2%
+      first_reach +-0.30%: UP=3.4% DOWN=4.1% NEITHER=91.3% BOTH=0.0%
+    TAG=state_above_vwap_high  P=OOS  H=3  N=1922  N_eff~=640
+      MFE      = +0.13%  CI95=[+0.10%, +0.15%]
+      MAE      = -0.15%  CI95=[-0.17%, -0.13%]
+      TERM     = -0.02%  CI95=[-0.04%, -0.01%]
+      MFE_first rate = 47.9%  CI95=[44.9%, 51.5%]
+      MAE_first rate = 35.0%  CI95=[31.6%, 37.6%]
+      SAME_bar rate  = 16.0%
+      mean mfe_first_bar = 1.71
+      mean mae_first_bar = 1.94
+      first_reach +-0.20%: UP=18.7% DOWN=23.5% NEITHER=56.5% BOTH=0.2%
+      first_reach +-0.30%: UP=9.7% DOWN=12.8% NEITHER=76.3% BOTH=0.0%
+    TAG=state_above_vwap_high  P=OOS  H=6  N=1922  N_eff~=320
+      MFE      = +0.18%  CI95=[+0.15%, +0.21%]
+      MAE      = -0.22%  CI95=[-0.26%, -0.19%]
+      TERM     = -0.04%  CI95=[-0.07%, -0.01%]
+      MFE_first rate = 54.3%  CI95=[50.7%, 58.7%]
+      MAE_first rate = 38.6%  CI95=[34.5%, 41.7%]
+      SAME_bar rate  = 5.9%
+      mean mfe_first_bar = 2.79
+      mean mae_first_bar = 3.40
+      first_reach +-0.20%: UP=27.1% DOWN=36.3% NEITHER=35.3% BOTH=0.2%
+      first_reach +-0.30%: UP=17.3% DOWN=23.7% NEITHER=57.8% BOTH=0.0%
+    TAG=state_above_vwap_high  P=OOS  H=12  N=1922  N_eff~=160
+      MFE      = +0.23%  CI95=[+0.19%, +0.28%]
+      MAE      = -0.32%  CI95=[-0.37%, -0.28%]
+      TERM     = -0.07%  CI95=[-0.12%, -0.03%]
+      MFE_first rate = 57.8%  CI95=[53.2%, 63.5%]
+      MAE_first rate = 37.8%  CI95=[32.8%, 42.6%]
+      SAME_bar rate  = 3.2%
+      mean mfe_first_bar = 4.79
+      mean mae_first_bar = 6.28
+      first_reach +-0.20%: UP=31.2% DOWN=47.6% NEITHER=19.9% BOTH=0.2%
+      first_reach +-0.30%: UP=23.5% DOWN=36.0% NEITHER=39.3% BOTH=0.0%
+    TAG=state_above_vwap_high  P=OOS  H=24  N=1922  N_eff~=80
+      MFE      = +0.30%  CI95=[+0.24%, +0.36%]
+      MAE      = -0.45%  CI95=[-0.53%, -0.38%]
+      TERM     = -0.09%  CI95=[-0.18%, -0.02%]
+      MFE_first rate = 58.2%  CI95=[51.2%, 65.6%]
+      MAE_first rate = 38.2%  CI95=[30.8%, 45.0%]
+      SAME_bar rate  = 2.4%
+      mean mfe_first_bar = 8.68
+      mean mae_first_bar = 10.98
+      first_reach +-0.20%: UP=33.3% DOWN=52.4% NEITHER=13.0% BOTH=0.2%
+      first_reach +-0.30%: UP=27.9% DOWN=45.5% NEITHER=25.4% BOTH=0.0%
+
+  Period: ALL  N=6573
+    TAG=state_above_vwap_high  P=ALL  H=1  N=6573  N_eff~=6573
+      MFE      = +0.06%  CI95=[+0.05%, +0.06%]
+      MAE      = -0.06%  CI95=[-0.07%, -0.06%]
+      TERM     = -0.00%  CI95=[-0.01%, -0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.6%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=5.4% DOWN=4.6% NEITHER=88.4% BOTH=0.2%
+      first_reach +-0.30%: UP=2.1% DOWN=1.8% NEITHER=94.7% BOTH=0.0%
+    TAG=state_above_vwap_high  P=ALL  H=3  N=6573  N_eff~=2191
+      MFE      = +0.10%  CI95=[+0.09%, +0.11%]
+      MAE      = -0.11%  CI95=[-0.12%, -0.10%]
+      TERM     = -0.01%  CI95=[-0.02%, -0.00%]
+      MFE_first rate = 45.9%  CI95=[44.5%, 47.7%]
+      MAE_first rate = 35.3%  CI95=[33.8%, 36.9%]
+      SAME_bar rate  = 17.4%
+      mean mfe_first_bar = 1.73
+      mean mae_first_bar = 1.90
+      first_reach +-0.20%: UP=13.4% DOWN=14.6% NEITHER=70.5% BOTH=0.2%
+      first_reach +-0.30%: UP=7.0% DOWN=6.7% NEITHER=84.9% BOTH=0.0%
+    TAG=state_above_vwap_high  P=ALL  H=6  N=6573  N_eff~=1095
+      MFE      = +0.14%  CI95=[+0.13%, +0.15%]
+      MAE      = -0.16%  CI95=[-0.18%, -0.15%]
+      TERM     = -0.02%  CI95=[-0.03%, -0.01%]
+      MFE_first rate = 52.9%  CI95=[50.9%, 55.2%]
+      MAE_first rate = 39.2%  CI95=[37.1%, 41.2%]
+      SAME_bar rate  = 6.5%
+      mean mfe_first_bar = 2.81
+      mean mae_first_bar = 3.32
+      first_reach +-0.20%: UP=20.3% DOWN=25.5% NEITHER=52.6% BOTH=0.2%
+      first_reach +-0.30%: UP=12.6% DOWN=13.6% NEITHER=72.3% BOTH=0.0%
+    TAG=state_above_vwap_high  P=ALL  H=12  N=6573  N_eff~=547
+      MFE      = +0.19%  CI95=[+0.17%, +0.21%]
+      MAE      = -0.23%  CI95=[-0.25%, -0.21%]
+      TERM     = -0.03%  CI95=[-0.06%, -0.01%]
+      MFE_first rate = 56.1%  CI95=[53.3%, 59.3%]
+      MAE_first rate = 38.8%  CI95=[35.7%, 41.7%]
+      SAME_bar rate  = 3.7%
+      mean mfe_first_bar = 4.73
+      mean mae_first_bar = 5.96
+      first_reach +-0.20%: UP=25.9% DOWN=37.0% NEITHER=35.4% BOTH=0.3%
+      first_reach +-0.30%: UP=18.9% DOWN=24.0% NEITHER=55.7% BOTH=0.0%
+    TAG=state_above_vwap_high  P=ALL  H=24  N=6573  N_eff~=273
+      MFE      = +0.25%  CI95=[+0.22%, +0.28%]
+      MAE      = -0.32%  CI95=[-0.35%, -0.29%]
+      TERM     = -0.05%  CI95=[-0.09%, -0.01%]
+      MFE_first rate = 56.2%  CI95=[52.3%, 60.6%]
+      MAE_first rate = 39.4%  CI95=[35.2%, 43.4%]
+      SAME_bar rate  = 3.0%
+      mean mfe_first_bar = 8.30
+      mean mae_first_bar = 10.73
+      first_reach +-0.20%: UP=29.9% DOWN=44.6% NEITHER=23.9% BOTH=0.3%
+      first_reach +-0.30%: UP=23.8% DOWN=35.0% NEITHER=39.8% BOTH=0.0%
+
+------------------------------------------------------------------------------
+TAG: state_trend_down
+------------------------------------------------------------------------------
+  Period: DISCOVERY  N=3906
+    TAG=state_trend_down  P=DISCOVERY  H=1  N=3906  N_eff~=3906
+      MFE      = +0.06%  CI95=[+0.05%, +0.06%]
+      MAE      = -0.06%  CI95=[-0.07%, -0.06%]
+      TERM     = +0.00%  CI95=[-0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.9%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=4.4% DOWN=5.2% NEITHER=89.2% BOTH=0.1%
+      first_reach +-0.30%: UP=1.5% DOWN=1.9% NEITHER=95.6% BOTH=0.0%
+    TAG=state_trend_down  P=DISCOVERY  H=3  N=3906  N_eff~=1302
+      MFE      = +0.10%  CI95=[+0.09%, +0.11%]
+      MAE      = -0.11%  CI95=[-0.12%, -0.10%]
+      TERM     = +0.00%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 40.5%  CI95=[38.8%, 42.1%]
+      MAE_first rate = 42.8%  CI95=[41.3%, 44.4%]
+      SAME_bar rate  = 15.6%
+      mean mfe_first_bar = 1.86
+      mean mae_first_bar = 1.83
+      first_reach +-0.20%: UP=13.4% DOWN=16.0% NEITHER=69.4% BOTH=0.2%
+      first_reach +-0.30%: UP=5.9% DOWN=7.2% NEITHER=85.8% BOTH=0.0%
+    TAG=state_trend_down  P=DISCOVERY  H=6  N=3906  N_eff~=651
+      MFE      = +0.15%  CI95=[+0.13%, +0.17%]
+      MAE      = -0.15%  CI95=[-0.17%, -0.14%]
+      TERM     = +0.01%  CI95=[-0.01%, +0.02%]
+      MFE_first rate = 45.2%  CI95=[42.7%, 47.8%]
+      MAE_first rate = 47.6%  CI95=[45.5%, 49.9%]
+      SAME_bar rate  = 6.1%
+      mean mfe_first_bar = 3.16
+      mean mae_first_bar = 3.08
+      first_reach +-0.20%: UP=21.8% DOWN=25.8% NEITHER=51.0% BOTH=0.2%
+      first_reach +-0.30%: UP=11.3% DOWN=14.5% NEITHER=73.1% BOTH=0.0%
+    TAG=state_trend_down  P=DISCOVERY  H=12  N=3906  N_eff~=325
+      MFE      = +0.21%  CI95=[+0.19%, +0.25%]
+      MAE      = -0.22%  CI95=[-0.24%, -0.19%]
+      TERM     = +0.01%  CI95=[-0.01%, +0.04%]
+      MFE_first rate = 47.1%  CI95=[44.0%, 50.3%]
+      MAE_first rate = 48.4%  CI95=[45.2%, 51.6%]
+      SAME_bar rate  = 3.4%
+      mean mfe_first_bar = 5.63
+      mean mae_first_bar = 5.49
+      first_reach +-0.20%: UP=31.8% DOWN=36.3% NEITHER=30.6% BOTH=0.2%
+      first_reach +-0.30%: UP=20.6% DOWN=24.5% NEITHER=53.8% BOTH=0.0%
+    TAG=state_trend_down  P=DISCOVERY  H=24  N=3906  N_eff~=162
+      MFE      = +0.30%  CI95=[+0.26%, +0.36%]
+      MAE      = -0.31%  CI95=[-0.34%, -0.27%]
+      TERM     = +0.00%  CI95=[-0.03%, +0.05%]
+      MFE_first rate = 49.4%  CI95=[45.7%, 53.7%]
+      MAE_first rate = 46.9%  CI95=[42.5%, 50.7%]
+      SAME_bar rate  = 2.7%
+      mean mfe_first_bar = 9.99
+      mean mae_first_bar = 10.41
+      first_reach +-0.20%: UP=38.4% DOWN=45.2% NEITHER=15.1% BOTH=0.2%
+      first_reach +-0.30%: UP=29.5% DOWN=36.2% NEITHER=33.2% BOTH=0.0%
+
+  Period: VALIDATION  N=2128
+    TAG=state_trend_down  P=VALIDATION  H=1  N=2128  N_eff~=2128
+      MFE      = +0.04%  CI95=[+0.04%, +0.04%]
+      MAE      = -0.04%  CI95=[-0.04%, -0.04%]
+      TERM     = +0.00%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.9%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=1.6% DOWN=1.8% NEITHER=95.4% BOTH=0.0%
+      first_reach +-0.30%: UP=0.5% DOWN=0.7% NEITHER=97.7% BOTH=0.0%
+    TAG=state_trend_down  P=VALIDATION  H=3  N=2128  N_eff~=709
+      MFE      = +0.07%  CI95=[+0.07%, +0.08%]
+      MAE      = -0.07%  CI95=[-0.08%, -0.06%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.02%]
+      MFE_first rate = 38.0%  CI95=[35.2%, 40.5%]
+      MAE_first rate = 43.6%  CI95=[41.6%, 46.0%]
+      SAME_bar rate  = 17.3%
+      mean mfe_first_bar = 1.86
+      mean mae_first_bar = 1.77
+      first_reach +-0.20%: UP=6.2% DOWN=7.2% NEITHER=85.3% BOTH=0.1%
+      first_reach +-0.30%: UP=2.1% DOWN=2.5% NEITHER=94.2% BOTH=0.1%
+    TAG=state_trend_down  P=VALIDATION  H=6  N=2128  N_eff~=354
+      MFE      = +0.11%  CI95=[+0.10%, +0.12%]
+      MAE      = -0.10%  CI95=[-0.11%, -0.09%]
+      TERM     = +0.02%  CI95=[+0.00%, +0.03%]
+      MFE_first rate = 41.2%  CI95=[37.9%, 43.6%]
+      MAE_first rate = 50.7%  CI95=[48.2%, 53.6%]
+      SAME_bar rate  = 7.0%
+      mean mfe_first_bar = 3.20
+      mean mae_first_bar = 2.91
+      first_reach +-0.20%: UP=14.0% DOWN=14.0% NEITHER=70.8% BOTH=0.1%
+      first_reach +-0.30%: UP=5.7% DOWN=6.1% NEITHER=87.0% BOTH=0.1%
+    TAG=state_trend_down  P=VALIDATION  H=12  N=2128  N_eff~=177
+      MFE      = +0.16%  CI95=[+0.14%, +0.18%]
+      MAE      = -0.14%  CI95=[-0.16%, -0.13%]
+      TERM     = +0.03%  CI95=[+0.00%, +0.05%]
+      MFE_first rate = 41.6%  CI95=[36.4%, 45.9%]
+      MAE_first rate = 53.7%  CI95=[49.4%, 58.9%]
+      SAME_bar rate  = 3.6%
+      mean mfe_first_bar = 5.96
+      mean mae_first_bar = 5.11
+      first_reach +-0.20%: UP=24.4% DOWN=23.6% NEITHER=50.8% BOTH=0.1%
+      first_reach +-0.30%: UP=12.4% DOWN=12.9% NEITHER=73.5% BOTH=0.1%
+    TAG=state_trend_down  P=VALIDATION  H=24  N=2128  N_eff~=88
+      MFE      = +0.22%  CI95=[+0.19%, +0.25%]
+      MAE      = -0.20%  CI95=[-0.24%, -0.17%]
+      TERM     = +0.02%  CI95=[-0.02%, +0.06%]
+      MFE_first rate = 43.7%  CI95=[37.4%, 49.6%]
+      MAE_first rate = 52.5%  CI95=[46.9%, 58.7%]
+      SAME_bar rate  = 2.7%
+      mean mfe_first_bar = 10.59
+      mean mae_first_bar = 9.23
+      first_reach +-0.20%: UP=35.3% DOWN=33.2% NEITHER=30.3% BOTH=0.1%
+      first_reach +-0.30%: UP=20.9% DOWN=23.7% NEITHER=54.1% BOTH=0.1%
+
+  Period: OOS  N=2602
+    TAG=state_trend_down  P=OOS  H=1  N=2602  N_eff~=2602
+      MFE      = +0.08%  CI95=[+0.07%, +0.09%]
+      MAE      = -0.08%  CI95=[-0.10%, -0.07%]
+      TERM     = +0.00%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.0%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=9.1% DOWN=10.3% NEITHER=79.2% BOTH=0.4%
+      first_reach +-0.30%: UP=4.2% DOWN=4.9% NEITHER=89.9% BOTH=0.0%
+    TAG=state_trend_down  P=OOS  H=3  N=2602  N_eff~=867
+      MFE      = +0.15%  CI95=[+0.13%, +0.17%]
+      MAE      = -0.15%  CI95=[-0.17%, -0.13%]
+      TERM     = +0.00%  CI95=[-0.01%, +0.02%]
+      MFE_first rate = 39.5%  CI95=[36.7%, 41.8%]
+      MAE_first rate = 42.2%  CI95=[39.9%, 44.5%]
+      SAME_bar rate  = 17.3%
+      mean mfe_first_bar = 1.86
+      mean mae_first_bar = 1.81
+      first_reach +-0.20%: UP=21.9% DOWN=22.7% NEITHER=53.8% BOTH=0.5%
+      first_reach +-0.30%: UP=12.9% DOWN=14.2% NEITHER=71.8% BOTH=0.1%
+    TAG=state_trend_down  P=OOS  H=6  N=2602  N_eff~=433
+      MFE      = +0.21%  CI95=[+0.18%, +0.24%]
+      MAE      = -0.22%  CI95=[-0.25%, -0.19%]
+      TERM     = +0.00%  CI95=[-0.02%, +0.03%]
+      MFE_first rate = 43.1%  CI95=[39.5%, 46.3%]
+      MAE_first rate = 49.8%  CI95=[46.5%, 53.3%]
+      SAME_bar rate  = 6.1%
+      mean mfe_first_bar = 3.17
+      mean mae_first_bar = 2.99
+      first_reach +-0.20%: UP=31.2% DOWN=32.7% NEITHER=34.3% BOTH=0.7%
+      first_reach +-0.30%: UP=21.1% DOWN=22.4% NEITHER=55.1% BOTH=0.2%
+    TAG=state_trend_down  P=OOS  H=12  N=2602  N_eff~=216
+      MFE      = +0.30%  CI95=[+0.26%, +0.35%]
+      MAE      = -0.31%  CI95=[-0.36%, -0.26%]
+      TERM     = +0.00%  CI95=[-0.04%, +0.04%]
+      MFE_first rate = 43.9%  CI95=[38.9%, 48.1%]
+      MAE_first rate = 52.2%  CI95=[47.7%, 57.4%]
+      SAME_bar rate  = 2.9%
+      mean mfe_first_bar = 5.64
+      mean mae_first_bar = 5.28
+      first_reach +-0.20%: UP=39.0% DOWN=41.6% NEITHER=17.6% BOTH=0.7%
+      first_reach +-0.30%: UP=29.6% DOWN=32.1% NEITHER=37.0% BOTH=0.3%
+    TAG=state_trend_down  P=OOS  H=24  N=2602  N_eff~=108
+      MFE      = +0.41%  CI95=[+0.34%, +0.49%]
+      MAE      = -0.44%  CI95=[-0.52%, -0.37%]
+      TERM     = -0.03%  CI95=[-0.10%, +0.06%]
+      MFE_first rate = 47.7%  CI95=[40.1%, 53.5%]
+      MAE_first rate = 49.0%  CI95=[42.7%, 56.8%]
+      SAME_bar rate  = 2.3%
+      mean mfe_first_bar = 10.13
+      mean mae_first_bar = 9.99
+      first_reach +-0.20%: UP=43.3% DOWN=46.8% NEITHER=8.1% BOTH=0.7%
+      first_reach +-0.30%: UP=36.3% DOWN=40.6% NEITHER=21.8% BOTH=0.3%
+
+  Period: ALL  N=8638
+    TAG=state_trend_down  P=ALL  H=1  N=8638  N_eff~=8638
+      MFE      = +0.06%  CI95=[+0.05%, +0.06%]
+      MAE      = -0.06%  CI95=[-0.07%, -0.06%]
+      TERM     = +0.00%  CI95=[+0.00%, +0.00%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.9%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=5.1% DOWN=5.9% NEITHER=87.7% BOTH=0.2%
+      first_reach +-0.30%: UP=2.0% DOWN=2.5% NEITHER=94.4% BOTH=0.0%
+    TAG=state_trend_down  P=ALL  H=3  N=8638  N_eff~=2879
+      MFE      = +0.11%  CI95=[+0.10%, +0.12%]
+      MAE      = -0.11%  CI95=[-0.12%, -0.10%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 39.6%  CI95=[38.4%, 40.8%]
+      MAE_first rate = 42.8%  CI95=[41.6%, 43.9%]
+      SAME_bar rate  = 16.5%
+      mean mfe_first_bar = 1.86
+      mean mae_first_bar = 1.81
+      first_reach +-0.20%: UP=14.2% DOWN=15.8% NEITHER=68.6% BOTH=0.3%
+      first_reach +-0.30%: UP=7.0% DOWN=8.2% NEITHER=83.7% BOTH=0.1%
+    TAG=state_trend_down  P=ALL  H=6  N=8638  N_eff~=1439
+      MFE      = +0.16%  CI95=[+0.15%, +0.17%]
+      MAE      = -0.16%  CI95=[-0.18%, -0.15%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.02%]
+      MFE_first rate = 43.6%  CI95=[42.0%, 45.2%]
+      MAE_first rate = 49.0%  CI95=[47.5%, 50.5%]
+      SAME_bar rate  = 6.3%
+      mean mfe_first_bar = 3.17
+      mean mae_first_bar = 3.01
+      first_reach +-0.20%: UP=22.7% DOWN=25.0% NEITHER=50.9% BOTH=0.3%
+      first_reach +-0.30%: UP=12.9% DOWN=14.8% NEITHER=71.1% BOTH=0.1%
+    TAG=state_trend_down  P=ALL  H=12  N=8638  N_eff~=719
+      MFE      = +0.23%  CI95=[+0.21%, +0.25%]
+      MAE      = -0.23%  CI95=[-0.25%, -0.21%]
+      TERM     = +0.01%  CI95=[-0.01%, +0.03%]
+      MFE_first rate = 44.8%  CI95=[42.8%, 46.9%]
+      MAE_first rate = 50.8%  CI95=[48.6%, 52.9%]
+      SAME_bar rate  = 3.3%
+      mean mfe_first_bar = 5.71
+      mean mae_first_bar = 5.33
+      first_reach +-0.20%: UP=32.1% DOWN=34.8% NEITHER=31.7% BOTH=0.3%
+      first_reach +-0.30%: UP=21.3% DOWN=23.9% NEITHER=53.6% BOTH=0.1%
+    TAG=state_trend_down  P=ALL  H=24  N=8638  N_eff~=359
+      MFE      = +0.31%  CI95=[+0.28%, +0.35%]
+      MAE      = -0.32%  CI95=[-0.35%, -0.29%]
+      TERM     = -0.00%  CI95=[-0.04%, +0.03%]
+      MFE_first rate = 47.5%  CI95=[44.7%, 50.6%]
+      MAE_first rate = 48.9%  CI95=[45.6%, 51.8%]
+      SAME_bar rate  = 2.6%
+      mean mfe_first_bar = 10.18
+      mean mae_first_bar = 9.99
+      first_reach +-0.20%: UP=39.1% DOWN=42.7% NEITHER=16.8% BOTH=0.3%
+      first_reach +-0.30%: UP=29.4% DOWN=34.5% NEITHER=34.9% BOTH=0.1%
+
+------------------------------------------------------------------------------
+TAG: state_move_down_6
+------------------------------------------------------------------------------
+  Period: DISCOVERY  N=2902
+    TAG=state_move_down_6  P=DISCOVERY  H=1  N=2902  N_eff~=2902
+      MFE      = +0.06%  CI95=[+0.06%, +0.07%]
+      MAE      = -0.07%  CI95=[-0.07%, -0.06%]
+      TERM     = +0.00%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.2%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=5.3% DOWN=6.2% NEITHER=87.5% BOTH=0.2%
+      first_reach +-0.30%: UP=1.9% DOWN=2.2% NEITHER=95.1% BOTH=0.0%
+    TAG=state_move_down_6  P=DISCOVERY  H=3  N=2902  N_eff~=967
+      MFE      = +0.12%  CI95=[+0.10%, +0.13%]
+      MAE      = -0.12%  CI95=[-0.13%, -0.11%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 38.2%  CI95=[36.2%, 40.3%]
+      MAE_first rate = 44.6%  CI95=[43.0%, 46.3%]
+      SAME_bar rate  = 16.4%
+      mean mfe_first_bar = 1.90
+      mean mae_first_bar = 1.79
+      first_reach +-0.20%: UP=15.7% DOWN=17.8% NEITHER=65.5% BOTH=0.3%
+      first_reach +-0.30%: UP=6.5% DOWN=8.2% NEITHER=84.5% BOTH=0.0%
+    TAG=state_move_down_6  P=DISCOVERY  H=6  N=2902  N_eff~=483
+      MFE      = +0.16%  CI95=[+0.14%, +0.18%]
+      MAE      = -0.17%  CI95=[-0.18%, -0.15%]
+      TERM     = +0.00%  CI95=[-0.01%, +0.02%]
+      MFE_first rate = 45.3%  CI95=[43.0%, 47.3%]
+      MAE_first rate = 48.0%  CI95=[46.2%, 50.4%]
+      SAME_bar rate  = 5.9%
+      mean mfe_first_bar = 3.16
+      mean mae_first_bar = 3.02
+      first_reach +-0.20%: UP=24.5% DOWN=28.7% NEITHER=45.6% BOTH=0.4%
+      first_reach +-0.30%: UP=12.3% DOWN=16.9% NEITHER=70.1% BOTH=0.0%
+    TAG=state_move_down_6  P=DISCOVERY  H=12  N=2902  N_eff~=241
+      MFE      = +0.23%  CI95=[+0.20%, +0.27%]
+      MAE      = -0.23%  CI95=[-0.26%, -0.21%]
+      TERM     = +0.01%  CI95=[-0.01%, +0.05%]
+      MFE_first rate = 47.6%  CI95=[44.4%, 50.5%]
+      MAE_first rate = 48.5%  CI95=[45.4%, 51.5%]
+      SAME_bar rate  = 3.2%
+      mean mfe_first_bar = 5.65
+      mean mae_first_bar = 5.54
+      first_reach +-0.20%: UP=33.1% DOWN=38.8% NEITHER=26.9% BOTH=0.4%
+      first_reach +-0.30%: UP=21.7% DOWN=27.0% NEITHER=50.6% BOTH=0.0%
+    TAG=state_move_down_6  P=DISCOVERY  H=24  N=2902  N_eff~=120
+      MFE      = +0.32%  CI95=[+0.28%, +0.37%]
+      MAE      = -0.32%  CI95=[-0.36%, -0.29%]
+      TERM     = +0.01%  CI95=[-0.03%, +0.07%]
+      MFE_first rate = 49.7%  CI95=[46.1%, 53.1%]
+      MAE_first rate = 47.5%  CI95=[43.9%, 50.8%]
+      SAME_bar rate  = 2.1%
+      mean mfe_first_bar = 10.31
+      mean mae_first_bar = 10.59
+      first_reach +-0.20%: UP=39.0% DOWN=46.0% NEITHER=13.9% BOTH=0.4%
+      first_reach +-0.30%: UP=30.4% DOWN=38.0% NEITHER=30.8% BOTH=0.0%
+
+  Period: VALIDATION  N=1306
+    TAG=state_move_down_6  P=VALIDATION  H=1  N=1306  N_eff~=1306
+      MFE      = +0.05%  CI95=[+0.04%, +0.05%]
+      MAE      = -0.05%  CI95=[-0.05%, -0.04%]
+      TERM     = +0.00%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=1.9% DOWN=2.8% NEITHER=94.3% BOTH=0.1%
+      first_reach +-0.30%: UP=0.4% DOWN=1.1% NEITHER=97.5% BOTH=0.1%
+    TAG=state_move_down_6  P=VALIDATION  H=3  N=1306  N_eff~=435
+      MFE      = +0.08%  CI95=[+0.07%, +0.09%]
+      MAE      = -0.09%  CI95=[-0.09%, -0.08%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 36.6%  CI95=[33.9%, 39.3%]
+      MAE_first rate = 43.2%  CI95=[40.4%, 46.0%]
+      SAME_bar rate  = 19.3%
+      mean mfe_first_bar = 1.84
+      mean mae_first_bar = 1.72
+      first_reach +-0.20%: UP=7.4% DOWN=9.3% NEITHER=82.2% BOTH=0.2%
+      first_reach +-0.30%: UP=2.5% DOWN=3.8% NEITHER=92.6% BOTH=0.2%
+    TAG=state_move_down_6  P=VALIDATION  H=6  N=1306  N_eff~=217
+      MFE      = +0.12%  CI95=[+0.11%, +0.13%]
+      MAE      = -0.11%  CI95=[-0.13%, -0.10%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.03%]
+      MFE_first rate = 40.7%  CI95=[37.6%, 43.5%]
+      MAE_first rate = 50.1%  CI95=[47.1%, 53.1%]
+      SAME_bar rate  = 8.3%
+      mean mfe_first_bar = 3.13
+      mean mae_first_bar = 2.78
+      first_reach +-0.20%: UP=14.7% DOWN=16.0% NEITHER=68.2% BOTH=0.2%
+      first_reach +-0.30%: UP=6.5% DOWN=6.8% NEITHER=85.6% BOTH=0.2%
+    TAG=state_move_down_6  P=VALIDATION  H=12  N=1306  N_eff~=108
+      MFE      = +0.17%  CI95=[+0.15%, +0.19%]
+      MAE      = -0.16%  CI95=[-0.17%, -0.14%]
+      TERM     = +0.03%  CI95=[+0.01%, +0.05%]
+      MFE_first rate = 39.6%  CI95=[35.3%, 43.4%]
+      MAE_first rate = 54.7%  CI95=[50.8%, 59.4%]
+      SAME_bar rate  = 4.8%
+      mean mfe_first_bar = 6.06
+      mean mae_first_bar = 4.96
+      first_reach +-0.20%: UP=27.0% DOWN=26.6% NEITHER=45.3% BOTH=0.2%
+      first_reach +-0.30%: UP=13.3% DOWN=14.8% NEITHER=70.8% BOTH=0.2%
+    TAG=state_move_down_6  P=VALIDATION  H=24  N=1306  N_eff~=54
+      MFE      = +0.24%  CI95=[+0.21%, +0.26%]
+      MAE      = -0.20%  CI95=[-0.23%, -0.18%]
+      TERM     = +0.04%  CI95=[+0.02%, +0.07%]
+      MFE_first rate = 41.0%  CI95=[35.8%, 45.4%]
+      MAE_first rate = 54.9%  CI95=[49.7%, 60.2%]
+      SAME_bar rate  = 3.2%
+      mean mfe_first_bar = 10.83
+      mean mae_first_bar = 8.78
+      first_reach +-0.20%: UP=38.4% DOWN=34.6% NEITHER=26.0% BOTH=0.2%
+      first_reach +-0.30%: UP=22.3% DOWN=22.9% NEITHER=53.8% BOTH=0.2%
+
+  Period: OOS  N=2359
+    TAG=state_move_down_6  P=OOS  H=1  N=2359  N_eff~=2359
+      MFE      = +0.09%  CI95=[+0.08%, +0.10%]
+      MAE      = -0.09%  CI95=[-0.10%, -0.08%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.9%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=10.5% DOWN=11.8% NEITHER=76.0% BOTH=0.6%
+      first_reach +-0.30%: UP=5.0% DOWN=6.1% NEITHER=87.7% BOTH=0.0%
+    TAG=state_move_down_6  P=OOS  H=3  N=2359  N_eff~=786
+      MFE      = +0.17%  CI95=[+0.15%, +0.19%]
+      MAE      = -0.17%  CI95=[-0.18%, -0.15%]
+      TERM     = +0.01%  CI95=[-0.01%, +0.02%]
+      MFE_first rate = 38.8%  CI95=[36.5%, 41.2%]
+      MAE_first rate = 44.0%  CI95=[41.5%, 46.9%]
+      SAME_bar rate  = 16.1%
+      mean mfe_first_bar = 1.88
+      mean mae_first_bar = 1.79
+      first_reach +-0.20%: UP=26.4% DOWN=25.6% NEITHER=46.2% BOTH=0.7%
+      first_reach +-0.30%: UP=15.0% DOWN=16.4% NEITHER=67.3% BOTH=0.1%
+    TAG=state_move_down_6  P=OOS  H=6  N=2359  N_eff~=393
+      MFE      = +0.23%  CI95=[+0.21%, +0.26%]
+      MAE      = -0.23%  CI95=[-0.26%, -0.21%]
+      TERM     = +0.01%  CI95=[-0.01%, +0.04%]
+      MFE_first rate = 43.3%  CI95=[39.8%, 46.5%]
+      MAE_first rate = 49.8%  CI95=[46.7%, 53.1%]
+      SAME_bar rate  = 5.8%
+      mean mfe_first_bar = 3.19
+      mean mae_first_bar = 2.92
+      first_reach +-0.20%: UP=36.2% DOWN=34.3% NEITHER=27.6% BOTH=0.8%
+      first_reach +-0.30%: UP=24.5% DOWN=24.3% NEITHER=49.8% BOTH=0.3%
+    TAG=state_move_down_6  P=OOS  H=12  N=2359  N_eff~=196
+      MFE      = +0.32%  CI95=[+0.28%, +0.36%]
+      MAE      = -0.32%  CI95=[-0.36%, -0.29%]
+      TERM     = +0.01%  CI95=[-0.03%, +0.05%]
+      MFE_first rate = 44.3%  CI95=[40.4%, 47.9%]
+      MAE_first rate = 51.0%  CI95=[47.6%, 54.8%]
+      SAME_bar rate  = 3.5%
+      mean mfe_first_bar = 5.81
+      mean mae_first_bar = 5.24
+      first_reach +-0.20%: UP=42.9% DOWN=40.2% NEITHER=14.9% BOTH=0.8%
+      first_reach +-0.30%: UP=32.6% DOWN=33.2% NEITHER=32.8% BOTH=0.3%
+    TAG=state_move_down_6  P=OOS  H=24  N=2359  N_eff~=98
+      MFE      = +0.44%  CI95=[+0.38%, +0.50%]
+      MAE      = -0.45%  CI95=[-0.51%, -0.39%]
+      TERM     = -0.01%  CI95=[-0.08%, +0.06%]
+      MFE_first rate = 46.9%  CI95=[42.1%, 51.5%]
+      MAE_first rate = 49.2%  CI95=[44.6%, 54.3%]
+      SAME_bar rate  = 2.8%
+      mean mfe_first_bar = 10.21
+      mean mae_first_bar = 9.65
+      first_reach +-0.20%: UP=46.8% DOWN=44.1% NEITHER=7.2% BOTH=0.8%
+      first_reach +-0.30%: UP=38.7% DOWN=40.2% NEITHER=19.7% BOTH=0.3%
+
+  Period: ALL  N=6589
+    TAG=state_move_down_6  P=ALL  H=1  N=6589  N_eff~=6589
+      MFE      = +0.07%  CI95=[+0.07%, +0.08%]
+      MAE      = -0.07%  CI95=[-0.08%, -0.07%]
+      TERM     = +0.00%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 99.1%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=6.5% DOWN=7.5% NEITHER=84.7% BOTH=0.3%
+      first_reach +-0.30%: UP=2.7% DOWN=3.4% NEITHER=93.0% BOTH=0.0%
+    TAG=state_move_down_6  P=ALL  H=3  N=6589  N_eff~=2196
+      MFE      = +0.13%  CI95=[+0.12%, +0.14%]
+      MAE      = -0.13%  CI95=[-0.14%, -0.12%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 38.0%  CI95=[36.8%, 39.4%]
+      MAE_first rate = 44.1%  CI95=[42.7%, 45.3%]
+      SAME_bar rate  = 16.9%
+      mean mfe_first_bar = 1.88
+      mean mae_first_bar = 1.77
+      first_reach +-0.20%: UP=17.9% DOWN=18.9% NEITHER=61.9% BOTH=0.4%
+      first_reach +-0.30%: UP=8.8% DOWN=10.3% NEITHER=80.0% BOTH=0.1%
+    TAG=state_move_down_6  P=ALL  H=6  N=6589  N_eff~=1098
+      MFE      = +0.18%  CI95=[+0.16%, +0.19%]
+      MAE      = -0.18%  CI95=[-0.19%, -0.17%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.02%]
+      MFE_first rate = 43.6%  CI95=[42.0%, 45.2%]
+      MAE_first rate = 49.2%  CI95=[47.5%, 50.7%]
+      SAME_bar rate  = 6.3%
+      mean mfe_first_bar = 3.17
+      mean mae_first_bar = 2.93
+      first_reach +-0.20%: UP=26.8% DOWN=28.1% NEITHER=43.7% BOTH=0.5%
+      first_reach +-0.30%: UP=15.5% DOWN=17.5% NEITHER=65.9% BOTH=0.1%
+    TAG=state_move_down_6  P=ALL  H=12  N=6589  N_eff~=549
+      MFE      = +0.25%  CI95=[+0.23%, +0.27%]
+      MAE      = -0.25%  CI95=[-0.27%, -0.23%]
+      TERM     = +0.02%  CI95=[-0.00%, +0.04%]
+      MFE_first rate = 44.7%  CI95=[42.8%, 46.5%]
+      MAE_first rate = 50.8%  CI95=[49.0%, 52.7%]
+      SAME_bar rate  = 3.6%
+      mean mfe_first_bar = 5.80
+      mean mae_first_bar = 5.31
+      first_reach +-0.20%: UP=35.5% DOWN=36.8% NEITHER=26.3% BOTH=0.5%
+      first_reach +-0.30%: UP=23.9% DOWN=26.7% NEITHER=48.3% BOTH=0.1%
+    TAG=state_move_down_6  P=ALL  H=24  N=6589  N_eff~=274
+      MFE      = +0.35%  CI95=[+0.32%, +0.38%]
+      MAE      = -0.34%  CI95=[-0.38%, -0.31%]
+      TERM     = +0.01%  CI95=[-0.02%, +0.05%]
+      MFE_first rate = 46.9%  CI95=[44.3%, 49.6%]
+      MAE_first rate = 49.6%  CI95=[47.0%, 52.1%]
+      SAME_bar rate  = 2.6%
+      mean mfe_first_bar = 10.38
+      mean mae_first_bar = 9.89
+      first_reach +-0.20%: UP=41.7% DOWN=42.9% NEITHER=13.9% BOTH=0.5%
+      first_reach +-0.30%: UP=31.8% DOWN=35.7% NEITHER=31.5% BOTH=0.1%
+
+------------------------------------------------------------------------------
+TAG: state_below_vwap_high
+------------------------------------------------------------------------------
+  Period: DISCOVERY  N=2901
+    TAG=state_below_vwap_high  P=DISCOVERY  H=1  N=2901  N_eff~=2901
+      MFE      = +0.06%  CI95=[+0.05%, +0.07%]
+      MAE      = -0.06%  CI95=[-0.07%, -0.05%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.7%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=4.7% DOWN=4.9% NEITHER=89.0% BOTH=0.1%
+      first_reach +-0.30%: UP=1.4% DOWN=1.7% NEITHER=95.6% BOTH=0.0%
+    TAG=state_below_vwap_high  P=DISCOVERY  H=3  N=2901  N_eff~=967
+      MFE      = +0.11%  CI95=[+0.10%, +0.12%]
+      MAE      = -0.11%  CI95=[-0.12%, -0.10%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.02%]
+      MFE_first rate = 38.6%  CI95=[36.3%, 40.6%]
+      MAE_first rate = 43.8%  CI95=[41.9%, 46.0%]
+      SAME_bar rate  = 16.3%
+      mean mfe_first_bar = 1.88
+      mean mae_first_bar = 1.80
+      first_reach +-0.20%: UP=14.0% DOWN=15.1% NEITHER=69.4% BOTH=0.2%
+      first_reach +-0.30%: UP=6.0% DOWN=6.7% NEITHER=85.9% BOTH=0.0%
+    TAG=state_below_vwap_high  P=DISCOVERY  H=6  N=2901  N_eff~=483
+      MFE      = +0.16%  CI95=[+0.14%, +0.18%]
+      MAE      = -0.15%  CI95=[-0.17%, -0.13%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.03%]
+      MFE_first rate = 43.4%  CI95=[40.3%, 45.9%]
+      MAE_first rate = 48.7%  CI95=[46.0%, 51.6%]
+      SAME_bar rate  = 6.6%
+      mean mfe_first_bar = 3.19
+      mean mae_first_bar = 3.02
+      first_reach +-0.20%: UP=23.3% DOWN=24.8% NEITHER=50.4% BOTH=0.2%
+      first_reach +-0.30%: UP=11.4% DOWN=14.1% NEITHER=73.2% BOTH=0.0%
+    TAG=state_below_vwap_high  P=DISCOVERY  H=12  N=2901  N_eff~=241
+      MFE      = +0.22%  CI95=[+0.19%, +0.25%]
+      MAE      = -0.21%  CI95=[-0.24%, -0.18%]
+      TERM     = +0.02%  CI95=[-0.01%, +0.06%]
+      MFE_first rate = 43.8%  CI95=[39.4%, 46.9%]
+      MAE_first rate = 50.8%  CI95=[47.1%, 55.4%]
+      SAME_bar rate  = 4.1%
+      mean mfe_first_bar = 5.69
+      mean mae_first_bar = 5.33
+      first_reach +-0.20%: UP=33.4% DOWN=34.2% NEITHER=30.9% BOTH=0.2%
+      first_reach +-0.30%: UP=20.2% DOWN=22.8% NEITHER=55.6% BOTH=0.0%
+    TAG=state_below_vwap_high  P=DISCOVERY  H=24  N=2901  N_eff~=120
+      MFE      = +0.31%  CI95=[+0.26%, +0.36%]
+      MAE      = -0.28%  CI95=[-0.33%, -0.24%]
+      TERM     = +0.03%  CI95=[-0.03%, +0.08%]
+      MFE_first rate = 45.9%  CI95=[40.2%, 50.6%]
+      MAE_first rate = 49.1%  CI95=[43.8%, 54.6%]
+      SAME_bar rate  = 3.6%
+      mean mfe_first_bar = 9.89
+      mean mae_first_bar = 9.61
+      first_reach +-0.20%: UP=39.7% DOWN=41.1% NEITHER=17.6% BOTH=0.2%
+      first_reach +-0.30%: UP=29.1% DOWN=32.8% NEITHER=36.7% BOTH=0.0%
+
+  Period: VALIDATION  N=1442
+    TAG=state_below_vwap_high  P=VALIDATION  H=1  N=1442  N_eff~=1442
+      MFE      = +0.04%  CI95=[+0.04%, +0.04%]
+      MAE      = -0.04%  CI95=[-0.05%, -0.04%]
+      TERM     = +0.00%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.5%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=1.4% DOWN=2.5% NEITHER=94.7% BOTH=0.0%
+      first_reach +-0.30%: UP=0.4% DOWN=0.9% NEITHER=97.2% BOTH=0.0%
+    TAG=state_below_vwap_high  P=VALIDATION  H=3  N=1442  N_eff~=480
+      MFE      = +0.08%  CI95=[+0.07%, +0.09%]
+      MAE      = -0.08%  CI95=[-0.08%, -0.07%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.02%]
+      MFE_first rate = 36.8%  CI95=[33.8%, 39.6%]
+      MAE_first rate = 45.1%  CI95=[42.5%, 47.7%]
+      SAME_bar rate  = 16.6%
+      mean mfe_first_bar = 1.90
+      mean mae_first_bar = 1.74
+      first_reach +-0.20%: UP=6.9% DOWN=8.0% NEITHER=83.6% BOTH=0.1%
+      first_reach +-0.30%: UP=2.4% DOWN=3.3% NEITHER=92.9% BOTH=0.0%
+    TAG=state_below_vwap_high  P=VALIDATION  H=6  N=1442  N_eff~=240
+      MFE      = +0.12%  CI95=[+0.11%, +0.13%]
+      MAE      = -0.11%  CI95=[-0.12%, -0.10%]
+      TERM     = +0.02%  CI95=[+0.01%, +0.03%]
+      MFE_first rate = 40.2%  CI95=[35.9%, 43.6%]
+      MAE_first rate = 51.7%  CI95=[48.2%, 55.8%]
+      SAME_bar rate  = 6.7%
+      mean mfe_first_bar = 3.28
+      mean mae_first_bar = 2.85
+      first_reach +-0.20%: UP=16.2% DOWN=15.5% NEITHER=66.8% BOTH=0.1%
+      first_reach +-0.30%: UP=6.7% DOWN=7.8% NEITHER=84.0% BOTH=0.0%
+    TAG=state_below_vwap_high  P=VALIDATION  H=12  N=1442  N_eff~=120
+      MFE      = +0.18%  CI95=[+0.16%, +0.20%]
+      MAE      = -0.15%  CI95=[-0.17%, -0.13%]
+      TERM     = +0.04%  CI95=[+0.01%, +0.07%]
+      MFE_first rate = 37.9%  CI95=[32.0%, 42.4%]
+      MAE_first rate = 56.7%  CI95=[52.1%, 63.0%]
+      SAME_bar rate  = 3.9%
+      mean mfe_first_bar = 6.09
+      mean mae_first_bar = 4.76
+      first_reach +-0.20%: UP=28.6% DOWN=24.3% NEITHER=45.5% BOTH=0.1%
+      first_reach +-0.30%: UP=15.1% DOWN=15.0% NEITHER=68.4% BOTH=0.0%
+    TAG=state_below_vwap_high  P=VALIDATION  H=24  N=1442  N_eff~=60
+      MFE      = +0.25%  CI95=[+0.21%, +0.29%]
+      MAE      = -0.20%  CI95=[-0.25%, -0.16%]
+      TERM     = +0.05%  CI95=[+0.01%, +0.10%]
+      MFE_first rate = 37.0%  CI95=[29.6%, 43.6%]
+      MAE_first rate = 58.4%  CI95=[51.5%, 65.8%]
+      SAME_bar rate  = 3.2%
+      mean mfe_first_bar = 10.48
+      mean mae_first_bar = 7.37
+      first_reach +-0.20%: UP=39.7% DOWN=30.7% NEITHER=28.0% BOTH=0.1%
+      first_reach +-0.30%: UP=24.7% DOWN=22.3% NEITHER=51.6% BOTH=0.0%
+
+  Period: OOS  N=1904
+    TAG=state_below_vwap_high  P=OOS  H=1  N=1904  N_eff~=1904
+      MFE      = +0.09%  CI95=[+0.08%, +0.10%]
+      MAE      = -0.09%  CI95=[-0.10%, -0.08%]
+      TERM     = +0.00%  CI95=[-0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.5%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=9.8% DOWN=10.7% NEITHER=77.4% BOTH=0.6%
+      first_reach +-0.30%: UP=4.5% DOWN=5.7% NEITHER=88.3% BOTH=0.1%
+    TAG=state_below_vwap_high  P=OOS  H=3  N=1904  N_eff~=634
+      MFE      = +0.16%  CI95=[+0.14%, +0.18%]
+      MAE      = -0.16%  CI95=[-0.18%, -0.14%]
+      TERM     = +0.00%  CI95=[-0.01%, +0.02%]
+      MFE_first rate = 38.4%  CI95=[35.6%, 40.7%]
+      MAE_first rate = 43.0%  CI95=[40.3%, 46.3%]
+      SAME_bar rate  = 17.1%
+      mean mfe_first_bar = 1.87
+      mean mae_first_bar = 1.78
+      first_reach +-0.20%: UP=24.7% DOWN=24.7% NEITHER=48.3% BOTH=0.8%
+      first_reach +-0.30%: UP=13.8% DOWN=16.6% NEITHER=67.9% BOTH=0.2%
+    TAG=state_below_vwap_high  P=OOS  H=6  N=1904  N_eff~=317
+      MFE      = +0.22%  CI95=[+0.19%, +0.26%]
+      MAE      = -0.23%  CI95=[-0.26%, -0.20%]
+      TERM     = -0.00%  CI95=[-0.03%, +0.03%]
+      MFE_first rate = 43.4%  CI95=[39.4%, 46.5%]
+      MAE_first rate = 48.8%  CI95=[45.6%, 52.9%]
+      SAME_bar rate  = 6.3%
+      mean mfe_first_bar = 3.16
+      mean mae_first_bar = 2.95
+      first_reach +-0.20%: UP=33.7% DOWN=34.8% NEITHER=29.1% BOTH=0.9%
+      first_reach +-0.30%: UP=22.3% DOWN=25.3% NEITHER=50.6% BOTH=0.3%
+    TAG=state_below_vwap_high  P=OOS  H=12  N=1904  N_eff~=158
+      MFE      = +0.32%  CI95=[+0.27%, +0.38%]
+      MAE      = -0.32%  CI95=[-0.37%, -0.27%]
+      TERM     = +0.01%  CI95=[-0.05%, +0.07%]
+      MFE_first rate = 42.6%  CI95=[37.6%, 46.9%]
+      MAE_first rate = 51.9%  CI95=[47.2%, 57.7%]
+      SAME_bar rate  = 3.9%
+      mean mfe_first_bar = 5.72
+      mean mae_first_bar = 5.03
+      first_reach +-0.20%: UP=40.8% DOWN=41.7% NEITHER=15.0% BOTH=1.0%
+      first_reach +-0.30%: UP=31.4% DOWN=33.5% NEITHER=33.3% BOTH=0.4%
+    TAG=state_below_vwap_high  P=OOS  H=24  N=1904  N_eff~=79
+      MFE      = +0.43%  CI95=[+0.36%, +0.53%]
+      MAE      = -0.43%  CI95=[-0.49%, -0.35%]
+      TERM     = -0.00%  CI95=[-0.09%, +0.09%]
+      MFE_first rate = 44.3%  CI95=[37.4%, 50.3%]
+      MAE_first rate = 50.9%  CI95=[44.8%, 58.4%]
+      SAME_bar rate  = 3.3%
+      mean mfe_first_bar = 9.92
+      mean mae_first_bar = 8.76
+      first_reach +-0.20%: UP=44.4% DOWN=44.4% NEITHER=8.7% BOTH=1.0%
+      first_reach +-0.30%: UP=37.3% DOWN=39.1% NEITHER=21.7% BOTH=0.4%
+
+  Period: ALL  N=6249
+    TAG=state_below_vwap_high  P=ALL  H=1  N=6249  N_eff~=6249
+      MFE      = +0.06%  CI95=[+0.06%, +0.07%]
+      MAE      = -0.06%  CI95=[-0.07%, -0.06%]
+      TERM     = +0.00%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      MAE_first rate = 0.0%  CI95=[0.0%, 0.0%]
+      SAME_bar rate  = 98.6%
+      mean mfe_first_bar = 1.00
+      mean mae_first_bar = 1.00
+      first_reach +-0.20%: UP=5.5% DOWN=6.1% NEITHER=86.7% BOTH=0.2%
+      first_reach +-0.30%: UP=2.1% DOWN=2.7% NEITHER=93.7% BOTH=0.0%
+    TAG=state_below_vwap_high  P=ALL  H=3  N=6249  N_eff~=2083
+      MFE      = +0.12%  CI95=[+0.11%, +0.13%]
+      MAE      = -0.12%  CI95=[-0.13%, -0.11%]
+      TERM     = +0.01%  CI95=[+0.00%, +0.01%]
+      MFE_first rate = 38.1%  CI95=[36.6%, 39.5%]
+      MAE_first rate = 43.8%  CI95=[42.4%, 45.4%]
+      SAME_bar rate  = 16.6%
+      mean mfe_first_bar = 1.88
+      mean mae_first_bar = 1.78
+      first_reach +-0.20%: UP=15.6% DOWN=16.4% NEITHER=66.2% BOTH=0.3%
+      first_reach +-0.30%: UP=7.6% DOWN=8.9% NEITHER=82.0% BOTH=0.0%
+    TAG=state_below_vwap_high  P=ALL  H=6  N=6249  N_eff~=1041
+      MFE      = +0.17%  CI95=[+0.15%, +0.18%]
+      MAE      = -0.17%  CI95=[-0.18%, -0.15%]
+      TERM     = +0.01%  CI95=[-0.00%, +0.02%]
+      MFE_first rate = 42.6%  CI95=[40.6%, 44.3%]
+      MAE_first rate = 49.4%  CI95=[47.6%, 51.6%]
+      SAME_bar rate  = 6.5%
+      mean mfe_first_bar = 3.20
+      mean mae_first_bar = 2.96
+      first_reach +-0.20%: UP=24.8% DOWN=25.7% NEITHER=47.7% BOTH=0.4%
+      first_reach +-0.30%: UP=13.7% DOWN=16.0% NEITHER=68.8% BOTH=0.1%
+    TAG=state_below_vwap_high  P=ALL  H=12  N=6249  N_eff~=520
+      MFE      = +0.24%  CI95=[+0.22%, +0.26%]
+      MAE      = -0.23%  CI95=[-0.25%, -0.21%]
+      TERM     = +0.02%  CI95=[+0.00%, +0.05%]
+      MFE_first rate = 42.1%  CI95=[39.4%, 44.6%]
+      MAE_first rate = 52.5%  CI95=[49.7%, 55.4%]
+      SAME_bar rate  = 4.0%
+      mean mfe_first_bar = 5.79
+      mean mae_first_bar = 5.10
+      first_reach +-0.20%: UP=34.6% DOWN=34.2% NEITHER=29.4% BOTH=0.4%
+      first_reach +-0.30%: UP=22.5% DOWN=24.3% NEITHER=51.8% BOTH=0.1%
+    TAG=state_below_vwap_high  P=ALL  H=24  N=6249  N_eff~=260
+      MFE      = +0.33%  CI95=[+0.29%, +0.37%]
+      MAE      = -0.31%  CI95=[-0.34%, -0.27%]
+      TERM     = +0.03%  CI95=[-0.01%, +0.07%]
+      MFE_first rate = 43.4%  CI95=[39.4%, 47.0%]
+      MAE_first rate = 51.8%  CI95=[48.2%, 55.6%]
+      SAME_bar rate  = 3.4%
+      mean mfe_first_bar = 10.03
+      mean mae_first_bar = 8.83
+      first_reach +-0.20%: UP=41.2% DOWN=39.7% NEITHER=17.3% BOTH=0.4%
+      first_reach +-0.30%: UP=30.6% DOWN=32.3% NEITHER=35.6% BOTH=0.1%
+
+==============================================================================
+PART B: BASELINE (no tag filter) BY PERIOD AND HORIZON
+==============================================================================
+
+------------------------------------------------------------------------------
+PERIOD: DISCOVERY
+------------------------------------------------------------------------------
+    BASELINE P=DISCOVERY H=1 N=11615
+      MFE=+0.05%  MAE=-0.06%
+      TERM=-0.00%
+      MFE_first rate = 0.0%
+      MAE_first rate = 0.0%
+      first_reach +-0.20%: UP=4.1% DOWN=4.1%
+      first_reach +-0.30%: UP=1.5% DOWN=1.4%
+    BASELINE P=DISCOVERY H=3 N=11615
+      MFE=+0.09%  MAE=-0.10%
+      TERM=-0.00%
+      MFE_first rate = 42.4%
+      MAE_first rate = 39.7%
+      first_reach +-0.20%: UP=11.8% DOWN=13.5%
+      first_reach +-0.30%: UP=5.6% DOWN=5.7%
+    BASELINE P=DISCOVERY H=6 N=11615
+      MFE=+0.14%  MAE=-0.15%
+      TERM=-0.00%
+      MFE_first rate = 48.8%
+      MAE_first rate = 44.3%
+      first_reach +-0.20%: UP=19.5% DOWN=23.5%
+      first_reach +-0.30%: UP=10.7% DOWN=12.1%
+    BASELINE P=DISCOVERY H=12 N=11615
+      MFE=+0.19%  MAE=-0.21%
+      TERM=-0.00%
+      MFE_first rate = 51.7%
+      MAE_first rate = 44.2%
+      first_reach +-0.20%: UP=27.7% DOWN=34.7%
+      first_reach +-0.30%: UP=18.5% DOWN=21.8%
+    BASELINE P=DISCOVERY H=24 N=11615
+      MFE=+0.27%  MAE=-0.29%
+      TERM=-0.01%
+      MFE_first rate = 53.1%
+      MAE_first rate = 43.6%
+      first_reach +-0.20%: UP=34.4% DOWN=44.3%
+      first_reach +-0.30%: UP=26.6% DOWN=34.1%
+
+------------------------------------------------------------------------------
+PERIOD: VALIDATION
+------------------------------------------------------------------------------
+    BASELINE P=VALIDATION H=1 N=6565
+      MFE=+0.04%  MAE=-0.04%
+      TERM=-0.00%
+      MFE_first rate = 0.0%
+      MAE_first rate = 0.0%
+      first_reach +-0.20%: UP=1.4% DOWN=1.7%
+      first_reach +-0.30%: UP=0.4% DOWN=0.5%
+    BASELINE P=VALIDATION H=3 N=6565
+      MFE=+0.07%  MAE=-0.07%
+      TERM=-0.00%
+      MFE_first rate = 41.9%
+      MAE_first rate = 38.8%
+      first_reach +-0.20%: UP=5.6% DOWN=6.8%
+      first_reach +-0.30%: UP=2.2% DOWN=2.3%
+    BASELINE P=VALIDATION H=6 N=6565
+      MFE=+0.10%  MAE=-0.11%
+      TERM=-0.00%
+      MFE_first rate = 48.1%
+      MAE_first rate = 44.0%
+      first_reach +-0.20%: UP=11.5% DOWN=14.4%
+      first_reach +-0.30%: UP=5.5% DOWN=5.7%
+    BASELINE P=VALIDATION H=12 N=6565
+      MFE=+0.14%  MAE=-0.15%
+      TERM=-0.00%
+      MFE_first rate = 49.2%
+      MAE_first rate = 45.9%
+      first_reach +-0.20%: UP=20.0% DOWN=26.0%
+      first_reach +-0.30%: UP=10.9% DOWN=13.1%
+    BASELINE P=VALIDATION H=24 N=6565
+      MFE=+0.19%  MAE=-0.22%
+      TERM=-0.01%
+      MFE_first rate = 51.1%
+      MAE_first rate = 45.0%
+      first_reach +-0.20%: UP=28.6% DOWN=37.0%
+      first_reach +-0.30%: UP=18.0% DOWN=24.9%
+
+------------------------------------------------------------------------------
+PERIOD: OOS
+------------------------------------------------------------------------------
+    BASELINE P=OOS H=1 N=7575
+      MFE=+0.07%  MAE=-0.08%
+      TERM=-0.00%
+      MFE_first rate = 0.0%
+      MAE_first rate = 0.0%
+      first_reach +-0.20%: UP=7.9% DOWN=8.9%
+      first_reach +-0.30%: UP=3.4% DOWN=4.1%
+    BASELINE P=OOS H=3 N=7575
+      MFE=+0.13%  MAE=-0.15%
+      TERM=-0.01%
+      MFE_first rate = 42.7%
+      MAE_first rate = 39.8%
+      first_reach +-0.20%: UP=19.6% DOWN=21.7%
+      first_reach +-0.30%: UP=10.7% DOWN=12.6%
+    BASELINE P=OOS H=6 N=7575
+      MFE=+0.19%  MAE=-0.21%
+      TERM=-0.01%
+      MFE_first rate = 48.2%
+      MAE_first rate = 44.7%
+      first_reach +-0.20%: UP=28.5% DOWN=32.3%
+      first_reach +-0.30%: UP=18.2% DOWN=21.7%
+    BASELINE P=OOS H=12 N=7575
+      MFE=+0.26%  MAE=-0.30%
+      TERM=-0.03%
+      MFE_first rate = 50.1%
+      MAE_first rate = 45.8%
+      first_reach +-0.20%: UP=35.2% DOWN=42.0%
+      first_reach +-0.30%: UP=25.9% DOWN=32.1%
+    BASELINE P=OOS H=24 N=7575
+      MFE=+0.36%  MAE=-0.43%
+      TERM=-0.05%
+      MFE_first rate = 51.9%
+      MAE_first rate = 44.6%
+      first_reach +-0.20%: UP=38.9% DOWN=48.5%
+      first_reach +-0.30%: UP=32.4% DOWN=41.7%
+
+------------------------------------------------------------------------------
+PERIOD: ALL
+------------------------------------------------------------------------------
+    BASELINE P=ALL H=1 N=25856
+      MFE=+0.05%  MAE=-0.06%
+      TERM=-0.00%
+      MFE_first rate = 0.0%
+      MAE_first rate = 0.0%
+      first_reach +-0.20%: UP=4.5% DOWN=4.8%
+      first_reach +-0.30%: UP=1.8% DOWN=2.0%
+    BASELINE P=ALL H=3 N=25856
+      MFE=+0.10%  MAE=-0.11%
+      TERM=-0.00%
+      MFE_first rate = 42.4%
+      MAE_first rate = 39.5%
+      first_reach +-0.20%: UP=12.5% DOWN=14.2%
+      first_reach +-0.30%: UP=6.3% DOWN=6.9%
+    BASELINE P=ALL H=6 N=25856
+      MFE=+0.14%  MAE=-0.15%
+      TERM=-0.00%
+      MFE_first rate = 48.4%
+      MAE_first rate = 44.4%
+      first_reach +-0.20%: UP=20.1% DOWN=23.8%
+      first_reach +-0.30%: UP=11.6% DOWN=13.3%
+    BASELINE P=ALL H=12 N=25856
+      MFE=+0.20%  MAE=-0.22%
+      TERM=-0.01%
+      MFE_first rate = 50.6%
+      MAE_first rate = 45.1%
+      first_reach +-0.20%: UP=28.0% DOWN=34.6%
+      first_reach +-0.30%: UP=18.7% DOWN=22.6%
+    BASELINE P=ALL H=24 N=25856
+      MFE=+0.28%  MAE=-0.31%
+      TERM=-0.02%
+      MFE_first rate = 52.3%
+      MAE_first rate = 44.2%
+      first_reach +-0.20%: UP=34.2% DOWN=43.6%
+      first_reach +-0.30%: UP=26.1% DOWN=33.9%
+
+==============================================================================
+PART C: DRIFT-NORMALIZED MFE_first / MAE_first
+==============================================================================
+
+For each tag/period/horizon: (tag rate) - (baseline rate) in pp.
+Positive MFE_first = tag reaches max high earlier than min low, vs baseline.
+Negative MFE_first = tag reaches min low earlier than max high, vs baseline.
+
+------------------------------------------------------------------------------
+TAG: state_trend_up
+------------------------------------------------------------------------------
+  horizon      H    DISCOVERY   VALIDATION          OOS
+  MFE_first    1        +0.00        +0.00        +0.00 
+  MAE_first    1        +0.00        +0.00        +0.00 
+  MFE_first    3        +2.22        +2.89        +3.53 
+  MAE_first    3        -2.58        -2.69        -3.15 
+  MFE_first    6        +3.98        +5.27        +5.08 
+  MAE_first    6        -3.40        -4.94        -4.29 
+  MFE_first   12        +4.30        +7.26        +5.30 
+  MAE_first   12        -3.78        -7.48        -4.29 
+  MFE_first   24        +5.09        +6.58        +5.70 
+  MAE_first   24        -4.81        -6.82        -4.89 
+
+------------------------------------------------------------------------------
+TAG: state_move_up_6
+------------------------------------------------------------------------------
+  horizon      H    DISCOVERY   VALIDATION          OOS
+  MFE_first    1        +0.00        +0.00        +0.00 
+  MAE_first    1        +0.00        +0.00        +0.00 
+  MFE_first    3        +2.98        +2.78        +2.92 
+  MAE_first    3        -2.59        -2.50        -3.18 
+  MFE_first    6        +1.61        +5.23        +4.42 
+  MAE_first    6        -1.35        -4.52        -5.01 
+  MFE_first   12        +0.69        +6.75        +4.76 
+  MAE_first   12        -0.38        -5.45        -4.78 
+  MFE_first   24        +2.08        +3.77        +3.33 
+  MAE_first   24        -1.77        -3.60        -3.25 
+
+------------------------------------------------------------------------------
+TAG: state_above_vwap_high
+------------------------------------------------------------------------------
+  horizon      H    DISCOVERY   VALIDATION          OOS
+  MFE_first    1        +0.00        +0.00        +0.00 
+  MAE_first    1        +0.00        +0.00        +0.00 
+  MFE_first    3        +1.96        +4.37        +5.15 
+  MAE_first    3        -3.41        -4.95        -4.83 
+  MFE_first    6        +1.77        +7.08        +6.11 
+  MAE_first    6        -3.03        -7.62        -6.07 
+  MFE_first   12        +1.26       +10.09        +7.69 
+  MAE_first   12        -2.29       -11.20        -8.01 
+  MFE_first   24        -0.31        +8.04        +6.29 
+  MAE_first   24        -0.79        -9.60        -6.37 
+
+------------------------------------------------------------------------------
+TAG: state_trend_down
+------------------------------------------------------------------------------
+  horizon      H    DISCOVERY   VALIDATION          OOS
+  MFE_first    1        +0.00        +0.00        +0.00 
+  MAE_first    1        +0.00        +0.00        +0.00 
+  MFE_first    3        -1.87        -3.96        -3.25 
+  MAE_first    3        +3.07        +4.77        +2.45 
+  MFE_first    6        -3.53        -6.86        -5.13 
+  MAE_first    6        +3.31        +6.64        +5.10 
+  MFE_first   12        -4.56        -7.61        -6.26 
+  MAE_first   12        +4.24        +7.80        +6.36 
+  MFE_first   24        -3.74        -7.37        -4.15 
+  MAE_first   24        +3.27        +7.48        +4.36 
+
+------------------------------------------------------------------------------
+TAG: state_move_down_6
+------------------------------------------------------------------------------
+  horizon      H    DISCOVERY   VALIDATION          OOS
+  MFE_first    1        +0.00        +0.00        +0.00 
+  MAE_first    1        +0.00        +0.00        +0.00 
+  MFE_first    3        -4.19        -5.33        -3.93 
+  MAE_first    3        +4.88        +4.34        +4.21 
+  MFE_first    6        -3.49        -7.34        -4.93 
+  MAE_first    6        +3.75        +6.06        +5.14 
+  MFE_first   12        -4.14        -9.61        -5.77 
+  MAE_first   12        +4.31        +8.76        +5.20 
+  MFE_first   24        -3.47       -10.11        -4.95 
+  MAE_first   24        +3.84        +9.89        +4.57 
+
+------------------------------------------------------------------------------
+TAG: state_below_vwap_high
+------------------------------------------------------------------------------
+  horizon      H    DISCOVERY   VALIDATION          OOS
+  MFE_first    1        +0.00        +0.00        +0.00 
+  MAE_first    1        +0.00        +0.00        +0.00 
+  MFE_first    3        -3.79        -5.18        -4.27 
+  MAE_first    3        +4.07        +6.30        +3.17 
+  MFE_first    6        -5.37        -7.92        -4.83 
+  MAE_first    6        +4.39        +7.64        +4.17 
+  MFE_first   12        -7.91       -11.27        -7.47 
+  MAE_first   12        +6.60       +10.82        +6.11 
+  MFE_first   24        -7.17       -14.11        -7.61 
+  MAE_first   24        +5.48       +13.38        +6.34 
+
+==============================================================================
+PART D: FIRST-REACH +-0.20% AND +-0.30% BY TAG/PERIOD/HORIZON
+==============================================================================
+
+------------------------------------------------------------------------------
+TAG: state_trend_up
+------------------------------------------------------------------------------
+  P=DISCOVERY  N=3879
+    H1  +-0.20%: UP=3.6% DOWN=3.2% NEITHER=91.9% BOTH=0.2%
+    H1  +-0.30%: UP=1.3% DOWN=1.1% NEITHER=96.4% BOTH=0.0%
+    H3  +-0.20%: UP=10.3% DOWN=12.0% NEITHER=76.4% BOTH=0.2%
+    H3  +-0.30%: UP=5.3% DOWN=4.6% NEITHER=88.9% BOTH=0.0%
+    H6  +-0.20%: UP=16.9% DOWN=21.9% NEITHER=59.8% BOTH=0.3%
+    H6  +-0.30%: UP=9.8% DOWN=9.8% NEITHER=79.2% BOTH=0.0%
+    H12 +-0.20%: UP=23.7% DOWN=33.5% NEITHER=41.4% BOTH=0.3%
+    H12 +-0.30%: UP=16.6% DOWN=19.5% NEITHER=62.8% BOTH=0.0%
+    H24 +-0.20%: UP=29.1% DOWN=44.8% NEITHER=24.7% BOTH=0.3%
+    H24 +-0.30%: UP=22.2% DOWN=33.8% NEITHER=42.9% BOTH=0.0%
+
+  P=VALIDATION  N=2019
+    H1  +-0.20%: UP=1.7% DOWN=1.4% NEITHER=96.0% BOTH=0.0%
+    H1  +-0.30%: UP=0.4% DOWN=0.3% NEITHER=98.4% BOTH=0.0%
+    H3  +-0.20%: UP=6.0% DOWN=6.2% NEITHER=86.9% BOTH=0.0%
+    H3  +-0.30%: UP=2.9% DOWN=1.8% NEITHER=94.5% BOTH=0.0%
+    H6  +-0.20%: UP=10.8% DOWN=15.0% NEITHER=73.4% BOTH=0.0%
+    H6  +-0.30%: UP=6.0% DOWN=4.9% NEITHER=88.2% BOTH=0.0%
+    H12 +-0.20%: UP=17.2% DOWN=30.0% NEITHER=51.9% BOTH=0.0%
+    H12 +-0.30%: UP=10.3% DOWN=13.4% NEITHER=75.4% BOTH=0.0%
+    H24 +-0.20%: UP=25.5% DOWN=44.2% NEITHER=29.4% BOTH=0.0%
+    H24 +-0.30%: UP=17.6% DOWN=28.5% NEITHER=53.0% BOTH=0.0%
+
+  P=OOS  N=2402
+    H1  +-0.20%: UP=6.7% DOWN=7.2% NEITHER=85.1% BOTH=0.2%
+    H1  +-0.30%: UP=2.4% DOWN=3.2% NEITHER=93.6% BOTH=0.1%
+    H3  +-0.20%: UP=17.8% DOWN=20.0% NEITHER=61.3% BOTH=0.2%
+    H3  +-0.30%: UP=8.5% DOWN=10.6% NEITHER=80.1% BOTH=0.1%
+    H6  +-0.20%: UP=26.3% DOWN=31.4% NEITHER=41.4% BOTH=0.2%
+    H6  +-0.30%: UP=15.4% DOWN=20.6% NEITHER=63.2% BOTH=0.1%
+    H12 +-0.20%: UP=32.0% DOWN=42.9% NEITHER=24.2% BOTH=0.2%
+    H12 +-0.30%: UP=23.1% DOWN=32.3% NEITHER=43.9% BOTH=0.1%
+    H24 +-0.20%: UP=35.8% DOWN=51.1% NEITHER=12.2% BOTH=0.2%
+    H24 +-0.30%: UP=29.8% DOWN=44.4% NEITHER=25.1% BOTH=0.1%
+
+  P=ALL  N=8356
+    H1  +-0.20%: UP=4.0% DOWN=3.9% NEITHER=91.0% BOTH=0.1%
+    H1  +-0.30%: UP=1.4% DOWN=1.5% NEITHER=96.1% BOTH=0.0%
+    H3  +-0.20%: UP=11.4% DOWN=12.9% NEITHER=74.6% BOTH=0.2%
+    H3  +-0.30%: UP=5.6% DOWN=5.7% NEITHER=87.7% BOTH=0.0%
+    H6  +-0.20%: UP=18.2% DOWN=23.0% NEITHER=57.7% BOTH=0.2%
+    H6  +-0.30%: UP=10.5% DOWN=11.7% NEITHER=76.8% BOTH=0.0%
+    H12 +-0.20%: UP=24.6% DOWN=35.4% NEITHER=38.9% BOTH=0.2%
+    H12 +-0.30%: UP=16.9% DOWN=21.7% NEITHER=60.4% BOTH=0.0%
+    H24 +-0.20%: UP=30.2% DOWN=46.5% NEITHER=22.1% BOTH=0.2%
+    H24 +-0.30%: UP=23.4% DOWN=35.5% NEITHER=40.1% BOTH=0.0%
+
+------------------------------------------------------------------------------
+TAG: state_move_up_6
+------------------------------------------------------------------------------
+  P=DISCOVERY  N=2902
+    H1  +-0.20%: UP=6.7% DOWN=4.8% NEITHER=87.3% BOTH=0.3%
+    H1  +-0.30%: UP=2.5% DOWN=1.7% NEITHER=94.8% BOTH=0.1%
+    H3  +-0.20%: UP=16.2% DOWN=15.4% NEITHER=67.1% BOTH=0.3%
+    H3  +-0.30%: UP=9.1% DOWN=6.3% NEITHER=83.6% BOTH=0.1%
+    H6  +-0.20%: UP=24.3% DOWN=26.2% NEITHER=48.0% BOTH=0.5%
+    H6  +-0.30%: UP=15.4% DOWN=12.6% NEITHER=71.0% BOTH=0.1%
+    H12 +-0.20%: UP=31.8% DOWN=36.2% NEITHER=30.5% BOTH=0.6%
+    H12 +-0.30%: UP=24.4% DOWN=23.1% NEITHER=51.5% BOTH=0.1%
+    H24 +-0.20%: UP=36.6% DOWN=44.3% NEITHER=17.7% BOTH=0.6%
+    H24 +-0.30%: UP=30.5% DOWN=34.5% NEITHER=33.9% BOTH=0.1%
+
+  P=VALIDATION  N=1362
+    H1  +-0.20%: UP=3.1% DOWN=1.6% NEITHER=94.4% BOTH=0.0%
+    H1  +-0.30%: UP=0.9% DOWN=0.5% NEITHER=97.7% BOTH=0.0%
+    H3  +-0.20%: UP=9.5% DOWN=6.1% NEITHER=83.6% BOTH=0.0%
+    H3  +-0.30%: UP=4.3% DOWN=2.3% NEITHER=92.6% BOTH=0.0%
+    H6  +-0.20%: UP=16.2% DOWN=15.3% NEITHER=67.6% BOTH=0.0%
+    H6  +-0.30%: UP=9.0% DOWN=4.9% NEITHER=85.2% BOTH=0.0%
+    H12 +-0.20%: UP=22.5% DOWN=29.0% NEITHER=47.6% BOTH=0.0%
+    H12 +-0.30%: UP=13.7% DOWN=12.6% NEITHER=72.8% BOTH=0.0%
+    H24 +-0.20%: UP=29.6% DOWN=41.6% NEITHER=27.9% BOTH=0.0%
+    H24 +-0.30%: UP=20.8% DOWN=26.5% NEITHER=51.8% BOTH=0.0%
+
+  P=OOS  N=2360
+    H1  +-0.20%: UP=10.3% DOWN=10.5% NEITHER=77.7% BOTH=0.5%
+    H1  +-0.30%: UP=4.4% DOWN=4.6% NEITHER=90.0% BOTH=0.1%
+    H3  +-0.20%: UP=21.8% DOWN=25.4% NEITHER=51.4% BOTH=0.5%
+    H3  +-0.30%: UP=12.2% DOWN=14.6% NEITHER=72.2% BOTH=0.1%
+    H6  +-0.20%: UP=29.6% DOWN=37.4% NEITHER=31.4% BOTH=0.5%
+    H6  +-0.30%: UP=20.0% DOWN=25.9% NEITHER=53.0% BOTH=0.1%
+    H12 +-0.20%: UP=34.5% DOWN=47.0% NEITHER=16.9% BOTH=0.5%
+    H12 +-0.30%: UP=27.2% DOWN=36.7% NEITHER=35.0% BOTH=0.1%
+    H24 +-0.20%: UP=36.8% DOWN=52.8% NEITHER=8.9% BOTH=0.5%
+    H24 +-0.30%: UP=33.3% DOWN=46.1% NEITHER=19.4% BOTH=0.1%
+
+  P=ALL  N=6660
+    H1  +-0.20%: UP=7.2% DOWN=6.2% NEITHER=85.4% BOTH=0.3%
+    H1  +-0.30%: UP=2.8% DOWN=2.4% NEITHER=93.7% BOTH=0.1%
+    H3  +-0.20%: UP=16.8% DOWN=17.1% NEITHER=64.9% BOTH=0.3%
+    H3  +-0.30%: UP=9.2% DOWN=8.4% NEITHER=81.4% BOTH=0.1%
+    H6  +-0.20%: UP=24.5% DOWN=27.9% NEITHER=46.2% BOTH=0.4%
+    H6  +-0.30%: UP=15.7% DOWN=15.7% NEITHER=67.6% BOTH=0.1%
+    H12 +-0.20%: UP=30.8% DOWN=38.6% NEITHER=29.2% BOTH=0.4%
+    H12 +-0.30%: UP=23.2% DOWN=25.7% NEITHER=50.1% BOTH=0.1%
+    H24 +-0.20%: UP=35.2% DOWN=46.8% NEITHER=16.7% BOTH=0.4%
+    H24 +-0.30%: UP=29.5% DOWN=37.0% NEITHER=32.5% BOTH=0.1%
+
+------------------------------------------------------------------------------
+TAG: state_above_vwap_high
+------------------------------------------------------------------------------
+  P=DISCOVERY  N=2901
+    H1  +-0.20%: UP=5.4% DOWN=3.6% NEITHER=89.2% BOTH=0.2%
+    H1  +-0.30%: UP=2.1% DOWN=1.1% NEITHER=95.2% BOTH=0.1%
+    H3  +-0.20%: UP=13.9% DOWN=12.9% NEITHER=71.4% BOTH=0.3%
+    H3  +-0.30%: UP=7.5% DOWN=5.1% NEITHER=85.8% BOTH=0.1%
+    H6  +-0.20%: UP=21.2% DOWN=22.9% NEITHER=53.9% BOTH=0.4%
+    H6  +-0.30%: UP=13.3% DOWN=11.1% NEITHER=73.9% BOTH=0.1%
+    H12 +-0.20%: UP=27.9% DOWN=32.3% NEITHER=37.7% BOTH=0.6%
+    H12 +-0.30%: UP=21.1% DOWN=20.6% NEITHER=56.6% BOTH=0.1%
+    H24 +-0.20%: UP=32.3% DOWN=39.9% NEITHER=25.7% BOTH=0.6%
+    H24 +-0.30%: UP=26.5% DOWN=31.4% NEITHER=40.5% BOTH=0.1%
+
+  P=VALIDATION  N=1717
+    H1  +-0.20%: UP=2.1% DOWN=1.5% NEITHER=95.0% BOTH=0.0%
+    H1  +-0.30%: UP=0.5% DOWN=0.5% NEITHER=97.6% BOTH=0.0%
+    H3  +-0.20%: UP=6.6% DOWN=7.3% NEITHER=84.7% BOTH=0.0%
+    H3  +-0.30%: UP=3.1% DOWN=2.5% NEITHER=93.0% BOTH=0.0%
+    H6  +-0.20%: UP=11.3% DOWN=17.6% NEITHER=69.8% BOTH=0.0%
+    H6  +-0.30%: UP=6.4% DOWN=6.3% NEITHER=85.9% BOTH=0.0%
+    H12 +-0.20%: UP=16.6% DOWN=32.8% NEITHER=49.2% BOTH=0.0%
+    H12 +-0.30%: UP=9.8% DOWN=16.1% NEITHER=72.7% BOTH=0.0%
+    H24 +-0.20%: UP=21.8% DOWN=43.3% NEITHER=33.5% BOTH=0.0%
+    H24 +-0.30%: UP=14.8% DOWN=28.7% NEITHER=55.2% BOTH=0.0%
+
+  P=OOS  N=1922
+    H1  +-0.20%: UP=8.4% DOWN=9.1% NEITHER=81.2% BOTH=0.2%
+    H1  +-0.30%: UP=3.4% DOWN=4.1% NEITHER=91.3% BOTH=0.0%
+    H3  +-0.20%: UP=18.7% DOWN=23.5% NEITHER=56.5% BOTH=0.2%
+    H3  +-0.30%: UP=9.7% DOWN=12.8% NEITHER=76.3% BOTH=0.0%
+    H6  +-0.20%: UP=27.1% DOWN=36.3% NEITHER=35.3% BOTH=0.2%
+    H6  +-0.30%: UP=17.3% DOWN=23.7% NEITHER=57.8% BOTH=0.0%
+    H12 +-0.20%: UP=31.2% DOWN=47.6% NEITHER=19.9% BOTH=0.2%
+    H12 +-0.30%: UP=23.5% DOWN=36.0% NEITHER=39.3% BOTH=0.0%
+    H24 +-0.20%: UP=33.3% DOWN=52.4% NEITHER=13.0% BOTH=0.2%
+    H24 +-0.30%: UP=27.9% DOWN=45.5% NEITHER=25.4% BOTH=0.0%
+
+  P=ALL  N=6573
+    H1  +-0.20%: UP=5.4% DOWN=4.6% NEITHER=88.4% BOTH=0.2%
+    H1  +-0.30%: UP=2.1% DOWN=1.8% NEITHER=94.7% BOTH=0.0%
+    H3  +-0.20%: UP=13.4% DOWN=14.6% NEITHER=70.5% BOTH=0.2%
+    H3  +-0.30%: UP=7.0% DOWN=6.7% NEITHER=84.9% BOTH=0.0%
+    H6  +-0.20%: UP=20.3% DOWN=25.5% NEITHER=52.6% BOTH=0.2%
+    H6  +-0.30%: UP=12.6% DOWN=13.6% NEITHER=72.3% BOTH=0.0%
+    H12 +-0.20%: UP=25.9% DOWN=37.0% NEITHER=35.4% BOTH=0.3%
+    H12 +-0.30%: UP=18.9% DOWN=24.0% NEITHER=55.7% BOTH=0.0%
+    H24 +-0.20%: UP=29.9% DOWN=44.6% NEITHER=23.9% BOTH=0.3%
+    H24 +-0.30%: UP=23.8% DOWN=35.0% NEITHER=39.8% BOTH=0.0%
+
+------------------------------------------------------------------------------
+TAG: state_trend_down
+------------------------------------------------------------------------------
+  P=DISCOVERY  N=3906
+    H1  +-0.20%: UP=4.4% DOWN=5.2% NEITHER=89.2% BOTH=0.1%
+    H1  +-0.30%: UP=1.5% DOWN=1.9% NEITHER=95.6% BOTH=0.0%
+    H3  +-0.20%: UP=13.4% DOWN=16.0% NEITHER=69.4% BOTH=0.2%
+    H3  +-0.30%: UP=5.9% DOWN=7.2% NEITHER=85.8% BOTH=0.0%
+    H6  +-0.20%: UP=21.8% DOWN=25.8% NEITHER=51.0% BOTH=0.2%
+    H6  +-0.30%: UP=11.3% DOWN=14.5% NEITHER=73.1% BOTH=0.0%
+    H12 +-0.20%: UP=31.8% DOWN=36.3% NEITHER=30.6% BOTH=0.2%
+    H12 +-0.30%: UP=20.6% DOWN=24.5% NEITHER=53.8% BOTH=0.0%
+    H24 +-0.20%: UP=38.4% DOWN=45.2% NEITHER=15.1% BOTH=0.2%
+    H24 +-0.30%: UP=29.5% DOWN=36.2% NEITHER=33.2% BOTH=0.0%
+
+  P=VALIDATION  N=2128
+    H1  +-0.20%: UP=1.6% DOWN=1.8% NEITHER=95.4% BOTH=0.0%
+    H1  +-0.30%: UP=0.5% DOWN=0.7% NEITHER=97.7% BOTH=0.0%
+    H3  +-0.20%: UP=6.2% DOWN=7.2% NEITHER=85.3% BOTH=0.1%
+    H3  +-0.30%: UP=2.1% DOWN=2.5% NEITHER=94.2% BOTH=0.1%
+    H6  +-0.20%: UP=14.0% DOWN=14.0% NEITHER=70.8% BOTH=0.1%
+    H6  +-0.30%: UP=5.7% DOWN=6.1% NEITHER=87.0% BOTH=0.1%
+    H12 +-0.20%: UP=24.4% DOWN=23.6% NEITHER=50.8% BOTH=0.1%
+    H12 +-0.30%: UP=12.4% DOWN=12.9% NEITHER=73.5% BOTH=0.1%
+    H24 +-0.20%: UP=35.3% DOWN=33.2% NEITHER=30.3% BOTH=0.1%
+    H24 +-0.30%: UP=20.9% DOWN=23.7% NEITHER=54.1% BOTH=0.1%
+
+  P=OOS  N=2602
+    H1  +-0.20%: UP=9.1% DOWN=10.3% NEITHER=79.2% BOTH=0.4%
+    H1  +-0.30%: UP=4.2% DOWN=4.9% NEITHER=89.9% BOTH=0.0%
+    H3  +-0.20%: UP=21.9% DOWN=22.7% NEITHER=53.8% BOTH=0.5%
+    H3  +-0.30%: UP=12.9% DOWN=14.2% NEITHER=71.8% BOTH=0.1%
+    H6  +-0.20%: UP=31.2% DOWN=32.7% NEITHER=34.3% BOTH=0.7%
+    H6  +-0.30%: UP=21.1% DOWN=22.4% NEITHER=55.1% BOTH=0.2%
+    H12 +-0.20%: UP=39.0% DOWN=41.6% NEITHER=17.6% BOTH=0.7%
+    H12 +-0.30%: UP=29.6% DOWN=32.1% NEITHER=37.0% BOTH=0.3%
+    H24 +-0.20%: UP=43.3% DOWN=46.8% NEITHER=8.1% BOTH=0.7%
+    H24 +-0.30%: UP=36.3% DOWN=40.6% NEITHER=21.8% BOTH=0.3%
+
+  P=ALL  N=8638
+    H1  +-0.20%: UP=5.1% DOWN=5.9% NEITHER=87.7% BOTH=0.2%
+    H1  +-0.30%: UP=2.0% DOWN=2.5% NEITHER=94.4% BOTH=0.0%
+    H3  +-0.20%: UP=14.2% DOWN=15.8% NEITHER=68.6% BOTH=0.3%
+    H3  +-0.30%: UP=7.0% DOWN=8.2% NEITHER=83.7% BOTH=0.1%
+    H6  +-0.20%: UP=22.7% DOWN=25.0% NEITHER=50.9% BOTH=0.3%
+    H6  +-0.30%: UP=12.9% DOWN=14.8% NEITHER=71.1% BOTH=0.1%
+    H12 +-0.20%: UP=32.1% DOWN=34.8% NEITHER=31.7% BOTH=0.3%
+    H12 +-0.30%: UP=21.3% DOWN=23.9% NEITHER=53.6% BOTH=0.1%
+    H24 +-0.20%: UP=39.1% DOWN=42.7% NEITHER=16.8% BOTH=0.3%
+    H24 +-0.30%: UP=29.4% DOWN=34.5% NEITHER=34.9% BOTH=0.1%
+
+------------------------------------------------------------------------------
+TAG: state_move_down_6
+------------------------------------------------------------------------------
+  P=DISCOVERY  N=2902
+    H1  +-0.20%: UP=5.3% DOWN=6.2% NEITHER=87.5% BOTH=0.2%
+    H1  +-0.30%: UP=1.9% DOWN=2.2% NEITHER=95.1% BOTH=0.0%
+    H3  +-0.20%: UP=15.7% DOWN=17.8% NEITHER=65.5% BOTH=0.3%
+    H3  +-0.30%: UP=6.5% DOWN=8.2% NEITHER=84.5% BOTH=0.0%
+    H6  +-0.20%: UP=24.5% DOWN=28.7% NEITHER=45.6% BOTH=0.4%
+    H6  +-0.30%: UP=12.3% DOWN=16.9% NEITHER=70.1% BOTH=0.0%
+    H12 +-0.20%: UP=33.1% DOWN=38.8% NEITHER=26.9% BOTH=0.4%
+    H12 +-0.30%: UP=21.7% DOWN=27.0% NEITHER=50.6% BOTH=0.0%
+    H24 +-0.20%: UP=39.0% DOWN=46.0% NEITHER=13.9% BOTH=0.4%
+    H24 +-0.30%: UP=30.4% DOWN=38.0% NEITHER=30.8% BOTH=0.0%
+
+  P=VALIDATION  N=1306
+    H1  +-0.20%: UP=1.9% DOWN=2.8% NEITHER=94.3% BOTH=0.1%
+    H1  +-0.30%: UP=0.4% DOWN=1.1% NEITHER=97.5% BOTH=0.1%
+    H3  +-0.20%: UP=7.4% DOWN=9.3% NEITHER=82.2% BOTH=0.2%
+    H3  +-0.30%: UP=2.5% DOWN=3.8% NEITHER=92.6% BOTH=0.2%
+    H6  +-0.20%: UP=14.7% DOWN=16.0% NEITHER=68.2% BOTH=0.2%
+    H6  +-0.30%: UP=6.5% DOWN=6.8% NEITHER=85.6% BOTH=0.2%
+    H12 +-0.20%: UP=27.0% DOWN=26.6% NEITHER=45.3% BOTH=0.2%
+    H12 +-0.30%: UP=13.3% DOWN=14.8% NEITHER=70.8% BOTH=0.2%
+    H24 +-0.20%: UP=38.4% DOWN=34.6% NEITHER=26.0% BOTH=0.2%
+    H24 +-0.30%: UP=22.3% DOWN=22.9% NEITHER=53.8% BOTH=0.2%
+
+  P=OOS  N=2359
+    H1  +-0.20%: UP=10.5% DOWN=11.8% NEITHER=76.0% BOTH=0.6%
+    H1  +-0.30%: UP=5.0% DOWN=6.1% NEITHER=87.7% BOTH=0.0%
+    H3  +-0.20%: UP=26.4% DOWN=25.6% NEITHER=46.2% BOTH=0.7%
+    H3  +-0.30%: UP=15.0% DOWN=16.4% NEITHER=67.3% BOTH=0.1%
+    H6  +-0.20%: UP=36.2% DOWN=34.3% NEITHER=27.6% BOTH=0.8%
+    H6  +-0.30%: UP=24.5% DOWN=24.3% NEITHER=49.8% BOTH=0.3%
+    H12 +-0.20%: UP=42.9% DOWN=40.2% NEITHER=14.9% BOTH=0.8%
+    H12 +-0.30%: UP=32.6% DOWN=33.2% NEITHER=32.8% BOTH=0.3%
+    H24 +-0.20%: UP=46.8% DOWN=44.1% NEITHER=7.2% BOTH=0.8%
+    H24 +-0.30%: UP=38.7% DOWN=40.2% NEITHER=19.7% BOTH=0.3%
+
+  P=ALL  N=6589
+    H1  +-0.20%: UP=6.5% DOWN=7.5% NEITHER=84.7% BOTH=0.3%
+    H1  +-0.30%: UP=2.7% DOWN=3.4% NEITHER=93.0% BOTH=0.0%
+    H3  +-0.20%: UP=17.9% DOWN=18.9% NEITHER=61.9% BOTH=0.4%
+    H3  +-0.30%: UP=8.8% DOWN=10.3% NEITHER=80.0% BOTH=0.1%
+    H6  +-0.20%: UP=26.8% DOWN=28.1% NEITHER=43.7% BOTH=0.5%
+    H6  +-0.30%: UP=15.5% DOWN=17.5% NEITHER=65.9% BOTH=0.1%
+    H12 +-0.20%: UP=35.5% DOWN=36.8% NEITHER=26.3% BOTH=0.5%
+    H12 +-0.30%: UP=23.9% DOWN=26.7% NEITHER=48.3% BOTH=0.1%
+    H24 +-0.20%: UP=41.7% DOWN=42.9% NEITHER=13.9% BOTH=0.5%
+    H24 +-0.30%: UP=31.8% DOWN=35.7% NEITHER=31.5% BOTH=0.1%
+
+------------------------------------------------------------------------------
+TAG: state_below_vwap_high
+------------------------------------------------------------------------------
+  P=DISCOVERY  N=2901
+    H1  +-0.20%: UP=4.7% DOWN=4.9% NEITHER=89.0% BOTH=0.1%
+    H1  +-0.30%: UP=1.4% DOWN=1.7% NEITHER=95.6% BOTH=0.0%
+    H3  +-0.20%: UP=14.0% DOWN=15.1% NEITHER=69.4% BOTH=0.2%
+    H3  +-0.30%: UP=6.0% DOWN=6.7% NEITHER=85.9% BOTH=0.0%
+    H6  +-0.20%: UP=23.3% DOWN=24.8% NEITHER=50.4% BOTH=0.2%
+    H6  +-0.30%: UP=11.4% DOWN=14.1% NEITHER=73.2% BOTH=0.0%
+    H12 +-0.20%: UP=33.4% DOWN=34.2% NEITHER=30.9% BOTH=0.2%
+    H12 +-0.30%: UP=20.2% DOWN=22.8% NEITHER=55.6% BOTH=0.0%
+    H24 +-0.20%: UP=39.7% DOWN=41.1% NEITHER=17.6% BOTH=0.2%
+    H24 +-0.30%: UP=29.1% DOWN=32.8% NEITHER=36.7% BOTH=0.0%
+
+  P=VALIDATION  N=1442
+    H1  +-0.20%: UP=1.4% DOWN=2.5% NEITHER=94.7% BOTH=0.0%
+    H1  +-0.30%: UP=0.4% DOWN=0.9% NEITHER=97.2% BOTH=0.0%
+    H3  +-0.20%: UP=6.9% DOWN=8.0% NEITHER=83.6% BOTH=0.1%
+    H3  +-0.30%: UP=2.4% DOWN=3.3% NEITHER=92.9% BOTH=0.0%
+    H6  +-0.20%: UP=16.2% DOWN=15.5% NEITHER=66.8% BOTH=0.1%
+    H6  +-0.30%: UP=6.7% DOWN=7.8% NEITHER=84.0% BOTH=0.0%
+    H12 +-0.20%: UP=28.6% DOWN=24.3% NEITHER=45.5% BOTH=0.1%
+    H12 +-0.30%: UP=15.1% DOWN=15.0% NEITHER=68.4% BOTH=0.0%
+    H24 +-0.20%: UP=39.7% DOWN=30.7% NEITHER=28.0% BOTH=0.1%
+    H24 +-0.30%: UP=24.7% DOWN=22.3% NEITHER=51.6% BOTH=0.0%
+
+  P=OOS  N=1904
+    H1  +-0.20%: UP=9.8% DOWN=10.7% NEITHER=77.4% BOTH=0.6%
+    H1  +-0.30%: UP=4.5% DOWN=5.7% NEITHER=88.3% BOTH=0.1%
+    H3  +-0.20%: UP=24.7% DOWN=24.7% NEITHER=48.3% BOTH=0.8%
+    H3  +-0.30%: UP=13.8% DOWN=16.6% NEITHER=67.9% BOTH=0.2%
+    H6  +-0.20%: UP=33.7% DOWN=34.8% NEITHER=29.1% BOTH=0.9%
+    H6  +-0.30%: UP=22.3% DOWN=25.3% NEITHER=50.6% BOTH=0.3%
+    H12 +-0.20%: UP=40.8% DOWN=41.7% NEITHER=15.0% BOTH=1.0%
+    H12 +-0.30%: UP=31.4% DOWN=33.5% NEITHER=33.3% BOTH=0.4%
+    H24 +-0.20%: UP=44.4% DOWN=44.4% NEITHER=8.7% BOTH=1.0%
+    H24 +-0.30%: UP=37.3% DOWN=39.1% NEITHER=21.7% BOTH=0.4%
+
+  P=ALL  N=6249
+    H1  +-0.20%: UP=5.5% DOWN=6.1% NEITHER=86.7% BOTH=0.2%
+    H1  +-0.30%: UP=2.1% DOWN=2.7% NEITHER=93.7% BOTH=0.0%
+    H3  +-0.20%: UP=15.6% DOWN=16.4% NEITHER=66.2% BOTH=0.3%
+    H3  +-0.30%: UP=7.6% DOWN=8.9% NEITHER=82.0% BOTH=0.0%
+    H6  +-0.20%: UP=24.8% DOWN=25.7% NEITHER=47.7% BOTH=0.4%
+    H6  +-0.30%: UP=13.7% DOWN=16.0% NEITHER=68.8% BOTH=0.1%
+    H12 +-0.20%: UP=34.6% DOWN=34.2% NEITHER=29.4% BOTH=0.4%
+    H12 +-0.30%: UP=22.5% DOWN=24.3% NEITHER=51.8% BOTH=0.1%
+    H24 +-0.20%: UP=41.2% DOWN=39.7% NEITHER=17.3% BOTH=0.4%
+    H24 +-0.30%: UP=30.6% DOWN=32.3% NEITHER=35.6% BOTH=0.1%
+
+==============================================================================
+PART E: INTEGRITY
+==============================================================================
+
+Rows total: 25856
+
+Session-safe check per horizon:
+  H1  rows with 1<=mfe_first_bar<=1: 25600  (violations: 0)
+  H3  rows with 1<=mfe_first_bar<=3: 25600  (violations: 0)
+  H6  rows with 1<=mfe_first_bar<=6: 25600  (violations: 0)
+  H12 rows with 1<=mfe_first_bar<=12: 25600  (violations: 0)
+  H24 rows with 1<=mfe_first_bar<=24: 25600  (violations: 0)
+
+Consistency check vs existing v600 first_reach_dir_H (for +-0.10%):
+  H1 : v600 column label_first_reach_dir_1 present with 25856 values
+  H3 : v600 column label_first_reach_dir_3 present with 25856 values
+  H6 : v600 column label_first_reach_dir_6 present with 25856 values
+  H12: v600 column label_first_reach_dir_12 present with 25856 values
+  H24: v600 column label_first_reach_dir_24 present with 25856 values
+
+Partial windows distribution per horizon (fraction, computed here):
+  H1  partial windows: 256 / 25856
+  H3  partial windows: 768 / 25856
+  H6  partial windows: 1536 / 25856
+  H12 partial windows: 3072 / 25856
+  H24 partial windows: 6144 / 25856
+
+NOTES:
+  - MFE/MAE/TERM are means over the whole subset for the given horizon.
+  - MFE_first / MAE_first are RATES per subset.
+  - CI95 values are block-bootstrap over sessions; they describe
+    within-sample uncertainty of the conditional mean/rate.
+  - N_eff ~= N / H is an APPROXIMATE independent observation count.
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================

@@ -1,0 +1,65 @@
+==============================================================================
+v600 STATE SUMMARY -- how often each state tag fires
+STRATEGY LOGIC: UNCHANGED -- RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Total rows: 25856
+Period split: DISCOVERY=11615  VALIDATION=6565  OOS=7575  OUT_OF_RANGE=101
+
+  state_trend_up                                 N_true=  8356 / 25856  = 32.32%
+  state_trend_down                               N_true=  8638 / 25856  = 33.41%
+  state_trend_flat                               N_true=  8862 / 25856  = 34.27%
+  state_ema_spread_high                          N_true=  6439 / 25856  = 24.90%
+  state_ema_spread_low                           N_true=  6775 / 25856  = 26.20%
+  state_move_up_6                                N_true=  6660 / 25856  = 25.76%
+  state_move_down_6                              N_true=  6589 / 25856  = 25.48%
+  state_move_up_12                               N_true=  6579 / 25856  = 25.44%
+  state_move_down_12                             N_true=  6594 / 25856  = 25.50%
+  state_quiet_6                                  N_true= 12601 / 25856  = 48.74%
+  state_ema9_21_cross_recent                     N_true=  3119 / 25856  = 12.06%
+  state_above_vwap_high                          N_true=  6573 / 25856  = 25.42%
+  state_below_vwap_high                          N_true=  6249 / 25856  = 24.17%
+  state_at_vwap                                  N_true= 13021 / 25856  = 50.36%
+  state_vwap_recent_reclaim_or_reject            N_true=  5095 / 25856  = 19.71%
+  state_volume_expansion                         N_true=  6350 / 25856  = 24.56%
+  state_volume_contraction                       N_true=  6281 / 25856  = 24.29%
+  state_volume_spike_recent                      N_true=  6999 / 25856  = 27.07%
+  state_range_expansion                          N_true=  6502 / 25856  = 25.15%
+  state_range_compression                        N_true=  6588 / 25856  = 25.48%
+  state_atr_high                                 N_true=  7034 / 25856  = 27.20%
+  state_atr_low                                  N_true=  7080 / 25856  = 27.38%
+  state_prev_swing_high_hh                       N_true= 10097 / 25856  = 39.05%
+  state_prev_swing_high_lh                       N_true= 10982 / 25856  = 42.47%
+  state_prev_swing_low_hl                        N_true= 10587 / 25856  = 40.95%
+  state_prev_swing_low_ll                        N_true= 10811 / 25856  = 41.81%
+  state_first_hour                               N_true=  3072 / 25856  = 11.88%
+  state_mid_session                              N_true=  9472 / 25856  = 36.63%
+  state_last_hour                                N_true=  3072 / 25856  = 11.88%
+  state_day_edge_zone                            N_true= 14791 / 25856  = 57.21%
+
+STATE TAG CORRELATION (pairwise, only co-occurrence > 100)
+------------------------------------------------------------------------------
+  corr(state_at_vwap, state_day_edge_zone) = -0.542  co=3983
+  corr(state_below_vwap_high, state_trend_down) = +0.494  co=4665
+  corr(state_above_vwap_high, state_trend_up) = +0.491  co=4711
+  corr(state_range_expansion, state_volume_expansion) = +0.491  co=3966
+  corr(state_move_down_12, state_move_down_6) = +0.483  co=4053
+  corr(state_move_up_12, state_move_up_6) = +0.478  co=4048
+  corr(state_below_vwap_high, state_move_down_12) = +0.452  co=3775
+  corr(state_ema_spread_low, state_trend_flat) = +0.448  co=4739
+  corr(state_move_down_12, state_trend_down) = +0.444  co=4564
+  corr(state_volume_expansion, state_volume_spike_recent) = +0.440  co=3894
+  corr(state_above_vwap_high, state_move_up_12) = +0.408  co=3673
+  corr(state_move_up_12, state_trend_up) = +0.403  co=4250
+  corr(state_above_vwap_high, state_trend_down) = -0.386  co=146
+  corr(state_range_compression, state_volume_contraction) = +0.382  co=3448
+  corr(state_ema_spread_high, state_trend_flat) = -0.382  co=178
+  corr(state_ema9_21_cross_recent, state_ema_spread_low) = +0.372  co=2193
+  corr(state_below_vwap_high, state_move_down_6) = +0.367  co=3361
+  corr(state_move_up_12, state_trend_down) = -0.358  co=295
+  corr(state_move_down_12, state_trend_up) = -0.357  co=250
+  corr(state_below_vwap_high, state_day_edge_zone) = +0.336  co=5415
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================
