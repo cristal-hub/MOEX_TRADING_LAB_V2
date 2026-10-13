@@ -1,0 +1,121 @@
+SIGNAL EDGE DIAGNOSTICS v1 -- READ ONLY
+audit_signal_edge_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD OPTIMIZATION
+NO FILTER INSTALLATION
+NO LIVE ORDERS
+
+Independent reproduction of state_move_down_6 and signal-vs-baseline
+forward-return diagnostics. No v600-v604 file is modified.
+
+==============================================================================
+INPUT INVENTORY
+==============================================================================
+OK      v601_predefined_entry_exit.py
+        size=24031
+        sha256=ad1ad0ee5bc513febf99c5006e4c2e603b2995dcbe0423c30e3b9b8d9c472260
+OK      v601_trades.csv
+        size=2248063
+        sha256=a44b178cb2d78d0605a79a87cabd60afced7a530160a26760fa646c4b1c79815
+OK      cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+        size=2416569
+        sha256=33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+OK      cache_2024_2025/5m/SBER_TQBR_2024-09-15_2025-09-14_5m.csv
+        size=2361287
+        sha256=6ad3e4646a260aac3a7d9c518e6cf3ad3c21f1a66a90a08f21564ca4733a38fa
+OK      cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+        size=2368190
+        sha256=054640f72aa6f855120d9ee78ab103d73723e8a0c95067137fae79ac5e3597d7
+OK      cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+        size=2242598
+        sha256=7542703e984e26987e5d86396823dd116247c95163ad7cd5082d5e62a549c924
+
+processing: SBER_2025_2026
+processing: SBER_2024_2025
+processing: GAZP_2025_2026
+processing: LKOH_2025_2026
+wrote audit_signal_edge_v1_forward_v2.csv
+wrote audit_signal_edge_v1_diff_v2.csv
+wrote audit_signal_edge_v1_excursion_v2.csv
+wrote audit_signal_edge_v1_repro_v2.csv
+wrote audit_signal_edge_v1_classification.txt
+
+==============================================================================
+FORWARD RETURNS (excerpt: reference=close, horizon=6)
+==============================================================================
+       dataset  horizon reference           sample     N  mean_pct  median_pct  std_pct   q25_pct  q75_pct  frac_pos
+SBER_2025_2026        6     close           signal  6225  0.008608    0.014110 0.259947 -0.105879 0.122528  0.528835
+SBER_2025_2026        6     close  baseline_uncond 18095 -0.009147   -0.009464 0.214218 -0.102461 0.077193  0.457861
+SBER_2025_2026        6     close baseline_session 18000 -0.009239   -0.009762 0.214772 -0.103289 0.077711  0.457222
+SBER_2024_2025        6     close           signal  7421  0.004054    0.011184 0.301118 -0.146199 0.159974  0.518798
+SBER_2024_2025        6     close  baseline_uncond 16520 -0.003409   -0.009561 0.281657 -0.137642 0.116034  0.470339
+SBER_2024_2025        6     close baseline_session 16520 -0.003409   -0.009561 0.281657 -0.137642 0.116034  0.470339
+GAZP_2025_2026        6     close           signal  8415  0.012994    0.016657 0.368692 -0.144734 0.176226  0.524896
+GAZP_2025_2026        6     close  baseline_uncond 15911 -0.017706   -0.025842 0.343954 -0.175666 0.120087  0.432342
+GAZP_2025_2026        6     close baseline_session 15911 -0.017706   -0.025842 0.343954 -0.175666 0.120087  0.432342
+LKOH_2025_2026        6     close           signal  8275  0.004399    0.009633 0.373329 -0.156960 0.170839  0.511420
+LKOH_2025_2026        6     close  baseline_uncond 16082 -0.013809   -0.019688 0.346424 -0.165973 0.111635  0.441114
+LKOH_2025_2026        6     close baseline_session 16082 -0.013809   -0.019688 0.346424 -0.165973 0.111635  0.441114
+
+==============================================================================
+SIGNAL vs BASELINE DIFF (excerpt: reference=close, horizon=6)
+==============================================================================
+       dataset  horizon reference baseline  N_signal  N_baseline  mean_signal_pct  mean_baseline_pct  diff_pct  ci_lo_pct  ci_hi_pct
+SBER_2025_2026        6     close   uncond      6225       18095         0.008608          -0.009147  0.017756   0.006840   0.029625
+SBER_2025_2026        6     close  session      6225       18000         0.008608          -0.009239  0.017848   0.006840   0.029625
+SBER_2024_2025        6     close   uncond      7421       16520         0.004054          -0.003409  0.007462  -0.006321   0.021413
+SBER_2024_2025        6     close  session      7421       16520         0.004054          -0.003409  0.007462  -0.006321   0.021413
+GAZP_2025_2026        6     close   uncond      8415       15911         0.012994          -0.017706  0.030701   0.017825   0.043850
+GAZP_2025_2026        6     close  session      8415       15911         0.012994          -0.017706  0.030701   0.017825   0.043850
+LKOH_2025_2026        6     close   uncond      8275       16082         0.004399          -0.013809  0.018208   0.001068   0.034529
+LKOH_2025_2026        6     close  session      8275       16082         0.004399          -0.013809  0.018208   0.001068   0.034529
+
+==============================================================================
+EXCURSION (excerpt: horizon=6)
+==============================================================================
+       dataset  horizon    N  mfe_mean_pct  mfe_median_pct  mfe_q25_pct  mfe_q75_pct  mae_mean_pct  mae_median_pct  mae_q25_pct  mae_q75_pct  mfe_minus_mae_mean_pct
+SBER_2025_2026        6 6225      0.180102        0.124078     0.052462     0.234007     -0.183338       -0.117432    -0.246842    -0.045081                0.363440
+SBER_2024_2025        6 7421      0.222537        0.163890     0.073212     0.296013     -0.233508       -0.163728    -0.330775    -0.061042                0.456045
+GAZP_2025_2026        6 8415      0.264190        0.181316     0.086281     0.334254     -0.262818       -0.169257    -0.342263    -0.068490                0.527008
+LKOH_2025_2026        6 8275      0.261960        0.173169     0.076877     0.331236     -0.258541       -0.166451    -0.342387    -0.062771                0.520501
+
+==============================================================================
+REPRODUCTION vs v601 LEDGER
+==============================================================================
+       dataset  n_bars  n_sessions  n_reproduced_signals  n_trades_in_ledger  n_trade_signals_found_in_repro  n_trade_signals_missing_from_repro
+SBER_2025_2026   25856         256                  6590                1835                            1835                                   0
+SBER_2024_2025   25453         252                  7903                2418                            2418                                   0
+GAZP_2025_2026   25862         256                  8925                2878                            2878                                   0
+LKOH_2025_2026   25893         256                  8800                2885                            2885                                   0
+
+==============================================================================
+FINAL CLASSIFICATION
+==============================================================================
+LABEL: C
+  - primary reference: close
+  - baseline: unconditional
+  - datasets total: 4
+  - datasets with diff>0 and CI_lo>0: 4
+  - datasets with diff<0 and CI_hi<0: 0
+  - h=6 signs per dataset: [1, 1, 1, 1]
+  - positive but magnitude below 2 bp on h=6
+
+==============================================================================
+LIMITATIONS
+==============================================================================
+- Overlapping forward-return windows within a session are not
+  independent; session-block bootstrap partially accounts for this.
+  Residual dependence may remain.
+- No time-of-session matching (design decision, documented).
+- 5M OHLCV cannot resolve intra-bar path; MFE/MAE are bar-level
+  extrema, not executable observations.
+- Frozen threshold -0.103471 is taken from DISCOVERY only; no
+  validation sample is used to revise it.
+- Pooled results must not be interpreted as four independent
+  replications.
+
+==============================================================================
+NO STRATEGY CHANGES. NO OPTIMIZATION. NO FILTERS. NO LIVE ORDERS.
+==============================================================================

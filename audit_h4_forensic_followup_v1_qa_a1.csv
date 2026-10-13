@@ -1,0 +1,4 @@
+dataset,audit_atr_nan,audit_atr_zero,audit_atr_neg,audit_atr_inf,v600_atr_match
+SBER_2025_2026,13,0,0,0,NOT PERFORMED
+GAZP_2025_2026,13,0,0,0,NOT PERFORMED
+LKOH_2025_2026,13,0,0,0,NOT PERFORMED

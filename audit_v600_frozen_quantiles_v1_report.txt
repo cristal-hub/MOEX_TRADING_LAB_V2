@@ -1,0 +1,120 @@
+V600 FROZEN QUANTILES INSPECTION v1 -- READ ONLY
+audit_v600_frozen_quantiles_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+Importing v600_hypothesis_lab as module (no __main__ execution)...
+  import OK
+
+Loading data via v600's own load_data (same code path)...
+  5M rows: 25856
+
+==============================================================================
+CALLING v600 compute_discovery_quantiles
+==============================================================================
+(this function is defined inside v600_hypothesis_lab.py)
+
+==============================================================================
+FROZEN QUANTILES AS RETURNED BY v600 (raw)
+==============================================================================
+variable: atr14
+  n   = 11602
+  q25 = +0.23032463
+  q50 = +0.29683005
+  q75 = +0.39754511
+  q90 = +0.52219494
+
+variable: close_ema21_signed_atr
+  n   = 11602
+  q25 = -0.97762498
+  q50 = -0.00877171
+  q75 = +0.95860707
+  q90 = +1.99108841
+
+variable: ema21_50_spread_atr
+  n   = 11602
+  q25 = +0.48540186
+  q50 = +0.95627207
+  q75 = +1.59096814
+  q90 = +2.25646013
+
+variable: ema9_21_spread_atr
+  n   = 11602
+  q25 = +0.24818415
+  q50 = +0.53540488
+  q75 = +0.91012024
+  q90 = +1.37746414
+
+variable: range_atr
+  n   = 11602
+  q25 = +0.54835695
+  q50 = +0.82110825
+  q75 = +1.18454987
+  q90 = +1.67987211
+
+variable: return_12_signed
+  n   = 11603
+  q25 = -0.15455951
+  q50 = -0.00679787
+  q75 = +0.13865390
+  q90 = +0.36124912
+
+variable: return_6_signed
+  n   = 11609
+  q25 = -0.10347130
+  q50 = -0.00329381
+  q75 = +0.09205169
+  q90 = +0.22997936
+
+variable: volume_ratio
+  n   = 11596
+  q25 = +0.37378336
+  q50 = +0.70361628
+  q75 = +1.32555817
+  q90 = +2.36261905
+
+variable: vwap_dev_signed_atr
+  n   = 11602
+  q25 = -1.33510198
+  q50 = -0.11244018
+  q75 = +0.97840561
+  q90 = +2.47100514
+
+==============================================================================
+FOR H4 SPECIFICATION
+==============================================================================
+range_atr frozen q25 (from v600 DISCOVERY): +0.54835695
+range_atr frozen q50: +0.82110825
+range_atr frozen q75: +1.18454987
+
+atr14 frozen q25: +0.23032463
+atr14 frozen q50: +0.29683005
+atr14 frozen q75: +0.39754511
+atr14 frozen q90: +0.52219494
+
+==============================================================================
+ATR14 DECILES -- DOES v600 PROVIDE THEM?
+==============================================================================
+v600 compute_discovery_quantiles provides only:
+  q25, q50, q75, q90
+It does NOT provide deciles (q10, q20, ..., q90).
+
+Therefore the H4 matched baseline using 'deciles of atr14'
+CANNOT be implemented from v600 frozen values as-is.
+Decision is required: either replace with the four quantiles
+q25/q50/q75/q90 that v600 does freeze, or omit the matched
+baseline entirely, or defer the matched baseline to a separate
+decision. Do not substitute silently.
+
+==============================================================================
+END OF INSPECTION
+==============================================================================
+
+No strategy logic was changed.
+No threshold was optimized.
+No filter was installed.
+No live order was sent.

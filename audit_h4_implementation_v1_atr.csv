@@ -1,0 +1,4 @@
+dataset,n_bars,atr14_zero,atr14_negative,atr14_nan,atr14_inf,range_atr_negative,range_atr_nan,range_atr_inf,event_tag_count,tag_with_invalid_atr,tag_with_invalid_range_atr
+SBER_2025_2026,25856,0,0,13,0,0,13,0,6381,0,0
+GAZP_2025_2026,25862,0,0,13,0,0,13,0,5587,0,0
+LKOH_2025_2026,25893,0,0,13,0,0,13,0,6239,0,0

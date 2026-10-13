@@ -1,0 +1,168 @@
+H4 FORENSIC FOLLOW-UP v1 -- READ ONLY
+audit_h4_forensic_followup_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+NO H4 EFFECT CALCULATIONS. NO CI. NO BOOTSTRAP.
+OOS NOT TOUCHED.
+
+Optimization note:
+  For bars in the last MAX_H=12 bars of a session, all
+  label_partial_window_H are True by construction of v600.
+  We set them directly without calling build_forward_labels.
+  This is equivalent, not a change to eligibility.
+
+==============================================================================
+SECTION 1 -- SAFE IMPORT OF v600
+==============================================================================
+Importing v600 as module via importlib (no main()).
+  import OK
+  build_forward_labels present: True
+  main() NOT called.
+
+==============================================================================
+DATASET: SBER_2025_2026
+==============================================================================
+  n_bars: 25856
+
+QA-A1 -- ATR14 and range_atr
+------------------------------------------------------------------------------
+  audit-side ATR14:
+    count: 25843
+    NaN:   13
+    zero:  0
+    neg:   0
+    inf:   0
+  v600 uses main.calculate_indicators for ATR14.
+  Calling main is out of scope; exact per-row comparison
+  of v600 ATR14 vs audit-side ATR14 is NOT performed.
+  Status: DATA-CHECK VERIFIED for audit-side only.
+          EXACT IMPLEMENTATION MATCH VERIFIED: NOT PERFORMED.
+
+QA-A2 -- Formal (j)-(k) vs v600 partial flags
+------------------------------------------------------------------------------
+  formal h=1  ok=25600  fail_j=0  fail_k=255  fail_both=1  sum=25856  n=25856
+  formal h=2  ok=25344  fail_j=0  fail_k=510  fail_both=2  sum=25856  n=25856
+  formal h=3  ok=25088  fail_j=0  fail_k=765  fail_both=3  sum=25856  n=25856
+  formal h=6  ok=24320  fail_j=0  fail_k=1530  fail_both=6  sum=25856  n=25856
+  formal h=12  ok=22784  fail_j=0  fail_k=3060  fail_both=12  sum=25856  n=25856
+
+  calling v600 build_forward_labels per eligible bar...
+  v600 flags computed.
+
+  h=1  v600_partial=3072  v600_full=22784  formal_full=25600  formal_partial=256  diff_partial=2816
+  h=2  v600_partial=3072  v600_full=22784  formal_full=25344  formal_partial=512  diff_partial=2560
+  h=3  v600_partial=3072  v600_full=22784  formal_full=25088  formal_partial=768  diff_partial=2304
+  h=6  v600_partial=3072  v600_full=22784  formal_full=24320  formal_partial=1536  diff_partial=1536
+  h=12  v600_partial=3072  v600_full=22784  formal_full=22784  formal_partial=3072  diff_partial=0
+
+PC5 diagnostics -- non-5-minute steps classified
+------------------------------------------------------------------------------
+  non-5-minute steps: 255
+    intra_session:    0
+    session_boundary: 255
+    invalid:          0
+
+==============================================================================
+DATASET: GAZP_2025_2026
+==============================================================================
+  n_bars: 25862
+
+QA-A1 -- ATR14 and range_atr
+------------------------------------------------------------------------------
+  audit-side ATR14:
+    count: 25849
+    NaN:   13
+    zero:  0
+    neg:   0
+    inf:   0
+  v600 uses main.calculate_indicators for ATR14.
+  Calling main is out of scope; exact per-row comparison
+  of v600 ATR14 vs audit-side ATR14 is NOT performed.
+  Status: DATA-CHECK VERIFIED for audit-side only.
+          EXACT IMPLEMENTATION MATCH VERIFIED: NOT PERFORMED.
+
+QA-A2 -- Formal (j)-(k) vs v600 partial flags
+------------------------------------------------------------------------------
+  formal h=1  ok=25606  fail_j=0  fail_k=255  fail_both=1  sum=25862  n=25862
+  formal h=2  ok=25350  fail_j=0  fail_k=510  fail_both=2  sum=25862  n=25862
+  formal h=3  ok=25094  fail_j=0  fail_k=765  fail_both=3  sum=25862  n=25862
+  formal h=6  ok=24326  fail_j=0  fail_k=1530  fail_both=6  sum=25862  n=25862
+  formal h=12  ok=22790  fail_j=0  fail_k=3060  fail_both=12  sum=25862  n=25862
+
+  calling v600 build_forward_labels per eligible bar...
+  v600 flags computed.
+
+  h=1  v600_partial=3072  v600_full=22790  formal_full=25606  formal_partial=256  diff_partial=2816
+  h=2  v600_partial=3072  v600_full=22790  formal_full=25350  formal_partial=512  diff_partial=2560
+  h=3  v600_partial=3072  v600_full=22790  formal_full=25094  formal_partial=768  diff_partial=2304
+  h=6  v600_partial=3072  v600_full=22790  formal_full=24326  formal_partial=1536  diff_partial=1536
+  h=12  v600_partial=3072  v600_full=22790  formal_full=22790  formal_partial=3072  diff_partial=0
+
+PC5 diagnostics -- non-5-minute steps classified
+------------------------------------------------------------------------------
+  non-5-minute steps: 255
+    intra_session:    0
+    session_boundary: 255
+    invalid:          0
+
+==============================================================================
+DATASET: LKOH_2025_2026
+==============================================================================
+  n_bars: 25893
+
+QA-A1 -- ATR14 and range_atr
+------------------------------------------------------------------------------
+  audit-side ATR14:
+    count: 25880
+    NaN:   13
+    zero:  0
+    neg:   0
+    inf:   0
+  v600 uses main.calculate_indicators for ATR14.
+  Calling main is out of scope; exact per-row comparison
+  of v600 ATR14 vs audit-side ATR14 is NOT performed.
+  Status: DATA-CHECK VERIFIED for audit-side only.
+          EXACT IMPLEMENTATION MATCH VERIFIED: NOT PERFORMED.
+
+QA-A2 -- Formal (j)-(k) vs v600 partial flags
+------------------------------------------------------------------------------
+  formal h=1  ok=25637  fail_j=0  fail_k=255  fail_both=1  sum=25893  n=25893
+  formal h=2  ok=25381  fail_j=0  fail_k=510  fail_both=2  sum=25893  n=25893
+  formal h=3  ok=25125  fail_j=0  fail_k=765  fail_both=3  sum=25893  n=25893
+  formal h=6  ok=24357  fail_j=0  fail_k=1530  fail_both=6  sum=25893  n=25893
+  formal h=12  ok=22821  fail_j=0  fail_k=3060  fail_both=12  sum=25893  n=25893
+
+  calling v600 build_forward_labels per eligible bar...
+  v600 flags computed.
+
+  h=1  v600_partial=3072  v600_full=22821  formal_full=25637  formal_partial=256  diff_partial=2816
+  h=2  v600_partial=3072  v600_full=22821  formal_full=25381  formal_partial=512  diff_partial=2560
+  h=3  v600_partial=3072  v600_full=22821  formal_full=25125  formal_partial=768  diff_partial=2304
+  h=6  v600_partial=3072  v600_full=22821  formal_full=24357  formal_partial=1536  diff_partial=1536
+  h=12  v600_partial=3072  v600_full=22821  formal_full=22821  formal_partial=3072  diff_partial=0
+
+PC5 diagnostics -- non-5-minute steps classified
+------------------------------------------------------------------------------
+  non-5-minute steps: 255
+    intra_session:    0
+    session_boundary: 255
+    invalid:          0
+
+wrote audit_h4_forensic_followup_v1_qa_a1.csv
+wrote audit_h4_forensic_followup_v1_qa_a2.csv
+wrote audit_h4_forensic_followup_v1_pc5.csv
+
+==============================================================================
+STATUS SUMMARY
+==============================================================================
+QA-A1: audit-side ATR14 only; v600 exact match NOT PERFORMED.
+QA-A2: formal vs v600 partial flags computed; see CSV.
+PC5:   diagnostics only; NOT APPLIED.
+
+No file was modified. No H4 effect was computed.
+No CI, no bootstrap, no OOS.

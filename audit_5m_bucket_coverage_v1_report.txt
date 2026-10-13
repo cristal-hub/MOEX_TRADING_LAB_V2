@@ -1,0 +1,51 @@
+5M BUCKET COVERAGE CHECK v1 -- READ ONLY
+audit_5m_bucket_coverage_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+total rows before session filter: 25856
+
+main sessions (first_begin = 06:55:00): 253
+exceptional sessions (excluded): 3
+  excluded: 2026-02-23
+  excluded: 2026-05-01
+  excluded: 2026-06-12
+
+rows after session filter: 25553
+
+==============================================================================
+ACTUAL BUCKET COUNTS (after session filter, A1 rule)
+==============================================================================
+  Bucket 1 [06:55,08:55): 5819
+  Bucket 2 [08:55,10:55): 6072
+  Bucket 3 [10:55,12:55): 6072
+  Bucket 4 [12:55,15:20]: 7590
+  outside all buckets:    0
+  total rows in filtered df: 25553
+
+coverage:
+  bars inside any bucket: 25553 / 25553 = 100.0000%
+  bars outside all buckets: 0
+
+==============================================================================
+BOUNDARY CHECK -- signal_time exactly on boundary
+==============================================================================
+bars exactly on a boundary: 1012
+  08:55:00 -> bucket 2  (253 bars)
+  10:55:00 -> bucket 3  (253 bars)
+  12:55:00 -> bucket 4  (253 bars)
+  15:20:00 -> bucket 4  (253 bars)
+
+==============================================================================
+SUMMARY
+==============================================================================
+- Session filter applied: 3 exceptional sessions excluded.
+- Bucket 4 defined as [12:55:00, 15:20:00] inclusive of 15:20:00.
+- Boundary rule: signal_time == boundary -> NEW bucket.
+- Actual per-bucket counts and outside count are reported above.
+- The word 'coverage' is used only with the computed number.
+- No strategy logic was changed.

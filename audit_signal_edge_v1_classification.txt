@@ -1,0 +1,30 @@
+SIGNAL EDGE DIAGNOSTICS v1 -- CLASSIFICATION
+
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD OPTIMIZATION. NO FILTER INSTALLATION. NO LIVE ORDERS.
+
+FINAL CLASSIFICATION: C
+
+Interpretation of labels:
+  A = evidence of potentially useful predictive information.
+  B = no meaningful predictive advantage detected against baseline.
+  C = inconclusive due to uncertainty, data limitations, or
+      insufficient independent observations.
+
+Decision rule applied:
+  reference = close, baseline = unconditional.
+  B if >=2 datasets show diff<0 and CI_hi<0.
+  A if >=2 datasets show diff>0 and CI_lo>0 and h=6 median >= 2 bp.
+  C otherwise (mixed signs, wide CI, or magnitude too small).
+
+Reasoning:
+  - primary reference: close
+  - baseline: unconditional
+  - datasets total: 4
+  - datasets with diff>0 and CI_lo>0: 4
+  - datasets with diff<0 and CI_hi<0: 0
+  - h=6 signs per dataset: [1, 1, 1, 1]
+  - positive but magnitude below 2 bp on h=6
+
+This is a research classification, not a live-trading approval.
+No strategy, threshold, filter, or engine was modified.

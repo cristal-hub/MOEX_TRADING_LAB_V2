@@ -1,0 +1,59 @@
+5M LONG SESSIONS CHECK v1 -- READ ONLY
+audit_5m_long_sessions_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+total rows: 25856
+total sessions: 256
+
+sessions with first_begin = 06:55:00 : 253
+sessions with first_begin != 06:55:00 : 3
+
+==============================================================================
+EXCEPTIONAL SESSIONS (first_begin != 06:55:00)
+==============================================================================
+  date=2026-02-23  weekday=0  n_bars=101  first_begin=2026-02-23 09:55:00  last_begin=2026-02-23 18:15:00
+  date=2026-05-01  weekday=4  n_bars=101  first_begin=2026-05-01 09:55:00  last_begin=2026-05-01 18:15:00
+  date=2026-06-12  weekday=4  n_bars=101  first_begin=2026-06-12 09:55:00  last_begin=2026-06-12 18:15:00
+
+Adjacent sessions:
+------------------------------------------------------------------------------
+  2026-02-23  prev_session=2026-02-20  next_session=2026-02-24
+  2026-05-01  prev_session=2026-04-30  next_session=2026-05-04
+  2026-06-12  prev_session=2026-06-11  next_session=2026-06-15
+
+Number of bars in each exceptional session:
+  2026-02-23 : 101 bars
+  2026-05-01 : 101 bars
+  2026-06-12 : 101 bars
+
+Signature of exceptional sessions (first_begin .. last_begin):
+  2026-02-23 : 2026-02-23 09:55:00 .. 2026-02-23 18:15:00
+  2026-05-01 : 2026-05-01 09:55:00 .. 2026-05-01 18:15:00
+  2026-06-12 : 2026-06-12 09:55:00 .. 2026-06-12 18:15:00
+
+==============================================================================
+WEEKDAY DISTRIBUTION -- main vs exceptional
+==============================================================================
+main sessions weekday counts:
+  Mon: 52
+  Tue: 51
+  Wed: 50
+  Thu: 51
+  Fri: 49
+exceptional sessions weekday counts:
+  Mon: 1
+  Fri: 2
+
+==============================================================================
+OBSERVATIONS
+==============================================================================
+- This script does not decide whether to include or exclude
+  exceptional sessions. It reports facts only.
+- Any decision to exclude them must be justified by calendar
+  or documented exchange schedule.
+- No strategy logic was changed.

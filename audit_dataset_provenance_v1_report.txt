@@ -1,0 +1,217 @@
+DATASET PROVENANCE AUDIT v1 -- READ ONLY
+audit_dataset_provenance_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+STATUS: PROVENANCE AUDIT ONLY -- NO H4 CALCULATIONS.
+
+Periods under audit (fixed):
+  DISCOVERY: 2025-09-15 .. 2026-02-28
+  VALIDATION: 2026-03-01 .. 2026-05-31
+  OOS: 2026-06-01 .. 2026-09-14
+
+==============================================================================
+DATASET: SBER_2025_2026
+==============================================================================
+declared path: cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+file size bytes: 2416569
+sha256: 33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+
+columns: ['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+raw rows: 25856
+dtype of begin (raw): str
+invalid / missing begin values (NaT): 0
+min begin: 2025-09-15 06:55:00
+max begin: 2026-09-14 15:15:00
+monotonic increasing: True
+duplicate begin values: 0
+
+unique calendar sessions (all data): 256
+
+------------------------------------------------------------------------------
+PERIOD BREAKDOWN
+------------------------------------------------------------------------------
+period             rows unique_sessions
+DISCOVERY         11615            115
+VALIDATION         6565             65
+OOS                7575             75
+OUTSIDE             101              1
+
+------------------------------------------------------------------------------
+PRESENCE IN EACH PERIOD
+------------------------------------------------------------------------------
+  DISCOVERY: PRESENT -- rows=11615
+  VALIDATION: PRESENT -- rows=6565
+  OOS: PRESENT -- rows=7575
+
+------------------------------------------------------------------------------
+SESSION BOUNDARIES (top times-of-day)
+------------------------------------------------------------------------------
+most common first begin time-of-day:
+  06:55:00: 253 sessions
+  09:55:00: 3 sessions
+most common last begin time-of-day:
+  15:15:00: 253 sessions
+  18:15:00: 3 sessions
+
+STATUS: OK -- file audited without ambiguity.
+
+==============================================================================
+DATASET: SBER_2024_2025
+==============================================================================
+declared path: cache_2024_2025/5m/SBER_TQBR_2024-09-15_2025-09-14_5m.csv
+file size bytes: 2361287
+sha256: 6ad3e4646a260aac3a7d9c518e6cf3ad3c21f1a66a90a08f21564ca4733a38fa
+
+columns: ['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+raw rows: 25453
+dtype of begin (raw): str
+invalid / missing begin values (NaT): 0
+min begin: 2024-09-16 09:55:00
+max begin: 2025-09-12 15:15:00
+monotonic increasing: True
+duplicate begin values: 0
+
+unique calendar sessions (all data): 252
+
+------------------------------------------------------------------------------
+PERIOD BREAKDOWN
+------------------------------------------------------------------------------
+period             rows unique_sessions
+DISCOVERY             0              0
+VALIDATION            0              0
+OOS                   0              0
+OUTSIDE           25453            252
+
+------------------------------------------------------------------------------
+PRESENCE IN EACH PERIOD
+------------------------------------------------------------------------------
+  DISCOVERY: ABSENT
+  VALIDATION: ABSENT
+  OOS: ABSENT
+
+------------------------------------------------------------------------------
+SESSION BOUNDARIES (top times-of-day)
+------------------------------------------------------------------------------
+most common first begin time-of-day:
+  06:55:00: 160 sessions
+  09:55:00: 90 sessions
+  12:05:00: 1 sessions
+most common last begin time-of-day:
+  15:15:00: 160 sessions
+  18:15:00: 90 sessions
+  20:45:00: 1 sessions
+
+STATUS: OK -- file audited without ambiguity.
+
+==============================================================================
+DATASET: GAZP_2025_2026
+==============================================================================
+declared path: cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+file size bytes: 2368190
+sha256: 054640f72aa6f855120d9ee78ab103d73723e8a0c95067137fae79ac5e3597d7
+
+columns: ['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+raw rows: 25862
+dtype of begin (raw): str
+invalid / missing begin values (NaT): 0
+min begin: 2025-09-15 06:55:00
+max begin: 2026-09-14 15:15:00
+monotonic increasing: True
+duplicate begin values: 0
+
+unique calendar sessions (all data): 256
+
+------------------------------------------------------------------------------
+PERIOD BREAKDOWN
+------------------------------------------------------------------------------
+period             rows unique_sessions
+DISCOVERY         11618            115
+VALIDATION         6566             65
+OOS                7577             75
+OUTSIDE             101              1
+
+------------------------------------------------------------------------------
+PRESENCE IN EACH PERIOD
+------------------------------------------------------------------------------
+  DISCOVERY: PRESENT -- rows=11618
+  VALIDATION: PRESENT -- rows=6566
+  OOS: PRESENT -- rows=7577
+
+------------------------------------------------------------------------------
+SESSION BOUNDARIES (top times-of-day)
+------------------------------------------------------------------------------
+most common first begin time-of-day:
+  06:55:00: 253 sessions
+  09:55:00: 3 sessions
+most common last begin time-of-day:
+  15:15:00: 251 sessions
+  15:20:00: 2 sessions
+  18:20:00: 2 sessions
+
+STATUS: OK -- file audited without ambiguity.
+
+==============================================================================
+DATASET: LKOH_2025_2026
+==============================================================================
+declared path: cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+file size bytes: 2242598
+sha256: 7542703e984e26987e5d86396823dd116247c95163ad7cd5082d5e62a549c924
+
+columns: ['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+raw rows: 25893
+dtype of begin (raw): str
+invalid / missing begin values (NaT): 0
+min begin: 2025-09-15 06:55:00
+max begin: 2026-09-14 15:15:00
+monotonic increasing: True
+duplicate begin values: 0
+
+unique calendar sessions (all data): 256
+
+------------------------------------------------------------------------------
+PERIOD BREAKDOWN
+------------------------------------------------------------------------------
+period             rows unique_sessions
+DISCOVERY         11639            115
+VALIDATION         6576             65
+OOS                7577             75
+OUTSIDE             101              1
+
+------------------------------------------------------------------------------
+PRESENCE IN EACH PERIOD
+------------------------------------------------------------------------------
+  DISCOVERY: PRESENT -- rows=11639
+  VALIDATION: PRESENT -- rows=6576
+  OOS: PRESENT -- rows=7577
+
+------------------------------------------------------------------------------
+SESSION BOUNDARIES (top times-of-day)
+------------------------------------------------------------------------------
+most common first begin time-of-day:
+  06:55:00: 252 sessions
+  09:55:00: 4 sessions
+most common last begin time-of-day:
+  15:15:00: 223 sessions
+  15:20:00: 28 sessions
+  18:15:00: 2 sessions
+
+STATUS: OK -- file audited without ambiguity.
+
+==============================================================================
+NOTES AND LIMITATIONS
+==============================================================================
+- This audit confirms file-level facts only.
+- It does NOT assert completeness of the time series.
+- It does NOT authorize PC2 or any confirmatory criterion change.
+- It does NOT perform H4 calculations of any kind.
+- OOS rows, if present in the files, are reported only as row counts.
+  They are not evaluated or used for H4.
+- No strategy logic was changed.
+- No threshold was optimized.
+- No filter was installed.
+- No live order was sent.

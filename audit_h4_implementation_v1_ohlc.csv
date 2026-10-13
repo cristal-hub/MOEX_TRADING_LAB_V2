@@ -1,0 +1,4 @@
+dataset,n_bars,ohlc_finite_violations,ohlc_positivity_violations,ohlc_consistency_violations,close_nan_or_nonfinite,close_nonpositive
+SBER_2025_2026,25856,0,0,0,0,0
+GAZP_2025_2026,25862,0,0,0,0,0
+LKOH_2025_2026,25893,0,0,0,0,0

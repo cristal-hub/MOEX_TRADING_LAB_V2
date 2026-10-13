@@ -1,0 +1,64 @@
+H7 CONTEXT COUNT v1 -- READ ONLY
+audit_h7_context_count_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+Read-only count of 5M context signals on the three excluded
+holiday sessions. No outcome is evaluated. No strategy is run.
+
+total rows: 25856
+total sessions: 256
+
+full dataset:
+  rows: 25856
+  state_move_down_6 True: 6590
+  bullish True: 12197
+  ctx (both): 2107
+
+==============================================================================
+HOLIDAY SESSIONS -- detail
+==============================================================================
+  date=2026-02-23
+    rows: 101
+    state_move_down_6 True: 0
+    bullish True: 52
+    ctx (both): 0
+    first_begin: 2026-02-23 09:55:00
+    last_begin:  2026-02-23 18:15:00
+
+  date=2026-05-01
+    rows: 101
+    state_move_down_6 True: 3
+    bullish True: 49
+    ctx (both): 1
+    first_begin: 2026-05-01 09:55:00
+    last_begin:  2026-05-01 18:15:00
+
+  date=2026-06-12
+    rows: 101
+    state_move_down_6 True: 3
+    bullish True: 42
+    ctx (both): 1
+    first_begin: 2026-06-12 09:55:00
+    last_begin:  2026-06-12 18:15:00
+
+total holiday rows: 303
+total holiday ctx: 2
+
+==============================================================================
+AFTER EXCLUSION
+==============================================================================
+  rows after exclusion: 25553
+  ctx after exclusion: 2105
+
+==============================================================================
+SUMMARY
+==============================================================================
+- Counts above are descriptive only.
+- No outcome is evaluated. No strategy is run.
+- The counts are frozen for H7 specification.
+- No strategy logic was changed.

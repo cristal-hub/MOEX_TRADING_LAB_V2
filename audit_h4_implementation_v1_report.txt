@@ -1,0 +1,271 @@
+H4 IMPLEMENTATION AUDIT v1 -- READ ONLY
+audit_h4_implementation_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+NO H4 EFFECT CALCULATIONS. NO CONFIDENCE INTERVALS.
+NO BOOTSTRAP. OOS NOT TOUCHED.
+
+==============================================================================
+INPUT INVENTORY
+==============================================================================
+OK      main_v5.17_threshold_path_lab_v2.py
+        size=530947
+        sha256=e8ddbd948cc996ed1f55f858d574d50de61cd9de6ec305c8b938ec5014e359bd
+OK      v600_hypothesis_lab.py
+        size=43846
+        sha256=97efcdee3b5c299b985eddbba325f0c9753f48043fa8ddd3ed6eeb40de75d347
+OK      v601_predefined_entry_exit.py
+        size=24031
+        sha256=ad1ad0ee5bc513febf99c5006e4c2e603b2995dcbe0423c30e3b9b8d9c472260
+OK      cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+        size=2416569
+        sha256=33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+OK      cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+        size=2368190
+        sha256=054640f72aa6f855120d9ee78ab103d73723e8a0c95067137fae79ac5e3597d7
+OK      cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+        size=2242598
+        sha256=7542703e984e26987e5d86396823dd116247c95163ad7cd5082d5e62a549c924
+
+==============================================================================
+DATASET: SBER_2025_2026
+==============================================================================
+  n_bars: 25856
+  begin min: 2025-09-15 06:55:00
+  begin max: 2026-09-14 15:15:00
+  sessions: 256
+
+AUDIT A1 -- forward window bounds and session safety
+------------------------------------------------------------------------------
+dataset              h       ok     fail_j     fail_k  fail_both      total
+SBER_2025_2026       1    25600          0        255          1      25856
+SBER_2025_2026       2    25344          0        510          2      25856
+SBER_2025_2026       3    25088          0        765          3      25856
+SBER_2025_2026       6    24320          0       1530          6      25856
+SBER_2025_2026      12    22784          0       3060         12      25856
+
+AUDIT A2 -- atr14 and range_atr (audit-side recomputation)
+------------------------------------------------------------------------------
+  dataset: SBER_2025_2026
+  n_bars: 25856
+  atr14_zero: 0
+  atr14_negative: 0
+  atr14_nan: 13
+  atr14_inf: 0
+  range_atr_negative: 0
+  range_atr_nan: 13
+  range_atr_inf: 0
+  event_tag_count: 6381
+  tag_with_invalid_atr: 0
+  tag_with_invalid_range_atr: 0
+
+AUDIT A3 -- OHLC conditions
+------------------------------------------------------------------------------
+  dataset: SBER_2025_2026
+  n_bars: 25856
+  ohlc_finite_violations: 0
+  ohlc_positivity_violations: 0
+  ohlc_consistency_violations: 0
+  close_nan_or_nonfinite: 0
+  close_nonpositive: 0
+
+AUDIT A4 -- timestamps (PC5 related, NOT applied)
+------------------------------------------------------------------------------
+  dataset: SBER_2025_2026
+  n_bars: 25856
+  begin_missing: 0
+  begin_duplicates: 0
+  adjacent_steps: 25855
+  non_5min_steps: 255
+  step_value_counts: {5.0: 25600, 760.0: 1, 940.0: 198, 1120.0: 2, 2380.0: 2, 3640.0: 2, 3820.0: 48, 4000.0: 1, 8140.0: 1}
+  example_non_5min: [940.0, 940.0, 940.0, 940.0, 3820.0, 940.0, 940.0, 940.0, 940.0, 3820.0]
+
+==============================================================================
+DATASET: GAZP_2025_2026
+==============================================================================
+  n_bars: 25862
+  begin min: 2025-09-15 06:55:00
+  begin max: 2026-09-14 15:15:00
+  sessions: 256
+
+AUDIT A1 -- forward window bounds and session safety
+------------------------------------------------------------------------------
+dataset              h       ok     fail_j     fail_k  fail_both      total
+GAZP_2025_2026       1    25606          0        255          1      25862
+GAZP_2025_2026       2    25350          0        510          2      25862
+GAZP_2025_2026       3    25094          0        765          3      25862
+GAZP_2025_2026       6    24326          0       1530          6      25862
+GAZP_2025_2026      12    22790          0       3060         12      25862
+
+AUDIT A2 -- atr14 and range_atr (audit-side recomputation)
+------------------------------------------------------------------------------
+  dataset: GAZP_2025_2026
+  n_bars: 25862
+  atr14_zero: 0
+  atr14_negative: 0
+  atr14_nan: 13
+  atr14_inf: 0
+  range_atr_negative: 0
+  range_atr_nan: 13
+  range_atr_inf: 0
+  event_tag_count: 5587
+  tag_with_invalid_atr: 0
+  tag_with_invalid_range_atr: 0
+
+AUDIT A3 -- OHLC conditions
+------------------------------------------------------------------------------
+  dataset: GAZP_2025_2026
+  n_bars: 25862
+  ohlc_finite_violations: 0
+  ohlc_positivity_violations: 0
+  ohlc_consistency_violations: 0
+  close_nan_or_nonfinite: 0
+  close_nonpositive: 0
+
+AUDIT A4 -- timestamps (PC5 related, NOT applied)
+------------------------------------------------------------------------------
+  dataset: GAZP_2025_2026
+  n_bars: 25862
+  begin_missing: 0
+  begin_duplicates: 0
+  adjacent_steps: 25861
+  non_5min_steps: 255
+  step_value_counts: {5.0: 25606, 755.0: 1, 935.0: 1, 940.0: 197, 1120.0: 2, 2375.0: 1, 2380.0: 1, 3630.0: 1, 3635.0: 1, 3820.0: 48, 4000.0: 1, 8140.0: 1}
+  example_non_5min: [940.0, 940.0, 940.0, 940.0, 3820.0, 940.0, 940.0, 940.0, 940.0, 3820.0]
+
+==============================================================================
+DATASET: LKOH_2025_2026
+==============================================================================
+  n_bars: 25893
+  begin min: 2025-09-15 06:55:00
+  begin max: 2026-09-14 15:15:00
+  sessions: 256
+
+AUDIT A1 -- forward window bounds and session safety
+------------------------------------------------------------------------------
+dataset              h       ok     fail_j     fail_k  fail_both      total
+LKOH_2025_2026       1    25637          0        255          1      25893
+LKOH_2025_2026       2    25381          0        510          2      25893
+LKOH_2025_2026       3    25125          0        765          3      25893
+LKOH_2025_2026       6    24357          0       1530          6      25893
+LKOH_2025_2026      12    22821          0       3060         12      25893
+
+AUDIT A2 -- atr14 and range_atr (audit-side recomputation)
+------------------------------------------------------------------------------
+  dataset: LKOH_2025_2026
+  n_bars: 25893
+  atr14_zero: 0
+  atr14_negative: 0
+  atr14_nan: 13
+  atr14_inf: 0
+  range_atr_negative: 0
+  range_atr_nan: 13
+  range_atr_inf: 0
+  event_tag_count: 6239
+  tag_with_invalid_atr: 0
+  tag_with_invalid_range_atr: 0
+
+AUDIT A3 -- OHLC conditions
+------------------------------------------------------------------------------
+  dataset: LKOH_2025_2026
+  n_bars: 25893
+  ohlc_finite_violations: 0
+  ohlc_positivity_violations: 0
+  ohlc_consistency_violations: 0
+  close_nan_or_nonfinite: 0
+  close_nonpositive: 0
+
+AUDIT A4 -- timestamps (PC5 related, NOT applied)
+------------------------------------------------------------------------------
+  dataset: LKOH_2025_2026
+  n_bars: 25893
+  begin_missing: 0
+  begin_duplicates: 0
+  adjacent_steps: 25892
+  non_5min_steps: 255
+  step_value_counts: {5.0: 25637, 730.0: 1, 760.0: 1, 930.0: 1, 935.0: 22, 940.0: 174, 1120.0: 2, 2380.0: 2, 3635.0: 1, 3640.0: 1, 3815.0: 6, 3820.0: 41, 4000.0: 2, 8140.0: 1}
+  example_non_5min: [940.0, 940.0, 935.0, 930.0, 3815.0, 940.0, 940.0, 940.0, 940.0, 3820.0]
+
+wrote audit_h4_implementation_v1_bounds.csv
+wrote audit_h4_implementation_v1_atr.csv
+wrote audit_h4_implementation_v1_ohlc.csv
+wrote audit_h4_implementation_v1_timestamps.csv
+
+==============================================================================
+SOURCE-CODE FINDINGS (Section B, A3, A4)
+==============================================================================
+Directly read in v600_hypothesis_lab.py:
+  - build_forward_labels at L359:
+      future_indices_all = []
+      for j in range(t0_index + 1, len(df_5m)):
+          if sk_5m.iloc[j] != session: break
+          future_indices_all.append(j)
+      if h > max_available -> label_partial_window_H = True
+  - ATR14 is computed inside main.calculate_indicators;
+    v600 does not redefine ATR14. range_atr is derived inside
+    compute_discovery_quantiles and build_state_tags.
+  - Zero-atr handling seen in compute_discovery_quantiles:
+      atr14.replace(0, np.nan)
+  - Not seen in v600: explicit requirement that atr14 > 0 or
+    range_atr > 0.
+  - Not seen in v600: explicit 5-minute step check.
+  - Not seen in v600 or v601: explicit treatment of sessions
+    with last_begin = 15:20 or first_begin = 09:55.
+
+Directly read in v601_predefined_entry_exit.py:
+  - _next_session_first_bar at L163 uses session_key.
+  - session_key = df['begin'].dt.date at L126.
+
+Directly read in main_v5.17_threshold_path_lab_v2.py:
+  - trading_session_key at L4452 normalizes date and shifts
+    Saturday/Sunday to Monday.
+  - build_session_keys at L4472 maps begin via
+    trading_session_key.
+  - L11944-L11945 and L4542 reference a '15:15' boundary and a
+    '15:15-15:20 band' in a diagnostic message.
+
+==============================================================================
+AUDIT A5 -- EVIDENCE MATRIX
+==============================================================================
+ID | Question | Source-code evidence | Data evidence | Status
+------------------------------------------------------------------------------
+A1.j | t+h index bounds | v600 L372-L376 | bounds CSV | see CSV
+A1.k | session_key const on [t,t+h] | v600 L374-L375 | bounds CSV | see CSV
+A1.p | label_partial_window_H matches behavior | v600 L382-L393 | bounds CSV | see CSV
+A2.atr | atr14 compute chain | main.calculate_indicators | atr CSV | see CSV
+A2.zero | atr14 == 0 handling | atr14.replace(0, np.nan) in v600 | atr CSV | see CSV
+A2.neg | atr14 < 0 possibility | not explicitly guarded | atr CSV | see CSV
+A3.ohlc | OHLC finite/positive/consistent | not explicit in v600 | ohlc CSV | see CSV
+A4.begin | begin column dtype/dup/missing | load_5m pd.to_datetime | ts CSV | see CSV
+A4.step | 5-minute step check | not present in code | ts CSV | see CSV
+PC5 | condition (l) application | not implemented | not applied | NOT AUTHORIZED
+Q-NEW | unusual sessions handling | no explicit rule | 41 entries / 36 dates | OPEN
+
+==============================================================================
+UNRESOLVED / OPEN (unchanged)
+==============================================================================
+- M1: one-sided direction vs two-sided CI. UNRESOLVED.
+- M2: bootstrap scheme. UNRESOLVED.
+- M3: OHLC eligibility vs D3/D4. UNRESOLVED.
+- PC1-PC4: PROPOSED / NOT AUTHORIZED.
+- PC5: PROPOSED CHANGE -- NOT AUTHORIZED (not applied here).
+- Q-NEW: OPEN / NOT DECIDED.
+- QA-A1: zero/negative atr14/range_atr -- partially evidenced by this audit.
+- QA-A2: correspondence between formal (j)-(k) and code -- partially evidenced.
+
+Note: this audit does not close any of these items. It reports
+facts only. Methodological decisions remain with the user.
+
+==============================================================================
+END OF AUDIT
+==============================================================================
+
+No file was modified. No H4 effect was computed.
+No confidence interval, no bootstrap, no OOS was touched.
+No strategy logic was changed.
+No live order was sent.

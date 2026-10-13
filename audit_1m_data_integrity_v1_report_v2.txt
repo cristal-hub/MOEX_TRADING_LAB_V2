@@ -1,0 +1,137 @@
+1M DATA INTEGRITY AUDIT v1 (fixed) -- READ ONLY
+audit_1m_data_integrity_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+Read-only audit of cache/1m/ and alignment with cache/5m/.
+No file is modified. No strategy is executed.
+
+Fix log vs first run:
+  - 1M begin timestamps converted to datetime before int64 comparison.
+  - Weekend files checked for exact content duplication.
+  - Pre-session 5M bar 06:55 recognized and reported separately.
+
+==============================================================================
+SECTION 1 -- INVENTORY
+==============================================================================
+1M files found: 331
+
+==============================================================================
+SECTION 2 -- COLUMN FORMAT
+==============================================================================
+columns: ['open', 'close', 'high', 'low', 'value', 'volume', 'begin', 'end']
+  dtype open: float64
+  dtype close: float64
+  dtype high: float64
+  dtype low: float64
+  dtype value: float64
+  dtype volume: int64
+  dtype begin: str
+  dtype end: str
+
+==============================================================================
+SECTION 3 -- PER-DAY COVERAGE
+==============================================================================
+days covered: 331
+rows per day: min=500 median=500 max=500
+duplicates (sum): 0
+invalid begin (sum): 0
+bad_low bars: 0
+bad_high bars: 0
+nonpositive cells: 0
+weekend files: 75
+
+==============================================================================
+SECTION 4 -- WEEKEND FILE CONTENT CHECK
+==============================================================================
+weekend files analysed: 75
+weekend files duplicating a weekday file: 0
+weekend files with unique content: 75
+
+
+==============================================================================
+SECTION 5 -- SESSION BOUNDARIES
+==============================================================================
+earliest first begin: 2025-09-15 06:59:00
+latest last begin:    2026-09-14 15:18:00
+
+most common first begin times:
+  06:59:00: 254
+  09:59:00: 77
+most common last begin times:
+  15:18:00: 254
+  18:18:00: 76
+  18:24:00: 1
+
+==============================================================================
+SECTION 6 -- 5M vs 1M ALIGNMENT (FIXED)
+==============================================================================
+5M rows: 25856
+1M unique begins: 165500
+
+5M begins present in 1M: 0 / 25856
+
+examples of 5M begins not present in 1M:
+  2025-09-15 06:55:00
+  2025-09-15 07:00:00
+  2025-09-15 07:05:00
+  2025-09-15 07:10:00
+  2025-09-15 07:15:00
+  2025-09-15 07:20:00
+  2025-09-15 07:25:00
+  2025-09-15 07:30:00
+  2025-09-15 07:35:00
+  2025-09-15 07:40:00
+
+Pre-session bar 2025-09-15 06:55:00: 1 occurrence(s)
+  Expected to be absent in 1M (session opens at 06:59).
+  Excluded from 1M simulation.
+
+1M bars per 5M window (excluding pre-session bar):
+  min=0 median=0 max=0 mean=0.000
+  windows with exactly 5 1M bars: 0
+  windows with < 5: 25855
+  windows with > 5: 0
+  windows with 0:   25855
+  examples of windows with < 5 1M bars:
+    2025-09-15 07:00:00  counts=0
+    2025-09-15 07:05:00  counts=0
+    2025-09-15 07:10:00  counts=0
+    2025-09-15 07:15:00  counts=0
+    2025-09-15 07:20:00  counts=0
+
+==============================================================================
+SECTION 7 -- ANOMALIES
+==============================================================================
+No anomalies recorded.
+
+==============================================================================
+SECTION 8 -- READINESS FOR 1M BACKTEST
+==============================================================================
+Structural checks:
+  duplicates: 0
+  invalid begin: 0
+  OHLC low violations: 0
+  OHLC high violations: 0
+  nonpositive prices: 0
+
+Alignment with 5M (fixed):
+  see Section 6 counts.
+
+Weekend handling:
+  weekend files: 75 (excluded from simulation).
+  see Section 4 for duplication status.
+
+Expected pre-session handling:
+  first 5M bar 2025-09-15 06:55:00 excluded from 1M simulation.
+
+==============================================================================
+END OF AUDIT
+==============================================================================
+
+No file was modified. No strategy was executed.
+No live orders were sent.

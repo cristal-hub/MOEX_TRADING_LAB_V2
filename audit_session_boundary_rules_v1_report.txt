@@ -1,0 +1,413 @@
+SESSION-BOUNDARY RULES AUDIT v1 -- READ ONLY
+audit_session_boundary_rules_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+STATUS: SESSION-BOUNDARY AUDIT ONLY. NO H4 CALCULATIONS.
+
+==============================================================================
+SECTION 1 -- SOURCE CODE INVENTORY
+==============================================================================
+FOUND   main_v5.17_threshold_path_lab_v2.py  size=530947
+FOUND   v600_hypothesis_lab.py  size=43846
+FOUND   v601_predefined_entry_exit.py  size=24031
+
+==============================================================================
+SECTION 2 -- session_key FORMATION
+==============================================================================
+Patterns searched: session_key, build_session_keys, trading_session_key,
+dt.date, .date()
+
+--- main_v5.17_threshold_path_lab_v2.py ---
+  L362:         work["session"] = work["begin"].dt.date
+  L634:     session = df["begin"].dt.date
+  L732:     session_keys = build_session_keys(work)
+  L778:     for session_key in session_keys.drop_duplicates():
+  L779:         indices = list(work.index[session_keys == session_key])
+  L793:     work["session_key"] = session_keys
+  L830:     session_keys = build_session_keys(df)
+  L868:         if next_i < len(df) and session_keys.iloc[next_i] == session_keys.iloc[i]:
+  L878:             if past_i >= 0 and session_keys.iloc[past_i] == session_keys.iloc[i]:
+  L925:         "session_key",
+  L975:     session_keys = build_session_keys(df)
+  L976:     session = session_keys.iloc[signal_index]
+  L979:         if session_keys.iloc[j] != session:
+  L4452: def trading_session_key(timestamp):
+  L4472: def build_session_keys(df):
+  L4474:     return df["begin"].map(trading_session_key)
+  L4495:         work["session"] = work["begin"].dt.date
+  L4527:         work5["session"] = work5["begin"].dt.date
+  L4570:       - last bar (begin, end, session_key(begin))
+  L4571:       - first bar of next session (begin, end, session_key(begin))
+  L4584:         work["session_key"] = work["begin"].map(trading_session_key)
+  L4592:             work.groupby("session_key", sort=True)
+  L4660:     session_keys = build_session_keys(df)
+  L4662:     temp["session_key"] = session_keys
+  L4666:         .groupby("session_key", sort=True)
+  L4680:     for session_key, row in grouped.iterrows():
+  L4682:             f"SESSION {session_key.strftime('%Y-%m-%d')} "
+  L4735:             trading_session_key(df.iloc[i]["begin"])
+  L4736:             == trading_session_key(df.iloc[i + 1]["begin"])
+  L4838:     session_keys = build_session_keys(df)
+  L4841:         current_session = session_keys.iloc[i]
+  L4843:         session_mask = session_keys == current_session
+  L4903:                 "session_key": current_session,
+  L4922:     session_keys = build_session_keys(df)
+  L4926:     for session_key in session_keys.drop_duplicates():
+  L4927:         global_indices = list(df.index[session_keys == session_key])
+  L5238:         # boundary. Weekend sessions are handled by session_key, so a
+  L5242:             previous_session = trading_session_key(
+  L5245:             current_session = trading_session_key(
+  L5291:                 and trading_session_key(df.iloc[next_index]["begin"])
+  ... (124 more matches)
+
+--- v600_hypothesis_lab.py ---
+  L126:     sk_5m = main.build_session_keys(df_5m)
+  L128:     df_5m["session_key"] = sk_5m
+  L130:     sk_1m = df_1m["begin"].map(main.trading_session_key)
+  L132:     print("  5M session_count=" + str(df_5m["session_key"].nunique()))
+  L161:     Returns dict: session_key -> list of dicts (one per bar, index within session)
+  L173:     for session_key, grp in df_5m.groupby("session_key"):
+  L211:         timelines[session_key] = snapshots
+  L284: def build_1m_features_for_bar(df_1m, sk_1m, session_key, t0_begin_ts):
+  L289:     mask = (sk_1m == session_key) & (df_1m["end"] <= t0_begin_ts)
+  L451: def build_state_tags(df_5m, i, session_local_idx, session_key, structure_timeline,
+  L592:     for skey, grp in df_5m.groupby("session_key"):
+  L670:             "session_key": str(skey),
+  L890:         sk_5m_cut = df_5m_cut["session_key"]
+  L894:         mini_session = df_5m_cut[df_5m_cut["session_key"] == skey].reset_index(drop=True)
+  L1020:     add("   forward labels use only bars with the same session_key as T0.")
+
+--- v601_predefined_entry_exit.py ---
+  L126:     df["session_key"] = df["begin"].dt.date
+  L167:     return df.iloc[i]["session_key"] != df.iloc[i + 1]["session_key"]
+  L248:             if df.iloc[i]["session_key"] != df.iloc[i - 1]["session_key"]:
+  L335:     freq_by_sess = df.groupby("session_key")[tag_col].mean().to_dict()
+  L339:     p_arr = df2["session_key"].map(freq_by_sess).fillna(0.0).to_numpy()
+  L415:         session_of_entry[idx] = df.iloc[idx]["session_key"]
+  L642:         n_sess = df["session_key"].nunique()
+
+------------------------------------------------------------------------------
+Function bodies (if found):
+------------------------------------------------------------------------------
+  def build_session_keys in main_v5.17_threshold_path_lab_v2.py:
+    L4472: def build_session_keys(df):
+    L4473:     """Build one exchange-session key for every candle."""
+    L4474:     return df["begin"].map(trading_session_key)
+    L4475: 
+    L4476: 
+
+  def trading_session_key in main_v5.17_threshold_path_lab_v2.py:
+    L4452: def trading_session_key(timestamp):
+    L4453:     """
+    L4454:     Return the MOEX trading-day key for a candle timestamp.
+    L4455: 
+    L4456:     Return the ordinary weekday trading-session key used by the
+    L4457:     research engine. Weekend candles are normally removed before this
+    L4458:     function is used because EXCLUDE_WEEKEND_SESSIONS=True.
+    L4459:     """
+    L4460:     ts = pd.Timestamp(timestamp)
+    L4461:     date = ts.normalize()
+    L4462: 
+    L4463:     if date.weekday() == 5:
+    L4464:         return date + pd.Timedelta(days=2)
+    L4465: 
+    L4466:     if date.weekday() == 6:
+    L4467:         return date + pd.Timedelta(days=1)
+    L4468: 
+    L4469:     return date
+    L4470: 
+    L4471: 
+
+  def assign_period in v600_hypothesis_lab.py:
+    L142: def assign_period(ts):
+    L143:     ts = pd.Timestamp(ts)
+    L144:     for name, lo, hi in PERIODS:
+    L145:         if pd.Timestamp(lo) <= ts <= pd.Timestamp(hi):
+    L146:             return name
+    L147:     return "OUT_OF_RANGE"
+    L148: 
+    L149: 
+    L150: # ============================================================
+    L151: # 5M STRUCTURE TIMELINE (causal, per session)
+    L152: # ============================================================
+    L153: 
+
+
+==============================================================================
+SECTION 3 -- FIXED TIME BOUNDARIES IN CODE
+==============================================================================
+Patterns searched: 15:15, 15:20, 18:15, 18:20, 18:25, 09:55, first_hour,
+last_hour, minutes_to_close, minutes_from_open
+
+--- main_v5.17_threshold_path_lab_v2.py ---
+  L4482:               OR last 1M candle is not at 15:15 (5M timeframe,
+  L4542:                   "last candle outside 15:15-15:20 band):")
+  L11944:         minutes_from_open = ts.hour * 60 + ts.minute - (6 * 60 + 55)
+  L11945:         minutes_to_close = (15 * 60 + 15) - (ts.hour * 60 + ts.minute)
+  L12040:             "session_minutes_from_open": minutes_from_open,
+  L12041:             "session_minutes_to_close": minutes_to_close,
+  L12146:         "session_minutes_from_open", "session_minutes_to_close",
+  L12652:             minutes_from_open = (entry_time - sess_first).total_seconds() / 60.0
+  L12653:             minutes_to_close  = (sess_last  - entry_time).total_seconds() / 60.0
+  L12656:             minutes_from_open = float("nan")
+  L12657:             minutes_to_close  = float("nan")
+  L12718:             "session_minutes_from_open_at_entry": minutes_from_open,
+  L12719:             "session_minutes_to_close_at_entry": minutes_to_close,
+  L12857:         add("  mean/median session_minutes_to_close_at_entry = " + _v519_fmt(_v519_mean(eos["session_minutes_to_close_at_entry"]), 2) + " / " + _v519_fmt(_v519_median(eos["session_minutes_to_close_at_entry"]), 2))
+  L12859:         add("Quartile split by session_minutes_to_close_at_entry:")
+  L12862:             eos_q["qtile"] = pd.qcut(eos_q["session_minutes_to_close_at_entry"], q=4, labels=["Q1", "Q2", "Q3", "Q4"], duplicates="drop")
+  L12875:                     " | mins_to_close=" + _v519_fmt(_v519_mean(g["session_minutes_to_close_at_entry"]), 1) + "/" + _v519_fmt(_v519_median(g["session_minutes_to_close_at_entry"]), 1))
+  L13107:             minutes_to_close = (sess_last_ts - entry_time).total_seconds() / 60.0
+  L13110:             minutes_to_close = float("nan")
+  L13133:             "minutes_to_close_at_entry": minutes_to_close,
+  L13346:     "session_minutes_from_open",
+  L13347:     "session_minutes_to_close",
+  L13724:     "session_minutes_from_open",
+  L13984:     # ---- 6. A. session_minutes_from_open ----
+  L13985:     add("3. A. session_minutes_from_open")
+  L13993:             work, "session_minutes_from_open", direction,
+  L13994:             disc_thresholds["session_minutes_from_open"]["Q25"],
+  L13995:             disc_thresholds["session_minutes_from_open"]["MEDIAN"],
+  L13996:             disc_thresholds["session_minutes_from_open"]["Q75"],
+  L14259:             "net_pnl", "exit_reason", "session_minutes_from_open_at_entry",
+  L14260:             "session_minutes_to_close_at_entry"]
+
+--- v600_hypothesis_lab.py ---
+  L564:     out["feat_session_minutes_from_open"] = np.nan
+  L565:     out["feat_session_minutes_to_close"] = np.nan
+  L568:     out["state_first_hour"] = False
+  L570:     out["state_last_hour"] = False
+  L638:         minutes_from_open = (pd.Timestamp(row["begin"]) - session_first_begin).total_seconds() / 60.0
+  L639:         minutes_to_close = (session_last_begin - pd.Timestamp(row["begin"])).total_seconds() / 60.0
+  L654:         state["feat_session_minutes_from_open"] = minutes_from_open
+  L655:         state["feat_session_minutes_to_close"] = minutes_to_close
+  L657:         state["state_first_hour"] = bool(minutes_from_open < 60)
+  L658:         state["state_mid_session"] = bool(60 <= minutes_from_open <= 240)
+  L659:         state["state_last_hour"] = bool(minutes_to_close < 60)
+  L941:             if k in ("feat_session_minutes_from_open", "feat_session_minutes_to_close", "feat_day_position",
+  L942:                      "state_first_hour", "state_mid_session", "state_last_hour", "state_day_edge_zone"):
+
+--- v601_predefined_entry_exit.py ---
+  no matches
+
+==============================================================================
+SECTION 4 -- FORWARD LABEL / SESSION SAFETY IN CODE
+==============================================================================
+Patterns searched: session_key, cross-session, t+h, future_indices_all,
+label_partial_window
+
+  def build_forward_labels in v600_hypothesis_lab.py:
+    L359: def build_forward_labels(df_5m, sk_5m, t0_index):
+    L360:     """
+    L361:     Compute all forward labels for horizons HORIZONS.
+    L362:     Session-safe: stop at session boundary.
+    L363:     Returns dict of label_* -> value, and bool whether any partial window.
+    L364:     """
+    L365:     out = {}
+    L366:     session = sk_5m.iloc[t0_index]
+    L367:     close_t0 = float(df_5m.iloc[t0_index]["close"])
+    L368:     if close_t0 <= 0:
+    L369:         return {}, False
+    L370: 
+    L371:     # Gather future indices per horizon (session-safe)
+    L372:     future_indices_all = []
+    L373:     for j in range(t0_index + 1, len(df_5m)):
+    L374:         if sk_5m.iloc[j] != session:
+    L375:             break
+    L376:         future_indices_all.append(j)
+    L377: 
+    L378:     max_available = len(future_indices_all)
+    L379: 
+    L380:     any_partial = False
+    L381:     for h in HORIZONS:
+    L382:         if h > max_available:
+    L383:             any_partial = True
+    L384:             out["label_forward_return_" + str(h)] = np.nan
+    L385:             out["label_forward_mfe_" + str(h)] = np.nan
+    L386:             out["label_forward_mae_" + str(h)] = np.nan
+    L387:             for lv in REACH_LEVELS:
+    L388:                 tag = str(lv).replace(".", "_")
+    L389:                 out["label_reach_plus_" + tag + "_" + str(h)] = np.nan
+    L390:                 out["label_reach_minus_" + tag + "_" + str(h)] = np.nan
+    L391:             out["label_first_reach_dir_" + str(h)] = "NEITHER"
+    L392:             out["label_partial_window_" + str(h)] = True
+    L393:             continue
+    L394: 
+    L395:         fwd = future_indices_all[:h]
+    L396:         fwd_df = df_5m.iloc[fwd]
+    L397: 
+    L398:         closes = fwd_df["close"].astype(float).to_numpy()
+    L399:         highs = fwd_df["high"].astype(float).to_numpy()
+    L400:         lows = fwd_df["low"].astype(float).to_numpy()
+    L401: 
+    L402:         close_h = float(closes[-1])
+    L403:         ret_h = (close_h / close_t0 - 1.0) * 100.0
+    L404: 
+    L405:         max_high = float(np.nanmax(highs))
+    L406:         min_low = float(np.nanmin(lows))
+    L407:         mfe = (max_high / close_t0 - 1.0) * 100.0
+    L408:         mae = (min_low / close_t0 - 1.0) * 100.0
+    L409: 
+    L410:         out["label_forward_return_" + str(h)] = ret_h
+    L411:         out["label_forward_mfe_" + str(h)] = mfe
+    L412:         out["label_forward_mae_" + str(h)] = mae
+    L413: 
+    L414:         for lv in REACH_LEVELS:
+    L415:             tag = str(lv).replace(".", "_")
+    L416:             up_hit = bool((highs >= close_t0 * (1.0 + lv / 100.0)).any())
+    L417:             dn_hit = bool((lows <= close_t0 * (1.0 - lv / 100.0)).any())
+    L418:             out["label_reach_plus_" + tag + "_" + str(h)] = up_hit
+
+  def _next_session_first_bar in v601_predefined_entry_exit.py:
+    L163: def _next_session_first_bar(df, i):
+    L164:     """Return True if bar i+1 exists and is in a DIFFERENT session."""
+    L165:     if i + 1 >= len(df):
+    L166:         return False
+    L167:     return df.iloc[i]["session_key"] != df.iloc[i + 1]["session_key"]
+    L168: 
+    L169: 
+
+
+==============================================================================
+SECTION 5 -- DATA: ANOMALOUS SESSIONS AND session_key
+==============================================================================
+Using rule: session_key = begin.dt.date (from code inspection).
+If code inspection above does not match this rule, mark UNRESOLVED.
+
+--------------------------------------------------------------------------
+DATASET: SBER_2025_2026
+--------------------------------------------------------------------------
+  rows: 25856
+  unique session_key (begin.dt.date): 256
+
+  anomalous sessions (first != 06:55 OR last != 15:15): 3
+
+  | session_key | first_begin | last_begin | n_bars |
+  | 2026-02-23 | 2026-02-23 09:55:00 | 2026-02-23 18:15:00 | 101 |
+  | 2026-05-01 | 2026-05-01 09:55:00 | 2026-05-01 18:15:00 | 101 |
+  | 2026-06-12 | 2026-06-12 09:55:00 | 2026-06-12 18:15:00 | 101 |
+
+--------------------------------------------------------------------------
+DATASET: GAZP_2025_2026
+--------------------------------------------------------------------------
+  rows: 25862
+  unique session_key (begin.dt.date): 256
+
+  anomalous sessions (first != 06:55 OR last != 15:15): 5
+
+  | session_key | first_begin | last_begin | n_bars |
+  | 2025-11-06 | 2025-11-06 06:55:00 | 2025-11-06 15:20:00 | 102 |
+  | 2026-01-06 | 2026-01-06 06:55:00 | 2026-01-06 15:20:00 | 102 |
+  | 2026-02-23 | 2026-02-23 09:55:00 | 2026-02-23 18:20:00 | 102 |
+  | 2026-05-01 | 2026-05-01 09:55:00 | 2026-05-01 18:20:00 | 102 |
+  | 2026-06-12 | 2026-06-12 09:55:00 | 2026-06-12 18:25:00 | 103 |
+
+--------------------------------------------------------------------------
+DATASET: LKOH_2025_2026
+--------------------------------------------------------------------------
+  rows: 25893
+  unique session_key (begin.dt.date): 256
+
+  anomalous sessions (first != 06:55 OR last != 15:15): 33
+
+  | session_key | first_begin | last_begin | n_bars |
+  | 2025-09-17 | 2025-09-17 06:55:00 | 2025-09-17 15:20:00 | 102 |
+  | 2025-09-18 | 2025-09-18 06:55:00 | 2025-09-18 15:25:00 | 103 |
+  | 2025-09-19 | 2025-09-19 06:55:00 | 2025-09-19 15:20:00 | 102 |
+  | 2025-09-29 | 2025-09-29 06:55:00 | 2025-09-29 15:20:00 | 102 |
+  | 2025-10-22 | 2025-10-22 06:55:00 | 2025-10-22 15:20:00 | 102 |
+  | 2025-11-27 | 2025-11-27 06:55:00 | 2025-11-27 15:20:00 | 102 |
+  | 2025-12-11 | 2025-12-11 06:55:00 | 2025-12-11 15:20:00 | 102 |
+  | 2025-12-18 | 2025-12-18 06:55:00 | 2025-12-18 15:20:00 | 102 |
+  | 2025-12-23 | 2025-12-23 06:55:00 | 2025-12-23 15:20:00 | 102 |
+  | 2026-01-12 | 2026-01-12 09:55:00 | 2026-01-12 18:15:00 | 101 |
+  | 2026-01-16 | 2026-01-16 06:55:00 | 2026-01-16 15:20:00 | 102 |
+  | 2026-01-20 | 2026-01-20 06:55:00 | 2026-01-20 15:20:00 | 102 |
+  | 2026-01-22 | 2026-01-22 06:55:00 | 2026-01-22 15:20:00 | 102 |
+  | 2026-02-12 | 2026-02-12 06:55:00 | 2026-02-12 15:20:00 | 102 |
+  | 2026-02-17 | 2026-02-17 06:55:00 | 2026-02-17 15:20:00 | 102 |
+  | 2026-02-18 | 2026-02-18 06:55:00 | 2026-02-18 15:20:00 | 102 |
+  | 2026-02-23 | 2026-02-23 09:55:00 | 2026-02-23 18:45:00 | 107 |
+  | 2026-02-25 | 2026-02-25 06:55:00 | 2026-02-25 15:20:00 | 102 |
+  | 2026-02-27 | 2026-02-27 06:55:00 | 2026-02-27 15:20:00 | 102 |
+  | 2026-03-30 | 2026-03-30 06:55:00 | 2026-03-30 15:20:00 | 102 |
+  | 2026-03-31 | 2026-03-31 06:55:00 | 2026-03-31 15:20:00 | 102 |
+  | 2026-04-02 | 2026-04-02 06:55:00 | 2026-04-02 15:20:00 | 102 |
+  | 2026-04-10 | 2026-04-10 06:55:00 | 2026-04-10 15:20:00 | 102 |
+  | 2026-04-24 | 2026-04-24 06:55:00 | 2026-04-24 15:20:00 | 102 |
+  | 2026-05-01 | 2026-05-01 09:55:00 | 2026-05-01 18:15:00 | 101 |
+  | 2026-05-12 | 2026-05-12 06:55:00 | 2026-05-12 15:20:00 | 102 |
+  | 2026-05-13 | 2026-05-13 06:55:00 | 2026-05-13 15:20:00 | 102 |
+  | 2026-05-18 | 2026-05-18 06:55:00 | 2026-05-18 15:20:00 | 102 |
+  | 2026-05-19 | 2026-05-19 06:55:00 | 2026-05-19 15:20:00 | 102 |
+  | 2026-05-21 | 2026-05-21 06:55:00 | 2026-05-21 15:20:00 | 102 |
+  | 2026-05-22 | 2026-05-22 06:55:00 | 2026-05-22 15:20:00 | 102 |
+  | 2026-06-02 | 2026-06-02 06:55:00 | 2026-06-02 15:20:00 | 102 |
+  | 2026-06-12 | 2026-06-12 09:55:00 | 2026-06-12 18:20:00 | 102 |
+
+==============================================================================
+SECTION 6 -- CAN THE LAST BAR OF A SESSION PARTICIPATE?
+==============================================================================
+Static analysis:
+
+v601 backtest_one:
+  - signal is built by build_tag as close.pct_change(6) * 100 < q25.
+  - entry requires _next_session_first_bar(df, t) == False.
+  - if t is the last bar of a session, _next_session_first_bar returns True,
+    therefore open_position returns None, no trade is created.
+  - Therefore the last bar of a session cannot create a trade entry.
+  - It can still, in principle, be assigned a signal value in build_tag,
+    but that value never leads to an entry.
+
+v600 build_forward_labels:
+  - future indices are collected only while
+    sk_5m.iloc[j] == session. Stop at first cross-session bar.
+  - if h > max_available, label is NaN and label_partial_window_H = True.
+  - Therefore forward windows never cross sessions.
+  - The last few bars of a session may have partial windows for large h.
+  - Those are marked in the data and would be dropped in any H4
+    implementation that respects the same rule.
+
+Controls and baselines:
+  - there is no separate control-set construction in v600/v601.
+  - in a future H4 implementation, controls are defined by H4 spec,
+    not by v600/v601. The spec must state whether the last bar of a
+    session can be a control. Currently UNRESOLVED in existing code.
+
+==============================================================================
+SECTION 7 -- CROSS-SESSION FORWARD WINDOW RISK
+==============================================================================
+v600 build_forward_labels stops at first cross-session bar. No risk.
+v601 uses session-safe intra-session windows only. No risk.
+
+If a future H4 implementation uses forward_range_h on bars near
+session end, the same session-safe rule must be applied explicitly.
+This is a specification item, not a code defect of v600/v601.
+
+wrote audit_session_boundary_rules_v1_anomalies.csv
+
+==============================================================================
+SECTION 9 -- UNRESOLVED ITEMS
+==============================================================================
+- Whether the last bar of a session may be a control in H4:
+  UNRESOLVED. Must be specified in v3.5 spec.
+- Whether 15:20 sessions are treated as standard or as
+  schedule features in H4: UNRESOLVED. Decision Q-NEW deferred.
+- Whether 09:55..18:xx holiday sessions enter H4: UNRESOLVED.
+  Decision Q-NEW deferred.
+- No H4 quantities were computed.
+- No H4 hypothesis was tested.
+- No strategy rule was changed.
+
+==============================================================================
+END OF AUDIT
+==============================================================================
+
+No file was modified. No H4 calculation was performed.
+No strategy logic was changed.
+No live order was sent.

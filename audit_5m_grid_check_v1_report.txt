@@ -1,0 +1,300 @@
+5M GRID CHECK v1 -- READ ONLY
+audit_5m_grid_check_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+Read-only inspection of 5M timestamp grid.
+No hypothesis is tested. No file is modified.
+
+==============================================================================
+INPUT
+==============================================================================
+OK  cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+    size=2416569
+
+rows: 25856
+columns: ['begin', 'open', 'high', 'low', 'close', 'volume', 'value', 'end', 'n_1m']
+
+==============================================================================
+COLUMNS begin / end -- sample and dtype
+==============================================================================
+first 5 rows (begin, end):
+  begin=2025-09-15 06:55:00   end=2025-09-15 06:59:59
+  begin=2025-09-15 07:00:00   end=2025-09-15 07:04:59
+  begin=2025-09-15 07:05:00   end=2025-09-15 07:09:59
+  begin=2025-09-15 07:10:00   end=2025-09-15 07:14:59
+  begin=2025-09-15 07:15:00   end=2025-09-15 07:19:59
+
+last 5 rows (begin, end):
+  begin=2026-09-14 14:55:00   end=2026-09-14 14:59:59
+  begin=2026-09-14 15:00:00   end=2026-09-14 15:04:59
+  begin=2026-09-14 15:05:00   end=2026-09-14 15:09:59
+  begin=2026-09-14 15:10:00   end=2026-09-14 15:14:59
+  begin=2026-09-14 15:15:00   end=2026-09-14 15:18:59
+
+==============================================================================
+SESSIONS
+==============================================================================
+distinct calendar dates: 256
+
+first 5 sessions (first_begin / last_begin / last_end / n_bars):
+  2025-09-15  n=101  first_begin=2025-09-15 06:55:00  last_begin=2025-09-15 15:15:00  last_end=2025-09-15 15:18:59
+  2025-09-16  n=101  first_begin=2025-09-16 06:55:00  last_begin=2025-09-16 15:15:00  last_end=2025-09-16 15:18:59
+  2025-09-17  n=101  first_begin=2025-09-17 06:55:00  last_begin=2025-09-17 15:15:00  last_end=2025-09-17 15:18:59
+  2025-09-18  n=101  first_begin=2025-09-18 06:55:00  last_begin=2025-09-18 15:15:00  last_end=2025-09-18 15:18:59
+  2025-09-19  n=101  first_begin=2025-09-19 06:55:00  last_begin=2025-09-19 15:15:00  last_end=2025-09-19 15:18:59
+
+last 5 sessions:
+  2026-09-08  n=101  first_begin=2026-09-08 06:55:00  last_begin=2026-09-08 15:15:00  last_end=2026-09-08 15:18:59
+  2026-09-09  n=101  first_begin=2026-09-09 06:55:00  last_begin=2026-09-09 15:15:00  last_end=2026-09-09 15:18:59
+  2026-09-10  n=101  first_begin=2026-09-10 06:55:00  last_begin=2026-09-10 15:15:00  last_end=2026-09-10 15:18:59
+  2026-09-11  n=101  first_begin=2026-09-11 06:55:00  last_begin=2026-09-11 15:15:00  last_end=2026-09-11 15:18:59
+  2026-09-14  n=101  first_begin=2026-09-14 06:55:00  last_begin=2026-09-14 15:15:00  last_end=2026-09-14 15:18:59
+
+n_bars per session: min=101 median=101 max=101
+
+first_begin time-of-day value counts (top 5):
+  06:55:00: 253 sessions
+  09:55:00: 3 sessions
+last_begin time-of-day value counts (top 5):
+  15:15:00: 253 sessions
+  18:15:00: 3 sessions
+
+end - begin (minutes):
+  min=3.9833  median=4.9833  max=4.9833  mean=4.9734
+  most common values:
+    4.9833 min: 25600 rows
+    3.9833 min: 256 rows
+
+==============================================================================
+BEGIN TIME-OF-DAY GRID
+==============================================================================
+distinct begin times-of-day: 137
+min begin-time: 06:55:00
+max begin-time: 18:15:00
+
+all distinct begin times-of-day (sorted):
+  06:55:00: 253 rows
+  07:00:00: 253 rows
+  07:05:00: 253 rows
+  07:10:00: 253 rows
+  07:15:00: 253 rows
+  07:20:00: 253 rows
+  07:25:00: 253 rows
+  07:30:00: 253 rows
+  07:35:00: 253 rows
+  07:40:00: 253 rows
+  07:45:00: 253 rows
+  07:50:00: 253 rows
+  07:55:00: 253 rows
+  08:00:00: 253 rows
+  08:05:00: 253 rows
+  08:10:00: 253 rows
+  08:15:00: 253 rows
+  08:20:00: 253 rows
+  08:25:00: 253 rows
+  08:30:00: 253 rows
+  08:35:00: 253 rows
+  08:40:00: 253 rows
+  08:45:00: 253 rows
+  08:50:00: 253 rows
+  08:55:00: 253 rows
+  09:00:00: 253 rows
+  09:05:00: 253 rows
+  09:10:00: 253 rows
+  09:15:00: 253 rows
+  09:20:00: 253 rows
+  09:25:00: 253 rows
+  09:30:00: 253 rows
+  09:35:00: 253 rows
+  09:40:00: 253 rows
+  09:45:00: 253 rows
+  09:50:00: 253 rows
+  09:55:00: 256 rows
+  10:00:00: 256 rows
+  10:05:00: 256 rows
+  10:10:00: 256 rows
+  10:15:00: 256 rows
+  10:20:00: 256 rows
+  10:25:00: 256 rows
+  10:30:00: 256 rows
+  10:35:00: 256 rows
+  10:40:00: 256 rows
+  10:45:00: 256 rows
+  10:50:00: 256 rows
+  10:55:00: 256 rows
+  11:00:00: 256 rows
+  11:05:00: 256 rows
+  11:10:00: 256 rows
+  11:15:00: 256 rows
+  11:20:00: 256 rows
+  11:25:00: 256 rows
+  11:30:00: 256 rows
+  11:35:00: 256 rows
+  11:40:00: 256 rows
+  11:45:00: 256 rows
+  11:50:00: 256 rows
+  11:55:00: 256 rows
+  12:00:00: 256 rows
+  12:05:00: 256 rows
+  12:10:00: 256 rows
+  12:15:00: 256 rows
+  12:20:00: 256 rows
+  12:25:00: 256 rows
+  12:30:00: 256 rows
+  12:35:00: 256 rows
+  12:40:00: 256 rows
+  12:45:00: 256 rows
+  12:50:00: 256 rows
+  12:55:00: 256 rows
+  13:00:00: 256 rows
+  13:05:00: 256 rows
+  13:10:00: 256 rows
+  13:15:00: 256 rows
+  13:20:00: 256 rows
+  13:25:00: 256 rows
+  13:30:00: 256 rows
+  13:35:00: 256 rows
+  13:40:00: 256 rows
+  13:45:00: 256 rows
+  13:50:00: 256 rows
+  13:55:00: 256 rows
+  14:00:00: 256 rows
+  14:05:00: 256 rows
+  14:10:00: 256 rows
+  14:15:00: 256 rows
+  14:20:00: 256 rows
+  14:25:00: 256 rows
+  14:30:00: 256 rows
+  14:35:00: 256 rows
+  14:40:00: 256 rows
+  14:45:00: 256 rows
+  14:50:00: 256 rows
+  14:55:00: 256 rows
+  15:00:00: 256 rows
+  15:05:00: 256 rows
+  15:10:00: 256 rows
+  15:15:00: 256 rows
+  15:20:00: 3 rows
+  15:25:00: 3 rows
+  15:30:00: 3 rows
+  15:35:00: 3 rows
+  15:40:00: 3 rows
+  15:45:00: 3 rows
+  15:50:00: 3 rows
+  15:55:00: 3 rows
+  16:00:00: 3 rows
+  16:05:00: 3 rows
+  16:10:00: 3 rows
+  16:15:00: 3 rows
+  16:20:00: 3 rows
+  16:25:00: 3 rows
+  16:30:00: 3 rows
+  16:35:00: 3 rows
+  16:40:00: 3 rows
+  16:45:00: 3 rows
+  16:50:00: 3 rows
+  16:55:00: 3 rows
+  17:00:00: 3 rows
+  17:05:00: 3 rows
+  17:10:00: 3 rows
+  17:15:00: 3 rows
+  17:20:00: 3 rows
+  17:25:00: 3 rows
+  17:30:00: 3 rows
+  17:35:00: 3 rows
+  17:40:00: 3 rows
+  17:45:00: 3 rows
+  17:50:00: 3 rows
+  17:55:00: 3 rows
+  18:00:00: 3 rows
+  18:05:00: 3 rows
+  18:10:00: 3 rows
+  18:15:00: 3 rows
+
+==============================================================================
+SIGNAL_TIME = begin + 5 min -- bucket alignment check
+==============================================================================
+bars classified by signal_time into 4 buckets:
+  Bucket 1 [06:55,08:55): 5819
+  Bucket 2 [08:55,10:55): 6105
+  Bucket 3 [10:55,12:55): 6144
+  Bucket 4 [12:55,15:20): 7424
+  outside all buckets:    364
+  total: 25856
+
+bars with signal_time exactly on a boundary: 1021
+  begin=2025-09-15 08:50:00  signal_time=2025-09-15 08:55:00
+  begin=2025-09-15 10:50:00  signal_time=2025-09-15 10:55:00
+  begin=2025-09-15 12:50:00  signal_time=2025-09-15 12:55:00
+  begin=2025-09-15 15:15:00  signal_time=2025-09-15 15:20:00
+  begin=2025-09-16 08:50:00  signal_time=2025-09-16 08:55:00
+  begin=2025-09-16 10:50:00  signal_time=2025-09-16 10:55:00
+  begin=2025-09-16 12:50:00  signal_time=2025-09-16 12:55:00
+  begin=2025-09-16 15:15:00  signal_time=2025-09-16 15:20:00
+  begin=2025-09-17 08:50:00  signal_time=2025-09-17 08:55:00
+  begin=2025-09-17 10:50:00  signal_time=2025-09-17 10:55:00
+
+bars outside all buckets -- time-of-day distribution of signal_time:
+  15:20:00: 256
+  15:25:00: 3
+  15:30:00: 3
+  15:35:00: 3
+  15:40:00: 3
+  15:45:00: 3
+  15:50:00: 3
+  15:55:00: 3
+  16:00:00: 3
+  16:05:00: 3
+
+==============================================================================
+LAST 5M BAR OF EACH SESSION -- signal_time bucket check
+==============================================================================
+last-bar bucket counts:
+  bucket 0: 256 sessions
+
+sample last bars (first 5 sessions):
+  2025-09-15  last_begin=2025-09-15 15:15:00  signal_time=2025-09-15 15:20:00  bucket=0
+  2025-09-16  last_begin=2025-09-16 15:15:00  signal_time=2025-09-16 15:20:00  bucket=0
+  2025-09-17  last_begin=2025-09-17 15:15:00  signal_time=2025-09-17 15:20:00  bucket=0
+  2025-09-18  last_begin=2025-09-18 15:15:00  signal_time=2025-09-18 15:20:00  bucket=0
+  2025-09-19  last_begin=2025-09-19 15:15:00  signal_time=2025-09-19 15:20:00  bucket=0
+
+==============================================================================
+FIRST 5M BAR OF EACH SESSION -- signal_time bucket check
+==============================================================================
+first-bar bucket counts:
+  bucket 1: 253 sessions
+  bucket 2: 3 sessions
+
+sample first bars (first 5 sessions):
+  2025-09-15  first_begin=2025-09-15 06:55:00  signal_time=2025-09-15 07:00:00  bucket=1
+  2025-09-16  first_begin=2025-09-16 06:55:00  signal_time=2025-09-16 07:00:00  bucket=1
+  2025-09-17  first_begin=2025-09-17 06:55:00  signal_time=2025-09-17 07:00:00  bucket=1
+  2025-09-18  first_begin=2025-09-18 06:55:00  signal_time=2025-09-18 07:00:00  bucket=1
+  2025-09-19  first_begin=2025-09-19 06:55:00  signal_time=2025-09-19 07:00:00  bucket=1
+
+==============================================================================
+LAST BAR end TIMESTAMP -- does it sit at or before 15:20?
+==============================================================================
+last-end time-of-day value counts (top 5):
+  15:18:59: 253 sessions
+  18:18:59: 3 sessions
+
+==============================================================================
+SUMMARY
+==============================================================================
+- Buckets are defined on signal_time = begin + 5 min.
+- Bucket boundaries: 06:55 / 08:55 / 10:55 / 12:55 / 15:20.
+- Boundary rule: [start, end) -- start included, end excluded.
+- Bars whose signal_time does not fall in any bucket are excluded.
+- Counts reported above give the exact per-bucket coverage.
+
+No strategy logic was changed.
+No threshold was optimized.
+No filter was installed.
+No live order was sent.

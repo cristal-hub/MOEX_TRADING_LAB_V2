@@ -1,0 +1,158 @@
+H4 FORENSIC FOLLOW-UP v2 FAST -- READ ONLY
+audit_h4_forensic_followup_v2_fast.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+
+NO H4 EFFECT CALCULATIONS. NO CI. NO BOOTSTRAP.
+OOS NOT TOUCHED.
+
+METHOD: v600 build_forward_labels is NOT called. Its logic is
+reproduced exactly on numpy (SOURCE-CODE VERIFIED).
+
+==============================================================================
+SECTION 1 -- SOURCE CODE INVENTORY
+==============================================================================
+v600_hypothesis_lab.py
+  size=43846
+  sha256=97efcdee3b5c299b985eddbba325f0c9753f48043fa8ddd3ed6eeb40de75d347
+cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+  size=2416569
+  sha256=33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+  size=2368190
+  sha256=054640f72aa6f855120d9ee78ab103d73723e8a0c95067137fae79ac5e3597d7
+cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+  size=2242598
+  sha256=7542703e984e26987e5d86396823dd116247c95163ad7cd5082d5e62a549c924
+
+==============================================================================
+DATASET: SBER_2025_2026
+==============================================================================
+  n_bars: 25856
+
+QA-A2 -- Formal (j)-(k) vs v600-reconstructed partial flags
+------------------------------------------------------------------------------
+  max_avail (within-session future bars per bar):
+    min=0 max=100 mean=50.00
+
+  h=1
+    formal: ok=25600 fail_j=0 fail_k=255 fail_both=1 sum=25856 n=25856
+    v600_recon: full=25600 partial=256
+    per-bar match formal_full vs v600_full: 25856 / 25856 (mismatch=0)
+  h=2
+    formal: ok=25344 fail_j=0 fail_k=510 fail_both=2 sum=25856 n=25856
+    v600_recon: full=25344 partial=512
+    per-bar match formal_full vs v600_full: 25856 / 25856 (mismatch=0)
+  h=3
+    formal: ok=25088 fail_j=0 fail_k=765 fail_both=3 sum=25856 n=25856
+    v600_recon: full=25088 partial=768
+    per-bar match formal_full vs v600_full: 25856 / 25856 (mismatch=0)
+  h=6
+    formal: ok=24320 fail_j=0 fail_k=1530 fail_both=6 sum=25856 n=25856
+    v600_recon: full=24320 partial=1536
+    per-bar match formal_full vs v600_full: 25856 / 25856 (mismatch=0)
+  h=12
+    formal: ok=22784 fail_j=0 fail_k=3060 fail_both=12 sum=25856 n=25856
+    v600_recon: full=22784 partial=3072
+    per-bar match formal_full vs v600_full: 25856 / 25856 (mismatch=0)
+
+PC5 diagnostics -- non-5-minute steps classified
+------------------------------------------------------------------------------
+  non-5-minute steps: 255
+    intra_session:    0
+    session_boundary: 255
+    invalid:          0
+
+==============================================================================
+DATASET: GAZP_2025_2026
+==============================================================================
+  n_bars: 25862
+
+QA-A2 -- Formal (j)-(k) vs v600-reconstructed partial flags
+------------------------------------------------------------------------------
+  max_avail (within-session future bars per bar):
+    min=0 max=102 mean=50.01
+
+  h=1
+    formal: ok=25606 fail_j=0 fail_k=255 fail_both=1 sum=25862 n=25862
+    v600_recon: full=25606 partial=256
+    per-bar match formal_full vs v600_full: 25862 / 25862 (mismatch=0)
+  h=2
+    formal: ok=25350 fail_j=0 fail_k=510 fail_both=2 sum=25862 n=25862
+    v600_recon: full=25350 partial=512
+    per-bar match formal_full vs v600_full: 25862 / 25862 (mismatch=0)
+  h=3
+    formal: ok=25094 fail_j=0 fail_k=765 fail_both=3 sum=25862 n=25862
+    v600_recon: full=25094 partial=768
+    per-bar match formal_full vs v600_full: 25862 / 25862 (mismatch=0)
+  h=6
+    formal: ok=24326 fail_j=0 fail_k=1530 fail_both=6 sum=25862 n=25862
+    v600_recon: full=24326 partial=1536
+    per-bar match formal_full vs v600_full: 25862 / 25862 (mismatch=0)
+  h=12
+    formal: ok=22790 fail_j=0 fail_k=3060 fail_both=12 sum=25862 n=25862
+    v600_recon: full=22790 partial=3072
+    per-bar match formal_full vs v600_full: 25862 / 25862 (mismatch=0)
+
+PC5 diagnostics -- non-5-minute steps classified
+------------------------------------------------------------------------------
+  non-5-minute steps: 255
+    intra_session:    0
+    session_boundary: 255
+    invalid:          0
+
+==============================================================================
+DATASET: LKOH_2025_2026
+==============================================================================
+  n_bars: 25893
+
+QA-A2 -- Formal (j)-(k) vs v600-reconstructed partial flags
+------------------------------------------------------------------------------
+  max_avail (within-session future bars per bar):
+    min=0 max=106 mean=50.07
+
+  h=1
+    formal: ok=25637 fail_j=0 fail_k=255 fail_both=1 sum=25893 n=25893
+    v600_recon: full=25637 partial=256
+    per-bar match formal_full vs v600_full: 25893 / 25893 (mismatch=0)
+  h=2
+    formal: ok=25381 fail_j=0 fail_k=510 fail_both=2 sum=25893 n=25893
+    v600_recon: full=25381 partial=512
+    per-bar match formal_full vs v600_full: 25893 / 25893 (mismatch=0)
+  h=3
+    formal: ok=25125 fail_j=0 fail_k=765 fail_both=3 sum=25893 n=25893
+    v600_recon: full=25125 partial=768
+    per-bar match formal_full vs v600_full: 25893 / 25893 (mismatch=0)
+  h=6
+    formal: ok=24357 fail_j=0 fail_k=1530 fail_both=6 sum=25893 n=25893
+    v600_recon: full=24357 partial=1536
+    per-bar match formal_full vs v600_full: 25893 / 25893 (mismatch=0)
+  h=12
+    formal: ok=22821 fail_j=0 fail_k=3060 fail_both=12 sum=25893 n=25893
+    v600_recon: full=22821 partial=3072
+    per-bar match formal_full vs v600_full: 25893 / 25893 (mismatch=0)
+
+PC5 diagnostics -- non-5-minute steps classified
+------------------------------------------------------------------------------
+  non-5-minute steps: 255
+    intra_session:    0
+    session_boundary: 255
+    invalid:          0
+
+wrote audit_h4_forensic_followup_v2_fast_qa_a2.csv
+wrote audit_h4_forensic_followup_v2_fast_pc5.csv
+
+==============================================================================
+STATUS
+==============================================================================
+QA-A2: formal (j)-(k) vs v600-reconstructed partial flags.
+       v600 build_forward_labels NOT called; logic copied
+       exactly -> SOURCE-CODE VERIFIED.
+PC5:   diagnostics only; NOT APPLIED.
+
+No file was modified. No H4 effect was computed.
+No CI, no bootstrap, no OOS.

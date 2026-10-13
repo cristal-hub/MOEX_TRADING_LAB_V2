@@ -1,0 +1,5 @@
+dataset,n_bars,n_sessions,n_reproduced_signals,n_trades_in_ledger,n_trade_signals_found_in_repro,n_trade_signals_missing_from_repro
+SBER_2025_2026,25856,256,6590,1835,1835,0
+SBER_2024_2025,25453,252,7903,2418,2418,0
+GAZP_2025_2026,25862,256,8925,2878,2878,0
+LKOH_2025_2026,25893,256,8800,2885,2885,0
