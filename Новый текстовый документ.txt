@@ -1,0 +1,186 @@
+==============================================================================
+MOEX TRADING LAB тАФ v5.18 GIVEBACK LAB
+RESEARCH ONLY тАФ STRATEGY LOGIC UNCHANGED
+Reconstructs in-trade paths and measures MFE -> final giveback.
+==============================================================================
+==============================================================================
+MOEX TRADING LAB тАФ v5.18 GIVEBACK LAB
+RESEARCH ONLY тАФ STRATEGY LOGIC UNCHANGED
+==============================================================================
+
+Rows: 553
+  ORDINARY  rows=200 | LONG=84 / SHORT=116
+  MANAGED   rows=353 | LONG=139 / SHORT=214
+
+Peak bar offset distribution (bars after entry to MFE peak).
+------------------------------------------------------------------------------
+  ORDINARY  mean=15.15 | median=9.00 | Q90=41.10
+  MANAGED   mean=7.52 | median=4.00 | Q90=21.00
+
+Giveback from peak to final, %.
+------------------------------------------------------------------------------
+  ORDINARY  mean=0.514 | median=0.410 | Q90=1.041
+  MANAGED   mean=0.194 | median=0.106 | Q90=0.467
+
+Bars at or above threshold (ordinary, by side).
+------------------------------------------------------------------------------
+  LONG: N=84
+    >= 0.20%: reached=41/84 | mean_bars=10.06 | median=0.00
+    >= 0.30%: reached=32/84 | mean_bars=7.79 | median=0.00
+    >= 0.50%: reached=20/84 | mean_bars=4.07 | median=0.00
+  SHORT: N=116
+    >= 0.20%: reached=74/116 | mean_bars=12.58 | median=3.50
+    >= 0.30%: reached=59/116 | mean_bars=9.51 | median=1.00
+    >= 0.50%: reached=36/116 | mean_bars=4.74 | median=0.00
+
+Exit reason decomposition (ordinary).
+------------------------------------------------------------------------------
+  END_OF_SESSION   N=164 | mean_peak=0.398 | mean_final=0.015 | mean_giveback=0.490
+  OPPOSITE_SIGNAL  N=35 | mean_peak=0.232 | mean_final=-0.384 | mean_giveback=0.623
+  END_OF_DATA      N=1 | mean_peak=0.332 | mean_final=-0.145 | mean_giveback=0.483
+
+By event_class ├Ч side (ordinary).
+------------------------------------------------------------------------------
+
+LONG
+  BOS_BAD_FROM_OUTSET                N= 43 | peak=0.087 | final=-0.257 | gb=0.401 | win=2.3%
+  MANAGED_REENTRY_GIVEBACK           N= 15 | peak=0.414 | final=0.013 | gb=0.488 | win=26.7%
+  MARGINAL_BOS                       N=  7 | peak=0.249 | final=-0.608 | gb=0.950 | win=0.0%
+  GOOD_BOS_LATE_ENTRY                N=  1 | peak=1.509 | final=-0.401 | gb=2.729 | win=0.0%
+  GOOD_BOS_ENGINE_EARNED             N= 14 | peak=0.794 | final=0.547 | gb=0.283 | win=100.0%
+  GOOD_BOS_ENGINE_FAILED_TO_CAPTURE  N=  4 | peak=0.470 | final=0.106 | gb=0.380 | win=0.0%
+
+SHORT
+  MARGINAL_BOS                       N= 16 | peak=0.330 | final=-0.084 | gb=0.484 | win=0.0%
+  GOOD_BOS_ENGINE_EARNED             N= 16 | peak=0.909 | final=0.562 | gb=0.433 | win=100.0%
+  BOS_BAD_FROM_OUTSET                N= 67 | peak=0.293 | final=-0.128 | gb=0.521 | win=22.4%
+  MANAGED_REENTRY_GIVEBACK           N= 10 | peak=0.473 | final=-0.178 | gb=0.830 | win=30.0%
+  GOOD_BOS_ENGINE_FAILED_TO_CAPTURE  N=  7 | peak=0.471 | final=-0.147 | gb=0.770 | win=0.0%
+
+By period (ordinary).
+------------------------------------------------------------------------------
+  DISCOVERY  N=95 | peak=0.376 | final=0.018 | gb=0.436
+  VALIDATION N=43 | peak=0.218 | final=-0.089 | gb=0.369
+  OOS        N=61 | peak=0.464 | final=-0.146 | gb=0.736
+
+Ordinary vs Managed, same side.
+------------------------------------------------------------------------------
+  LONG: ordinary N=84 mean_final=-0.301 | managed N=139 mean_final=-0.238
+  SHORT: ordinary N=116 mean_final=-0.259 | managed N=214 mean_final=-0.236
+
+Outputs:
+  v5.18_giveback_lab.csv
+==============================================================================
+
+======================================================================
+SAFETY:
+NO ORDERS WERE SENT
+NO TRADING ACTION WAS PERFORMED
+RESEARCH MODE ONLY
+======================================================================
+
+PS C:\Users\user\Desktop\MOEX_TRADING_LAB_V2> Select-String -Path v5.17_v2_12months_after_patch5.txt -Pattern "RESULT: 17/17|RESULT: 14/14|Net P&L|Trades|Wins|Losses|DIAG WARN"
+
+v5.17_v2_12months_after_patch5.txt:30:RESULT: 17/17 PASS
+v5.17_v2_12months_after_patch5.txt:2963:[PASS] No overlapping trades
+v5.17_v2_12months_after_patch5.txt:2978:RESULT: 17/17 PASS
+v5.17_v2_12months_after_patch5.txt:2990:Net P&L -42721.24
+v5.17_v2_12months_after_patch5.txt:2992:Trades 200
+v5.17_v2_12months_after_patch5.txt:2993:Wins 53
+v5.17_v2_12months_after_patch5.txt:2994:Losses 147
+v5.17_v2_12months_after_patch5.txt:3007:TRADES:
+v5.17_v2_12months_after_patch5.txt:5013:Trades with favourable excursion > 0: 166/200
+v5.17_v2_12months_after_patch5.txt:5014:Trades with structure changes after entry: 178/200
+v5.17_v2_12months_after_patch5.txt:5026:[PASS] No overlapping trades
+v5.17_v2_12months_after_patch5.txt:5036:RESULT: 14/14 PASS
+v5.17_v2_12months_after_patch5.txt:5051:Net P&L -56822.19
+v5.17_v2_12months_after_patch5.txt:5053:Trades 353
+v5.17_v2_12months_after_patch5.txt:5054:Wins 61
+v5.17_v2_12months_after_patch5.txt:5055:Losses 292
+v5.17_v2_12months_after_patch5.txt:7579:Managed minus ordinary net P&L: mean=+59.17 | median=+46.34
+v5.17_v2_12months_after_patch5.txt:8184:Ordinary trades:                   200
+v5.17_v2_12months_after_patch5.txt:8185:Unmatched ordinary trades:         0
+v5.17_v2_12months_after_patch5.txt:8186:Max trades attached to one BOS:   1
+v5.17_v2_12months_after_patch5.txt:8187:Mean trades per BOS:               0.627
+v5.17_v2_12months_after_patch5.txt:8292:Ordinary trades:                   200
+v5.17_v2_12months_after_patch5.txt:8310:[PASS] All ordinary trades map to BOS events
+v5.17_v2_12months_after_patch5.txt:8312:[PASS] No ordinary BOS has multiple trades
+v5.17_v2_12months_after_patch5.txt:8453:Ordinary trades: 200
+v5.17_v2_12months_after_patch5.txt:8454:Managed trades: 353
+v5.17_v2_12months_after_patch5.txt:11601:[PASS] All ordinary trades map to BOS
+v5.17_v2_12months_after_patch5.txt:11602:[PASS] All managed trades map to BOS
+v5.17_v2_12months_after_patch5.txt:11640:0            N=309 | mean MFE=+0.216% | ordinary trades=192 | mean ordinary PnL=-211.61
+v5.17_v2_12months_after_patch5.txt:11641:3-4          N= 1 | mean MFE=+0.090% | ordinary trades= 0 | mean ordinary PnL=n/a
+v5.17_v2_12months_after_patch5.txt:11642:1-2          N= 9 | mean MFE=+0.517% | ordinary trades= 8 | mean ordinary PnL=-261.45
+v5.17_v2_12months_after_patch5.txt:11646:1-2          N=238 | mean MFE=+0.225% | ordinary trades=196 | mean ordinary PnL=-217.36
+v5.17_v2_12months_after_patch5.txt:11647:3-4          N=25 | mean MFE=+0.276% | ordinary trades= 4 | mean ordinary PnL=-29.53
+v5.17_v2_12months_after_patch5.txt:11648:5+           N=24 | mean MFE=+0.258% | ordinary trades= 0 | mean ordinary PnL=n/a
+v5.17_v2_12months_after_patch5.txt:11649:NO_ENTRY     N=32 | mean MFE=+0.151% | ordinary trades= 0 | mean ordinary PnL=n/a
+v5.17_v2_12months_after_patch5.txt:11653:<0.5 ATR       N=124 | mean MFE=+0.231% | ordinary trades=100 | mean ordinary PnL=-222.29
+v5.17_v2_12months_after_patch5.txt:11654:0.5-1.0 ATR    N=77 | mean MFE=+0.229% | ordinary trades=55 | mean ordinary PnL=-238.38
+v5.17_v2_12months_after_patch5.txt:11655:1.0-1.5 ATR    N=46 | mean MFE=+0.221% | ordinary trades=30 | mean ordinary PnL=-170.65
+v5.17_v2_12months_after_patch5.txt:11656:>=1.5 ATR      N=40 | mean MFE=+0.252% | ordinary trades=15 | mean ordinary PnL=-150.84
+v5.17_v2_12months_after_patch5.txt:11657:NO_ENTRY       N=32 | mean MFE=+0.151% | ordinary trades= 0 | mean ordinary PnL=n/a
+v5.17_v2_12months_after_patch5.txt:11668:BOS #2568 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-198.17 | lifecycle=-1035.62 | delta=-837.45
+v5.17_v2_12months_after_patch5.txt:11669:BOS #66 SHORT | class=BOS_NO_TRADE | trades=2 | first=-130.25 | lifecycle=-844.72 | delta=-714.46
+v5.17_v2_12months_after_patch5.txt:11670:BOS #15983 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-17.40 | lifecycle=-613.36 | delta=-595.95
+v5.17_v2_12months_after_patch5.txt:11671:BOS #13200 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=4 | first=+228.32 | lifecycle=-359.75 | delta=-588.06
+v5.17_v2_12months_after_patch5.txt:11672:BOS #1448 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-46.89 | lifecycle=-596.02 | delta=-549.13
+v5.17_v2_12months_after_patch5.txt:11673:BOS #3814 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=2 | first=-147.47 | lifecycle=-680.24 | delta=-532.77
+v5.17_v2_12months_after_patch5.txt:11674:BOS #22056 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-146.05 | lifecycle=-640.23 | delta=-494.18
+v5.17_v2_12months_after_patch5.txt:11675:BOS #10137 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-140.92 | lifecycle=-615.41 | delta=-474.49
+v5.17_v2_12months_after_patch5.txt:11676:BOS #3190 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=3 | first=-36.28 | lifecycle=-500.77 | delta=-464.49
+v5.17_v2_12months_after_patch5.txt:11677:BOS #12263 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-74.74 | lifecycle=-477.73 | delta=-402.99
+v5.17_v2_12months_after_patch5.txt:11678:BOS #23489 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=+75.54 | lifecycle=-318.15 | delta=-393.68
+v5.17_v2_12months_after_patch5.txt:11679:BOS #7612 SHORT | class=BOS_BAD_FROM_OUTSET | trades=3 | first=-204.59 | lifecycle=-585.57 | delta=-380.97
+v5.17_v2_12months_after_patch5.txt:11680:BOS #24898 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-59.40 | lifecycle=-411.41 | delta=-352.01
+v5.17_v2_12months_after_patch5.txt:11681:BOS #23085 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=+342.62 | lifecycle=+8.70 | delta=-333.92
+v5.17_v2_12months_after_patch5.txt:11682:BOS #7309 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-46.24 | lifecycle=-364.15 | delta=-317.91
+v5.17_v2_12months_after_patch5.txt:11683:BOS #8430 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-116.16 | lifecycle=-409.22 | delta=-293.06
+v5.17_v2_12months_after_patch5.txt:11684:BOS #8537 LONG | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-118.43 | lifecycle=-385.29 | delta=-266.85
+v5.17_v2_12months_after_patch5.txt:11685:BOS #24111 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=4 | first=-21.89 | lifecycle=-259.25 | delta=-237.36
+v5.17_v2_12months_after_patch5.txt:11686:BOS #480 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-88.11 | lifecycle=-299.73 | delta=-211.62
+v5.17_v2_12months_after_patch5.txt:11687:BOS #11250 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=+28.30 | lifecycle=-165.17 | delta=-193.47
+v5.17_v2_12months_after_patch5.txt:11688:BOS #18436 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-116.90 | lifecycle=-299.94 | delta=-183.04
+v5.17_v2_12months_after_patch5.txt:11689:BOS #23707 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=-25.59 | lifecycle=-204.03 | delta=-178.44
+v5.17_v2_12months_after_patch5.txt:11690:BOS #3713 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-16.78 | lifecycle=-194.66 | delta=-177.88
+v5.17_v2_12months_after_patch5.txt:11691:BOS #3978 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=+69.73 | lifecycle=-104.79 | delta=-174.52
+v5.17_v2_12months_after_patch5.txt:11692:BOS #1346 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=-112.30 | lifecycle=-283.20 | delta=-170.90
+v5.17_v2_12months_after_patch5.txt:11693:BOS #22886 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-99.90 | lifecycle=-241.64 | delta=-141.74
+v5.17_v2_12months_after_patch5.txt:11694:BOS #9435 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-78.59 | lifecycle=-205.75 | delta=-127.15
+v5.17_v2_12months_after_patch5.txt:11695:BOS #21662 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=+61.98 | lifecycle=-54.85 | delta=-116.84
+v5.17_v2_12months_after_patch5.txt:11696:BOS #11753 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-83.27 | lifecycle=-193.07 | delta=-109.80
+v5.17_v2_12months_after_patch5.txt:11697:BOS #23595 SHORT | class=BOS_NO_TRADE | trades=2 | first=-118.45 | lifecycle=-219.47 | delta=-101.02
+v5.17_v2_12months_after_patch5.txt:11698:BOS #18780 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-77.97 | lifecycle=-166.65 | delta=-88.68
+v5.17_v2_12months_after_patch5.txt:11699:BOS #10278 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-110.40 | lifecycle=-185.09 | delta=-74.69
+v5.17_v2_12months_after_patch5.txt:11700:BOS #22156 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-42.78 | lifecycle=-116.40 | delta=-73.62
+v5.17_v2_12months_after_patch5.txt:11701:BOS #10641 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-105.80 | lifecycle=-165.83 | delta=-60.02
+v5.17_v2_12months_after_patch5.txt:11702:BOS #13875 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=2 | first=-67.32 | lifecycle=-124.26 | delta=-56.93
+v5.17_v2_12months_after_patch5.txt:11703:BOS #25426 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=2 | first=-22.36 | lifecycle=-74.84 | delta=-52.48
+v5.17_v2_12months_after_patch5.txt:11704:BOS #13586 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+42.07 | lifecycle=+8.50 | delta=-33.57
+v5.17_v2_12months_after_patch5.txt:11705:BOS #7165 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-96.90 | lifecycle=-126.57 | delta=-29.66
+v5.17_v2_12months_after_patch5.txt:11706:BOS #9935 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-91.28 | lifecycle=-104.39 | delta=-13.11
+v5.17_v2_12months_after_patch5.txt:11707:BOS #25797 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-36.74 | lifecycle=-40.11 | delta=-3.37
+v5.17_v2_12months_after_patch5.txt:11708:BOS #20944 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+53.17 | lifecycle=+51.15 | delta=-2.02
+v5.17_v2_12months_after_patch5.txt:11709:BOS #1480 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+231.61 | lifecycle=+235.51 | delta=+3.90
+v5.17_v2_12months_after_patch5.txt:11710:BOS #19821 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-146.38 | lifecycle=-102.40 | delta=+43.98
+v5.17_v2_12months_after_patch5.txt:11711:BOS #14925 LONG | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+197.47 | lifecycle=+243.71 | delta=+46.24
+v5.17_v2_12months_after_patch5.txt:11712:BOS #5924 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-169.24 | lifecycle=-111.44 | delta=+57.79
+v5.17_v2_12months_after_patch5.txt:11713:BOS #5507 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-177.68 | lifecycle=-95.96 | delta=+81.72
+v5.17_v2_12months_after_patch5.txt:11714:BOS #21438 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=-26.02 | lifecycle=+65.93 | delta=+91.95
+v5.17_v2_12months_after_patch5.txt:11715:BOS #4733 LONG | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+109.62 | lifecycle=+221.36 | delta=+111.73
+v5.17_v2_12months_after_patch5.txt:11716:BOS #23901 LONG | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=-92.23 | lifecycle=+39.38 | delta=+131.61
+v5.17_v2_12months_after_patch5.txt:11717:BOS #19529 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=+140.71 | lifecycle=+284.43 | delta=+143.73
+v5.17_v2_12months_after_patch5.txt:11718:BOS #157 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=-40.87 | lifecycle=+107.39 | delta=+148.26
+v5.17_v2_12months_after_patch5.txt:11719:BOS #348 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-274.21 | lifecycle=-98.00 | delta=+176.21
+v5.17_v2_12months_after_patch5.txt:11783:Ordinary trades reconstructed: 200
+v5.17_v2_12months_after_patch5.txt:12069:Ordinary trades available: 200
+
+
+PS C:\Users\user\Desktop\MOEX_TRADING_LAB_V2> (Get-Content v5.18_giveback_lab.csv | Measure-Object -Line).Lines
+>> Get-Content v5.18_giveback_lab.csv -TotalCount 3
+554
+engine,trade_number,side,entry_index,exit_index,path_end_index,holding_bars,exit_reason,entry_time,exit_time,net_pnl,return_pct,final_favorable_pct,event_class,period,bos_event_index_5m,bos_event_time,entry_offset_min,peak_bar_offset,peak_index,peak_time,peak_favorable_pct,trough_after_peak_pct,giveback_from_peak_pct,post_peak_mae_pct,giveback_at_exit_pct,t0_2_reached,t0_2_bars_at_or_above,t0_2_first_below_after_peak,t0_3_reached,t0_3_bars_at_or_above,t0_3_first_below_after_peak,t0_5_reached,t0_5_bars_at_or_above,t0_5_first_below_after_peak
+ORDINARY,1,SHORT,57,100,100,43,END_OF_SESSION,2025-09-15 11:40:00,2025-09-15 15:15:00,-279.58162805484034,-0.2795816280548403,-0.09955215494447112,MARGINAL_BOS,DISCOVERY,56,2025-09-15 11:35:00,0.0,29,86,2025-09-15 14:05:00,0.5150460576635485,-0.09955215494447112,0.6145982126080196,-0.20839413648517935,0.6145982126080196,True,26,5.0,True,22,4.0,True,1,1.0
+ORDINARY,2,SHORT,158,201,200,43,OPPOSITE_SIGNAL,2025-09-16 11:40:00,2025-09-16 15:15:00,127.20977393709617,0.1275664262283969,0.3479561365672401,GOOD_BOS_ENGINE_EARNED,DISCOVERY,157,2025-09-16 11:35:00,0.0,16,174,2025-09-16 13:00:00,0.9138154821488165,0.3379686152212624,0.575846866927554,0.2116318754141755,0.5658593455815764,True,39,,True,36,,True,26,22.0
+
