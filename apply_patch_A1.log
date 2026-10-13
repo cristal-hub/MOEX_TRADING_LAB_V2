@@ -1,0 +1,60 @@
+======================================================================
+MOEX TRADING LAB — apply_patch_A1.py
+======================================================================
+Папка: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+Целевой файл: main_v5.17_threshold_path_lab_v2.py
+
+[OK] Файл найден: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+     Размер: 361203 байт
+     SHA256: 98df3ed0c75551a65f020537c6dfac00e0e0e829bd4b0706b72f200357521016
+[OK] SHA256 совпадает с эталоном v5.17.
+
+[OK] Оригинальный блок найден, файл ещё не пропатчен.
+
+[OK] Резервная копия: main_v5.17_threshold_path_lab_v2.py.bak
+[OK] Патч A1 применён.
+
+======================================================================
+DIFF — что изменилось (упрощённо):
+======================================================================
+
+БЫЛО (в timeline.append):
+    "last_event": signal_result["last_event"],
+    "signal_event": (
+        signal_result["last_event"].copy()
+        if signal_result["last_event"] is not None
+        else None
+    ),
+
+СТАЛО:
+    # [A1] перед timeline.append добавлен блок:
+    #   signal_event_global = ...
+    #   signal_event_global["index"] = first_session_index + local_signal_index
+    #   signal_event_global["time"] = df.iloc[global_signal_index]["end"]
+    #   signal_event_global["bar_begin"] = df.iloc[global_signal_index]["begin"]
+
+    "last_event": signal_result["last_event"],
+    "signal_event": signal_event_global,
+
+======================================================================
+До патча:    361126 символов
+После патча: 361916 символов
+Разница:     790 символов
+======================================================================
+
+[PASS] Патч A1 применён успешно.
+
+Следующие шаги:
+  1. Запустите v5.17-V2 с сохранением вывода в txt:
+
+     $env:PYTHONIOENCODING="utf-8"
+     python main_v5.17_threshold_path_lab_v2.py *>&1 | Tee-Object -FilePath v5.17_v2_after_A1_output.txt
+
+  2. Сравните новый v5.17_threshold_path_lab.csv с оригиналом
+     v5.17_threshold_path_lab_ORIGINAL.csv — они должны совпадать.
+
+  3. Если 27 trades НЕ изменились — A1 корректна.
+     Если изменились — откат:
+
+     Copy-Item "main_v5.17_threshold_path_lab_v2.py.bak" "main_v5.17_threshold_path_lab_v2.py" -Force
+
