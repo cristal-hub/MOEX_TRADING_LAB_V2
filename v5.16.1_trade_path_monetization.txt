@@ -1,0 +1,279 @@
+==================================================================================
+MOEX TRADING LAB — v5.16.1 ORDINARY TRADE PATH / MFE -> EXIT MONETIZATION LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+No thresholds below are strategy parameters. They are descriptive labels only.
+==================================================================================
+Ordinary trades reconstructed: 200
+Research round-trip break-even allowance: 0.2000%
+
+1) LONG / SHORT PATH SUMMARY
+----------------------------------------------------------------------------------
+SHORT  N=116 | mean MFE=+0.413% | median MFE=+0.320% | mean MAE=-0.498% | mean final=-0.259% | profitable=34/116
+LONG   N=84 | mean MFE=+0.320% | median MFE=+0.192% | mean MAE=-0.462% | mean final=-0.301% | profitable=19/84
+
+2) MFE -> FINAL CONVERSION
+----------------------------------------------------------------------------------
+0-0.10     N=67 | mean MFE=+0.018% | mean final=-0.577% | profitable=0/67 | MFE->final giveback=+0.595pp
+0.10-0.20  N=18 | mean MFE=+0.150% | mean final=-0.400% | profitable=1/18 | MFE->final giveback=+0.550pp
+0.20-0.30  N=24 | mean MFE=+0.241% | mean final=-0.498% | profitable=2/24 | MFE->final giveback=+0.739pp
+0.30-0.50  N=35 | mean MFE=+0.394% | mean final=-0.227% | profitable=8/35 | MFE->final giveback=+0.621pp
+0.50-0.75  N=20 | mean MFE=+0.611% | mean final=-0.057% | profitable=11/20 | MFE->final giveback=+0.667pp
+0.75-1.00  N=18 | mean MFE=+0.854% | mean final=+0.223% | profitable=16/18 | MFE->final giveback=+0.631pp
+>=1.00     N=18 | mean MFE=+1.313% | mean final=+0.418% | profitable=15/18 | MFE->final giveback=+0.895pp
+
+3) THRESHOLD CONVERSION: REACHED -> LATER OUTCOME
+----------------------------------------------------------------------------------
++0.05%  reached=145/200 | later loss=92 | later profit=53 | mean final=-0.148% | mean giveback=+0.660pp
++0.10%  reached=133/200 | later loss=80 | later profit=53 | mean final=-0.125% | mean giveback=+0.678pp
++0.20%  reached=115/200 | later loss=63 | later profit=52 | mean final=-0.083% | mean giveback=+0.698pp
++0.30%  reached=91/200 | later loss=41 | later profit=50 | mean final=+0.027% | mean giveback=+0.687pp
++0.40%  reached=71/200 | later loss=25 | later profit=46 | mean final=+0.092% | mean giveback=+0.724pp
++0.50%  reached=56/200 | later loss=14 | later profit=42 | mean final=+0.186% | mean giveback=+0.729pp
++0.75%  reached=36/200 | later loss= 5 | later profit=31 | mean final=+0.320% | mean giveback=+0.763pp
++1.00%  reached=18/200 | later loss= 3 | later profit=15 | mean final=+0.418% | mean giveback=+0.895pp
+
+4) TIME TO MFE / FIRST PROFIT AFTER COST
+----------------------------------------------------------------------------------
+MFE bar: N=200 | mean=16.15 | median=10.00
+First > cost (0.2000%): N=115 | mean=12.19 | median=8.00
+
+5) LARGEST MFE -> FINAL GIVEBACKS
+----------------------------------------------------------------------------------
+trade #154 SHORT | MFE=+1.103% | final=-1.581% | giveback=+2.684pp | MFE bar=26 | exit=OPPOSITE_SIGNAL
+trade #156 SHORT | MFE=+0.011% | final=-2.624% | giveback=+2.635pp | MFE bar=1 | exit=END_OF_SESSION
+trade # 8 SHORT | MFE=+0.000% | final=-2.581% | giveback=+2.581pp | MFE bar=1 | exit=END_OF_SESSION
+trade #182 LONG  | MFE=+0.232% | final=-1.992% | giveback=+2.225pp | MFE bar=10 | exit=OPPOSITE_SIGNAL
+trade #20 LONG  | MFE=+1.509% | final=-0.685% | giveback=+2.194pp | MFE bar=1 | exit=END_OF_SESSION
+trade #152 LONG  | MFE=+0.255% | final=-1.795% | giveback=+2.050pp | MFE bar=2 | exit=OPPOSITE_SIGNAL
+trade #172 SHORT | MFE=+0.528% | final=-1.436% | giveback=+1.964pp | MFE bar=12 | exit=END_OF_SESSION
+trade #169 SHORT | MFE=+0.204% | final=-1.693% | giveback=+1.897pp | MFE bar=13 | exit=END_OF_SESSION
+trade #168 SHORT | MFE=+1.550% | final=-0.185% | giveback=+1.734pp | MFE bar=25 | exit=END_OF_SESSION
+trade #167 SHORT | MFE=+0.814% | final=-0.818% | giveback=+1.633pp | MFE bar=8 | exit=END_OF_SESSION
+
+6) RECOVERY AFTER ADVERSE EXCURSION
+----------------------------------------------------------------------------------
+MAE <= -0.10% then later +0.10%: 106/200
+MAE <= -0.10% then later +0.20%: 90/200
+MAE <= -0.20% then later +0.10%: 66/200
+MAE <= -0.20% then later +0.20%: 54/200
+MAE <= -0.30% then later +0.10%: 44/200
+MAE <= -0.30% then later +0.20%: 38/200
+MAE <= -0.50% then later +0.10%: 15/200
+MAE <= -0.50% then later +0.20%: 13/200
+
+7) TRADE-BY-TRADE PATH SUMMARY
+----------------------------------------------------------------------------------
+# 1 SHORT | hold=43 | MFE=+0.515% @bar 30 | MAE=-0.208% @bar 43 | final=-0.280% | giveback=+0.795pp | exit=END_OF_SESSION
+# 2 SHORT | hold=43 | MFE=+0.914% @bar 17 | MAE=-0.050% @bar 1 | final=+0.128% | giveback=+0.786pp | exit=OPPOSITE_SIGNAL
+# 3 SHORT | hold=28 | MFE=+0.023% @bar 1 | MAE=-0.797% @bar 11 | final=-0.714% | giveback=+0.738pp | exit=END_OF_SESSION
+# 4 SHORT | hold=54 | MFE=+0.618% @bar 52 | MAE=-0.284% @bar 14 | final=+0.161% | giveback=+0.458pp | exit=END_OF_SESSION
+# 5 SHORT | hold=20 | MFE=+0.233% @bar 11 | MAE=-0.342% @bar 20 | final=-0.450% | giveback=+0.683pp | exit=OPPOSITE_SIGNAL
+# 6 LONG  | hold= 3 | MFE=+0.000% @bar 1 | MAE=-0.448% @bar 4 | final=-0.571% | giveback=+0.571pp | exit=END_OF_SESSION
+# 7 SHORT | hold=69 | MFE=+0.706% @bar 42 | MAE=-0.701% @bar 68 | final=-0.438% | giveback=+1.144pp | exit=END_OF_SESSION
+# 8 SHORT | hold=62 | MFE=+0.000% @bar 1 | MAE=-2.453% @bar 61 | final=-2.581% | giveback=+2.581pp | exit=END_OF_SESSION
+# 9 SHORT | hold=65 | MFE=+0.672% @bar 33 | MAE=-0.638% @bar 1 | final=-0.026% | giveback=+0.698pp | exit=END_OF_SESSION
+#10 SHORT | hold=53 | MFE=+0.750% @bar 52 | MAE=-0.773% @bar 21 | final=+0.522% | giveback=+0.228pp | exit=END_OF_SESSION
+#11 SHORT | hold=63 | MFE=+0.480% @bar 30 | MAE=-0.449% @bar 12 | final=-0.549% | giveback=+1.029pp | exit=OPPOSITE_SIGNAL
+#12 LONG  | hold= 3 | MFE=+0.027% @bar 1 | MAE=-0.236% @bar 4 | final=-0.319% | giveback=+0.346pp | exit=END_OF_SESSION
+#13 LONG  | hold=32 | MFE=+0.243% @bar 3 | MAE=-0.357% @bar 32 | final=-0.496% | giveback=+0.739pp | exit=OPPOSITE_SIGNAL
+#14 SHORT | hold=33 | MFE=+0.825% @bar 21 | MAE=-0.050% @bar 1 | final=+0.266% | giveback=+0.559pp | exit=END_OF_SESSION
+#15 LONG  | hold=33 | MFE=+0.258% @bar 9 | MAE=-0.739% @bar 34 | final=-0.846% | giveback=+1.103pp | exit=END_OF_SESSION
+#16 SHORT | hold=66 | MFE=+0.116% @bar 24 | MAE=-1.046% @bar 14 | final=-0.401% | giveback=+0.517pp | exit=END_OF_SESSION
+#17 LONG  | hold=33 | MFE=+0.330% @bar 26 | MAE=-0.173% @bar 12 | final=-0.003% | giveback=+0.333pp | exit=END_OF_SESSION
+#18 LONG  | hold=56 | MFE=+0.159% @bar 2 | MAE=-0.874% @bar 33 | final=-0.497% | giveback=+0.657pp | exit=END_OF_SESSION
+#19 SHORT | hold=59 | MFE=+0.481% @bar 50 | MAE=-0.740% @bar 17 | final=-0.135% | giveback=+0.616pp | exit=END_OF_SESSION
+#20 LONG  | hold=21 | MFE=+1.509% @bar 1 | MAE=-1.461% @bar 8 | final=-0.685% | giveback=+2.194pp | exit=END_OF_SESSION
+#21 LONG  | hold=74 | MFE=+1.313% @bar 73 | MAE=-0.480% @bar 4 | final=+1.029% | giveback=+0.284pp | exit=END_OF_SESSION
+#22 LONG  | hold=54 | MFE=+0.814% @bar 21 | MAE=-0.142% @bar 8 | final=+0.422% | giveback=+0.392pp | exit=END_OF_SESSION
+#23 LONG  | hold=22 | MFE=+0.286% @bar 3 | MAE=-0.134% @bar 1 | final=-0.019% | giveback=+0.304pp | exit=END_OF_SESSION
+#24 SHORT | hold=58 | MFE=+1.018% @bar 42 | MAE=-0.135% @bar 5 | final=+0.214% | giveback=+0.804pp | exit=END_OF_SESSION
+#25 LONG  | hold=56 | MFE=+0.365% @bar 35 | MAE=-0.333% @bar 8 | final=-0.096% | giveback=+0.460pp | exit=END_OF_SESSION
+#26 LONG  | hold=60 | MFE=+0.665% @bar 27 | MAE=-0.057% @bar 1 | final=+0.006% | giveback=+0.659pp | exit=END_OF_SESSION
+#27 SHORT | hold=58 | MFE=+0.131% @bar 4 | MAE=-0.995% @bar 14 | final=-0.385% | giveback=+0.516pp | exit=END_OF_SESSION
+#28 SHORT | hold=51 | MFE=+0.792% @bar 51 | MAE=-0.053% @bar 3 | final=+0.230% | giveback=+0.562pp | exit=END_OF_SESSION
+#29 LONG  | hold=48 | MFE=+1.071% @bar 15 | MAE=-0.117% @bar 1 | final=+0.033% | giveback=+1.038pp | exit=END_OF_SESSION
+#30 SHORT | hold=31 | MFE=+0.388% @bar 11 | MAE=-0.326% @bar 31 | final=-0.440% | giveback=+0.829pp | exit=OPPOSITE_SIGNAL
+#31 LONG  | hold=12 | MFE=+1.000% @bar 10 | MAE=-0.053% @bar 1 | final=+0.454% | giveback=+0.546pp | exit=END_OF_SESSION
+#32 SHORT | hold=27 | MFE=+0.531% @bar 14 | MAE=-0.377% @bar 27 | final=-0.506% | giveback=+1.036pp | exit=OPPOSITE_SIGNAL
+#33 LONG  | hold=24 | MFE=+0.117% @bar 1 | MAE=-0.596% @bar 24 | final=-0.742% | giveback=+0.859pp | exit=OPPOSITE_SIGNAL
+#34 SHORT | hold=10 | MFE=+0.339% @bar 11 | MAE=-0.247% @bar 4 | final=+0.175% | giveback=+0.164pp | exit=END_OF_SESSION
+#35 SHORT | hold=65 | MFE=+1.543% @bar 42 | MAE=-0.360% @bar 6 | final=+0.900% | giveback=+0.643pp | exit=END_OF_SESSION
+#36 SHORT | hold=50 | MFE=+0.289% @bar 10 | MAE=-0.263% @bar 40 | final=-0.292% | giveback=+0.581pp | exit=END_OF_SESSION
+#37 LONG  | hold=66 | MFE=+0.491% @bar 55 | MAE=-0.532% @bar 18 | final=-0.256% | giveback=+0.748pp | exit=END_OF_SESSION
+#38 LONG  | hold=46 | MFE=+0.570% @bar 15 | MAE=-0.178% @bar 6 | final=-0.026% | giveback=+0.596pp | exit=END_OF_SESSION
+#39 SHORT | hold=57 | MFE=+0.151% @bar 8 | MAE=-0.338% @bar 49 | final=-0.375% | giveback=+0.526pp | exit=END_OF_SESSION
+#40 SHORT | hold=61 | MFE=+0.545% @bar 23 | MAE=-0.090% @bar 1 | final=+0.083% | giveback=+0.462pp | exit=END_OF_SESSION
+#41 SHORT | hold=61 | MFE=+0.470% @bar 42 | MAE=-0.215% @bar 4 | final=-0.048% | giveback=+0.518pp | exit=END_OF_SESSION
+#42 LONG  | hold=33 | MFE=+0.851% @bar 31 | MAE=-0.237% @bar 10 | final=+0.441% | giveback=+0.409pp | exit=END_OF_SESSION
+#43 SHORT | hold=61 | MFE=+0.471% @bar 61 | MAE=-0.342% @bar 11 | final=+0.071% | giveback=+0.400pp | exit=END_OF_SESSION
+#44 LONG  | hold=37 | MFE=+0.000% @bar 1 | MAE=-0.728% @bar 18 | final=-0.571% | giveback=+0.571pp | exit=END_OF_SESSION
+#45 SHORT | hold=58 | MFE=+0.280% @bar 12 | MAE=-0.423% @bar 58 | final=-0.516% | giveback=+0.796pp | exit=END_OF_SESSION
+#46 SHORT | hold=15 | MFE=+0.418% @bar 3 | MAE=-0.132% @bar 3 | final=+0.145% | giveback=+0.273pp | exit=END_OF_SESSION
+#47 SHORT | hold=10 | MFE=+0.003% @bar 2 | MAE=-0.271% @bar 7 | final=-0.329% | giveback=+0.332pp | exit=END_OF_SESSION
+#48 SHORT | hold=73 | MFE=+0.915% @bar 67 | MAE=-0.172% @bar 5 | final=+0.262% | giveback=+0.653pp | exit=END_OF_SESSION
+#49 LONG  | hold=14 | MFE=+0.016% @bar 1 | MAE=-0.429% @bar 14 | final=-0.556% | giveback=+0.572pp | exit=OPPOSITE_SIGNAL
+#50 SHORT | hold=45 | MFE=+0.943% @bar 25 | MAE=-0.390% @bar 24 | final=+0.135% | giveback=+0.808pp | exit=END_OF_SESSION
+#51 SHORT | hold=66 | MFE=+0.017% @bar 27 | MAE=-0.770% @bar 65 | final=-0.920% | giveback=+0.938pp | exit=OPPOSITE_SIGNAL
+#52 LONG  | hold= 4 | MFE=+0.220% @bar 4 | MAE=-0.050% @bar 1 | final=+0.043% | giveback=+0.177pp | exit=END_OF_SESSION
+#53 SHORT | hold=48 | MFE=+0.294% @bar 26 | MAE=-0.226% @bar 14 | final=-0.347% | giveback=+0.641pp | exit=OPPOSITE_SIGNAL
+#54 LONG  | hold=23 | MFE=+0.734% @bar 21 | MAE=-0.083% @bar 1 | final=+0.451% | giveback=+0.283pp | exit=END_OF_SESSION
+#55 SHORT | hold=62 | MFE=+0.316% @bar 55 | MAE=-0.133% @bar 21 | final=+0.109% | giveback=+0.207pp | exit=END_OF_SESSION
+#56 LONG  | hold=64 | MFE=+0.053% @bar 3 | MAE=-0.348% @bar 35 | final=-0.140% | giveback=+0.193pp | exit=END_OF_SESSION
+#57 LONG  | hold=78 | MFE=+1.039% @bar 40 | MAE=-0.400% @bar 23 | final=+0.169% | giveback=+0.870pp | exit=END_OF_SESSION
+#58 SHORT | hold=62 | MFE=+0.130% @bar 30 | MAE=-0.263% @bar 15 | final=-0.367% | giveback=+0.498pp | exit=END_OF_SESSION
+#59 SHORT | hold=38 | MFE=+0.352% @bar 8 | MAE=-0.238% @bar 38 | final=-0.385% | giveback=+0.737pp | exit=OPPOSITE_SIGNAL
+#60 LONG  | hold=31 | MFE=+0.121% @bar 19 | MAE=-0.167% @bar 6 | final=-0.069% | giveback=+0.190pp | exit=END_OF_SESSION
+#61 SHORT | hold=10 | MFE=+0.141% @bar 10 | MAE=-0.050% @bar 1 | final=-0.063% | giveback=+0.204pp | exit=END_OF_SESSION
+#62 LONG  | hold=33 | MFE=+0.000% @bar 1 | MAE=-0.549% @bar 33 | final=-0.698% | giveback=+0.698pp | exit=OPPOSITE_SIGNAL
+#63 SHORT | hold= 0 | MFE=+0.000% @bar 1 | MAE=-0.100% @bar 1 | final=-0.237% | giveback=+0.237pp | exit=END_OF_SESSION
+#64 LONG  | hold=60 | MFE=+0.427% @bar 10 | MAE=-0.377% @bar 49 | final=-0.460% | giveback=+0.886pp | exit=END_OF_SESSION
+#65 SHORT | hold=61 | MFE=+0.000% @bar 3 | MAE=-1.260% @bar 18 | final=-1.171% | giveback=+1.171pp | exit=END_OF_SESSION
+#66 SHORT | hold=62 | MFE=+0.323% @bar 12 | MAE=-0.214% @bar 36 | final=-0.284% | giveback=+0.607pp | exit=END_OF_SESSION
+#67 LONG  | hold=54 | MFE=+0.404% @bar 8 | MAE=-0.163% @bar 3 | final=-0.003% | giveback=+0.407pp | exit=END_OF_SESSION
+#68 SHORT | hold=72 | MFE=+0.216% @bar 10 | MAE=-0.984% @bar 29 | final=-0.982% | giveback=+1.198pp | exit=END_OF_SESSION
+#69 SHORT | hold=38 | MFE=+0.000% @bar 1 | MAE=-0.330% @bar 3 | final=-0.266% | giveback=+0.266pp | exit=END_OF_SESSION
+#70 LONG  | hold=22 | MFE=+0.283% @bar 13 | MAE=-0.151% @bar 1 | final=-0.233% | giveback=+0.516pp | exit=END_OF_SESSION
+#71 LONG  | hold=46 | MFE=+0.000% @bar 2 | MAE=-0.330% @bar 15 | final=-0.258% | giveback=+0.258pp | exit=END_OF_SESSION
+#72 LONG  | hold=39 | MFE=+0.002% @bar 1 | MAE=-0.304% @bar 40 | final=-0.398% | giveback=+0.400pp | exit=END_OF_SESSION
+#73 SHORT | hold=53 | MFE=+0.451% @bar 53 | MAE=-0.194% @bar 1 | final=+0.243% | giveback=+0.207pp | exit=END_OF_SESSION
+#74 SHORT | hold= 1 | MFE=+0.000% @bar 1 | MAE=-0.142% @bar 2 | final=-0.289% | giveback=+0.289pp | exit=END_OF_SESSION
+#75 LONG  | hold=57 | MFE=+0.188% @bar 7 | MAE=-0.099% @bar 50 | final=-0.076% | giveback=+0.264pp | exit=END_OF_SESSION
+#76 SHORT | hold=61 | MFE=+0.843% @bar 31 | MAE=-0.196% @bar 3 | final=+0.243% | giveback=+0.600pp | exit=END_OF_SESSION
+#77 SHORT | hold=66 | MFE=+0.784% @bar 53 | MAE=-0.181% @bar 17 | final=+0.244% | giveback=+0.540pp | exit=END_OF_SESSION
+#78 SHORT | hold=51 | MFE=+0.151% @bar 15 | MAE=-0.427% @bar 51 | final=-0.576% | giveback=+0.727pp | exit=OPPOSITE_SIGNAL
+#79 LONG  | hold= 2 | MFE=+0.000% @bar 2 | MAE=-0.122% @bar 3 | final=-0.259% | giveback=+0.259pp | exit=END_OF_SESSION
+#80 SHORT | hold=10 | MFE=+0.062% @bar 1 | MAE=-0.253% @bar 9 | final=-0.338% | giveback=+0.400pp | exit=END_OF_SESSION
+#81 SHORT | hold=62 | MFE=+0.582% @bar 62 | MAE=-0.205% @bar 22 | final=+0.197% | giveback=+0.385pp | exit=END_OF_SESSION
+#82 SHORT | hold=60 | MFE=+0.249% @bar 8 | MAE=-0.120% @bar 13 | final=-0.094% | giveback=+0.343pp | exit=END_OF_SESSION
+#83 SHORT | hold=62 | MFE=+0.063% @bar 5 | MAE=-0.615% @bar 14 | final=-0.257% | giveback=+0.320pp | exit=END_OF_SESSION
+#84 LONG  | hold=35 | MFE=+0.637% @bar 14 | MAE=-0.106% @bar 1 | final=-0.012% | giveback=+0.649pp | exit=OPPOSITE_SIGNAL
+#85 SHORT | hold=29 | MFE=+0.211% @bar 23 | MAE=-0.195% @bar 2 | final=-0.002% | giveback=+0.213pp | exit=END_OF_SESSION
+#86 LONG  | hold=29 | MFE=+0.006% @bar 16 | MAE=-0.119% @bar 10 | final=-0.144% | giveback=+0.150pp | exit=END_OF_SESSION
+#87 LONG  | hold=15 | MFE=+0.000% @bar 2 | MAE=-0.381% @bar 6 | final=-0.339% | giveback=+0.339pp | exit=END_OF_SESSION
+#88 LONG  | hold=63 | MFE=+0.390% @bar 2 | MAE=-0.288% @bar 54 | final=-0.293% | giveback=+0.683pp | exit=END_OF_SESSION
+#89 SHORT | hold=48 | MFE=+0.040% @bar 1 | MAE=-0.301% @bar 30 | final=-0.316% | giveback=+0.357pp | exit=END_OF_SESSION
+#90 SHORT | hold=24 | MFE=+0.000% @bar 1 | MAE=-0.562% @bar 24 | final=-0.716% | giveback=+0.716pp | exit=OPPOSITE_SIGNAL
+#91 LONG  | hold= 2 | MFE=+0.000% @bar 1 | MAE=-0.085% @bar 3 | final=-0.232% | giveback=+0.232pp | exit=END_OF_SESSION
+#92 LONG  | hold=60 | MFE=+0.349% @bar 4 | MAE=-0.145% @bar 39 | final=-0.124% | giveback=+0.473pp | exit=END_OF_SESSION
+#93 LONG  | hold= 8 | MFE=+0.000% @bar 3 | MAE=-0.154% @bar 6 | final=-0.200% | giveback=+0.200pp | exit=END_OF_SESSION
+#94 LONG  | hold=15 | MFE=+0.000% @bar 1 | MAE=-0.317% @bar 14 | final=-0.420% | giveback=+0.420pp | exit=END_OF_SESSION
+#95 LONG  | hold=18 | MFE=+0.395% @bar 16 | MAE=-0.060% @bar 1 | final=+0.137% | giveback=+0.258pp | exit=END_OF_SESSION
+#96 SHORT | hold=62 | MFE=+0.219% @bar 4 | MAE=-0.502% @bar 18 | final=-0.178% | giveback=+0.397pp | exit=END_OF_SESSION
+#97 LONG  | hold=34 | MFE=+0.000% @bar 1 | MAE=-0.663% @bar 34 | final=-0.809% | giveback=+0.809pp | exit=OPPOSITE_SIGNAL
+#98 SHORT | hold=16 | MFE=+0.000% @bar 2 | MAE=-0.221% @bar 6 | final=-0.216% | giveback=+0.216pp | exit=END_OF_SESSION
+#99 LONG  | hold=57 | MFE=+0.195% @bar 2 | MAE=-0.621% @bar 57 | final=-0.654% | giveback=+0.849pp | exit=OPPOSITE_SIGNAL
+#100 LONG  | hold=25 | MFE=+0.022% @bar 1 | MAE=-0.687% @bar 25 | final=-0.799% | giveback=+0.821pp | exit=OPPOSITE_SIGNAL
+#101 SHORT | hold=34 | MFE=+0.076% @bar 2 | MAE=-0.214% @bar 19 | final=-0.203% | giveback=+0.280pp | exit=END_OF_SESSION
+#102 LONG  | hold=21 | MFE=+0.551% @bar 22 | MAE=-0.116% @bar 7 | final=+0.184% | giveback=+0.368pp | exit=END_OF_SESSION
+#103 SHORT | hold=69 | MFE=+0.338% @bar 68 | MAE=-0.333% @bar 20 | final=-0.000% | giveback=+0.338pp | exit=END_OF_SESSION
+#104 SHORT | hold=56 | MFE=+1.350% @bar 43 | MAE=-0.213% @bar 5 | final=+0.377% | giveback=+0.973pp | exit=END_OF_SESSION
+#105 LONG  | hold=32 | MFE=+0.000% @bar 2 | MAE=-0.295% @bar 27 | final=-0.423% | giveback=+0.423pp | exit=END_OF_SESSION
+#106 SHORT | hold=27 | MFE=+0.187% @bar 28 | MAE=-0.157% @bar 21 | final=-0.011% | giveback=+0.198pp | exit=END_OF_SESSION
+#107 SHORT | hold=53 | MFE=+0.343% @bar 10 | MAE=-0.119% @bar 3 | final=-0.052% | giveback=+0.394pp | exit=END_OF_SESSION
+#108 SHORT | hold=47 | MFE=+0.472% @bar 29 | MAE=-0.050% @bar 1 | final=+0.025% | giveback=+0.447pp | exit=END_OF_SESSION
+#109 SHORT | hold=61 | MFE=+0.058% @bar 9 | MAE=-0.563% @bar 37 | final=-0.296% | giveback=+0.354pp | exit=END_OF_SESSION
+#110 LONG  | hold=66 | MFE=+0.689% @bar 51 | MAE=-0.174% @bar 3 | final=+0.215% | giveback=+0.474pp | exit=END_OF_SESSION
+#111 SHORT | hold=64 | MFE=+0.270% @bar 4 | MAE=-0.211% @bar 19 | final=-0.191% | giveback=+0.461pp | exit=END_OF_SESSION
+#112 SHORT | hold=36 | MFE=+0.331% @bar 31 | MAE=-0.107% @bar 2 | final=-0.083% | giveback=+0.414pp | exit=END_OF_SESSION
+#113 LONG  | hold=38 | MFE=+0.989% @bar 13 | MAE=-0.053% @bar 1 | final=+0.264% | giveback=+0.725pp | exit=END_OF_SESSION
+#114 SHORT | hold=56 | MFE=+0.064% @bar 4 | MAE=-0.633% @bar 54 | final=-0.639% | giveback=+0.703pp | exit=END_OF_SESSION
+#115 SHORT | hold=36 | MFE=+0.231% @bar 6 | MAE=-0.091% @bar 1 | final=-0.178% | giveback=+0.409pp | exit=OPPOSITE_SIGNAL
+#116 LONG  | hold= 8 | MFE=+0.045% @bar 7 | MAE=-0.195% @bar 5 | final=-0.190% | giveback=+0.235pp | exit=END_OF_SESSION
+#117 SHORT | hold=45 | MFE=+0.058% @bar 1 | MAE=-0.623% @bar 29 | final=-0.632% | giveback=+0.689pp | exit=END_OF_SESSION
+#118 SHORT | hold=28 | MFE=+0.000% @bar 1 | MAE=-0.399% @bar 28 | final=-0.548% | giveback=+0.548pp | exit=OPPOSITE_SIGNAL
+#119 LONG  | hold=21 | MFE=+0.756% @bar 22 | MAE=-0.066% @bar 1 | final=+0.583% | giveback=+0.173pp | exit=END_OF_SESSION
+#120 LONG  | hold=24 | MFE=+0.043% @bar 1 | MAE=-0.602% @bar 24 | final=-0.746% | giveback=+0.788pp | exit=OPPOSITE_SIGNAL
+#121 SHORT | hold=27 | MFE=+0.037% @bar 1 | MAE=-0.556% @bar 27 | final=-0.685% | giveback=+0.722pp | exit=END_OF_SESSION
+#122 SHORT | hold=57 | MFE=+0.216% @bar 27 | MAE=-0.345% @bar 4 | final=-0.188% | giveback=+0.404pp | exit=END_OF_SESSION
+#123 SHORT | hold=15 | MFE=+0.016% @bar 2 | MAE=-0.268% @bar 9 | final=-0.275% | giveback=+0.291pp | exit=END_OF_SESSION
+#124 SHORT | hold=24 | MFE=+0.336% @bar 2 | MAE=-0.660% @bar 23 | final=-0.793% | giveback=+1.129pp | exit=OPPOSITE_SIGNAL
+#125 LONG  | hold=24 | MFE=+0.000% @bar 3 | MAE=-0.566% @bar 24 | final=-0.713% | giveback=+0.713pp | exit=OPPOSITE_SIGNAL
+#126 SHORT | hold=26 | MFE=+0.053% @bar 3 | MAE=-0.405% @bar 10 | final=-0.266% | giveback=+0.319pp | exit=END_OF_SESSION
+#127 LONG  | hold=54 | MFE=+0.000% @bar 7 | MAE=-0.178% @bar 25 | final=-0.309% | giveback=+0.309pp | exit=END_OF_SESSION
+#128 SHORT | hold=33 | MFE=+0.365% @bar 31 | MAE=-0.422% @bar 16 | final=+0.005% | giveback=+0.360pp | exit=END_OF_SESSION
+#129 SHORT | hold=63 | MFE=+0.435% @bar 37 | MAE=-0.305% @bar 18 | final=-0.116% | giveback=+0.551pp | exit=END_OF_SESSION
+#130 SHORT | hold=69 | MFE=+0.000% @bar 1 | MAE=-1.038% @bar 19 | final=-0.863% | giveback=+0.863pp | exit=END_OF_SESSION
+#131 SHORT | hold=72 | MFE=+0.000% @bar 11 | MAE=-0.859% @bar 16 | final=-0.965% | giveback=+0.965pp | exit=END_OF_SESSION
+#132 SHORT | hold=64 | MFE=+0.000% @bar 1 | MAE=-0.305% @bar 1 | final=-0.403% | giveback=+0.403pp | exit=OPPOSITE_SIGNAL
+#133 LONG  | hold= 5 | MFE=+0.000% @bar 1 | MAE=-0.130% @bar 5 | final=-0.203% | giveback=+0.203pp | exit=END_OF_SESSION
+#134 SHORT | hold=46 | MFE=+0.538% @bar 9 | MAE=-0.201% @bar 46 | final=-0.343% | giveback=+0.881pp | exit=OPPOSITE_SIGNAL
+#135 LONG  | hold=14 | MFE=+0.000% @bar 1 | MAE=-0.310% @bar 6 | final=-0.345% | giveback=+0.345pp | exit=END_OF_SESSION
+#136 SHORT | hold=18 | MFE=+0.220% @bar 14 | MAE=-0.223% @bar 1 | final=-0.036% | giveback=+0.256pp | exit=END_OF_SESSION
+#137 SHORT | hold=61 | MFE=+0.035% @bar 14 | MAE=-0.635% @bar 31 | final=-0.586% | giveback=+0.620pp | exit=END_OF_SESSION
+#138 LONG  | hold=47 | MFE=+0.188% @bar 7 | MAE=-0.492% @bar 47 | final=-0.425% | giveback=+0.614pp | exit=END_OF_SESSION
+#139 LONG  | hold=61 | MFE=+0.061% @bar 22 | MAE=-0.551% @bar 58 | final=-0.487% | giveback=+0.549pp | exit=END_OF_SESSION
+#140 SHORT | hold=56 | MFE=+0.400% @bar 13 | MAE=-0.200% @bar 41 | final=-0.197% | giveback=+0.597pp | exit=END_OF_SESSION
+#141 LONG  | hold=12 | MFE=+0.000% @bar 1 | MAE=-0.306% @bar 7 | final=-0.305% | giveback=+0.305pp | exit=END_OF_SESSION
+#142 SHORT | hold= 4 | MFE=+0.078% @bar 2 | MAE=-0.050% @bar 1 | final=-0.088% | giveback=+0.166pp | exit=END_OF_SESSION
+#143 LONG  | hold=35 | MFE=+0.071% @bar 22 | MAE=-0.093% @bar 4 | final=-0.125% | giveback=+0.197pp | exit=END_OF_SESSION
+#144 SHORT | hold=34 | MFE=+0.244% @bar 35 | MAE=-0.213% @bar 15 | final=+0.004% | giveback=+0.240pp | exit=END_OF_SESSION
+#145 SHORT | hold=22 | MFE=+0.000% @bar 1 | MAE=-0.487% @bar 22 | final=-0.536% | giveback=+0.536pp | exit=OPPOSITE_SIGNAL
+#146 LONG  | hold=18 | MFE=+0.016% @bar 17 | MAE=-0.409% @bar 7 | final=-0.322% | giveback=+0.337pp | exit=END_OF_SESSION
+#147 SHORT | hold=63 | MFE=+1.325% @bar 64 | MAE=-0.056% @bar 1 | final=+1.140% | giveback=+0.185pp | exit=END_OF_SESSION
+#148 SHORT | hold=24 | MFE=+1.163% @bar 4 | MAE=-0.348% @bar 2 | final=+0.389% | giveback=+0.774pp | exit=END_OF_SESSION
+#149 SHORT | hold=28 | MFE=+1.181% @bar 29 | MAE=-0.375% @bar 11 | final=+0.921% | giveback=+0.260pp | exit=END_OF_SESSION
+#150 LONG  | hold=72 | MFE=+1.346% @bar 61 | MAE=-0.974% @bar 8 | final=+0.746% | giveback=+0.600pp | exit=END_OF_SESSION
+#151 SHORT | hold=39 | MFE=+0.988% @bar 30 | MAE=-0.730% @bar 4 | final=+0.060% | giveback=+0.927pp | exit=END_OF_SESSION
+#152 LONG  | hold=33 | MFE=+0.255% @bar 2 | MAE=-1.647% @bar 33 | final=-1.795% | giveback=+2.050pp | exit=OPPOSITE_SIGNAL
+#153 SHORT | hold=28 | MFE=+1.848% @bar 28 | MAE=-0.176% @bar 2 | final=+1.416% | giveback=+0.432pp | exit=END_OF_SESSION
+#154 SHORT | hold=69 | MFE=+1.103% @bar 26 | MAE=-1.419% @bar 69 | final=-1.581% | giveback=+2.684pp | exit=OPPOSITE_SIGNAL
+#155 LONG  | hold= 1 | MFE=+0.000% @bar 1 | MAE=-0.866% @bar 2 | final=-0.522% | giveback=+0.522pp | exit=END_OF_SESSION
+#156 SHORT | hold=54 | MFE=+0.011% @bar 1 | MAE=-3.029% @bar 19 | final=-2.624% | giveback=+2.635pp | exit=END_OF_SESSION
+#157 LONG  | hold=35 | MFE=+0.158% @bar 7 | MAE=-1.469% @bar 30 | final=-1.026% | giveback=+1.184pp | exit=END_OF_SESSION
+#158 LONG  | hold=51 | MFE=+0.411% @bar 31 | MAE=-1.062% @bar 15 | final=-0.564% | giveback=+0.975pp | exit=OPPOSITE_SIGNAL
+#159 SHORT | hold=14 | MFE=+0.148% @bar 1 | MAE=-0.421% @bar 3 | final=-0.249% | giveback=+0.396pp | exit=END_OF_SESSION
+#160 SHORT | hold=69 | MFE=+1.560% @bar 69 | MAE=-0.235% @bar 13 | final=+1.342% | giveback=+0.218pp | exit=END_OF_SESSION
+#161 LONG  | hold=49 | MFE=+0.084% @bar 5 | MAE=-1.314% @bar 50 | final=-1.296% | giveback=+1.380pp | exit=END_OF_SESSION
+#162 SHORT | hold=62 | MFE=+0.731% @bar 40 | MAE=-0.689% @bar 18 | final=+0.252% | giveback=+0.479pp | exit=END_OF_SESSION
+#163 SHORT | hold= 8 | MFE=+0.014% @bar 1 | MAE=-0.315% @bar 7 | final=-0.359% | giveback=+0.373pp | exit=END_OF_SESSION
+#164 LONG  | hold=47 | MFE=+0.126% @bar 13 | MAE=-0.452% @bar 44 | final=-0.433% | giveback=+0.559pp | exit=END_OF_SESSION
+#165 SHORT | hold=73 | MFE=+1.380% @bar 64 | MAE=-0.442% @bar 13 | final=+0.551% | giveback=+0.829pp | exit=END_OF_SESSION
+#166 SHORT | hold=36 | MFE=+0.431% @bar 1 | MAE=-1.602% @bar 25 | final=-1.181% | giveback=+1.612pp | exit=END_OF_SESSION
+#167 SHORT | hold=50 | MFE=+0.814% @bar 8 | MAE=-1.279% @bar 36 | final=-0.818% | giveback=+1.633pp | exit=END_OF_SESSION
+#168 SHORT | hold=51 | MFE=+1.550% @bar 25 | MAE=-0.846% @bar 5 | final=-0.185% | giveback=+1.734pp | exit=END_OF_SESSION
+#169 SHORT | hold=74 | MFE=+0.204% @bar 13 | MAE=-2.133% @bar 46 | final=-1.693% | giveback=+1.897pp | exit=END_OF_SESSION
+#170 SHORT | hold=39 | MFE=+0.333% @bar 16 | MAE=-1.007% @bar 38 | final=-1.141% | giveback=+1.475pp | exit=OPPOSITE_SIGNAL
+#171 LONG  | hold=22 | MFE=+0.045% @bar 1 | MAE=-1.105% @bar 16 | final=-0.737% | giveback=+0.781pp | exit=END_OF_SESSION
+#172 SHORT | hold=62 | MFE=+0.528% @bar 12 | MAE=-3.041% @bar 42 | final=-1.436% | giveback=+1.964pp | exit=END_OF_SESSION
+#173 LONG  | hold=62 | MFE=+0.369% @bar 45 | MAE=-0.582% @bar 1 | final=-0.062% | giveback=+0.431pp | exit=END_OF_SESSION
+#174 LONG  | hold=37 | MFE=+0.203% @bar 2 | MAE=-0.683% @bar 37 | final=-0.748% | giveback=+0.951pp | exit=OPPOSITE_SIGNAL
+#175 SHORT | hold= 2 | MFE=+0.000% @bar 1 | MAE=-0.343% @bar 2 | final=-0.406% | giveback=+0.406pp | exit=END_OF_SESSION
+#176 LONG  | hold=59 | MFE=+0.000% @bar 1 | MAE=-0.792% @bar 17 | final=-0.555% | giveback=+0.555pp | exit=END_OF_SESSION
+#177 SHORT | hold=42 | MFE=+1.338% @bar 4 | MAE=-0.165% @bar 1 | final=+0.298% | giveback=+1.040pp | exit=END_OF_SESSION
+#178 SHORT | hold=11 | MFE=+0.000% @bar 1 | MAE=-0.368% @bar 7 | final=-0.449% | giveback=+0.449pp | exit=END_OF_SESSION
+#179 SHORT | hold=42 | MFE=+0.610% @bar 2 | MAE=-0.127% @bar 25 | final=-0.032% | giveback=+0.641pp | exit=END_OF_SESSION
+#180 LONG  | hold=20 | MFE=+0.000% @bar 1 | MAE=-1.299% @bar 20 | final=-1.399% | giveback=+1.399pp | exit=OPPOSITE_SIGNAL
+#181 SHORT | hold=42 | MFE=+0.386% @bar 6 | MAE=-0.348% @bar 24 | final=-0.204% | giveback=+0.590pp | exit=END_OF_SESSION
+#182 LONG  | hold=31 | MFE=+0.232% @bar 10 | MAE=-1.884% @bar 31 | final=-1.992% | giveback=+2.225pp | exit=OPPOSITE_SIGNAL
+#183 SHORT | hold=26 | MFE=+0.613% @bar 9 | MAE=-0.228% @bar 18 | final=+0.081% | giveback=+0.532pp | exit=END_OF_SESSION
+#184 LONG  | hold=34 | MFE=+0.973% @bar 35 | MAE=-0.358% @bar 8 | final=+0.804% | giveback=+0.169pp | exit=END_OF_SESSION
+#185 LONG  | hold= 0 | MFE=+0.167% @bar 1 | MAE=-0.054% @bar 1 | final=+0.006% | giveback=+0.161pp | exit=END_OF_SESSION
+#186 SHORT | hold=26 | MFE=+0.582% @bar 15 | MAE=-0.316% @bar 1 | final=+0.049% | giveback=+0.533pp | exit=END_OF_SESSION
+#187 LONG  | hold=17 | MFE=+0.134% @bar 6 | MAE=-0.889% @bar 16 | final=-0.851% | giveback=+0.985pp | exit=OPPOSITE_SIGNAL
+#188 SHORT | hold=50 | MFE=+0.013% @bar 1 | MAE=-1.568% @bar 25 | final=-0.868% | giveback=+0.881pp | exit=END_OF_SESSION
+#189 SHORT | hold=46 | MFE=+0.000% @bar 1 | MAE=-1.105% @bar 7 | final=-0.947% | giveback=+0.947pp | exit=END_OF_SESSION
+#190 SHORT | hold= 7 | MFE=+0.219% @bar 8 | MAE=-0.069% @bar 1 | final=-0.047% | giveback=+0.266pp | exit=END_OF_SESSION
+#191 SHORT | hold=48 | MFE=+0.594% @bar 19 | MAE=-0.150% @bar 8 | final=+0.281% | giveback=+0.313pp | exit=END_OF_SESSION
+#192 LONG  | hold=67 | MFE=+0.825% @bar 20 | MAE=-0.161% @bar 6 | final=+0.128% | giveback=+0.697pp | exit=END_OF_SESSION
+#193 LONG  | hold=47 | MFE=+0.217% @bar 3 | MAE=-0.602% @bar 23 | final=-0.679% | giveback=+0.896pp | exit=END_OF_SESSION
+#194 SHORT | hold=26 | MFE=+0.000% @bar 1 | MAE=-0.624% @bar 26 | final=-0.684% | giveback=+0.684pp | exit=OPPOSITE_SIGNAL
+#195 LONG  | hold=12 | MFE=+0.412% @bar 11 | MAE=-0.312% @bar 8 | final=-0.014% | giveback=+0.427pp | exit=END_OF_SESSION
+#196 SHORT | hold=47 | MFE=+0.463% @bar 16 | MAE=-0.964% @bar 45 | final=-1.040% | giveback=+1.503pp | exit=END_OF_SESSION
+#197 LONG  | hold=65 | MFE=+0.750% @bar 22 | MAE=-0.643% @bar 5 | final=-0.021% | giveback=+0.772pp | exit=END_OF_SESSION
+#198 LONG  | hold=37 | MFE=+0.838% @bar 22 | MAE=-0.250% @bar 3 | final=+0.115% | giveback=+0.723pp | exit=END_OF_SESSION
+#199 LONG  | hold=50 | MFE=+0.011% @bar 1 | MAE=-1.561% @bar 18 | final=-1.571% | giveback=+1.581pp | exit=END_OF_SESSION
+#200 LONG  | hold=57 | MFE=+0.332% @bar 14 | MAE=-0.274% @bar 20 | final=-0.326% | giveback=+0.657pp | exit=END_OF_DATA
+
+INTEGRITY
+----------------------------------------------------------------------------------
+[PASS] Ordinary trade count matches reconstructed rows
+[PASS] No duplicate trade numbers
+[PASS] Every path starts at actual entry index
+[PASS] Path does not use post-exit normal-signal bars
+[PASS] CSV export written
+[PASS] No strategy parameters modified
+RESULT: 6/6 PASS
+
+SAFETY: NO ORDERS WERE SENT
+SAFETY: RESEARCH MODE ONLY
+==================================================================================

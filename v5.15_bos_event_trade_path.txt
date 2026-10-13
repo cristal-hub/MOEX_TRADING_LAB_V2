@@ -1,0 +1,3165 @@
+==============================================================================
+MOEX TRADING LAB — v5.15 BOS -> EVENT -> TRADE PATH LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+==============================================================================
+Unique BOS events: 319
+Ordinary trades: 200
+Managed trades: 353
+Ordinary unmatched: 0
+Managed unmatched: 0
+
+EVENT CLASS SUMMARY
+------------------------------------------------------------------------------
+MARGINAL_BOS                           N=23 | mean MAX MFE=+0.298% | mean ordinary PnL=-396.32
+BOS_NO_TRADE                           N=17 | mean MAX MFE=+0.295% | mean ordinary PnL=n/a
+GOOD_BOS_ENGINE_EARNED                 N=30 | mean MAX MFE=+0.586% | mean ordinary PnL=+279.10
+BOS_GOOD_NO_ORDINARY_TRADE             N=20 | mean MAX MFE=+0.537% | mean ordinary PnL=n/a
+BOS_BAD_FROM_OUTSET                    N=192 | mean MAX MFE=+0.070% | mean ordinary PnL=-303.47
+MANAGED_REENTRY_GIVEBACK               N=25 | mean MAX MFE=+0.427% | mean ordinary PnL=-202.89
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE      N=11 | mean MAX MFE=+0.485% | mean ordinary PnL=-262.60
+GOOD_BOS_LATE_ENTRY                    N= 1 | mean MAX MFE=+1.725% | mean ordinary PnL=-636.63
+
+FULL BOS PATHS
+------------------------------------------------------------------------------
+BOS #56 SHORT 2025-09-15 11:35:00 | CLASS=MARGINAL_BOS
+  close=302.4000 strength=75.46511627907 level=303.72
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.046% H3=+0.056% H6=+0.255% H12=+0.395% MAX=+0.395% @bar 11
+  MAE H1=-0.023% H3=-0.079% H6=-0.116% H12=-0.116%
+  ordinary: N=1 return=-0.280% net=-279.58 MFE=+0.512% exit=END_OF_SESSION
+  managed: N=1 first=-64.32 lifecycle=-64.32
+  managed trade numbers: 1
+  managed results:       -64.32
+
+BOS #61 SHORT 2025-09-15 12:00:00 | CLASS=BOS_NO_TRADE
+  close=301.9900 strength=87.43589676906525 level=302.18
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.119% H3=+0.119% H6=+0.259% H12=+0.392% MAX=+0.392% @bar 9
+  MAE H1=+0.000% H3=-0.003% H6=-0.003% H12=-0.003%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+28.70 lifecycle=+28.70
+  managed trade numbers: 2
+  managed results:       +28.70
+
+BOS #66 SHORT 2025-09-15 12:25:00 | CLASS=BOS_NO_TRADE
+  close=301.5200 strength=69.19291694431774 level=301.63
+  event->signal=0 bars | event->entry=6.0 bars
+  MFE H1=+0.103% H3=+0.136% H6=+0.236% H12=+0.236% MAX=+0.236% @bar 4
+  MAE H1=-0.010% H3=-0.010% H6=-0.010% H12=-0.152%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-130.25 lifecycle=-844.72
+  managed trade numbers: 3,4
+  managed results:       -130.25,-714.46
+
+BOS #157 SHORT 2025-09-16 11:35:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=302.5900 strength=80.92105263157588 level=303.27
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.235% H3=+0.315% H6=+0.358% H12=+0.518% MAX=+0.518% @bar 12
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=+0.128% net=+127.21 MFE=+0.906% exit=OPPOSITE_SIGNAL
+  managed: N=3 first=-40.87 lifecycle=+107.39
+  managed trade numbers: 5,6,7
+  managed results:       -40.87,-175.27,+323.52
+
+BOS #169 SHORT 2025-09-16 12:35:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=301.0300 strength=74.43106962478598 level=301.21
+  event->signal=0 bars | event->entry=7.0 bars
+  MFE H1=+0.226% H3=+0.343% H6=+0.444% H12=+0.444% MAX=+0.444% @bar 5
+  MAE H1=-0.027% H3=-0.027% H6=-0.027% H12=-0.027%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-420.16 lifecycle=-420.16
+  managed trade numbers: 8
+  managed results:       -420.16
+
+BOS #197 LONG 2025-09-16 14:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.5300 strength=82.15701023248005 level=301.29
+  event->signal=4 bars | event->entry=nan bars
+  MFE H1=+0.090% H3=+0.090% H6=+0.090% H12=+0.090% MAX=+0.090% @bar 1
+  MAE H1=-0.036% H3=-0.046% H6=-0.046% H12=-0.046%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #273 SHORT 2025-09-17 12:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.0100 strength=75.84254115776166 level=300.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.070% H3=+0.070% H6=+0.070% H12=+0.070% MAX=+0.070% @bar 1
+  MAE H1=-0.007% H3=-0.163% H6=-0.316% H12=-0.751%
+  ordinary: N=1 return=-0.714% net=-713.08 MFE=+0.023% exit=END_OF_SESSION
+  managed: N=1 first=-705.65 lifecycle=-705.65
+  managed trade numbers: 9
+  managed results:       -705.65
+
+BOS #348 SHORT 2025-09-18 10:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.6700 strength=90.70103743740746 level=302.87
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.043% H3=+0.126% H6=+0.149% H12=+0.182% MAX=+0.182% @bar 8
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=-0.092%
+  ordinary: N=1 return=+0.161% net=+159.18 MFE=+0.614% exit=END_OF_SESSION
+  managed: N=2 first=-274.21 lifecycle=-98.00
+  managed trade numbers: 10,11
+  managed results:       -274.21,+176.21
+
+BOS #389 SHORT 2025-09-18 14:05:00 | CLASS=BOS_NO_TRADE
+  close=301.3000 strength=70.15720512952433 level=301.39
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.040% H3=+0.040% H6=+0.040% H12=+0.213% MAX=+0.213% @bar 11
+  MAE H1=-0.083% H3=-0.235% H6=-0.258% H12=-0.258%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-293.84 lifecycle=-293.84
+  managed trade numbers: 12
+  managed results:       -293.84
+
+BOS #480 SHORT 2025-09-19 13:15:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=300.6500 strength=70.84379809165179 level=300.91
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.070% H3=+0.177% H6=+0.217% H12=+0.284% MAX=+0.284% @bar 11
+  MAE H1=-0.027% H3=-0.027% H6=-0.027% H12=-0.027%
+  ordinary: N=1 return=-0.450% net=-446.76 MFE=+0.233% exit=OPPOSITE_SIGNAL
+  managed: N=2 first=-88.11 lifecycle=-299.73
+  managed trade numbers: 13,14
+  managed results:       -88.11,-211.62
+
+BOS #500 LONG 2025-09-19 14:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.3900 strength=92.168674698796 level=300.45
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.212% H3=-0.388% H6=-0.395% H12=-0.395%
+  ordinary: N=1 return=-0.571% net=-564.36 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-556.15 lifecycle=-556.15
+  managed trade numbers: 15
+  managed results:       -556.15
+
+BOS #535 SHORT 2025-09-22 09:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=294.3500 strength=90.50847457627074 level=295.01
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.167% MAX=+0.167% @bar 11
+  MAE H1=-0.129% H3=-0.335% H6=-0.335% H12=-0.433%
+  ordinary: N=1 return=-0.438% net=-430.73 MFE=+0.701% exit=END_OF_SESSION
+  managed: N=1 first=+53.33 lifecycle=+53.33
+  managed trade numbers: 16
+  managed results:       +53.33
+
+BOS #744 SHORT 2025-09-24 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=288.9200 strength=87.36842105263058 level=290.05
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.183% H3=-0.434% H6=-0.783% H12=-0.899%
+  ordinary: N=1 return=-2.581% net=-2525.63 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-1725.41 lifecycle=-1725.41
+  managed trade numbers: 17
+  managed results:       -1725.41
+
+BOS #1145 SHORT 2025-09-30 09:45:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=287.3000 strength=75.77932236491138 level=287.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.038% H3=+0.167% H6=+0.525% H12=+0.588% MAX=+0.588% @bar 8
+  MAE H1=-0.588% H3=-0.588% H6=-0.588% H12=-0.588%
+  ordinary: N=1 return=-0.026% net=-24.60 MFE=+0.667% exit=END_OF_SESSION
+  managed: N=1 first=+55.07 lifecycle=+55.07
+  managed trade numbers: 18
+  managed results:       +55.07
+
+BOS #1148 SHORT 2025-09-30 10:00:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=286.9700 strength=72.74516227456478 level=287.16
+  event->signal=0 bars | event->entry=7.0 bars
+  MFE H1=+0.157% H3=+0.409% H6=+0.473% H12=+0.473% MAX=+0.473% @bar 5
+  MAE H1=-0.097% H3=-0.097% H6=-0.097% H12=-0.323%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-220.52 lifecycle=-220.52
+  managed trade numbers: 19
+  managed results:       -220.52
+
+BOS #1258 SHORT 2025-10-01 10:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=288.2500 strength=80.2222741764875 level=288.41
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.122% H6=+0.122% H12=+0.122% MAX=+0.122% @bar 3
+  MAE H1=-0.114% H3=-0.114% H6=-0.239% H12=-0.397%
+  ordinary: N=1 return=+0.522% net=+497.93 MFE=+0.745% exit=END_OF_SESSION
+  managed: N=1 first=-846.99 lifecycle=-846.99
+  managed trade numbers: 20
+  managed results:       -846.99
+
+BOS #1305 SHORT 2025-10-01 14:40:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=287.2000 strength=72.31315051819166 level=287.55
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.010% H3=+0.010% H6=+0.420% H12=+0.420% MAX=+0.420% @bar 5
+  MAE H1=-0.090% H3=-0.101% H6=-0.101% H12=-0.101%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+136.66 lifecycle=+136.66
+  managed trade numbers: 21
+  managed results:       +136.66
+
+BOS #1309 SHORT 2025-10-01 15:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=286.2100 strength=99.56310679611691 level=287.17
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.073% H3=+0.073% H6=+0.073% H12=+0.073% MAX=+0.073% @bar 1
+  MAE H1=-0.101% H3=-0.188% H6=-0.188% H12=-0.188%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #1346 SHORT 2025-10-02 09:40:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=284.3000 strength=70.43937218588681 level=284.52
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.113% H3=+0.332% H6=+0.342% H12=+0.381% MAX=+0.381% @bar 7
+  MAE H1=+0.000% H3=+0.000% H6=-0.067% H12=-0.399%
+  ordinary: N=1 return=-0.549% net=-525.79 MFE=+0.478% exit=OPPOSITE_SIGNAL
+  managed: N=3 first=-112.30 lifecycle=-283.20
+  managed trade numbers: 22,23,24
+  managed results:       -112.30,-115.42,-55.48
+
+BOS #1409 LONG 2025-10-02 14:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=285.2900 strength=66.18203346093733 level=285.25
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.077% H3=+0.077% H6=+0.077% H12=+0.077% MAX=+0.077% @bar 1
+  MAE H1=-0.028% H3=-0.172% H6=-0.186% H12=-0.186%
+  ordinary: N=1 return=-0.319% net=-303.83 MFE=+0.027% exit=END_OF_SESSION
+  managed: N=1 first=-299.84 lifecycle=-299.84
+  managed trade numbers: 25
+  managed results:       -299.84
+
+BOS #1448 LONG 2025-10-03 09:45:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=286.4900 strength=99.16666666666745 level=286.2
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.290% H6=+0.290% H12=+0.290% MAX=+0.290% @bar 3
+  MAE H1=-0.059% H3=-0.066% H6=-0.066% H12=-0.066%
+  ordinary: N=1 return=-0.496% net=-471.20 MFE=+0.243% exit=OPPOSITE_SIGNAL
+  managed: N=2 first=-46.89 lifecycle=-596.02
+  managed trade numbers: 26,27
+  managed results:       -46.89,-549.13
+
+BOS #1480 SHORT 2025-10-03 12:25:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=285.6400 strength=85.47619047619821 level=286.02
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.116% H3=+0.288% H6=+0.577% H12=+0.748% MAX=+0.748% @bar 7
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=+0.266% net=+251.59 MFE=+0.819% exit=END_OF_SESSION
+  managed: N=2 first=+231.61 lifecycle=+235.51
+  managed trade numbers: 28,29
+  managed results:       +231.61,+3.90
+
+BOS #1500 SHORT 2025-10-03 14:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=283.3200 strength=73.14418444421497 level=283.52
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.060% H3=+0.060% H6=+0.060% H12=+0.060% MAX=+0.060% @bar 1
+  MAE H1=-0.201% H3=-0.299% H6=-0.355% H12=-0.359%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-361.45 lifecycle=-361.45
+  managed trade numbers: 30
+  managed results:       -361.45
+
+BOS #1581 LONG 2025-10-06 12:25:00 | CLASS=MARGINAL_BOS
+  close=285.9700 strength=65.14897361759613 level=285.93
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.115% H3=+0.133% H6=+0.175% H12=+0.308% MAX=+0.308% @bar 9
+  MAE H1=-0.045% H3=-0.112% H6=-0.119% H12=-0.119%
+  ordinary: N=1 return=-0.846% net=-801.45 MFE=+0.258% exit=END_OF_SESSION
+  managed: N=1 first=-17.05 lifecycle=-17.05
+  managed trade numbers: 31
+  managed results:       -17.05
+
+BOS #1587 LONG 2025-10-06 12:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=286.4600 strength=67.03469051933419 level=286.35
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.014% H3=+0.136% H6=+0.136% H12=+0.136% MAX=+0.136% @bar 3
+  MAE H1=-0.168% H3=-0.168% H6=-0.248% H12=-0.248%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-782.17 lifecycle=-782.17
+  managed trade numbers: 32
+  managed results:       -782.17
+
+BOS #2154 SHORT 2025-10-14 09:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=284.1300 strength=98.33333333333479 level=284.45
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.004% H3=+0.004% H6=+0.074% H12=+0.074% MAX=+0.074% @bar 4
+  MAE H1=-0.162% H3=-0.309% H6=-0.316% H12=-0.448%
+  ordinary: N=1 return=-0.401% net=-376.75 MFE=+0.115% exit=END_OF_SESSION
+  managed: N=1 first=-369.74 lifecycle=-369.74
+  managed trade numbers: 33
+  managed results:       -369.74
+
+BOS #2389 LONG 2025-10-16 12:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=284.4100 strength=86.75508544950937 level=284.13
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.081% H3=+0.109% H6=+0.130% H12=+0.130% MAX=+0.130% @bar 4
+  MAE H1=-0.095% H3=-0.095% H6=-0.095% H12=-0.123%
+  ordinary: N=1 return=-0.003% net=-3.08 MFE=+0.330% exit=END_OF_SESSION
+  managed: N=1 first=-51.39 lifecycle=-51.39
+  managed trade numbers: 34
+  managed results:       -51.39
+
+BOS #2414 LONG 2025-10-16 14:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=285.2500 strength=87.45615293230804 level=284.97
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.084% H3=+0.084% H6=+0.084% H12=+0.084% MAX=+0.084% @bar 1
+  MAE H1=-0.151% H3=-0.165% H6=-0.259% H12=-0.259%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-135.21 lifecycle=-135.21
+  managed trade numbers: 35
+  managed results:       -135.21
+
+BOS #2568 LONG 2025-10-20 10:30:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=305.5100 strength=72.11402099565349 level=305.32
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.157% H3=+0.209% H6=+0.209% H12=+0.209% MAX=+0.209% @bar 2
+  MAE H1=-0.003% H3=-0.069% H6=-0.324% H12=-0.396%
+  ordinary: N=1 return=-0.497% net=-465.33 MFE=+0.159% exit=END_OF_SESSION
+  managed: N=2 first=-198.17 lifecycle=-1035.62
+  managed trade numbers: 36,37
+  managed results:       -198.17,-837.45
+
+BOS #2767 SHORT 2025-10-22 10:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=293.5800 strength=73.28934433147955 level=294.03
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.085% H3=+0.092% H6=+0.092% H12=+0.092% MAX=+0.092% @bar 3
+  MAE H1=-0.051% H3=-0.143% H6=-0.394% H12=-0.394%
+  ordinary: N=1 return=-0.135% net=-125.95 MFE=+0.478% exit=END_OF_SESSION
+  managed: N=1 first=+146.37 lifecycle=+146.37
+  managed trade numbers: 38
+  managed results:       +146.37
+
+BOS #2812 SHORT 2025-10-22 14:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=292.0400 strength=75.70994715907929 level=292.23
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.014% H12=+0.014% MAX=+0.014% @bar 5
+  MAE H1=-0.188% H3=-0.195% H6=-0.273% H12=-0.294%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-451.96 lifecycle=-451.96
+  managed trade numbers: 39
+  managed results:       -451.96
+
+BOS #3005 LONG 2025-10-24 13:15:00 | CLASS=GOOD_BOS_LATE_ENTRY
+  close=289.9300 strength=65.94861106038796 level=289.5
+  event->signal=2 bars | event->entry=3.0 bars
+  MFE H1=+0.017% H3=+1.725% H6=+1.725% H12=+1.725% MAX=+1.725% @bar 3
+  MAE H1=-0.148% H3=-0.207% H6=-1.007% H12=-1.252%
+  ordinary: N=1 return=-0.685% net=-636.63 MFE=+1.509% exit=END_OF_SESSION
+  managed: N=1 first=-338.87 lifecycle=-338.87
+  managed trade numbers: 40
+  managed results:       -338.87
+
+BOS #3156 LONG 2025-10-28 09:00:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=286.1100 strength=98.62804878048752 level=284.7
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.014% H3=+0.031% H6=+0.031% H12=+0.259% MAX=+0.259% @bar 12
+  MAE H1=-0.175% H3=-0.175% H6=-0.433% H12=-0.433%
+  ordinary: N=1 return=+1.029% net=+949.82 MFE=+1.313% exit=END_OF_SESSION
+  managed: N=1 first=-201.82 lifecycle=-201.82
+  managed trade numbers: 41
+  managed results:       -201.82
+
+BOS #3168 LONG 2025-10-28 10:00:00 | CLASS=BOS_NO_TRADE
+  close=286.7000 strength=80.13163139403574 level=286.2
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.269% MAX=+0.269% @bar 12
+  MAE H1=-0.171% H3=-0.276% H6=-0.359% H12=-0.453%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+133.92 lifecycle=+133.92
+  managed trade numbers: 42
+  managed results:       +133.92
+
+BOS #3190 LONG 2025-10-28 11:50:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=287.9000 strength=74.52985120962646 level=287.67
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.292% H3=+0.372% H6=+0.483% H12=+0.483% MAX=+0.483% @bar 5
+  MAE H1=-0.003% H3=-0.003% H6=-0.003% H12=-0.003%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=3 first=-36.28 lifecycle=-500.77
+  managed trade numbers: 43,44,45
+  managed results:       -36.28,-86.28,-378.20
+
+BOS #3378 LONG 2025-10-30 10:40:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=293.9500 strength=89.80582524271752 level=293.38
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.102% H3=+0.150% H6=+0.316% H12=+0.697% MAX=+0.697% @bar 11
+  MAE H1=-0.003% H3=-0.003% H6=-0.014% H12=-0.095%
+  ordinary: N=1 return=+0.422% net=+393.45 MFE=+0.814% exit=END_OF_SESSION
+  managed: N=1 first=-175.67 lifecycle=-175.67
+  managed trade numbers: 46
+  managed results:       -175.67
+
+BOS #3388 LONG 2025-10-30 11:30:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=295.2300 strength=82.52436188807455 level=294.88
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.261% H3=+0.261% H6=+0.261% H12=+0.423% MAX=+0.423% @bar 11
+  MAE H1=-0.078% H3=-0.112% H6=-0.125% H12=-0.125%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-15.42 lifecycle=-15.42
+  managed trade numbers: 47
+  managed results:       -15.42
+
+BOS #3395 LONG 2025-10-30 12:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.2300 strength=66.00240036151699 level=296.0
+  event->signal=0 bars | event->entry=9.0 bars
+  MFE H1=+0.000% H3=+0.041% H6=+0.084% H12=+0.084% MAX=+0.084% @bar 4
+  MAE H1=-0.122% H3=-0.122% H6=-0.122% H12=-0.236%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-205.42 lifecycle=-205.42
+  managed trade numbers: 48
+  managed results:       -205.42
+
+BOS #3713 LONG 2025-11-05 13:20:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=297.8200 strength=91.46551724138047 level=297.49
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.013% H3=+0.336% H6=+0.336% H12=+0.336% MAX=+0.336% @bar 3
+  MAE H1=-0.084% H3=-0.084% H6=-0.084% H12=-0.084%
+  ordinary: N=1 return=-0.019% net=-17.66 MFE=+0.286% exit=END_OF_SESSION
+  managed: N=2 first=-16.78 lifecycle=-194.66
+  managed trade numbers: 49,50
+  managed results:       -16.78,-177.88
+
+BOS #3778 SHORT 2025-11-06 10:20:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=295.0900 strength=85.96774193548572 level=295.91
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.109% H3=+0.173% H6=+0.173% H12=+0.337% MAX=+0.337% @bar 8
+  MAE H1=-0.014% H3=-0.017% H6=-0.098% H12=-0.098%
+  ordinary: N=1 return=+0.214% net=+200.35 MFE=+1.008% exit=END_OF_SESSION
+  managed: N=1 first=-96.33 lifecycle=-96.33
+  managed trade numbers: 51
+  managed results:       -96.33
+
+BOS #3802 SHORT 2025-11-06 12:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=294.0200 strength=70.0945538038766 level=294.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.044% H3=+0.044% H6=+0.044% H12=+0.198% MAX=+0.198% @bar 12
+  MAE H1=-0.082% H3=-0.082% H6=-0.197% H12=-0.197%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+179.05 lifecycle=+179.05
+  managed trade numbers: 52
+  managed results:       +179.05
+
+BOS #3814 SHORT 2025-11-06 13:20:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=293.6500 strength=73.64456575597266 level=293.89
+  event->signal=0 bars | event->entry=8.0 bars
+  MFE H1=+0.092% H3=+0.273% H6=+0.562% H12=+0.562% MAX=+0.562% @bar 6
+  MAE H1=-0.051% H3=-0.051% H6=-0.051% H12=-0.051%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-147.47 lifecycle=-680.24
+  managed trade numbers: 53,54
+  managed results:       -147.47,-532.77
+
+BOS #3881 LONG 2025-11-07 10:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.5700 strength=79.8905273901673 level=296.3
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.010% H3=+0.010% H6=+0.010% H12=+0.010% MAX=+0.010% @bar 1
+  MAE H1=-0.064% H3=-0.064% H6=-0.169% H12=-0.280%
+  ordinary: N=1 return=-0.096% net=-89.67 MFE=+0.365% exit=END_OF_SESSION
+  managed: N=1 first=-36.75 lifecycle=-36.75
+  managed trade numbers: 55
+  managed results:       -36.75
+
+BOS #3978 LONG 2025-11-10 10:10:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=300.6400 strength=90.86419753086305 level=299.3
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.253% H3=+0.536% H6=+0.612% H12=+0.642% MAX=+0.642% @bar 11
+  MAE H1=-0.007% H3=-0.007% H6=-0.007% H12=-0.007%
+  ordinary: N=1 return=+0.006% net=+5.64 MFE=+0.665% exit=END_OF_SESSION
+  managed: N=3 first=+69.73 lifecycle=-104.79
+  managed trade numbers: 56,57,58
+  managed results:       +69.73,-27.34,-147.17
+
+BOS #4005 LONG 2025-11-10 12:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.6700 strength=68.92874165723164 level=302.57
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.020% H3=+0.020% H6=+0.020% H12=+0.020% MAX=+0.020% @bar 1
+  MAE H1=-0.218% H3=-0.304% H6=-0.304% H12=-0.430%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-504.97 lifecycle=-504.97
+  managed trade numbers: 59
+  managed results:       -504.97
+
+BOS #4283 SHORT 2025-11-13 10:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=298.6800 strength=86.18421052631622 level=299.14
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.013% H3=+0.161% H6=+0.181% H12=+0.181% MAX=+0.181% @bar 4
+  MAE H1=-0.080% H3=-0.127% H6=-0.127% H12=-0.705%
+  ordinary: N=1 return=-0.385% net=-360.61 MFE=+0.131% exit=END_OF_SESSION
+  managed: N=1 first=-298.52 lifecycle=-298.52
+  managed trade numbers: 60
+  managed results:       -298.52
+
+BOS #4391 SHORT 2025-11-14 10:55:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=297.9900 strength=95.22471910112114 level=298.51
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.124% H3=+0.124% H6=+0.367% H12=+0.384% MAX=+0.384% @bar 7
+  MAE H1=+0.000% H3=-0.003% H6=-0.003% H12=-0.003%
+  ordinary: N=1 return=+0.230% net=+214.96 MFE=+0.786% exit=END_OF_SESSION
+  managed: N=1 first=+139.19 lifecycle=+139.19
+  managed trade numbers: 61
+  managed results:       +139.19
+
+BOS #4395 SHORT 2025-11-14 11:15:00 | CLASS=BOS_NO_TRADE
+  close=297.2200 strength=94.21428571428358 level=297.62
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.108% H3=+0.125% H6=+0.125% H12=+0.304% MAX=+0.304% @bar 10
+  MAE H1=-0.040% H3=-0.057% H6=-0.114% H12=-0.195%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #4404 SHORT 2025-11-14 12:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.6000 strength=67.43438938949842 level=296.85
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.094% H3=+0.094% H6=+0.094% H12=+0.094% MAX=+0.094% @bar 1
+  MAE H1=-0.121% H3=-0.131% H6=-0.199% H12=-0.202%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-289.86 lifecycle=-289.86
+  managed trade numbers: 62
+  managed results:       -289.86
+
+BOS #4596 LONG 2025-11-18 11:10:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=299.4900 strength=88.93783639982674 level=298.71
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.130% H3=+0.671% H6=+0.838% H12=+0.995% MAX=+0.995% @bar 11
+  MAE H1=-0.063% H3=-0.063% H6=-0.063% H12=-0.063%
+  ordinary: N=1 return=+0.033% net=+31.34 MFE=+1.071% exit=END_OF_SESSION
+  managed: N=1 first=+543.21 lifecycle=+543.21
+  managed trade numbers: 63
+  managed results:       +543.21
+
+BOS #4702 SHORT 2025-11-19 11:35:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=299.9700 strength=83.32031249999883 level=300.85
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.137% H3=+0.137% H6=+0.137% H12=+0.439% MAX=+0.439% @bar 11
+  MAE H1=-0.030% H3=-0.229% H6=-0.229% H12=-0.229%
+  ordinary: N=1 return=-0.440% net=-412.60 MFE=+0.387% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=+23.61 lifecycle=+23.61
+  managed trade numbers: 64
+  managed results:       +23.61
+
+BOS #4713 SHORT 2025-11-19 12:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=299.0800 strength=78.69449114621085 level=299.5
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.134% H3=+0.134% H6=+0.134% H12=+0.134% MAX=+0.134% @bar 1
+  MAE H1=+0.000% H3=-0.057% H6=-0.134% H12=-0.210%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-348.55 lifecycle=-348.55
+  managed trade numbers: 65
+  managed results:       -348.55
+
+BOS #4733 LONG 2025-11-19 14:10:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=300.6900 strength=94.64285714285701 level=300.14
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.299% H3=+0.649% H6=+0.649% H12=+1.051% MAX=+1.051% @bar 10
+  MAE H1=-0.003% H3=-0.003% H6=-0.003% H12=-0.003%
+  ordinary: N=1 return=+0.454% net=+423.64 MFE=+1.000% exit=END_OF_SESSION
+  managed: N=2 first=+109.62 lifecycle=+221.36
+  managed trade numbers: 66,67
+  managed results:       +109.62,+111.73
+
+BOS #4741 LONG 2025-11-19 14:50:00 | CLASS=BOS_NO_TRADE
+  close=303.1200 strength=88.83483676658315 level=302.64
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.079% H3=+0.241% H6=+0.241% H12=+0.241% MAX=+0.241% @bar 2
+  MAE H1=-0.129% H3=-0.129% H6=-0.152% H12=-0.152%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #4785 SHORT 2025-11-20 10:05:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=304.7300 strength=86.80402295706973 level=305.11
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.154% H3=+0.154% H6=+0.323% H12=+0.462% MAX=+0.462% @bar 7
+  MAE H1=-0.013% H3=-0.013% H6=-0.013% H12=-0.013%
+  ordinary: N=1 return=-0.506% net=-473.75 MFE=+0.528% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=+52.10 lifecycle=+52.10
+  managed trade numbers: 68
+  managed results:       +52.10
+
+BOS #4798 SHORT 2025-11-20 11:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.1400 strength=76.71954028894159 level=303.33
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.046% H3=+0.046% H6=+0.046% H12=+0.046% MAX=+0.046% @bar 1
+  MAE H1=-0.082% H3=-0.266% H6=-0.420% H12=-0.492%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-777.29 lifecycle=-777.29
+  managed trade numbers: 69
+  managed results:       -777.29
+
+BOS #4812 LONG 2025-11-20 12:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=305.7000 strength=93.27868852458852 level=304.64
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.164% H3=+0.164% H6=+0.164% H12=+0.164% MAX=+0.164% @bar 1
+  MAE H1=-0.023% H3=-0.082% H6=-0.229% H12=-0.451%
+  ordinary: N=1 return=-0.742% net=-691.70 MFE=+0.117% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-581.96 lifecycle=-581.96
+  managed trade numbers: 70
+  managed results:       -581.96
+
+BOS #4836 SHORT 2025-11-20 14:20:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=304.0200 strength=68.44037274965488 level=304.15
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.138% H3=+0.138% H6=+0.138% H12=+0.386% MAX=+0.386% @bar 11
+  MAE H1=-0.003% H3=-0.145% H6=-0.200% H12=-0.200%
+  ordinary: N=1 return=+0.175% net=+162.29 MFE=+0.338% exit=END_OF_SESSION
+  managed: N=1 first=+151.29 lifecycle=+151.29
+  managed trade numbers: 71
+  managed results:       +151.29
+
+BOS #4844 SHORT 2025-11-20 15:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.2600 strength=89.5813017132644 level=303.6
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.013% H3=+0.135% H6=+0.135% H12=+0.135% MAX=+0.135% @bar 3
+  MAE H1=-0.105% H3=-0.115% H6=-0.115% H12=-0.115%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #4981 SHORT 2025-11-24 09:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=308.4000 strength=68.40045016688555 level=308.45
+  event->signal=2 bars | event->entry=3.0 bars
+  MFE H1=+0.003% H3=+0.016% H6=+0.130% H12=+0.175% MAX=+0.175% @bar 11
+  MAE H1=-0.084% H3=-0.084% H6=-0.097% H12=-0.355%
+  ordinary: N=1 return=+0.900% net=+834.34 MFE=+1.519% exit=END_OF_SESSION
+  managed: N=1 first=-324.31 lifecycle=-324.31
+  managed trade numbers: 72
+  managed results:       -324.31
+
+BOS #4987 SHORT 2025-11-24 10:05:00 | CLASS=BOS_NO_TRADE
+  close=308.2000 strength=79.89808681390477 level=308.35
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.016% H3=+0.016% H6=+0.110% H12=+0.299% MAX=+0.299% @bar 12
+  MAE H1=-0.039% H3=-0.420% H6=-0.420% H12=-0.420%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #5005 SHORT 2025-11-24 11:35:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=305.9600 strength=95.26315789473676 level=307.26
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.007% H3=+0.007% H6=+0.446% H12=+0.446% MAX=+0.446% @bar 5
+  MAE H1=-0.121% H3=-0.157% H6=-0.157% H12=-0.157%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-6.00 lifecycle=-6.00
+  managed trade numbers: 73
+  managed results:       -6.00
+
+BOS #5009 SHORT 2025-11-24 11:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.8100 strength=94.01315789473716 level=305.78
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.069% H3=+0.069% H6=+0.069% H12=+0.069% MAX=+0.069% @bar 1
+  MAE H1=-0.206% H3=-0.525% H6=-0.525% H12=-0.525%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+70.53 lifecycle=+70.53
+  managed trade numbers: 74
+  managed results:       +70.53
+
+BOS #5022 SHORT 2025-11-24 13:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.1600 strength=88.26827286637425 level=304.6
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.039% H3=+0.151% H6=+0.151% H12=+0.151% MAX=+0.151% @bar 3
+  MAE H1=-0.076% H3=-0.076% H6=-0.275% H12=-0.380%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #5200 SHORT 2025-11-26 11:00:00 | CLASS=MARGINAL_BOS
+  close=305.0300 strength=76.10347836931753 level=305.18
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.010% H3=+0.010% H6=+0.010% H12=+0.339% MAX=+0.339% @bar 10
+  MAE H1=-0.098% H3=-0.160% H6=-0.160% H12=-0.160%
+  ordinary: N=1 return=-0.292% net=-273.08 MFE=+0.288% exit=END_OF_SESSION
+  managed: N=1 first=-36.61 lifecycle=-36.61
+  managed trade numbers: 75
+  managed results:       -36.61
+
+BOS #5385 LONG 2025-11-28 09:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.8900 strength=84.72222222222011 level=300.33
+  event->signal=1 bars | event->entry=2.0 bars
+  MFE H1=+0.063% H3=+0.090% H6=+0.103% H12=+0.103% MAX=+0.103% @bar 5
+  MAE H1=-0.003% H3=-0.023% H6=-0.296% H12=-0.296%
+  ordinary: N=1 return=-0.256% net=-238.97 MFE=+0.491% exit=END_OF_SESSION
+  managed: N=1 first=-37.85 lifecycle=-37.85
+  managed trade numbers: 76
+  managed results:       -37.85
+
+BOS #5507 LONG 2025-12-01 11:20:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=304.5900 strength=65.50133857250101 level=304.45
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.059% H3=+0.131% H6=+0.131% H12=+0.545% MAX=+0.545% @bar 10
+  MAE H1=-0.039% H3=-0.039% H6=-0.128% H12=-0.128%
+  ordinary: N=1 return=-0.026% net=-24.33 MFE=+0.570% exit=END_OF_SESSION
+  managed: N=2 first=-177.68 lifecycle=-95.96
+  managed trade numbers: 77,78
+  managed results:       -177.68,+81.72
+
+BOS #5597 SHORT 2025-12-02 10:25:00 | CLASS=MARGINAL_BOS
+  close=304.1200 strength=72.24195448331915 level=304.32
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.095% H3=+0.095% H6=+0.142% H12=+0.201% MAX=+0.201% @bar 8
+  MAE H1=-0.036% H3=-0.039% H6=-0.039% H12=-0.039%
+  ordinary: N=1 return=-0.375% net=-348.32 MFE=+0.151% exit=END_OF_SESSION
+  managed: N=1 first=-72.93 lifecycle=-72.93
+  managed trade numbers: 79
+  managed results:       -72.93
+
+BOS #5603 SHORT 2025-12-02 10:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.6900 strength=84.21913706503705 level=303.83
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.043% H3=+0.059% H6=+0.059% H12=+0.059% MAX=+0.059% @bar 2
+  MAE H1=-0.043% H3=-0.049% H6=-0.079% H12=-0.354%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-466.38 lifecycle=-466.38
+  managed trade numbers: 80
+  managed results:       -466.38
+
+BOS #5694 SHORT 2025-12-03 10:05:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=300.8700 strength=78.7499999999992 level=301.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.070% H3=+0.070% H6=+0.247% H12=+0.290% MAX=+0.290% @bar 11
+  MAE H1=-0.043% H3=-0.043% H6=-0.043% H12=-0.043%
+  ordinary: N=1 return=+0.083% net=+76.72 MFE=+0.542% exit=END_OF_SESSION
+  managed: N=1 first=-71.42 lifecycle=-71.42
+  managed trade numbers: 81
+  managed results:       -71.42
+
+BOS #5716 SHORT 2025-12-03 11:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=299.4000 strength=85.32984500011838 level=299.56
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.100% H3=+0.100% H6=+0.100% H12=+0.100% MAX=+0.100% @bar 1
+  MAE H1=-0.067% H3=-0.130% H6=-0.266% H12=-0.330%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-350.67 lifecycle=-350.67
+  managed trade numbers: 82
+  managed results:       -350.67
+
+BOS #5795 SHORT 2025-12-04 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.2100 strength=84.64702282631131 level=303.41
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.069% H6=+0.069% H12=+0.152% MAX=+0.152% @bar 12
+  MAE H1=-0.040% H3=-0.096% H6=-0.168% H12=-0.168%
+  ordinary: N=1 return=-0.048% net=-44.65 MFE=+0.468% exit=END_OF_SESSION
+  managed: N=1 first=-18.48 lifecycle=-18.48
+  managed trade numbers: 83
+  managed results:       -18.48
+
+BOS #5837 SHORT 2025-12-04 13:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.1700 strength=78.46125368440906 level=302.42
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.013% H12=+0.023% MAX=+0.023% @bar 7
+  MAE H1=-0.073% H3=-0.089% H6=-0.093% H12=-0.185%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-324.97 lifecycle=-324.97
+  managed trade numbers: 84
+  managed results:       -324.97
+
+BOS #5924 LONG 2025-12-05 12:25:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=305.1700 strength=70.30739331324168 level=305.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.338% H3=+0.338% H6=+0.338% H12=+0.338% MAX=+0.338% @bar 1
+  MAE H1=+0.000% H3=-0.043% H6=-0.049% H12=-0.187%
+  ordinary: N=1 return=+0.441% net=+409.00 MFE=+0.851% exit=END_OF_SESSION
+  managed: N=2 first=-169.24 lifecycle=-111.44
+  managed trade numbers: 85,86
+  managed results:       -169.24,+57.79
+
+BOS #5997 SHORT 2025-12-08 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=306.8100 strength=92.27012937882705 level=307.05
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.033% H3=+0.033% H6=+0.033% H12=+0.033% MAX=+0.033% @bar 1
+  MAE H1=-0.010% H3=-0.062% H6=-0.286% H12=-0.289%
+  ordinary: N=1 return=+0.071% net=+65.93 MFE=+0.468% exit=END_OF_SESSION
+  managed: N=1 first=-14.62 lifecycle=-14.62
+  managed trade numbers: 87
+  managed results:       -14.62
+
+BOS #6324 LONG 2025-12-11 12:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=309.3500 strength=86.57206953739983 level=309.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.210% H3=-0.246% H6=-0.314% H12=-0.569%
+  ordinary: N=1 return=-0.571% net=-531.87 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-681.95 lifecycle=-681.95
+  managed trade numbers: 88
+  managed results:       -681.95
+
+BOS #6356 LONG 2025-12-11 14:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=308.4600 strength=91.8292682926824 level=308.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.230% H3=-0.230% H6=-0.230% H12=-0.230%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-240.91 lifecycle=-240.91
+  managed trade numbers: 89
+  managed results:       -240.91
+
+BOS #6505 SHORT 2025-12-15 10:20:00 | CLASS=MARGINAL_BOS
+  close=304.2000 strength=68.15789473683628 level=304.7
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.155% H3=+0.155% H6=+0.211% H12=+0.330% MAX=+0.330% @bar 12
+  MAE H1=+0.000% H3=-0.049% H6=-0.049% H12=-0.049%
+  ordinary: N=1 return=-0.516% net=-477.97 MFE=+0.279% exit=END_OF_SESSION
+  managed: N=1 first=-10.40 lifecycle=-10.40
+  managed trade numbers: 90
+  managed results:       -10.40
+
+BOS #6516 SHORT 2025-12-15 11:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.3400 strength=77.42510883674804 level=303.56
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.046% H3=+0.046% H6=+0.046% H12=+0.046% MAX=+0.046% @bar 1
+  MAE H1=-0.016% H3=-0.036% H6=-0.256% H12=-0.616%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-614.01 lifecycle=-614.01
+  managed trade numbers: 91
+  managed results:       -614.01
+
+BOS #6649 SHORT 2025-12-16 13:55:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=304.9300 strength=72.52932896122563 level=305.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.461% H6=+0.461% H12=+0.461% MAX=+0.461% @bar 3
+  MAE H1=-0.043% H3=-0.088% H6=-0.088% H12=-0.088%
+  ordinary: N=1 return=+0.145% net=+133.34 MFE=+0.416% exit=END_OF_SESSION
+  managed: N=1 first=-35.24 lifecycle=-35.24
+  managed trade numbers: 92
+  managed results:       -35.24
+
+BOS #6652 SHORT 2025-12-16 14:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.0000 strength=86.37724550898163 level=304.81
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.076% H3=+0.076% H6=+0.076% H12=+0.076% MAX=+0.076% @bar 1
+  MAE H1=-0.112% H3=-0.187% H6=-0.230% H12=-0.262%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-10.46 lifecycle=-10.46
+  managed trade numbers: 93
+  managed results:       -10.46
+
+BOS #6755 SHORT 2025-12-17 14:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.8100 strength=90.03282094758086 level=303.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.017% H3=+0.053% H6=+0.053% H12=+0.053% MAX=+0.053% @bar 2
+  MAE H1=-0.036% H3=-0.063% H6=-0.214% H12=-0.221%
+  ordinary: N=1 return=-0.329% net=-303.61 MFE=+0.003% exit=END_OF_SESSION
+  managed: N=1 first=-272.95 lifecycle=-272.95
+  managed trade numbers: 94
+  managed results:       -272.95
+
+BOS #6793 SHORT 2025-12-18 09:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.3700 strength=66.16422756774543 level=303.49
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.119% H3=+0.119% H6=+0.119% H12=+0.119% MAX=+0.119% @bar 1
+  MAE H1=-0.049% H3=-0.086% H6=-0.122% H12=-0.122%
+  ordinary: N=1 return=+0.262% net=+240.99 MFE=+0.906% exit=END_OF_SESSION
+  managed: N=1 first=-105.38 lifecycle=-105.38
+  managed trade numbers: 95
+  managed results:       -105.38
+
+BOS #6806 SHORT 2025-12-18 10:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.9300 strength=77.71298042681025 level=303.01
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.023% H3=+0.023% H6=+0.023% H12=+0.026% MAX=+0.026% @bar 11
+  MAE H1=-0.073% H3=-0.102% H6=-0.102% H12=-0.188%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-34.28 lifecycle=-34.28
+  managed trade numbers: 96
+  managed results:       -34.28
+
+BOS #6819 SHORT 2025-12-18 11:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.3200 strength=98.205128205127 level=302.86
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.053% MAX=+0.053% @bar 11
+  MAE H1=-0.159% H3=-0.198% H6=-0.211% H12=-0.224%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-42.25 lifecycle=-42.25
+  managed trade numbers: 97
+  managed results:       -42.25
+
+BOS #6853 SHORT 2025-12-18 14:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.0000 strength=93.86075949367296 level=301.63
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.023% H3=+0.070% H6=+0.123% H12=+0.176% MAX=+0.176% @bar 7
+  MAE H1=-0.056% H3=-0.060% H6=-0.060% H12=-0.331%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-126.63 lifecycle=-126.63
+  managed trade numbers: 98
+  managed results:       -126.63
+
+BOS #6856 SHORT 2025-12-18 14:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.8200 strength=65.50485443581422 level=300.91
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.063% H3=+0.063% H6=+0.116% H12=+0.116% MAX=+0.116% @bar 4
+  MAE H1=-0.033% H3=-0.043% H6=-0.043% H12=-0.391%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #6860 SHORT 2025-12-18 14:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.5000 strength=73.66419499656774 level=300.63
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.130% H3=-0.146% H6=-0.497% H12=-0.497%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-469.12 lifecycle=-469.12
+  managed trade numbers: 99
+  managed results:       -469.12
+
+BOS #6908 LONG 2025-12-19 10:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.0200 strength=74.76426380092254 level=302.9
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.076% H3=+0.076% H6=+0.076% H12=+0.076% MAX=+0.076% @bar 1
+  MAE H1=-0.010% H3=-0.086% H6=-0.089% H12=-0.320%
+  ordinary: N=1 return=-0.556% net=-512.36 MFE=+0.016% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-414.63 lifecycle=-414.63
+  managed trade numbers: 100
+  managed results:       -414.63
+
+BOS #6922 SHORT 2025-12-19 11:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.9600 strength=65.98373069527362 level=302.05
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.020% H3=+0.020% H6=+0.053% H12=+0.086% MAX=+0.086% @bar 8
+  MAE H1=-0.053% H3=-0.066% H6=-0.066% H12=-0.179%
+  ordinary: N=1 return=+0.135% net=+123.65 MFE=+0.934% exit=END_OF_SESSION
+  managed: N=1 first=+31.52 lifecycle=+31.52
+  managed trade numbers: 101
+  managed results:       +31.52
+
+BOS #7099 SHORT 2025-12-23 09:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=297.5300 strength=91.84616800045798 level=297.69
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.020% H3=+0.020% H6=+0.020% H12=+0.020% MAX=+0.020% @bar 1
+  MAE H1=-0.168% H3=-0.248% H6=-0.248% H12=-0.425%
+  ordinary: N=1 return=-0.920% net=-845.03 MFE=+0.017% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-709.09 lifecycle=-709.09
+  managed trade numbers: 102
+  managed results:       -709.09
+
+BOS #7165 LONG 2025-12-23 14:50:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=299.6600 strength=87.43243243243481 level=299.25
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.160% H3=+0.187% H6=+0.270% H12=+0.270% MAX=+0.270% @bar 4
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=+0.043% net=+39.43 MFE=+0.220% exit=END_OF_SESSION
+  managed: N=2 first=-96.90 lifecycle=-126.57
+  managed trade numbers: 103,104
+  managed results:       -96.90,-29.66
+
+BOS #7199 SHORT 2025-12-24 09:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.3500 strength=68.92074855512418 level=300.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.067% H6=+0.097% H12=+0.117% MAX=+0.117% @bar 10
+  MAE H1=-0.063% H3=-0.063% H6=-0.063% H12=-0.063%
+  ordinary: N=1 return=-0.347% net=-315.60 MFE=+0.293% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-131.84 lifecycle=-131.84
+  managed trade numbers: 105
+  managed results:       -131.84
+
+BOS #7208 SHORT 2025-12-24 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.0300 strength=71.47863435251384 level=300.06
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.010% H3=+0.010% H6=+0.010% H12=+0.010% MAX=+0.010% @bar 1
+  MAE H1=-0.043% H3=-0.070% H6=-0.283% H12=-0.283%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-2.65 lifecycle=-2.65
+  managed trade numbers: 106
+  managed results:       -2.65
+
+BOS #7247 LONG 2025-12-24 13:15:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=300.8100 strength=67.46817676893771 level=300.71
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.063% H3=+0.063% H6=+0.209% H12=+0.578% MAX=+0.578% @bar 12
+  MAE H1=-0.040% H3=-0.040% H6=-0.040% H12=-0.040%
+  ordinary: N=1 return=+0.451% net=+408.75 MFE=+0.734% exit=END_OF_SESSION
+  managed: N=1 first=+363.02 lifecycle=+363.02
+  managed trade numbers: 107
+  managed results:       +363.02
+
+BOS #7257 LONG 2025-12-24 14:05:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=301.8400 strength=90.52238805969931 level=301.44
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.017% H3=+0.384% H6=+0.384% H12=+0.434% MAX=+0.434% @bar 11
+  MAE H1=-0.080% H3=-0.080% H6=-0.080% H12=-0.080%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #7309 SHORT 2025-12-25 10:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=301.2600 strength=93.56372189888512 level=301.44
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.030% H3=+0.076% H6=+0.186% H12=+0.246% MAX=+0.246% @bar 12
+  MAE H1=-0.040% H3=-0.040% H6=-0.040% H12=-0.040%
+  ordinary: N=1 return=+0.109% net=+99.35 MFE=+0.315% exit=END_OF_SESSION
+  managed: N=2 first=-46.24 lifecycle=-364.15
+  managed trade numbers: 108,109
+  managed results:       -46.24,-317.91
+
+BOS #7363 SHORT 2025-12-25 14:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.2500 strength=72.66838408312842 level=300.37
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.030% H3=+0.030% H6=+0.030% H12=+0.030% MAX=+0.030% @bar 1
+  MAE H1=-0.003% H3=-0.043% H6=-0.113% H12=-0.113%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-179.96 lifecycle=-179.96
+  managed trade numbers: 110
+  managed results:       -179.96
+
+BOS #7408 LONG 2025-12-26 09:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.7400 strength=93.48484848485064 level=301.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.027% H3=+0.109% H6=+0.109% H12=+0.109% MAX=+0.109% @bar 3
+  MAE H1=-0.046% H3=-0.046% H6=-0.046% H12=-0.189%
+  ordinary: N=1 return=-0.140% net=-127.98 MFE=+0.053% exit=END_OF_SESSION
+  managed: N=1 first=-112.77 lifecycle=-112.77
+  managed trade numbers: 111
+  managed results:       -112.77
+
+BOS #7495 LONG 2025-12-29 08:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.9000 strength=75.15406585362514 level=302.79
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.007% H3=-0.125% H6=-0.297% H12=-0.337%
+  ordinary: N=1 return=+0.169% net=+154.18 MFE=+1.039% exit=END_OF_SESSION
+  managed: N=1 first=+437.41 lifecycle=+437.41
+  managed trade numbers: 112
+  managed results:       +437.41
+
+BOS #7612 SHORT 2025-12-30 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=299.6200 strength=88.17103865036499 level=299.8
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.114% H3=+0.134% H6=+0.171% H12=+0.171% MAX=+0.171% @bar 6
+  MAE H1=-0.003% H3=-0.073% H6=-0.100% H12=-0.120%
+  ordinary: N=1 return=-0.367% net=-334.98 MFE=+0.130% exit=END_OF_SESSION
+  managed: N=3 first=-204.59 lifecycle=-585.57
+  managed trade numbers: 113,114,115
+  managed results:       -204.59,-96.51,-284.47
+
+BOS #7706 SHORT 2026-01-05 09:25:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=297.4100 strength=70.27591431655006 level=297.57
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.067% H3=+0.067% H6=+0.067% H12=+0.405% MAX=+0.405% @bar 8
+  MAE H1=-0.017% H3=-0.101% H6=-0.101% H12=-0.101%
+  ordinary: N=1 return=-0.385% net=-350.19 MFE=+0.350% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-122.51 lifecycle=-122.51
+  managed trade numbers: 116
+  managed results:       -122.51
+
+BOS #7713 SHORT 2026-01-05 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.6600 strength=99.12621359223135 level=297.21
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.152% H3=+0.152% H6=+0.152% H12=+0.152% MAX=+0.152% @bar 1
+  MAE H1=-0.229% H3=-0.229% H6=-0.229% H12=-0.413%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-308.22 lifecycle=-308.22
+  managed trade numbers: 117
+  managed results:       -308.22
+
+BOS #7744 LONG 2026-01-05 12:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=297.9500 strength=74.36831535474211 level=297.7
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.007% H12=+0.107% MAX=+0.107% @bar 11
+  MAE H1=-0.101% H3=-0.101% H6=-0.117% H12=-0.117%
+  ordinary: N=1 return=-0.069% net=-62.65 MFE=+0.121% exit=END_OF_SESSION
+  managed: N=1 first=-129.88 lifecycle=-129.88
+  managed trade numbers: 118
+  managed results:       -129.88
+
+BOS #7763 LONG 2026-01-05 14:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=298.4000 strength=65.86935100242546 level=298.33
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.007% H3=+0.007% H6=+0.007% H12=+0.007% MAX=+0.007% @bar 1
+  MAE H1=-0.040% H3=-0.084% H6=-0.084% H12=-0.158%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-174.96 lifecycle=-174.96
+  managed trade numbers: 119
+  managed results:       -174.96
+
+BOS #7866 SHORT 2026-01-06 14:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=299.1800 strength=74.29310142911159 level=299.3
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.037% H3=+0.037% H6=+0.057% H12=+0.184% MAX=+0.184% @bar 10
+  MAE H1=-0.007% H3=-0.007% H6=-0.007% H12=-0.007%
+  ordinary: N=1 return=-0.063% net=-56.87 MFE=+0.141% exit=END_OF_SESSION
+  managed: N=1 first=-49.89 lifecycle=-49.89
+  managed trade numbers: 120
+  managed results:       -49.89
+
+BOS #7875 SHORT 2026-01-06 15:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=298.7600 strength=94.65517241379729 level=299.01
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.044% H3=+0.044% H6=+0.044% H12=+0.044% MAX=+0.044% @bar 1
+  MAE H1=+0.000% H3=-0.017% H6=-0.017% H12=-0.017%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #7944 LONG 2026-01-08 12:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=298.5000 strength=77.23996445873198 level=298.4
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.101% H3=-0.104% H6=-0.104% H12=-0.151%
+  ordinary: N=1 return=-0.698% net=-631.39 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-325.68 lifecycle=-325.68
+  managed trade numbers: 121
+  managed results:       -325.68
+
+BOS #7977 SHORT 2026-01-08 15:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=297.0000 strength=99.42290777116564 level=297.2
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.020% H3=+0.020% H6=+0.020% H12=+0.020% MAX=+0.020% @bar 1
+  MAE H1=-0.050% H3=-0.050% H6=-0.050% H12=-0.050%
+  ordinary: N=1 return=-0.237% net=-212.96 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-187.35 lifecycle=-187.35
+  managed trade numbers: 122
+  managed results:       -187.35
+
+BOS #8119 LONG 2026-01-12 10:10:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=299.9800 strength=95.34482758621054 level=299.35
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.040% H3=+0.040% H6=+0.153% H12=+0.473% MAX=+0.473% @bar 10
+  MAE H1=-0.050% H3=-0.057% H6=-0.057% H12=-0.057%
+  ordinary: N=1 return=-0.460% net=-411.60 MFE=+0.427% exit=END_OF_SESSION
+  managed: N=1 first=+96.91 lifecycle=+96.91
+  managed trade numbers: 123
+  managed results:       +96.91
+
+BOS #8124 LONG 2026-01-12 10:35:00 | CLASS=BOS_NO_TRADE
+  close=300.3400 strength=88.97279175876481 level=300.1
+  event->signal=0 bars | event->entry=6.0 bars
+  MFE H1=+0.013% H3=+0.316% H6=+0.353% H12=+0.353% MAX=+0.353% @bar 5
+  MAE H1=-0.063% H3=-0.063% H6=-0.063% H12=-0.063%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-293.83 lifecycle=-293.83
+  managed trade numbers: 124
+  managed results:       -293.83
+
+BOS #8320 SHORT 2026-01-14 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.1500 strength=95.87837837838185 level=296.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.017% H3=+0.044% H6=+0.044% H12=+0.044% MAX=+0.044% @bar 3
+  MAE H1=-0.088% H3=-0.185% H6=-0.185% H12=-0.300%
+  ordinary: N=1 return=-1.171% net=-1043.73 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-967.99 lifecycle=-967.99
+  managed trade numbers: 125
+  managed results:       -967.99
+
+BOS #8420 SHORT 2026-01-15 10:00:00 | CLASS=MARGINAL_BOS
+  close=298.5200 strength=83.82871082157092 level=298.74
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.037% H3=+0.047% H6=+0.127% H12=+0.377% MAX=+0.377% @bar 12
+  MAE H1=-0.064% H3=-0.080% H6=-0.120% H12=-0.120%
+  ordinary: N=1 return=-0.284% net=-250.22 MFE=+0.322% exit=END_OF_SESSION
+  managed: N=1 first=-40.74 lifecycle=-40.74
+  managed trade numbers: 126
+  managed results:       -40.74
+
+BOS #8430 SHORT 2026-01-15 10:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=297.8200 strength=84.92573350916817 level=298.05
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.108% H3=+0.141% H6=+0.141% H12=+0.141% MAX=+0.141% @bar 2
+  MAE H1=-0.047% H3=-0.091% H6=-0.144% H12=-0.144%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-116.16 lifecycle=-409.22
+  managed trade numbers: 127,128
+  managed results:       -116.16,-293.06
+
+BOS #8529 LONG 2026-01-16 10:40:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=299.6400 strength=84.72350854868708 level=299.48
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.020% H3=+0.047% H6=+0.187% H12=+0.451% MAX=+0.451% @bar 8
+  MAE H1=-0.060% H3=-0.117% H6=-0.117% H12=-0.117%
+  ordinary: N=1 return=-0.003% net=-2.89 MFE=+0.404% exit=END_OF_SESSION
+  managed: N=1 first=+41.19 lifecycle=+41.19
+  managed trade numbers: 129
+  managed results:       +41.19
+
+BOS #8532 LONG 2026-01-16 10:55:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=299.7600 strength=65.10831774709641 level=299.7
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.080% H3=+0.147% H6=+0.410% H12=+0.410% MAX=+0.410% @bar 5
+  MAE H1=-0.010% H3=-0.010% H6=-0.033% H12=-0.033%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #8537 LONG 2026-01-16 11:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.7000 strength=87.95454545454503 level=300.2
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.033% H3=+0.040% H6=+0.040% H12=+0.040% MAX=+0.040% @bar 3
+  MAE H1=-0.086% H3=-0.153% H6=-0.186% H12=-0.193%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-118.43 lifecycle=-385.29
+  managed trade numbers: 130,131
+  managed results:       -118.43,-266.85
+
+BOS #8610 SHORT 2026-01-19 09:00:00 | CLASS=MARGINAL_BOS
+  close=301.3800 strength=78.55601783176617 level=301.6
+  event->signal=2 bars | event->entry=3.0 bars
+  MFE H1=+0.073% H3=+0.120% H6=+0.186% H12=+0.346% MAX=+0.346% @bar 12
+  MAE H1=-0.040% H3=-0.040% H6=-0.050% H12=-0.050%
+  ordinary: N=1 return=-0.982% net=-862.48 MFE=+0.216% exit=END_OF_SESSION
+  managed: N=1 first=-87.31 lifecycle=-87.31
+  managed trade numbers: 132
+  managed results:       -87.31
+
+BOS #8622 SHORT 2026-01-19 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.6200 strength=70.77855723832974 level=300.82
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.063% H3=+0.063% H6=+0.063% H12=+0.063% MAX=+0.063% @bar 1
+  MAE H1=-0.096% H3=-0.209% H6=-0.209% H12=-0.272%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-853.57 lifecycle=-853.57
+  managed trade numbers: 133
+  managed results:       -853.57
+
+BOS #8747 SHORT 2026-01-20 12:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.6400 strength=85.28846153846456 level=302.9
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.056% H3=+0.056% H6=+0.056% H12=+0.056% MAX=+0.056% @bar 1
+  MAE H1=+0.000% H3=-0.274% H6=-0.274% H12=-0.274%
+  ordinary: N=1 return=-0.266% net=-231.67 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-202.11 lifecycle=-202.11
+  managed trade numbers: 134
+  managed results:       -202.11
+
+BOS #8864 LONG 2026-01-21 13:20:00 | CLASS=MARGINAL_BOS
+  close=305.9200 strength=93.41463414634163 level=305.11
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.101% H6=+0.108% H12=+0.281% MAX=+0.281% @bar 12
+  MAE H1=-0.101% H3=-0.101% H6=-0.101% H12=-0.101%
+  ordinary: N=1 return=-0.233% net=-201.77 MFE=+0.283% exit=END_OF_SESSION
+  managed: N=1 first=-8.02 lifecycle=-8.02
+  managed trade numbers: 135
+  managed results:       -8.02
+
+BOS #8873 LONG 2026-01-21 14:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=306.5000 strength=94.99967600500028 level=306.25
+  event->signal=0 bars | event->entry=7.0 bars
+  MFE H1=+0.003% H3=+0.091% H6=+0.144% H12=+0.144% MAX=+0.144% @bar 4
+  MAE H1=-0.033% H3=-0.033% H6=-0.033% H12=-0.199%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-318.97 lifecycle=-318.97
+  managed trade numbers: 136
+  managed results:       -318.97
+
+BOS #8941 LONG 2026-01-22 11:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=306.8700 strength=77.09308991374542 level=306.71
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.042% H6=+0.042% H12=+0.042% MAX=+0.042% @bar 2
+  MAE H1=-0.039% H3=-0.059% H6=-0.098% H12=-0.160%
+  ordinary: N=1 return=-0.258% net=-223.75 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-194.81 lifecycle=-194.81
+  managed trade numbers: 137
+  managed results:       -194.81
+
+BOS #9049 LONG 2026-01-23 11:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=307.1000 strength=75.88235294117791 level=306.8
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.055% H3=+0.055% H6=+0.055% H12=+0.055% MAX=+0.055% @bar 1
+  MAE H1=-0.065% H3=-0.163% H6=-0.199% H12=-0.199%
+  ordinary: N=1 return=-0.398% net=-343.84 MFE=+0.002% exit=END_OF_SESSION
+  managed: N=1 first=-282.25 lifecycle=-282.25
+  managed trade numbers: 138
+  managed results:       -282.25
+
+BOS #9136 SHORT 2026-01-26 10:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.8200 strength=76.70020949867907 level=305.05
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.033% H3=+0.033% H6=+0.033% H12=+0.089% MAX=+0.089% @bar 12
+  MAE H1=-0.144% H3=-0.144% H6=-0.144% H12=-0.144%
+  ordinary: N=1 return=+0.243% net=+209.36 MFE=+0.449% exit=END_OF_SESSION
+  managed: N=1 first=-51.43 lifecycle=-51.43
+  managed trade numbers: 139
+  managed results:       -51.43
+
+BOS #9390 SHORT 2026-01-28 15:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.8800 strength=76.69642857142702 level=304.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.046% H3=+0.046% H6=+0.046% H12=+0.046% MAX=+0.046% @bar 1
+  MAE H1=-0.062% H3=-0.085% H6=-0.085% H12=-0.085%
+  ordinary: N=1 return=-0.289% net=-249.22 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-216.35 lifecycle=-216.35
+  managed trade numbers: 140
+  managed results:       -216.35
+
+BOS #9435 LONG 2026-01-29 10:25:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=306.1400 strength=86.16666666666863 level=305.3
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.118% H3=+0.167% H6=+0.180% H12=+0.242% MAX=+0.242% @bar 7
+  MAE H1=-0.007% H3=-0.007% H6=-0.007% H12=-0.007%
+  ordinary: N=1 return=-0.076% net=-65.30 MFE=+0.188% exit=END_OF_SESSION
+  managed: N=2 first=-78.59 lifecycle=-205.75
+  managed trade numbers: 141,142
+  managed results:       -78.59,-127.15
+
+BOS #9532 SHORT 2026-01-30 10:05:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=307.2400 strength=80.37015663955474 level=307.44
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.029% H3=+0.029% H6=+0.143% H12=+0.228% MAX=+0.228% @bar 7
+  MAE H1=-0.055% H3=-0.140% H6=-0.140% H12=-0.140%
+  ordinary: N=1 return=+0.243% net=+208.93 MFE=+0.836% exit=END_OF_SESSION
+  managed: N=1 first=-173.17 lifecycle=-173.17
+  managed trade numbers: 143
+  managed results:       -173.17
+
+BOS #9538 SHORT 2026-01-30 10:35:00 | CLASS=BOS_NO_TRADE
+  close=306.8100 strength=98.01406381258232 level=307.15
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.088% H3=+0.088% H6=+0.088% H12=+0.265% MAX=+0.265% @bar 10
+  MAE H1=-0.020% H3=-0.185% H6=-0.263% H12=-0.263%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+400.66 lifecycle=+400.66
+  managed trade numbers: 144
+  managed results:       +400.66
+
+BOS #9548 SHORT 2026-01-30 11:25:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=306.1900 strength=89.57181062716884 level=306.54
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.062% H3=+0.062% H6=+0.390% H12=+0.545% MAX=+0.545% @bar 7
+  MAE H1=-0.039% H3=-0.078% H6=-0.078% H12=-0.078%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #9554 SHORT 2026-01-30 11:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=305.0900 strength=96.56779661017046 level=306.0
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.184% H3=+0.184% H6=+0.184% H12=+0.194% MAX=+0.194% @bar 9
+  MAE H1=-0.023% H3=-0.039% H6=-0.039% H12=-0.039%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #9628 SHORT 2026-02-02 09:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.5200 strength=67.5882865876203 level=304.57
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.095% H3=+0.095% H6=+0.138% H12=+0.171% MAX=+0.171% @bar 8
+  MAE H1=-0.003% H3=-0.115% H6=-0.115% H12=-0.115%
+  ordinary: N=1 return=+0.244% net=+209.99 MFE=+0.778% exit=END_OF_SESSION
+  managed: N=1 first=-205.83 lifecycle=-205.83
+  managed trade numbers: 145
+  managed results:       -205.83
+
+BOS #9742 SHORT 2026-02-03 10:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.6600 strength=73.39786152539196 level=303.76
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.020% H3=+0.020% H6=+0.119% H12=+0.119% MAX=+0.119% @bar 6
+  MAE H1=-0.023% H3=-0.023% H6=-0.023% H12=-0.023%
+  ordinary: N=1 return=-0.576% net=-497.25 MFE=+0.151% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-99.85 lifecycle=-99.85
+  managed trade numbers: 146
+  managed results:       -99.85
+
+BOS #9747 SHORT 2026-02-03 11:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.5000 strength=79.28942866661467 level=303.6
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.066% H3=+0.066% H6=+0.066% H12=+0.155% MAX=+0.155% @bar 10
+  MAE H1=-0.003% H3=-0.076% H6=-0.076% H12=-0.076%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #9757 SHORT 2026-02-03 12:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.1700 strength=76.54683160730889 level=303.3
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.036% H3=+0.036% H6=+0.036% H12=+0.036% MAX=+0.036% @bar 1
+  MAE H1=-0.096% H3=-0.171% H6=-0.184% H12=-0.198%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-241.99 lifecycle=-241.99
+  managed trade numbers: 147
+  managed results:       -241.99
+
+BOS #9793 LONG 2026-02-03 15:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.7900 strength=88.26911021545372 level=304.6
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.007% H6=+0.007% H12=+0.007% MAX=+0.007% @bar 2
+  MAE H1=-0.052% H3=-0.075% H6=-0.075% H12=-0.075%
+  ordinary: N=1 return=-0.259% net=-222.15 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-191.82 lifecycle=-191.82
+  managed trade numbers: 148
+  managed results:       -191.82
+
+BOS #9886 SHORT 2026-02-04 14:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.6100 strength=83.86363636363984 level=304.91
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.112% H3=+0.112% H6=+0.112% H12=+0.112% MAX=+0.112% @bar 1
+  MAE H1=-0.030% H3=-0.089% H6=-0.089% H12=-0.203%
+  ordinary: N=1 return=-0.338% net=-289.46 MFE=+0.062% exit=END_OF_SESSION
+  managed: N=1 first=-249.94 lifecycle=-249.94
+  managed trade numbers: 149
+  managed results:       -249.94
+
+BOS #9935 SHORT 2026-02-05 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.4000 strength=77.54302274860618 level=302.61
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.109% H3=+0.199% H6=+0.199% H12=+0.199% MAX=+0.199% @bar 3
+  MAE H1=-0.007% H3=-0.007% H6=-0.007% H12=-0.010%
+  ordinary: N=1 return=+0.197% net=+168.31 MFE=+0.579% exit=END_OF_SESSION
+  managed: N=2 first=-91.28 lifecycle=-104.39
+  managed trade numbers: 150,151
+  managed results:       -91.28,-13.11
+
+BOS #9996 SHORT 2026-02-05 15:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.5300 strength=83.45106578026162 level=300.78
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.007% H3=+0.007% H6=+0.007% H12=+0.007% MAX=+0.007% @bar 1
+  MAE H1=-0.106% H3=-0.232% H6=-0.232% H12=-0.232%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-313.85 lifecycle=-313.85
+  managed trade numbers: 152
+  managed results:       -313.85
+
+BOS #10038 SHORT 2026-02-06 10:10:00 | CLASS=MARGINAL_BOS
+  close=301.5500 strength=71.72413793103573 level=301.86
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.020% H3=+0.139% H6=+0.183% H12=+0.299% MAX=+0.299% @bar 8
+  MAE H1=+0.000% H3=-0.020% H6=-0.020% H12=-0.030%
+  ordinary: N=1 return=-0.094% net=-80.19 MFE=+0.249% exit=END_OF_SESSION
+  managed: N=1 first=-85.74 lifecycle=-85.74
+  managed trade numbers: 153
+  managed results:       -85.74
+
+BOS #10042 SHORT 2026-02-06 10:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.0100 strength=69.96405641719144 level=301.12
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.003% H3=+0.047% H6=+0.120% H12=+0.120% MAX=+0.120% @bar 4
+  MAE H1=-0.110% H3=-0.123% H6=-0.123% H12=-0.249%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-146.38 lifecycle=-146.38
+  managed trade numbers: 154
+  managed results:       -146.38
+
+BOS #10045 SHORT 2026-02-06 10:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=300.9100 strength=72.39220049236168 level=301.0
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.086% H3=+0.086% H6=+0.086% H12=+0.086% MAX=+0.086% @bar 1
+  MAE H1=-0.030% H3=-0.143% H6=-0.282% H12=-0.282%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-160.64 lifecycle=-160.64
+  managed trade numbers: 155
+  managed results:       -160.64
+
+BOS #10137 SHORT 2026-02-09 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.0100 strength=80.86141827565461 level=301.11
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.090% H3=+0.103% H6=+0.116% H12=+0.116% MAX=+0.116% @bar 5
+  MAE H1=-0.086% H3=-0.086% H6=-0.096% H12=-0.212%
+  ordinary: N=1 return=-0.257% net=-219.17 MFE=+0.063% exit=END_OF_SESSION
+  managed: N=2 first=-140.92 lifecycle=-615.41
+  managed trade numbers: 156,157
+  managed results:       -140.92,-474.49
+
+BOS #10173 SHORT 2026-02-09 13:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.0900 strength=88.75000000000355 level=301.49
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.056% H3=-0.056% H6=-0.136% H12=-0.179%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-163.75 lifecycle=-163.75
+  managed trade numbers: 158
+  managed results:       -163.75
+
+BOS #10236 LONG 2026-02-10 09:50:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=302.7100 strength=75.0862068965497 level=302.24
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.089% H3=+0.244% H6=+0.558% H12=+0.558% MAX=+0.558% @bar 5
+  MAE H1=-0.053% H3=-0.053% H6=-0.053% H12=-0.053%
+  ordinary: N=1 return=-0.012% net=-10.13 MFE=+0.637% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=+164.96 lifecycle=+164.96
+  managed trade numbers: 159
+  managed results:       +164.96
+
+BOS #10241 LONG 2026-02-10 10:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.3300 strength=97.39669421487625 level=303.45
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.016% H3=+0.016% H6=+0.016% H12=+0.154% MAX=+0.154% @bar 9
+  MAE H1=-0.168% H3=-0.168% H6=-0.168% H12=-0.168%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-113.55 lifecycle=-113.55
+  managed trade numbers: 160
+  managed results:       -113.55
+
+BOS #10249 LONG 2026-02-10 10:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.6100 strength=78.04509471136596 level=304.4
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.062% H3=+0.062% H6=+0.062% H12=+0.062% MAX=+0.062% @bar 1
+  MAE H1=-0.138% H3=-0.217% H6=-0.217% H12=-0.292%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-250.70 lifecycle=-250.70
+  managed trade numbers: 161
+  managed results:       -250.70
+
+BOS #10271 SHORT 2026-02-10 12:45:00 | CLASS=MARGINAL_BOS
+  close=303.3000 strength=95.98039215686411 level=303.66
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.082% H3=+0.082% H6=+0.082% H12=+0.258% MAX=+0.258% @bar 7
+  MAE H1=-0.099% H3=-0.142% H6=-0.142% H12=-0.142%
+  ordinary: N=1 return=-0.002% net=-1.68 MFE=+0.211% exit=END_OF_SESSION
+  managed: N=1 first=-103.46 lifecycle=-103.46
+  managed trade numbers: 162
+  managed results:       -103.46
+
+BOS #10278 SHORT 2026-02-10 13:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=302.5900 strength=91.85714285714359 level=303.05
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.010% H3=+0.020% H6=+0.020% H12=+0.020% MAX=+0.020% @bar 3
+  MAE H1=-0.188% H3=-0.188% H6=-0.188% H12=-0.191%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-110.40 lifecycle=-185.09
+  managed trade numbers: 163,164
+  managed results:       -110.40,-74.69
+
+BOS #10473 LONG 2026-02-12 12:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=305.8800 strength=95.99999999999773 level=305.58
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.007% H3=+0.013% H6=+0.033% H12=+0.046% MAX=+0.046% @bar 8
+  MAE H1=-0.029% H3=-0.029% H6=-0.029% H12=-0.072%
+  ordinary: N=1 return=-0.144% net=-122.97 MFE=+0.006% exit=END_OF_SESSION
+  managed: N=1 first=-103.36 lifecycle=-103.36
+  managed trade numbers: 165
+  managed results:       -103.36
+
+BOS #10588 LONG 2026-02-13 13:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=307.7600 strength=88.32446338154408 level=307.34
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.013% H3=+0.029% H6=+0.029% H12=+0.029% MAX=+0.029% @bar 2
+  MAE H1=-0.244% H3=-0.244% H6=-0.338% H12=-0.338%
+  ordinary: N=1 return=-0.339% net=-288.63 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-242.60 lifecycle=-242.60
+  managed trade numbers: 166
+  managed results:       -242.60
+
+BOS #10641 LONG 2026-02-16 09:55:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=311.0200 strength=84.30232558139203 level=310.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.315% H3=+0.444% H6=+0.444% H12=+0.444% MAX=+0.444% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=-0.106% H12=-0.170%
+  ordinary: N=1 return=-0.293% net=-248.31 MFE=+0.390% exit=END_OF_SESSION
+  managed: N=2 first=-105.80 lifecycle=-165.83
+  managed trade numbers: 167,168
+  managed results:       -105.80,-60.02
+
+BOS #10757 SHORT 2026-02-17 11:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=310.2800 strength=91.93181818181966 level=310.62
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.090% H3=+0.090% H6=+0.090% H12=+0.090% MAX=+0.090% @bar 1
+  MAE H1=+0.000% H3=-0.087% H6=-0.100% H12=-0.100%
+  ordinary: N=1 return=-0.316% net=-267.27 MFE=+0.040% exit=END_OF_SESSION
+  managed: N=1 first=-298.18 lifecycle=-298.18
+  managed trade numbers: 169
+  managed results:       -298.18
+
+BOS #11082 SHORT 2026-02-20 13:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=312.3700 strength=83.98648648648587 level=313.08
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.019% H3=+0.019% H6=+0.019% H12=+0.019% MAX=+0.019% @bar 1
+  MAE H1=-0.109% H3=-0.192% H6=-0.319% H12=-0.402%
+  ordinary: N=1 return=-0.716% net=-603.33 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-427.48 lifecycle=-427.48
+  managed trade numbers: 170
+  managed results:       -427.48
+
+BOS #11106 LONG 2026-02-20 15:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=313.9900 strength=99.39393939393992 level=313.7
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.013% H3=-0.035% H6=-0.035% H12=-0.035%
+  ordinary: N=1 return=-0.232% net=-193.77 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-162.98 lifecycle=-162.98
+  managed trade numbers: 171
+  managed results:       -162.98
+
+BOS #11250 LONG 2026-02-24 10:10:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=315.9100 strength=65.4455771459265 level=315.88
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.218% H3=+0.345% H6=+0.396% H12=+0.396% MAX=+0.396% @bar 4
+  MAE H1=-0.006% H3=-0.006% H6=-0.006% H12=-0.006%
+  ordinary: N=1 return=-0.124% net=-103.49 MFE=+0.349% exit=END_OF_SESSION
+  managed: N=2 first=+28.30 lifecycle=-165.17
+  managed trade numbers: 172,173
+  managed results:       +28.30,-193.47
+
+BOS #11403 LONG 2026-02-25 14:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.3000 strength=70.77350741902549 level=316.28
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.013% H6=+0.013% H12=+0.013% MAX=+0.013% @bar 3
+  MAE H1=-0.003% H3=-0.028% H6=-0.104% H12=-0.104%
+  ordinary: N=1 return=-0.200% net=-166.58 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-139.95 lifecycle=-139.95
+  managed trade numbers: 174
+  managed results:       -139.95
+
+BOS #11497 LONG 2026-02-26 13:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=317.9400 strength=74.9999999999987 level=317.74
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.016% H3=+0.016% H6=+0.016% H12=+0.016% MAX=+0.016% @bar 1
+  MAE H1=-0.016% H3=-0.110% H6=-0.167% H12=-0.233%
+  ordinary: N=1 return=-0.420% net=-349.08 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-293.28 lifecycle=-293.28
+  managed trade numbers: 175
+  managed results:       -293.28
+
+BOS #11595 LONG 2026-02-27 13:40:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=314.3900 strength=79.19042483071428 level=314.29
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.089% H3=+0.089% H6=+0.216% H12=+0.216% MAX=+0.216% @bar 6
+  MAE H1=-0.010% H3=-0.010% H6=-0.010% H12=-0.010%
+  ordinary: N=1 return=+0.137% net=+113.26 MFE=+0.395% exit=END_OF_SESSION
+  managed: N=1 first=-41.86 lifecycle=-41.86
+  managed trade numbers: 176
+  managed results:       -41.86
+
+BOS #11600 LONG 2026-02-27 14:05:00 | CLASS=BOS_NO_TRADE
+  close=315.0000 strength=98.0909090909088 level=314.67
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.022% H3=+0.022% H6=+0.022% H12=+0.251% MAX=+0.251% @bar 11
+  MAE H1=-0.029% H3=-0.063% H6=-0.063% H12=-0.063%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-46.38 lifecycle=-46.38
+  managed trade numbers: 177
+  managed results:       -46.38
+
+BOS #11609 LONG 2026-02-27 14:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=315.4500 strength=94.82456140350693 level=315.07
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.051% H3=+0.108% H6=+0.108% H12=+0.108% MAX=+0.108% @bar 2
+  MAE H1=-0.079% H3=-0.079% H6=-0.092% H12=-0.092%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-94.89 lifecycle=-94.89
+  managed trade numbers: 178
+  managed results:       -94.89
+
+BOS #11753 SHORT 2026-03-03 10:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=312.5300 strength=66.74351149386625 level=312.68
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.093% H3=+0.157% H6=+0.266% H12=+0.266% MAX=+0.266% @bar 4
+  MAE H1=-0.006% H3=-0.006% H6=-0.006% H12=-0.303%
+  ordinary: N=1 return=-0.178% net=-147.34 MFE=+0.219% exit=END_OF_SESSION
+  managed: N=2 first=-83.27 lifecycle=-193.07
+  managed trade numbers: 179,180
+  managed results:       -83.27,-109.80
+
+BOS #12018 LONG 2026-03-05 15:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=315.5700 strength=77.50565465743328 level=315.27
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+nan% H3=+nan% H6=+nan% H12=+nan% MAX=+0.000% @bar 0
+  MAE H1=+nan% H3=+nan% H6=+nan% H12=+nan%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #12068 LONG 2026-03-06 11:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.2900 strength=75.82706766917347 level=315.29
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.155% H3=-0.155% H6=-0.155% H12=-0.408%
+  ordinary: N=1 return=-0.809% net=-669.86 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-476.96 lifecycle=-476.96
+  managed trade numbers: 181
+  managed results:       -476.96
+
+BOS #12102 SHORT 2026-03-06 13:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=314.3500 strength=93.97155530450596 level=314.48
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.048% H3=-0.048% H6=-0.175% H12=-0.175%
+  ordinary: N=1 return=-0.216% net=-177.39 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-148.47 lifecycle=-148.47
+  managed trade numbers: 182
+  managed results:       -148.47
+
+BOS #12263 LONG 2026-03-10 10:25:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=318.5000 strength=94.89999999999952 level=317.92
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.094% H3=+0.245% H6=+0.245% H12=+0.245% MAX=+0.245% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=-0.050%
+  ordinary: N=1 return=-0.654% net=-536.24 MFE=+0.195% exit=OPPOSITE_SIGNAL
+  managed: N=2 first=-74.74 lifecycle=-477.73
+  managed trade numbers: 183,184
+  managed results:       -74.74,-402.99
+
+BOS #12321 SHORT 2026-03-10 15:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=317.0500 strength=78.09523809523965 level=317.38
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+nan% H3=+nan% H6=+nan% H12=+nan% MAX=+0.000% @bar 0
+  MAE H1=+nan% H3=+nan% H6=+nan% H12=+nan%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #12665 LONG 2026-03-16 10:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=318.5700 strength=80.11111111111165 level=318.18
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.072% H3=+0.072% H6=+0.072% H12=+0.072% MAX=+0.072% @bar 1
+  MAE H1=-0.013% H3=-0.173% H6=-0.204% H12=-0.210%
+  ordinary: N=1 return=-0.799% net=-650.01 MFE=+0.022% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-445.63 lifecycle=-445.63
+  managed trade numbers: 185
+  managed results:       -445.63
+
+BOS #12690 SHORT 2026-03-16 12:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.6500 strength=91.46551724138243 level=317.79
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.101% H3=+0.123% H6=+0.123% H12=+0.123% MAX=+0.123% @bar 2
+  MAE H1=-0.006% H3=-0.028% H6=-0.082% H12=-0.164%
+  ordinary: N=1 return=-0.203% net=-164.13 MFE=+0.076% exit=END_OF_SESSION
+  managed: N=1 first=-137.52 lifecycle=-137.52
+  managed trade numbers: 186
+  managed results:       -137.52
+
+BOS #12804 LONG 2026-03-17 13:25:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=317.4800 strength=77.94490898199041 level=317.3
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.306% MAX=+0.306% @bar 12
+  MAE H1=-0.035% H3=-0.047% H6=-0.060% H12=-0.063%
+  ordinary: N=1 return=+0.184% net=+148.10 MFE=+0.551% exit=END_OF_SESSION
+  managed: N=1 first=+124.09 lifecycle=+124.09
+  managed trade numbers: 187
+  managed results:       +124.09
+
+BOS #12813 LONG 2026-03-17 14:10:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=317.9000 strength=99.66101694915284 level=317.5
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.094% H3=+0.173% H6=+0.189% H12=+0.409% MAX=+0.409% @bar 11
+  MAE H1=-0.035% H3=-0.035% H6=-0.035% H12=-0.035%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #12958 SHORT 2026-03-19 09:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.4600 strength=68.77368674720735 level=320.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.034% H3=+0.072% H6=+0.072% H12=+0.141% MAX=+0.141% @bar 11
+  MAE H1=-0.003% H3=-0.022% H6=-0.041% H12=-0.118%
+  ordinary: N=1 return=-0.000% net=-0.08 MFE=+0.337% exit=END_OF_SESSION
+  managed: N=1 first=-0.06 lifecycle=-0.06
+  managed trade numbers: 188
+  managed results:       -0.06
+
+BOS #13173 SHORT 2026-03-23 10:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=319.2800 strength=65.10445806361531 level=319.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.066% H3=+0.066% H6=+0.085% H12=+0.119% MAX=+0.119% @bar 11
+  MAE H1=-0.038% H3=-0.125% H6=-0.163% H12=-0.163%
+  ordinary: N=1 return=+0.377% net=+304.41 MFE=+1.332% exit=END_OF_SESSION
+  managed: N=1 first=-78.06 lifecycle=-78.06
+  managed trade numbers: 189
+  managed results:       -78.06
+
+BOS #13200 SHORT 2026-03-23 12:45:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=318.3100 strength=66.48585431033604 level=318.39
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.028% H3=+0.079% H6=+0.359% H12=+0.913% MAX=+0.913% @bar 10
+  MAE H1=-0.028% H3=-0.028% H6=-0.028% H12=-0.028%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=4 first=+228.32 lifecycle=-359.75
+  managed trade numbers: 190,191,192,193
+  managed results:       +228.32,-90.61,-124.75,-372.70
+
+BOS #13298 LONG 2026-03-24 12:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=317.5600 strength=66.96428571428778 level=317.29
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.006% H6=+0.006% H12=+0.006% MAX=+0.006% @bar 2
+  MAE H1=-0.022% H3=-0.154% H6=-0.176% H12=-0.239%
+  ordinary: N=1 return=-0.423% net=-342.91 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-297.05 lifecycle=-297.05
+  managed trade numbers: 194
+  managed results:       -297.05
+
+BOS #13404 SHORT 2026-03-25 12:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=317.4600 strength=72.92217841895292 level=317.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.006% H3=+0.006% H6=+0.050% H12=+0.050% MAX=+0.050% @bar 5
+  MAE H1=-0.009% H3=-0.041% H6=-0.041% H12=-0.044%
+  ordinary: N=1 return=-0.011% net=-8.73 MFE=+0.186% exit=END_OF_SESSION
+  managed: N=1 first=-195.09 lifecycle=-195.09
+  managed trade numbers: 195
+  managed results:       -195.09
+
+BOS #13408 SHORT 2026-03-25 13:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=317.3600 strength=89.25351206424547 level=317.44
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.019% H3=+0.019% H6=+0.019% H12=+0.019% MAX=+0.019% @bar 1
+  MAE H1=-0.025% H3=-0.076% H6=-0.076% H12=-0.107%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #13479 SHORT 2026-03-26 10:45:00 | CLASS=MARGINAL_BOS
+  close=316.9500 strength=81.77827396584036 level=317.01
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.301% H12=+0.390% MAX=+0.390% @bar 10
+  MAE H1=-0.063% H3=-0.073% H6=-0.073% H12=-0.073%
+  ordinary: N=1 return=-0.052% net=-41.63 MFE=+0.341% exit=END_OF_SESSION
+  managed: N=1 first=-0.69 lifecycle=-0.69
+  managed trade numbers: 196
+  managed results:       -0.69
+
+BOS #13483 SHORT 2026-03-26 11:05:00 | CLASS=BOS_NO_TRADE
+  close=316.9300 strength=71.72561443892295 level=316.95
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.250% H3=+0.294% H6=+0.383% H12=+0.383% MAX=+0.383% @bar 6
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-129.26 lifecycle=-129.26
+  managed trade numbers: 197
+  managed results:       -129.26
+
+BOS #13489 SHORT 2026-03-26 11:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=315.8300 strength=78.79273865411714 level=316.0
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.152% H3=-0.325% H6=-0.325% H12=-0.325%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-171.17 lifecycle=-171.17
+  managed trade numbers: 198
+  managed results:       -171.17
+
+BOS #13586 SHORT 2026-03-27 11:15:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=315.5200 strength=70.59862533452814 level=315.65
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.117% H3=+0.165% H6=+0.427% H12=+0.427% MAX=+0.427% @bar 5
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=+0.025% net=+20.37 MFE=+0.470% exit=END_OF_SESSION
+  managed: N=2 first=+42.07 lifecycle=+8.50
+  managed trade numbers: 199,200
+  managed results:       +42.07,-33.57
+
+BOS #13613 SHORT 2026-03-27 13:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=314.1000 strength=79.85306606600459 level=314.18
+  event->signal=0 bars | event->entry=6.0 bars
+  MFE H1=+0.029% H3=+0.070% H6=+0.070% H12=+0.070% MAX=+0.070% @bar 2
+  MAE H1=-0.003% H3=-0.003% H6=-0.105% H12=-0.286%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-257.80 lifecycle=-257.80
+  managed trade numbers: 201
+  managed results:       -257.80
+
+BOS #13774 SHORT 2026-03-31 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=314.0300 strength=84.5121951219517 level=314.32
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.045% H3=+0.045% H6=+0.045% H12=+0.115% MAX=+0.115% @bar 9
+  MAE H1=-0.086% H3=-0.086% H6=-0.086% H12=-0.086%
+  ordinary: N=1 return=-0.296% net=-238.59 MFE=+0.058% exit=END_OF_SESSION
+  managed: N=1 first=-145.05 lifecycle=-145.05
+  managed trade numbers: 202
+  managed results:       -145.05
+
+BOS #13782 SHORT 2026-03-31 10:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=313.7700 strength=73.1496325719536 level=313.89
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.032% H3=+0.032% H6=+0.032% H12=+0.032% MAX=+0.032% @bar 1
+  MAE H1=-0.006% H3=-0.010% H6=-0.156% H12=-0.365%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-182.62 lifecycle=-182.62
+  managed trade numbers: 203
+  managed results:       -182.62
+
+BOS #13870 LONG 2026-04-01 09:40:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=315.1400 strength=84.06956313699335 level=315.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.006% H3=+0.006% H6=+0.495% H12=+0.590% MAX=+0.590% @bar 7
+  MAE H1=-0.013% H3=-0.124% H6=-0.124% H12=-0.124%
+  ordinary: N=1 return=+0.215% net=+173.05 MFE=+0.689% exit=END_OF_SESSION
+  managed: N=1 first=+129.13 lifecycle=+129.13
+  managed trade numbers: 204
+  managed results:       +129.13
+
+BOS #13875 LONG 2026-04-01 10:05:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=315.7800 strength=89.94117647058562 level=315.16
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.291% H3=+0.386% H6=+0.386% H12=+0.418% MAX=+0.418% @bar 11
+  MAE H1=-0.019% H3=-0.019% H6=-0.019% H12=-0.019%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-67.32 lifecycle=-124.26
+  managed trade numbers: 205,206
+  managed results:       -67.32,-56.93
+
+BOS #13973 SHORT 2026-04-02 09:50:00 | CLASS=MARGINAL_BOS
+  close=316.2000 strength=68.50448442474388 level=316.26
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.212% H6=+0.324% H12=+0.324% MAX=+0.324% @bar 4
+  MAE H1=-0.044% H3=-0.060% H6=-0.060% H12=-0.060%
+  ordinary: N=1 return=-0.191% net=-153.62 MFE=+0.270% exit=END_OF_SESSION
+  managed: N=1 first=-48.33 lifecycle=-48.33
+  managed trade numbers: 207
+  managed results:       -48.33
+
+BOS #13976 SHORT 2026-04-02 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=315.5900 strength=95.44117647058867 level=316.19
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.130% H3=+0.130% H6=+0.130% H12=+0.130% MAX=+0.130% @bar 1
+  MAE H1=-0.006% H3=-0.142% H6=-0.142% H12=-0.253%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-208.84 lifecycle=-208.84
+  managed trade numbers: 208
+  managed results:       -208.84
+
+BOS #14102 SHORT 2026-04-03 12:10:00 | CLASS=MARGINAL_BOS
+  close=315.7100 strength=88.30769230769467 level=316.02
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.041% H3=+0.155% H6=+0.225% H12=+0.225% MAX=+0.225% @bar 4
+  MAE H1=-0.038% H3=-0.057% H6=-0.057% H12=-0.057%
+  ordinary: N=1 return=-0.083% net=-66.55 MFE=+0.330% exit=END_OF_SESSION
+  managed: N=1 first=-81.30 lifecycle=-81.30
+  managed trade numbers: 209
+  managed results:       -81.30
+
+BOS #14105 SHORT 2026-04-03 12:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=315.3200 strength=91.08973093578909 level=315.55
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.102% H3=+0.102% H6=+0.102% H12=+0.102% MAX=+0.102% @bar 1
+  MAE H1=+0.000% H3=+0.000% H6=-0.003% H12=-0.124%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #14201 LONG 2026-04-06 12:00:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=316.4100 strength=73.94664715423626 level=316.35
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.060% H3=+0.316% H6=+0.866% H12=+0.977% MAX=+0.977% @bar 12
+  MAE H1=-0.003% H3=-0.003% H6=-0.003% H12=-0.003%
+  ordinary: N=1 return=+0.264% net=+212.19 MFE=+0.989% exit=END_OF_SESSION
+  managed: N=1 first=+348.60 lifecycle=+348.60
+  managed trade numbers: 210
+  managed results:       +348.60
+
+BOS #14213 LONG 2026-04-06 13:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=319.4900 strength=94.1531551315654 level=319.15
+  event->signal=0 bars | event->entry=3.0 bars
+  MFE H1=+0.066% H3=+0.066% H6=+0.066% H12=+0.066% MAX=+0.066% @bar 1
+  MAE H1=-0.100% H3=-0.419% H6=-0.513% H12=-0.520%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-381.23 lifecycle=-381.23
+  managed trade numbers: 211
+  managed results:       -381.23
+
+BOS #14587 SHORT 2026-04-10 10:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.9200 strength=69.93787693632345 level=317.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.019% H3=+0.107% H6=+0.111% H12=+0.111% MAX=+0.111% @bar 4
+  MAE H1=-0.082% H3=-0.082% H6=-0.202% H12=-0.274%
+  ordinary: N=1 return=-0.639% net=-515.25 MFE=+0.064% exit=END_OF_SESSION
+  managed: N=1 first=-149.62 lifecycle=-149.62
+  managed trade numbers: 212
+  managed results:       -149.62
+
+BOS #14590 SHORT 2026-04-10 10:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.5900 strength=69.84397963057138 level=316.65
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.006% H3=+0.006% H6=+0.006% H12=+0.006% MAX=+0.006% @bar 1
+  MAE H1=-0.173% H3=-0.305% H6=-0.378% H12=-0.378%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-390.69 lifecycle=-390.69
+  managed trade numbers: 213
+  managed results:       -390.69
+
+BOS #14700 SHORT 2026-04-13 11:30:00 | CLASS=MARGINAL_BOS
+  close=316.9600 strength=68.55424173807938 level=317.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.051% H3=+0.250% H6=+0.285% H12=+0.285% MAX=+0.285% @bar 6
+  MAE H1=-0.038% H3=-0.038% H6=-0.038% H12=-0.038%
+  ordinary: N=1 return=-0.178% net=-142.52 MFE=+0.231% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-15.03 lifecycle=-15.03
+  managed trade numbers: 214
+  managed results:       -15.03
+
+BOS #14706 SHORT 2026-04-13 12:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.1100 strength=66.42869530718401 level=316.17
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.013% H3=+0.016% H6=+0.016% H12=+0.016% MAX=+0.016% @bar 2
+  MAE H1=-0.060% H3=-0.101% H6=-0.158% H12=-0.234%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-228.51 lifecycle=-228.51
+  managed trade numbers: 215
+  managed results:       -228.51
+
+BOS #14736 LONG 2026-04-13 14:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.8800 strength=67.50000000000236 level=316.66
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.009% H3=+0.038% H6=+0.073% H12=+0.095% MAX=+0.095% @bar 7
+  MAE H1=-0.032% H3=-0.032% H6=-0.145% H12=-0.145%
+  ordinary: N=1 return=-0.190% net=-152.23 MFE=+0.045% exit=END_OF_SESSION
+  managed: N=1 first=-123.19 lifecycle=-123.19
+  managed trade numbers: 216
+  managed results:       -123.19
+
+BOS #14800 SHORT 2026-04-14 11:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=315.6200 strength=90.6666666666651 level=316.25
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.108% H3=+0.108% H6=+0.108% H12=+0.108% MAX=+0.108% @bar 1
+  MAE H1=-0.013% H3=-0.136% H6=-0.136% H12=-0.243%
+  ordinary: N=1 return=-0.632% net=-503.93 MFE=+0.058% exit=END_OF_SESSION
+  managed: N=1 first=-420.08 lifecycle=-420.08
+  managed trade numbers: 217
+  managed results:       -420.08
+
+BOS #14897 SHORT 2026-04-15 11:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=316.4800 strength=77.97175033055652 level=316.61
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.092% H3=-0.092% H6=-0.199% H12=-0.287%
+  ordinary: N=1 return=-0.548% net=-434.58 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-321.16 lifecycle=-321.16
+  managed trade numbers: 218
+  managed results:       -321.16
+
+BOS #14925 LONG 2026-04-15 13:25:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=317.6000 strength=100.0 level=317.39
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.063% H6=+0.375% H12=+0.712% MAX=+0.712% @bar 10
+  MAE H1=-0.019% H3=-0.019% H6=-0.019% H12=-0.019%
+  ordinary: N=1 return=+0.583% net=+459.61 MFE=+0.756% exit=END_OF_SESSION
+  managed: N=2 first=+197.47 lifecycle=+243.71
+  managed trade numbers: 219,220
+  managed results:       +197.47,+46.24
+
+BOS #14946 LONG 2026-04-15 15:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.0900 strength=89.41051437951671 level=319.86
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.019% H3=+0.019% H6=+0.019% H12=+0.019% MAX=+0.019% @bar 1
+  MAE H1=-0.028% H3=-0.028% H6=-0.028% H12=-0.028%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #15097 LONG 2026-04-17 10:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.9100 strength=69.273979395874 level=323.69
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.090% H3=+0.090% H6=+0.090% H12=+0.090% MAX=+0.090% @bar 1
+  MAE H1=-0.003% H3=-0.173% H6=-0.235% H12=-0.278%
+  ordinary: N=1 return=-0.746% net=-591.23 MFE=+0.043% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-461.81 lifecycle=-461.81
+  managed trade numbers: 221
+  managed results:       -461.81
+
+BOS #15121 SHORT 2026-04-17 12:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.1200 strength=71.9892600940012 level=322.41
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.084% H3=+0.084% H6=+0.084% H12=+0.084% MAX=+0.084% @bar 1
+  MAE H1=-0.025% H3=-0.198% H6=-0.198% H12=-0.198%
+  ordinary: N=1 return=-0.685% net=-539.25 MFE=+0.037% exit=END_OF_SESSION
+  managed: N=1 first=-435.72 lifecycle=-435.72
+  managed trade numbers: 222
+  managed results:       -435.72
+
+BOS #15192 SHORT 2026-04-20 10:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=324.0200 strength=74.03669724770732 level=324.56
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.040% H3=+0.040% H6=+0.040% H12=+0.040% MAX=+0.040% @bar 1
+  MAE H1=-0.083% H3=-0.280% H6=-0.286% H12=-0.286%
+  ordinary: N=1 return=-0.188% net=-146.75 MFE=+0.216% exit=END_OF_SESSION
+  managed: N=1 first=-79.53 lifecycle=-79.53
+  managed trade numbers: 223
+  managed results:       -79.53
+
+BOS #15219 SHORT 2026-04-20 12:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.2700 strength=71.77075143425233 level=323.4
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.019% H3=+0.019% H6=+0.019% H12=+0.022% MAX=+0.022% @bar 7
+  MAE H1=-0.117% H3=-0.117% H6=-0.117% H12=-0.179%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #15941 SHORT 2026-04-29 13:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=319.7600 strength=85.00000000000098 level=320.61
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.050% H3=+0.066% H6=+0.066% H12=+0.066% MAX=+0.066% @bar 2
+  MAE H1=-0.019% H3=-0.184% H6=-0.200% H12=-0.218%
+  ordinary: N=1 return=-0.275% net=-214.78 MFE=+0.016% exit=END_OF_SESSION
+  managed: N=1 first=-173.65 lifecycle=-173.65
+  managed trade numbers: 224
+  managed results:       -173.65
+
+BOS #15983 SHORT 2026-04-30 09:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=319.4400 strength=91.51785714285728 level=320.02
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.003% H3=+0.387% H6=+0.387% H12=+0.387% MAX=+0.387% @bar 2
+  MAE H1=-0.138% H3=-0.138% H6=-0.138% H12=-0.346%
+  ordinary: N=1 return=-0.793% net=-616.76 MFE=+0.335% exit=OPPOSITE_SIGNAL
+  managed: N=2 first=-17.40 lifecycle=-613.36
+  managed trade numbers: 225,226
+  managed results:       -17.40,-595.95
+
+BOS #16007 LONG 2026-04-30 11:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=321.3700 strength=84.58333333333846 level=320.78
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.025% H3=+0.037% H6=+0.037% H12=+0.037% MAX=+0.037% @bar 3
+  MAE H1=-0.016% H3=-0.137% H6=-0.137% H12=-0.208%
+  ordinary: N=1 return=-0.713% net=-550.09 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-395.55 lifecycle=-395.55
+  managed trade numbers: 227
+  managed results:       -395.55
+
+BOS #16031 SHORT 2026-04-30 13:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=319.6700 strength=89.28319286562639 level=319.9
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.066% H3=+0.100% H6=+0.100% H12=+0.100% MAX=+0.100% @bar 3
+  MAE H1=-0.009% H3=-0.009% H6=-0.228% H12=-0.358%
+  ordinary: N=1 return=-0.266% net=-203.78 MFE=+0.053% exit=END_OF_SESSION
+  managed: N=1 first=-164.59 lifecycle=-164.59
+  managed trade numbers: 228
+  managed results:       -164.59
+
+BOS #16104 LONG 2026-05-01 13:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.7000 strength=70.17744863615417 level=320.68
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.009% H3=+0.009% H6=+0.028% H12=+0.031% MAX=+0.031% @bar 7
+  MAE H1=-0.009% H3=-0.009% H6=-0.009% H12=-0.028%
+  ordinary: N=1 return=-0.309% net=-236.10 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-190.69 lifecycle=-190.69
+  managed trade numbers: 229
+  managed results:       -190.69
+
+BOS #16109 LONG 2026-05-01 14:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.7600 strength=69.67279623787849 level=320.73
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.009% H3=+0.012% H6=+0.012% H12=+0.012% MAX=+0.012% @bar 2
+  MAE H1=-0.003% H3=-0.047% H6=-0.047% H12=-0.047%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #16226 SHORT 2026-05-04 12:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=321.5400 strength=86.85185185184982 level=321.93
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.006% H3=+0.006% H6=+0.006% H12=+0.006% MAX=+0.006% @bar 1
+  MAE H1=-0.143% H3=-0.155% H6=-0.155% H12=-0.310%
+  ordinary: N=1 return=+0.005% net=+4.17 MFE=+0.364% exit=END_OF_SESSION
+  managed: N=1 first=-334.02 lifecycle=-334.02
+  managed trade numbers: 230
+  managed results:       -334.02
+
+BOS #16398 SHORT 2026-05-06 09:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.8100 strength=78.40679189225807 level=320.92
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.016% H3=+0.094% H6=+0.094% H12=+0.197% MAX=+0.197% @bar 12
+  MAE H1=-0.044% H3=-0.069% H6=-0.121% H12=-0.140%
+  ordinary: N=1 return=-0.116% net=-88.26 MFE=+0.433% exit=END_OF_SESSION
+  managed: N=1 first=-55.60 lifecycle=-55.60
+  managed trade numbers: 231
+  managed results:       -55.60
+
+BOS #16406 SHORT 2026-05-06 10:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.3200 strength=86.2538794810817 level=320.51
+  event->signal=0 bars | event->entry=6.0 bars
+  MFE H1=+0.034% H3=+0.037% H6=+0.044% H12=+0.044% MAX=+0.044% @bar 4
+  MAE H1=+0.000% H3=+0.000% H6=-0.162% H12=-0.407%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-0.05 lifecycle=-0.05
+  managed trade numbers: 232
+  managed results:       -0.05
+
+BOS #16694 SHORT 2026-05-11 09:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=321.7000 strength=77.57600475304753 level=321.91
+  event->signal=1 bars | event->entry=2.0 bars
+  MFE H1=+0.059% H3=+0.059% H6=+0.059% H12=+0.059% MAX=+0.059% @bar 1
+  MAE H1=-0.006% H3=-0.078% H6=-0.149% H12=-0.676%
+  ordinary: N=1 return=-0.863% net=-657.20 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-575.63 lifecycle=-575.63
+  managed trade numbers: 233
+  managed results:       -575.63
+
+BOS #16793 SHORT 2026-05-12 09:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.3600 strength=74.0624999999939 level=323.8
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.025% H3=+0.025% H6=+0.025% H12=+0.040% MAX=+0.040% @bar 11
+  MAE H1=-0.003% H3=-0.090% H6=-0.090% H12=-0.627%
+  ordinary: N=1 return=-0.965% net=-728.28 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-571.54 lifecycle=-571.54
+  managed trade numbers: 234
+  managed results:       -571.54
+
+BOS #16902 SHORT 2026-05-13 09:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=325.0300 strength=67.5586915171653 level=325.04
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.009% H3=+0.009% H6=+0.009% H12=+0.009% MAX=+0.009% @bar 1
+  MAE H1=-0.255% H3=-0.255% H6=-0.255% H12=-0.255%
+  ordinary: N=1 return=-0.403% net=-301.52 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-221.78 lifecycle=-221.78
+  managed trade numbers: 235
+  managed results:       -221.78
+
+BOS #16967 LONG 2026-05-13 15:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=325.6900 strength=65.78071990239972 level=325.66
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+nan% H3=+nan% H6=+nan% H12=+nan% MAX=+0.000% @bar 0
+  MAE H1=+nan% H3=+nan% H6=+nan% H12=+nan%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #17466 LONG 2026-05-20 14:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.6800 strength=71.87285029426616 level=323.65
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.006% H3=+0.006% H6=+0.006% H12=+0.006% MAX=+0.006% @bar 1
+  MAE H1=-0.003% H3=-0.012% H6=-0.080% H12=-0.080%
+  ordinary: N=1 return=-0.203% net=-151.09 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-121.36 lifecycle=-121.36
+  managed trade numbers: 236
+  managed results:       -121.36
+
+BOS #17512 SHORT 2026-05-21 10:10:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=322.9000 strength=93.9412615077569 level=323.09
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.320% H3=+0.404% H6=+0.404% H12=+0.589% MAX=+0.589% @bar 9
+  MAE H1=-0.012% H3=-0.012% H6=-0.012% H12=-0.012%
+  ordinary: N=1 return=-0.343% net=-254.61 MFE=+0.536% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=+171.15 lifecycle=+171.15
+  managed trade numbers: 237
+  managed results:       +171.15
+
+BOS #17521 SHORT 2026-05-21 10:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=321.3300 strength=71.66527057402425 level=321.6
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.087% H3=+0.093% H6=+0.093% H12=+0.093% MAX=+0.093% @bar 3
+  MAE H1=+0.000% H3=+0.000% H6=-0.016% H12=-0.075%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-166.36 lifecycle=-166.36
+  managed trade numbers: 238
+  managed results:       -166.36
+
+BOS #17558 LONG 2026-05-21 14:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.3700 strength=78.61823934225197 level=323.24
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.034% H3=-0.102% H6=-0.263% H12=-0.263%
+  ordinary: N=1 return=-0.345% net=-255.41 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-205.89 lifecycle=-205.89
+  managed trade numbers: 239
+  managed results:       -205.89
+
+BOS #17756 SHORT 2026-05-25 13:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.9300 strength=98.6708860759505 level=323.77
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.009% H3=+0.009% H6=+0.009% H12=+0.009% MAX=+0.009% @bar 1
+  MAE H1=-0.170% H3=-0.170% H6=-0.170% H12=-0.170%
+  ordinary: N=1 return=-0.036% net=-26.36 MFE=+0.220% exit=END_OF_SESSION
+  managed: N=1 first=-21.24 lifecycle=-21.24
+  managed trade numbers: 240
+  managed results:       -21.24
+
+BOS #17769 SHORT 2026-05-25 14:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.5400 strength=96.70212765957223 level=322.9
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.152% H3=+0.152% H6=+0.152% H12=+0.152% MAX=+0.152% @bar 1
+  MAE H1=-0.012% H3=-0.012% H6=-0.012% H12=-0.012%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #17814 SHORT 2026-05-26 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=319.3600 strength=95.49999999999898 level=320.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.050% H3=+0.050% H6=+0.050% H12=+0.050% MAX=+0.050% @bar 1
+  MAE H1=-0.109% H3=-0.200% H6=-0.483% H12=-0.483%
+  ordinary: N=1 return=-0.586% net=-432.02 MFE=+0.035% exit=END_OF_SESSION
+  managed: N=1 first=-463.83 lifecycle=-463.83
+  managed trade numbers: 241
+  managed results:       -463.83
+
+BOS #18030 LONG 2026-05-28 11:15:00 | CLASS=MARGINAL_BOS
+  close=323.1400 strength=94.65517241378953 level=322.61
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.077% H3=+0.118% H6=+0.189% H12=+0.235% MAX=+0.235% @bar 7
+  MAE H1=-0.003% H3=-0.003% H6=-0.003% H12=-0.003%
+  ordinary: N=1 return=-0.425% net=-311.93 MFE=+0.188% exit=END_OF_SESSION
+  managed: N=1 first=-28.60 lifecycle=-28.60
+  managed trade numbers: 242
+  managed results:       -28.60
+
+BOS #18037 LONG 2026-05-28 11:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.8500 strength=93.71794871795421 level=323.52
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.080% H3=-0.164% H6=-0.176% H12=-0.250%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-219.70 lifecycle=-219.70
+  managed trade numbers: 243
+  managed results:       -219.70
+
+BOS #18218 LONG 2026-06-01 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.9700 strength=77.0833333333361 level=322.31
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.012% H3=+0.015% H6=+0.015% H12=+0.015% MAX=+0.015% @bar 2
+  MAE H1=-0.015% H3=-0.105% H6=-0.127% H12=-0.211%
+  ordinary: N=1 return=-0.487% net=-355.82 MFE=+0.061% exit=END_OF_SESSION
+  managed: N=1 first=-286.27 lifecycle=-286.27
+  managed trade numbers: 244
+  managed results:       -286.27
+
+BOS #18425 SHORT 2026-06-03 10:30:00 | CLASS=MARGINAL_BOS
+  close=326.0100 strength=74.28295535219969 level=326.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.151% H3=+0.151% H6=+0.151% H12=+0.311% MAX=+0.311% @bar 11
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=-0.197% net=-143.13 MFE=+0.398% exit=END_OF_SESSION
+  managed: N=1 first=-25.38 lifecycle=-25.38
+  managed trade numbers: 245
+  managed results:       -25.38
+
+BOS #18436 SHORT 2026-06-03 11:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=325.1700 strength=86.81034482758461 level=325.52
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.049% H3=+0.191% H6=+0.191% H12=+0.191% MAX=+0.191% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=-0.150% H12=-0.212%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-116.90 lifecycle=-299.94
+  managed trade numbers: 246,247
+  managed results:       -116.90,-183.04
+
+BOS #18570 LONG 2026-06-04 14:10:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=324.5200 strength=79.61538461538386 level=324.24
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.025% H3=+0.025% H6=+0.025% H12=+0.025% MAX=+0.025% @bar 1
+  MAE H1=-0.068% H3=-0.160% H6=-0.243% H12=-0.253%
+  ordinary: N=1 return=-0.305% net=-220.77 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-176.98 lifecycle=-176.98
+  managed trade numbers: 248
+  managed results:       -176.98
+
+BOS #18780 SHORT 2026-06-08 14:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.9100 strength=84.18424085728972 level=321.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.106% H3=+0.128% H6=+0.128% H12=+0.128% MAX=+0.128% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=-0.088% net=-63.43 MFE=+0.078% exit=END_OF_SESSION
+  managed: N=2 first=-77.97 lifecycle=-166.65
+  managed trade numbers: 249,250
+  managed results:       -77.97,-88.68
+
+BOS #19153 LONG 2026-06-12 15:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.0000 strength=69.79602568855825 level=321.98
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.016% MAX=+0.016% @bar 12
+  MAE H1=-0.031% H3=-0.034% H6=-0.043% H12=-0.043%
+  ordinary: N=1 return=-0.125% net=-90.62 MFE=+0.071% exit=END_OF_SESSION
+  managed: N=1 first=-58.16 lifecycle=-58.16
+  managed trade numbers: 251
+  managed results:       -58.16
+
+BOS #19165 LONG 2026-06-12 16:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.0500 strength=86.66666666666983 level=322.0
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.000% H3=+0.009% H6=+0.034% H12=+0.106% MAX=+0.106% @bar 10
+  MAE H1=-0.006% H3=-0.009% H6=-0.009% H12=-0.009%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #19174 LONG 2026-06-12 17:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=322.3000 strength=100.0 level=322.16
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.028% H3=+0.028% H6=+0.028% H12=+0.028% MAX=+0.028% @bar 1
+  MAE H1=-0.003% H3=-0.003% H6=-0.022% H12=-0.022%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-129.68 lifecycle=-129.68
+  managed trade numbers: 252
+  managed results:       -129.68
+
+BOS #19255 SHORT 2026-06-15 12:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=324.3200 strength=74.94631840953718 level=324.52
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.114% H3=+0.114% H6=+0.114% H12=+0.114% MAX=+0.114% @bar 1
+  MAE H1=+0.000% H3=-0.062% H6=-0.148% H12=-0.148%
+  ordinary: N=1 return=+0.004% net=+2.68 MFE=+0.243% exit=END_OF_SESSION
+  managed: N=1 first=+2.14 lifecycle=+2.14
+  managed trade numbers: 253
+  managed results:       +2.14
+
+BOS #19288 SHORT 2026-06-15 15:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=323.8500 strength=76.05838359927708 level=323.95
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.012% H3=+0.152% H6=+0.152% H12=+0.152% MAX=+0.152% @bar 2
+  MAE H1=-0.040% H3=-0.040% H6=-0.040% H12=-0.040%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #19451 SHORT 2026-06-17 11:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=318.9300 strength=81.96428571428392 level=319.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.038% H3=+0.038% H6=+0.038% H12=+0.038% MAX=+0.038% @bar 1
+  MAE H1=-0.028% H3=-0.172% H6=-0.178% H12=-0.285%
+  ordinary: N=1 return=-0.536% net=-386.67 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-355.75 lifecycle=-355.75
+  managed trade numbers: 254
+  managed results:       -355.75
+
+BOS #19473 LONG 2026-06-17 13:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=320.0200 strength=70.55698058105092 level=319.84
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.041% H3=+0.053% H6=+0.053% H12=+0.053% MAX=+0.053% @bar 2
+  MAE H1=-0.006% H3=-0.006% H6=-0.322% H12=-0.359%
+  ordinary: N=1 return=-0.322% net=-230.71 MFE=+0.016% exit=END_OF_SESSION
+  managed: N=1 first=-184.06 lifecycle=-184.06
+  managed trade numbers: 255
+  managed results:       -184.06
+
+BOS #19529 SHORT 2026-06-18 09:55:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=318.3100 strength=90.03038155346964 level=318.51
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.028% H3=+0.097% H6=+0.852% H12=+0.852% MAX=+0.852% @bar 5
+  MAE H1=-0.016% H3=-0.016% H6=-0.016% H12=-0.016%
+  ordinary: N=1 return=+1.140% net=+815.31 MFE=+1.308% exit=END_OF_SESSION
+  managed: N=3 first=+140.71 lifecycle=+284.43
+  managed trade numbers: 256,257,258
+  managed results:       +140.71,-34.92,+178.64
+
+BOS #19593 SHORT 2026-06-18 15:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=314.0800 strength=72.44731851190234 level=314.23
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+nan% H3=+nan% H6=+nan% H12=+nan% MAX=+0.000% @bar 0
+  MAE H1=+nan% H3=+nan% H6=+nan% H12=+nan%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #19669 SHORT 2026-06-19 13:10:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=314.3800 strength=83.84615384615486 level=315.02
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.041% H3=+0.041% H6=+1.214% H12=+1.214% MAX=+1.214% @bar 4
+  MAE H1=-0.257% H3=-0.298% H6=-0.298% H12=-0.298%
+  ordinary: N=1 return=+0.389% net=+281.53 MFE=+1.150% exit=END_OF_SESSION
+  managed: N=1 first=+360.17 lifecycle=+360.17
+  managed trade numbers: 259
+  managed results:       +360.17
+
+BOS #19673 SHORT 2026-06-19 13:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=310.8400 strength=97.38875878220169 level=314.1
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.006% H3=+0.006% H6=+0.006% H12=+0.006% MAX=+0.006% @bar 1
+  MAE H1=-0.311% H3=-0.754% H6=-0.754% H12=-0.754%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-254.45 lifecycle=-254.45
+  managed trade numbers: 260
+  managed results:       -254.45
+
+BOS #19766 SHORT 2026-06-22 12:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=309.9700 strength=88.91447368421038 level=311.07
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.032% H3=+0.065% H6=+0.187% H12=+0.187% MAX=+0.187% @bar 5
+  MAE H1=-0.071% H3=-0.164% H6=-0.164% H12=-0.325%
+  ordinary: N=1 return=+0.921% net=+668.76 MFE=+1.167% exit=END_OF_SESSION
+  managed: N=1 first=-244.86 lifecycle=-244.86
+  managed trade numbers: 261
+  managed results:       -244.86
+
+BOS #19771 SHORT 2026-06-22 13:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=309.4700 strength=68.60772706290687 level=309.6
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.023% H3=+0.023% H6=+0.023% H12=+0.045% MAX=+0.045% @bar 10
+  MAE H1=-0.222% H3=-0.248% H6=-0.486% H12=-0.486%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #19821 LONG 2026-06-23 09:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=302.3900 strength=78.26653949310048 level=301.58
+  event->signal=2 bars | event->entry=3.0 bars
+  MFE H1=+0.046% H3=+0.665% H6=+0.681% H12=+0.681% MAX=+0.681% @bar 4
+  MAE H1=-0.351% H3=-0.351% H6=-0.351% H12=-0.734%
+  ordinary: N=1 return=+0.746% net=+546.63 MFE=+1.346% exit=END_OF_SESSION
+  managed: N=2 first=-146.38 lifecycle=-102.40
+  managed trade numbers: 262,263
+  managed results:       -146.38,+43.98
+
+BOS #19957 SHORT 2026-06-24 11:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=303.6400 strength=88.54404521810874 level=304.24
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.033% H3=+0.033% H6=+0.033% H12=+0.033% MAX=+0.033% @bar 1
+  MAE H1=-0.381% H3=-0.638% H6=-0.680% H12=-0.680%
+  ordinary: N=1 return=+0.060% net=+44.64 MFE=+0.978% exit=END_OF_SESSION
+  managed: N=1 first=-63.40 lifecycle=-63.40
+  managed trade numbers: 264
+  managed results:       -63.40
+
+BOS #20036 LONG 2026-06-25 10:05:00 | CLASS=MARGINAL_BOS
+  close=304.8700 strength=87.4064695225363 level=304.39
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.075% H3=+0.305% H6=+0.305% H12=+0.305% MAX=+0.305% @bar 2
+  MAE H1=-0.115% H3=-0.115% H6=-0.722% H12=-1.394%
+  ordinary: N=1 return=-1.795% net=-1325.88 MFE=+0.255% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-623.93 lifecycle=-623.93
+  managed trade numbers: 265
+  managed results:       -623.93
+
+BOS #20069 SHORT 2026-06-25 12:50:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=300.0000 strength=93.26979558736126 level=300.62
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.067% H3=+0.067% H6=+1.007% H12=+1.245% MAX=+1.245% @bar 7
+  MAE H1=-0.107% H3=-0.127% H6=-0.127% H12=-0.127%
+  ordinary: N=1 return=+1.416% net=+1026.96 MFE=+1.814% exit=END_OF_SESSION
+  managed: N=1 first=+224.20 lifecycle=+224.20
+  managed trade numbers: 266
+  managed results:       +224.20
+
+BOS #20073 SHORT 2026-06-25 13:10:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=298.6400 strength=98.61538461538584 level=299.8
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.451% H3=+0.786% H6=+0.786% H12=+0.786% MAX=+0.786% @bar 3
+  MAE H1=+0.000% H3=+0.000% H6=-0.120% H12=-0.221%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+466.76 lifecycle=+466.76
+  managed trade numbers: 267
+  managed results:       +466.76
+
+BOS #20092 SHORT 2026-06-25 14:45:00 | CLASS=BOS_NO_TRADE
+  close=295.2400 strength=93.97368421052664 level=296.31
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.014% H3=+0.030% H6=+0.282% H12=+0.282% MAX=+0.282% @bar 5
+  MAE H1=-0.341% H3=-0.348% H6=-0.348% H12=-0.348%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #20128 SHORT 2026-06-26 09:20:00 | CLASS=MARGINAL_BOS
+  close=293.7000 strength=82.2299737657028 level=294.29
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.376% H3=+0.400% H6=+0.400% H12=+0.400% MAX=+0.400% @bar 2
+  MAE H1=-0.133% H3=-0.160% H6=-0.326% H12=-0.884%
+  ordinary: N=1 return=-1.581% net=-1163.23 MFE=+1.091% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-57.79 lifecycle=-57.79
+  managed trade numbers: 268
+  managed results:       -57.79
+
+BOS #20197 LONG 2026-06-26 15:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=297.7800 strength=100.0 level=293.49
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.040% H3=+0.040% H6=+0.040% H12=+0.040% MAX=+0.040% @bar 1
+  MAE H1=-0.584% H3=-0.826% H6=-0.826% H12=-0.826%
+  ordinary: N=1 return=-0.522% net=-377.84 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-297.66 lifecycle=-297.66
+  managed trade numbers: 269
+  managed results:       -297.66
+
+BOS #20245 SHORT 2026-06-29 10:40:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.2400 strength=72.42857142857069 level=297.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.064% H3=+0.064% H6=+0.064% H12=+0.064% MAX=+0.064% @bar 1
+  MAE H1=-0.047% H3=-0.507% H6=-1.581% H12=-2.501%
+  ordinary: N=1 return=-2.624% net=-1890.14 MFE=+0.011% exit=END_OF_SESSION
+  managed: N=1 first=-1736.48 lifecycle=-1736.48
+  managed trade numbers: 270
+  managed results:       -1736.48
+
+BOS #20285 SHORT 2026-06-29 14:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=301.4400 strength=77.25000000000057 level=302.49
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.163% H3=+0.163% H6=+0.163% H12=+0.163% MAX=+0.163% @bar 1
+  MAE H1=-0.136% H3=-0.337% H6=-0.587% H12=-0.777%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-475.62 lifecycle=-475.62
+  managed trade numbers: 271
+  managed results:       -475.62
+
+BOS #20365 LONG 2026-06-30 12:15:00 | CLASS=MARGINAL_BOS
+  close=312.0000 strength=97.66666666666687 level=310.73
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.170% H12=+0.208% MAX=+0.208% @bar 7
+  MAE H1=-0.282% H3=-0.282% H6=-0.282% H12=-0.282%
+  ordinary: N=1 return=-1.026% net=-719.33 MFE=+0.158% exit=END_OF_SESSION
+  managed: N=1 first=-175.32 lifecycle=-175.32
+  managed trade numbers: 272
+  managed results:       -175.32
+
+BOS #20369 LONG 2026-06-30 12:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=312.4700 strength=89.98460980412901 level=312.0
+  event->signal=0 bars | event->entry=7.0 bars
+  MFE H1=+0.000% H3=+0.058% H6=+0.058% H12=+0.058% MAX=+0.058% @bar 3
+  MAE H1=-0.150% H3=-0.150% H6=-0.275% H12=-0.816%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-502.27 lifecycle=-502.27
+  managed trade numbers: 273
+  managed results:       -502.27
+
+BOS #20436 LONG 2026-07-01 09:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=310.2100 strength=82.49342963619853 level=309.9
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.019% H3=+0.093% H6=+0.200% H12=+0.200% MAX=+0.200% @bar 5
+  MAE H1=-0.119% H3=-0.322% H6=-0.322% H12=-0.322%
+  ordinary: N=1 return=-0.564% net=-391.32 MFE=+0.411% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-100.72 lifecycle=-100.72
+  managed trade numbers: 274
+  managed results:       -100.72
+
+BOS #20487 SHORT 2026-07-01 14:00:00 | CLASS=MARGINAL_BOS
+  close=309.0200 strength=84.19151259442421 level=309.49
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.201% H3=+0.201% H6=+0.201% H12=+0.201% MAX=+0.201% @bar 1
+  MAE H1=-0.245% H3=-0.368% H6=-0.368% H12=-0.368%
+  ordinary: N=1 return=-0.249% net=-171.68 MFE=+0.147% exit=END_OF_SESSION
+  managed: N=1 first=-133.69 lifecycle=-133.69
+  managed trade numbers: 275
+  managed results:       -133.69
+
+BOS #20533 SHORT 2026-07-02 09:25:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=306.6100 strength=96.509433962265 level=307.04
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.101% H12=+0.196% MAX=+0.196% @bar 9
+  MAE H1=-0.147% H3=-0.147% H6=-0.147% H12=-0.147%
+  ordinary: N=1 return=+1.342% net=+923.76 MFE=+1.536% exit=END_OF_SESSION
+  managed: N=1 first=-121.30 lifecycle=-121.30
+  managed trade numbers: 276
+  managed results:       -121.30
+
+BOS #20540 SHORT 2026-07-02 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=306.2500 strength=88.57142857142932 level=306.6
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.042% H3=+0.078% H6=+0.078% H12=+0.078% MAX=+0.078% @bar 2
+  MAE H1=-0.075% H3=-0.075% H6=-0.306% H12=-0.306%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+168.96 lifecycle=+168.96
+  managed trade numbers: 277
+  managed results:       +168.96
+
+BOS #20557 SHORT 2026-07-02 11:25:00 | CLASS=BOS_NO_TRADE
+  close=305.5500 strength=81.68067226890723 level=306.01
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.141% H3=+0.141% H6=+0.276% H12=+0.276% MAX=+0.276% @bar 5
+  MAE H1=-0.052% H3=-0.114% H6=-0.114% H12=-0.114%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #20562 SHORT 2026-07-02 11:50:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=304.7100 strength=96.78068671385046 level=305.11
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.164% H3=-0.180% H6=-0.347% H12=-0.561%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-142.62 lifecycle=-142.62
+  managed trade numbers: 278
+  managed results:       -142.62
+
+BOS #20596 SHORT 2026-07-02 14:40:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=303.5500 strength=90.03269592993864 level=304.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.291% H3=+0.360% H6=+0.593% H12=+0.593% MAX=+0.593% @bar 6
+  MAE H1=-0.109% H3=-0.109% H6=-0.109% H12=-0.109%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+184.27 lifecycle=+184.27
+  managed trade numbers: 279
+  managed results:       +184.27
+
+BOS #20755 LONG 2026-07-06 11:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=305.1900 strength=80.18347353625076 level=305.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.102% H3=+0.102% H6=+0.134% H12=+0.134% MAX=+0.134% @bar 5
+  MAE H1=-0.095% H3=-0.125% H6=-0.125% H12=-0.125%
+  ordinary: N=1 return=-1.296% net=-904.30 MFE=+0.084% exit=END_OF_SESSION
+  managed: N=1 first=-652.09 lifecycle=-652.09
+  managed trade numbers: 280
+  managed results:       -652.09
+
+BOS #20760 LONG 2026-07-06 11:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=305.5700 strength=66.11929845290872 level=305.5
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.003% H3=+0.003% H6=+0.003% H12=+0.003% MAX=+0.003% @bar 1
+  MAE H1=-0.206% H3=-0.206% H6=-0.236% H12=-0.403%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #20944 SHORT 2026-07-08 10:00:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=296.8000 strength=75.57197255549882 level=297.05
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.010% H3=+0.263% H6=+0.590% H12=+0.590% MAX=+0.590% @bar 4
+  MAE H1=-0.145% H3=-0.185% H6=-0.185% H12=-0.185%
+  ordinary: N=1 return=+0.252% net=+173.61 MFE=+0.725% exit=END_OF_SESSION
+  managed: N=2 first=+53.17 lifecycle=+51.15
+  managed trade numbers: 281,282
+  managed results:       +53.17,-2.02
+
+BOS #21099 SHORT 2026-07-09 14:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=296.7100 strength=77.00000000000102 level=297.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.064% H3=+0.064% H6=+0.064% H12=+0.064% MAX=+0.064% @bar 1
+  MAE H1=-0.007% H3=-0.175% H6=-0.235% H12=-0.266%
+  ordinary: N=1 return=-0.359% net=-247.71 MFE=+0.014% exit=END_OF_SESSION
+  managed: N=1 first=-190.52 lifecycle=-190.52
+  managed trade numbers: 283
+  managed results:       -190.52
+
+BOS #21363 LONG 2026-07-14 11:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=295.6000 strength=78.94662707787248 level=295.38
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.101% MAX=+0.101% @bar 12
+  MAE H1=-0.105% H3=-0.196% H6=-0.196% H12=-0.196%
+  ordinary: N=1 return=-0.433% net=-297.90 MFE=+0.126% exit=END_OF_SESSION
+  managed: N=1 first=-89.69 lifecycle=-89.69
+  managed trade numbers: 284
+  managed results:       -89.69
+
+BOS #21438 SHORT 2026-07-15 09:05:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=292.1300 strength=91.04153466122148 level=292.4
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.312% H3=+0.354% H6=+0.354% H12=+0.354% MAX=+0.354% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=-0.031% H12=-0.287%
+  ordinary: N=1 return=+0.551% net=+377.24 MFE=+1.361% exit=END_OF_SESSION
+  managed: N=2 first=-26.02 lifecycle=+65.93
+  managed trade numbers: 285,286
+  managed results:       -26.02,+91.95
+
+BOS #21494 SHORT 2026-07-15 13:45:00 | CLASS=BOS_NO_TRADE
+  close=289.0600 strength=97.33050847457655 level=290.01
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.152% H3=+0.152% H6=+0.152% H12=+0.365% MAX=+0.365% @bar 8
+  MAE H1=-0.062% H3=-0.173% H6=-0.190% H12=-0.834%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-380.72 lifecycle=-380.72
+  managed trade numbers: 287
+  managed results:       -380.72
+
+BOS #21576 SHORT 2026-07-16 12:10:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=277.7000 strength=81.15909090909128 level=280.04
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.478% H3=+0.478% H6=+0.478% H12=+0.478% MAX=+0.478% @bar 1
+  MAE H1=-0.291% H3=-0.498% H6=-0.566% H12=-0.896%
+  ordinary: N=1 return=-1.181% net=-813.49 MFE=+0.429% exit=END_OF_SESSION
+  managed: N=1 first=-722.43 lifecycle=-722.43
+  managed trade numbers: 288
+  managed results:       -722.43
+
+BOS #21662 SHORT 2026-07-17 10:55:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=279.5900 strength=69.83929506659004 level=279.78
+  event->signal=1 bars | event->entry=2.0 bars
+  MFE H1=+0.377% H3=+0.691% H6=+0.935% H12=+1.176% MAX=+1.176% @bar 9
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=-0.818% net=-556.87 MFE=+0.808% exit=END_OF_SESSION
+  managed: N=2 first=+61.98 lifecycle=-54.85
+  managed trade numbers: 289,290
+  managed results:       +61.98,-116.84
+
+BOS #21864 SHORT 2026-07-21 10:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=260.3100 strength=81.31097560975596 level=262.43
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.015% H3=+0.015% H6=+0.015% H12=+0.015% MAX=+0.015% @bar 1
+  MAE H1=-0.417% H3=-0.584% H6=-0.793% H12=-0.793%
+  ordinary: N=1 return=-0.185% net=-124.70 MFE=+1.526% exit=END_OF_SESSION
+  managed: N=1 first=+334.39 lifecycle=+334.39
+  managed trade numbers: 291
+  managed results:       +334.39
+
+BOS #21883 SHORT 2026-07-21 12:30:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=258.0600 strength=95.80645161290332 level=260.06
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.569% H3=+0.593% H6=+0.726% H12=+0.726% MAX=+0.726% @bar 6
+  MAE H1=-0.186% H3=-0.186% H6=-0.186% H12=-0.440%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-312.29 lifecycle=-312.29
+  managed trade numbers: 292
+  managed results:       -312.29
+
+BOS #21942 SHORT 2026-07-22 09:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=260.2300 strength=96.46739130434841 level=261.2
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.050% H3=+0.058% H6=+0.058% H12=+0.058% MAX=+0.058% @bar 2
+  MAE H1=-0.196% H3=-0.238% H6=-0.287% H12=-0.497%
+  ordinary: N=1 return=-1.693% net=-1141.06 MFE=+0.204% exit=END_OF_SESSION
+  managed: N=1 first=-380.43 lifecycle=-380.43
+  managed trade numbers: 293
+  managed results:       -380.43
+
+BOS #22056 SHORT 2026-07-23 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=261.7700 strength=80.7142857142862 level=263.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.004% H3=+0.004% H6=+0.004% H12=+0.046% MAX=+0.046% @bar 8
+  MAE H1=-0.187% H3=-0.396% H6=-0.426% H12=-0.426%
+  ordinary: N=1 return=-1.141% net=-756.03 MFE=+0.332% exit=OPPOSITE_SIGNAL
+  managed: N=2 first=-146.05 lifecycle=-640.23
+  managed trade numbers: 294,295
+  managed results:       -146.05,-494.18
+
+BOS #22095 LONG 2026-07-23 13:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=264.2300 strength=89.24242424242576 level=263.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.095% H3=+0.095% H6=+0.095% H12=+0.095% MAX=+0.095% @bar 1
+  MAE H1=-0.136% H3=-0.254% H6=-0.382% H12=-0.674%
+  ordinary: N=1 return=-0.737% net=-482.33 MFE=+0.045% exit=END_OF_SESSION
+  managed: N=1 first=-373.67 lifecycle=-373.67
+  managed trade numbers: 296
+  managed results:       -373.67
+
+BOS #22156 SHORT 2026-07-24 10:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=260.9500 strength=93.06896551724233 level=262.01
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.254% H3=+0.323% H6=+0.323% H12=+0.590% MAX=+0.590% @bar 12
+  MAE H1=+0.000% H3=-0.019% H6=-0.019% H12=-0.019%
+  ordinary: N=1 return=-1.436% net=-933.52 MFE=+0.525% exit=END_OF_SESSION
+  managed: N=2 first=-42.78 lifecycle=-116.40
+  managed trade numbers: 297,298
+  managed results:       -42.78,-73.62
+
+BOS #22459 LONG 2026-07-29 10:00:00 | CLASS=MARGINAL_BOS
+  close=274.3500 strength=86.02941176471005 level=274.0
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.015% H3=+0.015% H6=+0.015% H12=+0.273% MAX=+0.273% @bar 10
+  MAE H1=-0.532% H3=-0.532% H6=-0.532% H12=-0.532%
+  ordinary: N=1 return=-0.062% net=-39.47 MFE=+0.369% exit=END_OF_SESSION
+  managed: N=1 first=-49.24 lifecycle=-49.24
+  managed trade numbers: 299
+  managed results:       -49.24
+
+BOS #22472 LONG 2026-07-29 11:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=275.4000 strength=75.8540427642229 level=275.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.015% H3=+0.015% H6=+0.015% H12=+0.015% MAX=+0.015% @bar 1
+  MAE H1=-0.160% H3=-0.247% H6=-0.381% H12=-0.465%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-222.28 lifecycle=-222.28
+  managed trade numbers: 300
+  managed results:       -222.28
+
+BOS #22886 LONG 2026-08-04 11:55:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=284.2900 strength=83.70229113904762 level=283.89
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.186% H3=+0.250% H6=+0.250% H12=+0.250% MAX=+0.250% @bar 2
+  MAE H1=-0.028% H3=-0.028% H6=-0.130% H12=-0.264%
+  ordinary: N=1 return=-0.748% net=-478.86 MFE=+0.203% exit=OPPOSITE_SIGNAL
+  managed: N=2 first=-99.90 lifecycle=-241.64
+  managed trade numbers: 301,302
+  managed results:       -99.90,-141.74
+
+BOS #22923 SHORT 2026-08-04 15:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=282.7200 strength=68.33333333333259 level=283.42
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.042% H3=+0.042% H6=+0.042% H12=+0.042% MAX=+0.042% @bar 1
+  MAE H1=-0.205% H3=-0.293% H6=-0.293% H12=-0.293%
+  ordinary: N=1 return=-0.406% net=-257.75 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-201.70 lifecycle=-201.70
+  managed trade numbers: 303
+  managed results:       -201.70
+
+BOS #22967 LONG 2026-08-05 10:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=286.9000 strength=66.0685302696991 level=286.8
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.164% H3=-0.488% H6=-0.488% H12=-0.488%
+  ordinary: N=1 return=-0.555% net=-351.23 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-426.54 lifecycle=-426.54
+  managed trade numbers: 304
+  managed results:       -426.54
+
+BOS #23085 SHORT 2026-08-06 11:40:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=285.5700 strength=90.60810810810909 level=286.01
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.025% H3=+1.137% H6=+1.392% H12=+1.392% MAX=+1.392% @bar 4
+  MAE H1=-0.112% H3=-0.112% H6=-0.112% H12=-0.112%
+  ordinary: N=1 return=+0.298% net=+187.52 MFE=+1.320% exit=END_OF_SESSION
+  managed: N=3 first=+342.62 lifecycle=+8.70
+  managed trade numbers: 305,306,307
+  managed results:       +342.62,-97.19,-236.72
+
+BOS #23419 SHORT 2026-08-11 14:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=285.3800 strength=80.37714302890237 level=285.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.028% H3=+0.028% H6=+0.028% H12=+0.028% MAX=+0.028% @bar 1
+  MAE H1=-0.084% H3=-0.220% H6=-0.311% H12=-0.314%
+  ordinary: N=1 return=-0.449% net=-283.64 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-220.65 lifecycle=-220.65
+  managed trade numbers: 308
+  managed results:       -220.65
+
+BOS #23489 SHORT 2026-08-12 11:40:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=285.2600 strength=74.05829968709662 level=285.35
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.028% H3=+0.660% H6=+0.660% H12=+0.660% MAX=+0.660% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=-0.032% net=-19.85 MFE=+0.606% exit=END_OF_SESSION
+  managed: N=3 first=+75.54 lifecycle=-318.15
+  managed trade numbers: 309,310,311
+  managed results:       +75.54,-111.79,-281.90
+
+BOS #23570 LONG 2026-08-13 10:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=284.0500 strength=80.77960343944667 level=283.97
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.081% H3=-0.285% H6=-0.630% H12=-0.965%
+  ordinary: N=1 return=-1.399% net=-878.73 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-527.39 lifecycle=-527.39
+  managed trade numbers: 312
+  managed results:       -527.39
+
+BOS #23590 SHORT 2026-08-13 11:40:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=280.6200 strength=94.00000000000034 level=281.31
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.043% H3=+0.043% H6=+0.429% H12=+0.429% MAX=+0.429% @bar 6
+  MAE H1=-0.189% H3=-0.203% H6=-0.203% H12=-0.203%
+  ordinary: N=1 return=-0.204% net=-126.17 MFE=+0.385% exit=END_OF_SESSION
+  managed: N=1 first=-10.41 lifecycle=-10.41
+  managed trade numbers: 313
+  managed results:       -10.41
+
+BOS #23595 SHORT 2026-08-13 12:05:00 | CLASS=BOS_NO_TRADE
+  close=280.3300 strength=69.15803245157085 level=280.5
+  event->signal=0 bars | event->entry=5.0 bars
+  MFE H1=+0.326% H3=+0.326% H6=+0.326% H12=+0.326% MAX=+0.326% @bar 1
+  MAE H1=+0.000% H3=+0.000% H6=-0.029% H12=-0.029%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-118.45 lifecycle=-219.47
+  managed trade numbers: 314,315
+  managed results:       -118.45,-101.02
+
+BOS #23676 LONG 2026-08-14 10:25:00 | CLASS=MARGINAL_BOS
+  close=279.6300 strength=65.71428571429325 level=278.64
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.036% H3=+0.036% H6=+0.036% H12=+0.283% MAX=+0.283% @bar 10
+  MAE H1=-0.097% H3=-0.375% H6=-0.375% H12=-0.662%
+  ordinary: N=1 return=-1.992% net=-1231.82 MFE=+0.232% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-139.98 lifecycle=-139.98
+  managed trade numbers: 316
+  managed results:       -139.98
+
+BOS #23684 LONG 2026-08-14 11:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=279.9800 strength=75.73278945601668 level=279.73
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.079% H3=+0.157% H6=+0.157% H12=+0.157% MAX=+0.157% @bar 2
+  MAE H1=-0.046% H3=-0.221% H6=-0.904% H12=-1.104%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-482.12 lifecycle=-482.12
+  managed trade numbers: 317
+  managed results:       -482.12
+
+BOS #23707 SHORT 2026-08-14 13:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=274.5900 strength=96.72794117647089 level=275.45
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.066% H3=+0.549% H6=+0.582% H12=+0.656% MAX=+0.656% @bar 9
+  MAE H1=-0.033% H3=-0.033% H6=-0.033% H12=-0.033%
+  ordinary: N=1 return=+0.081% net=+48.91 MFE=+0.609% exit=END_OF_SESSION
+  managed: N=3 first=-25.59 lifecycle=-204.03
+  managed trade numbers: 318,319,320
+  managed results:       -25.59,-25.48,-152.96
+
+BOS #23901 LONG 2026-08-18 12:20:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=275.4800 strength=94.6892655367233 level=274.09
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.152% H3=+0.323% H6=+0.323% H12=+0.323% MAX=+0.323% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=-0.069% H12=-0.309%
+  ordinary: N=1 return=+0.804% net=+487.63 MFE=+0.973% exit=END_OF_SESSION
+  managed: N=3 first=-92.23 lifecycle=+39.38
+  managed trade numbers: 321,322,323
+  managed results:       -92.23,-54.65,+186.27
+
+BOS #23923 LONG 2026-08-18 14:10:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=276.9000 strength=86.98795180722817 level=276.37
+  event->signal=0 bars | event->entry=7.0 bars
+  MFE H1=+0.368% H3=+0.397% H6=+0.491% H12=+0.491% MAX=+0.491% @bar 4
+  MAE H1=-0.014% H3=-0.014% H6=-0.014% H12=-0.051%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+54.97 lifecycle=+54.97
+  managed trade numbers: 324
+  managed results:       +54.97
+
+BOS #24036 LONG 2026-08-19 15:10:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=276.4500 strength=94.767441860464 level=276.1
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.217% H3=+0.217% H6=+0.217% H12=+0.217% MAX=+0.217% @bar 1
+  MAE H1=-0.004% H3=-0.004% H6=-0.004% H12=-0.004%
+  ordinary: N=1 return=+0.006% net=+3.65 MFE=+0.167% exit=END_OF_SESSION
+  managed: N=1 first=+2.81 lifecycle=+2.81
+  managed trade numbers: 325
+  managed results:       +2.81
+
+BOS #24111 SHORT 2026-08-20 13:00:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=273.8300 strength=98.11188811188805 level=275.17
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.051% H3=+0.231% H6=+0.543% H12=+0.543% MAX=+0.543% @bar 4
+  MAE H1=-0.266% H3=-0.266% H6=-0.266% H12=-0.266%
+  ordinary: N=1 return=+0.049% net=+29.71 MFE=+0.578% exit=END_OF_SESSION
+  managed: N=4 first=-21.89 lifecycle=-259.25
+  managed trade numbers: 326,327,328,329
+  managed results:       -21.89,-51.08,-121.66,-64.62
+
+BOS #24170 LONG 2026-08-21 09:30:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=271.5300 strength=65.51900319150378 level=271.38
+  event->signal=1 bars | event->entry=2.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.173% MAX=+0.173% @bar 7
+  MAE H1=-0.052% H3=-0.077% H6=-0.195% H12=-0.538%
+  ordinary: N=1 return=-0.851% net=-520.41 MFE=+0.134% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-203.83 lifecycle=-203.83
+  managed trade numbers: 330
+  managed results:       -203.83
+
+BOS #24177 LONG 2026-08-21 10:05:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=271.8200 strength=84.30817429714186 level=271.57
+  event->signal=0 bars | event->entry=nan bars
+  MFE H1=+0.040% H3=+0.040% H6=+0.040% H12=+0.040% MAX=+0.040% @bar 1
+  MAE H1=-0.103% H3=-0.644% H6=-0.644% H12=-0.957%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=0 first=+nan lifecycle=+nan
+
+BOS #24188 SHORT 2026-08-21 11:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=269.7300 strength=68.85566573881249 level=270.07
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.063% H3=+0.063% H6=+0.063% H12=+0.063% MAX=+0.063% @bar 1
+  MAE H1=-0.089% H3=-0.288% H6=-0.329% H12=-1.230%
+  ordinary: N=1 return=-0.868% net=-526.64 MFE=+0.013% exit=END_OF_SESSION
+  managed: N=1 first=-728.64 lifecycle=-728.64
+  managed trade numbers: 331
+  managed results:       -728.64
+
+BOS #24228 SHORT 2026-08-21 14:20:00 | CLASS=BOS_NO_TRADE
+  close=271.5500 strength=65.00572064967012 level=271.72
+  event->signal=1 bars | event->entry=2.0 bars
+  MFE H1=+0.203% H3=+0.218% H6=+0.218% H12=+0.218% MAX=+0.218% @bar 2
+  MAE H1=-0.026% H3=-0.026% H6=-0.147% H12=-0.191%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-176.64 lifecycle=-176.64
+  managed trade numbers: 332
+  managed results:       -176.64
+
+BOS #24394 SHORT 2026-08-25 11:20:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=268.0000 strength=97.3599201349039 level=268.5
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.283% H3=-0.353% H6=-0.924% H12=-1.060%
+  ordinary: N=1 return=-0.947% net=-569.57 MFE=+0.000% exit=END_OF_SESSION
+  managed: N=1 first=-433.18 lifecycle=-433.18
+  managed trade numbers: 333
+  managed results:       -433.18
+
+BOS #24534 SHORT 2026-08-26 14:35:00 | CLASS=MARGINAL_BOS
+  close=268.0500 strength=97.98701298701012 level=268.71
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.131% H3=+0.161% H6=+0.161% H12=+0.269% MAX=+0.269% @bar 8
+  MAE H1=-0.019% H3=-0.019% H6=-0.019% H12=-0.019%
+  ordinary: N=1 return=-0.047% net=-27.94 MFE=+0.219% exit=END_OF_SESSION
+  managed: N=1 first=-21.25 lifecycle=-21.25
+  managed trade numbers: 334
+  managed results:       -21.25
+
+BOS #24695 SHORT 2026-08-28 11:10:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=268.7200 strength=83.52941176470515 level=269.51
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.108% H3=+0.115% H6=+0.198% H12=+0.640% MAX=+0.640% @bar 12
+  MAE H1=-0.093% H3=-0.093% H6=-0.093% H12=-0.100%
+  ordinary: N=1 return=+0.281% net=+167.05 MFE=+0.590% exit=END_OF_SESSION
+  managed: N=1 first=+123.67 lifecycle=+123.67
+  managed trade numbers: 335
+  managed results:       +123.67
+
+BOS #24777 LONG 2026-08-31 09:35:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=270.6000 strength=86.89655172414024 level=270.3
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.030% H3=+0.085% H6=+0.129% H12=+0.251% MAX=+0.251% @bar 8
+  MAE H1=-0.037% H3=-0.078% H6=-0.107% H12=-0.107%
+  ordinary: N=1 return=+0.128% net=+76.69 MFE=+0.825% exit=END_OF_SESSION
+  managed: N=1 first=-32.12 lifecycle=-32.12
+  managed trade numbers: 336
+  managed results:       -32.12
+
+BOS #24784 LONG 2026-08-31 10:10:00 | CLASS=BOS_NO_TRADE
+  close=271.0100 strength=72.49475971512368 level=270.84
+  event->signal=0 bars | event->entry=4.0 bars
+  MFE H1=+0.100% H3=+0.100% H6=+0.100% H12=+0.347% MAX=+0.347% @bar 12
+  MAE H1=+0.000% H3=-0.030% H6=-0.221% H12=-0.221%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=+121.60 lifecycle=+121.60
+  managed trade numbers: 337
+  managed results:       +121.60
+
+BOS #24794 LONG 2026-08-31 11:00:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=271.5600 strength=82.78679132757784 level=271.28
+  event->signal=0 bars | event->entry=10.0 bars
+  MFE H1=+0.085% H3=+0.523% H6=+0.523% H12=+0.523% MAX=+0.523% @bar 3
+  MAE H1=-0.022% H3=-0.022% H6=-0.022% H12=-0.022%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-277.74 lifecycle=-277.74
+  managed trade numbers: 338
+  managed results:       -277.74
+
+BOS #24898 LONG 2026-09-01 11:15:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=277.0200 strength=77.40997588621954 level=276.66
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.079% H3=+0.271% H6=+0.271% H12=+0.271% MAX=+0.271% @bar 3
+  MAE H1=-0.065% H3=-0.065% H6=-0.155% H12=-0.455%
+  ordinary: N=1 return=-0.679% net=-405.95 MFE=+0.217% exit=END_OF_SESSION
+  managed: N=2 first=-59.40 lifecycle=-411.41
+  managed trade numbers: 339,340
+  managed results:       -59.40,-352.01
+
+BOS #25008 SHORT 2026-09-02 12:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=273.3100 strength=84.80769230769248 level=273.7
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.026% H3=+0.026% H6=+0.026% H12=+0.026% MAX=+0.026% @bar 1
+  MAE H1=-0.033% H3=-0.259% H6=-0.343% H12=-0.343%
+  ordinary: N=1 return=-0.684% net=-405.87 MFE=+0.000% exit=OPPOSITE_SIGNAL
+  managed: N=1 first=-250.47 lifecycle=-250.47
+  managed trade numbers: 341
+  managed results:       -250.47
+
+BOS #25034 LONG 2026-09-02 14:10:00 | CLASS=GOOD_BOS_ENGINE_FAILED_TO_CAPTURE
+  close=274.6200 strength=79.75409836065596 level=274.25
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.007% H3=+0.007% H6=+0.055% H12=+0.466% MAX=+0.466% @bar 11
+  MAE H1=-0.109% H3=-0.208% H6=-0.222% H12=-0.259%
+  ordinary: N=1 return=-0.014% net=-8.53 MFE=+0.412% exit=END_OF_SESSION
+  managed: N=1 first=+8.13 lifecycle=+8.13
+  managed trade numbers: 342
+  managed results:       +8.13
+
+BOS #25100 SHORT 2026-09-03 11:15:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=274.1700 strength=78.22916666666598 level=274.72
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.007% H3=+0.051% H6=+0.051% H12=+0.062% MAX=+0.062% @bar 9
+  MAE H1=-0.080% H3=-0.098% H6=-0.098% H12=-0.374%
+  ordinary: N=1 return=-1.040% net=-613.14 MFE=+0.461% exit=END_OF_SESSION
+  managed: N=1 first=+23.14 lifecycle=+23.14
+  managed trade numbers: 343
+  managed results:       +23.14
+
+BOS #25183 LONG 2026-09-04 09:45:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=279.7700 strength=96.01694915253994 level=279.35
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.114% H3=-0.257% H6=-0.597% H12=-0.597%
+  ordinary: N=1 return=-0.021% net=-12.51 MFE=+0.750% exit=END_OF_SESSION
+  managed: N=1 first=+138.38 lifecycle=+138.38
+  managed trade numbers: 344
+  managed results:       +138.38
+
+BOS #25200 LONG 2026-09-04 11:10:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=279.9300 strength=77.49035586316464 level=279.8
+  event->signal=0 bars | event->entry=8.0 bars
+  MFE H1=+0.293% H3=+0.597% H6=+0.739% H12=+0.739% MAX=+0.739% @bar 5
+  MAE H1=-0.018% H3=-0.018% H6=-0.018% H12=-0.018%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-237.02 lifecycle=-237.02
+  managed trade numbers: 345
+  managed results:       -237.02
+
+BOS #25413 LONG 2026-09-08 12:05:00 | CLASS=GOOD_BOS_ENGINE_EARNED
+  close=279.2600 strength=90.6481481481497 level=278.66
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.039% H3=+0.039% H6=+0.351% H12=+0.351% MAX=+0.351% @bar 6
+  MAE H1=-0.129% H3=-0.201% H6=-0.201% H12=-0.201%
+  ordinary: N=1 return=+0.115% net=+66.92 MFE=+0.838% exit=END_OF_SESSION
+  managed: N=1 first=-14.16 lifecycle=-14.16
+  managed trade numbers: 346
+  managed results:       -14.16
+
+BOS #25426 LONG 2026-09-08 13:10:00 | CLASS=BOS_GOOD_NO_ORDINARY_TRADE
+  close=280.3200 strength=74.36121082344835 level=280.24
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.235% H3=+0.243% H6=+0.250% H12=+0.507% MAX=+0.507% @bar 9
+  MAE H1=-0.004% H3=-0.004% H6=-0.004% H12=-0.004%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=2 first=-22.36 lifecycle=-74.84
+  managed trade numbers: 347,348
+  managed results:       -22.36,-52.48
+
+BOS #25435 LONG 2026-09-08 13:55:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=281.2900 strength=67.76036568448063 level=281.02
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.060% H3=+0.060% H6=+0.060% H12=+0.060% MAX=+0.060% @bar 1
+  MAE H1=-0.156% H3=-0.252% H6=-0.306% H12=-0.423%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-195.97 lifecycle=-195.97
+  managed trade numbers: 349
+  managed results:       -195.97
+
+BOS #25501 LONG 2026-09-09 11:00:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=279.7400 strength=71.57894736841963 level=278.98
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.057% H3=+0.057% H6=+0.057% H12=+0.057% MAX=+0.057% @bar 1
+  MAE H1=-0.004% H3=-0.354% H6=-0.368% H12=-0.368%
+  ordinary: N=1 return=-1.571% net=-916.96 MFE=+0.011% exit=END_OF_SESSION
+  managed: N=1 first=-693.99 lifecycle=-693.99
+  managed trade numbers: 350
+  managed results:       -693.99
+
+BOS #25797 LONG 2026-09-14 10:25:00 | CLASS=MANAGED_REENTRY_GIVEBACK
+  close=285.4700 strength=75.50505808250122 level=285.16
+  event->signal=0 bars | event->entry=1.0 bars
+  MFE H1=+0.186% H3=+0.319% H6=+0.319% H12=+0.319% MAX=+0.319% @bar 2
+  MAE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000%
+  ordinary: N=1 return=-0.326% net=-187.24 MFE=+0.332% exit=END_OF_DATA
+  managed: N=2 first=-36.74 lifecycle=-40.11
+  managed trade numbers: 351,352
+  managed results:       -36.74,-3.37
+
+BOS #25811 LONG 2026-09-14 11:35:00 | CLASS=BOS_BAD_FROM_OUTSET
+  close=286.5600 strength=88.68769442703676 level=286.38
+  event->signal=0 bars | event->entry=2.0 bars
+  MFE H1=+0.000% H3=+0.000% H6=+0.000% H12=+0.000% MAX=+0.000% @bar 0
+  MAE H1=-0.091% H3=-0.195% H6=-0.604% H12=-0.604%
+  ordinary: N=0 return=+nan% net=+nan MFE=+nan% exit=nan
+  managed: N=1 first=-274.75 lifecycle=-274.75
+  managed trade numbers: 353
+  managed results:       -274.75
+
+INTEGRITY
+------------------------------------------------------------------------------
+[PASS] Unique BOS rows
+[PASS] No duplicate event/direction rows
+[PASS] All ordinary trades map to BOS
+[PASS] All managed trades map to BOS
+[PASS] Forward windows start at t+1 and stay in session
+[PASS] No negative event->signal distance
+[PASS] CSV export written
+[PASS] TXT report written
+[PASS] No strategy parameters modified
+RESULT: 9/9 PASS
+
+SAFETY: NO ORDERS WERE SENT
+SAFETY: RESEARCH MODE ONLY
+==============================================================================

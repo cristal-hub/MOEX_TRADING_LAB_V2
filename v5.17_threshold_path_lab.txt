@@ -1,0 +1,251 @@
+==================================================================================
+MOEX TRADING LAB — v5.17 TEMPORAL THRESHOLD PATH / GIVEBACK LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+No threshold below is a strategy parameter. All results are descriptive path labels.
+==================================================================================
+Ordinary trades available: 200
+Ordinary trade paths reconstructed: 200
+
+1) THRESHOLD REACH / PERSISTENCE / GIVEBACK
+----------------------------------------------------------------------------------
++0.20% | reached=115/200 | mean bars>=level=20.03 | median=15.00 | crossed below again=85/115 | mean peak-giveback=0.549pp | mean post-hit MAE=-0.294%
+           first cross-below: N=85 | mean=5.92 bars | median=3.00 | returned <0 after hit=55/115
++0.30% | reached=91/200 | mean bars>=level=19.31 | median=14.00 | crossed below again=69/91 | mean peak-giveback=0.545pp | mean post-hit MAE=-0.200%
+           first cross-below: N=69 | mean=5.67 bars | median=2.00 | returned <0 after hit=33/91
++0.50% | reached=56/200 | mean bars>=level=15.93 | median=12.50 | crossed below again=46/56 | mean peak-giveback=0.602pp | mean post-hit MAE=-0.075%
+           first cross-below: N=46 | mean=5.93 bars | median=2.00 | returned <0 after hit=14/56
+
+2) WHAT HAPPENS AFTER THE FIRST THRESHOLD HIT
+----------------------------------------------------------------------------------
++0.20% | N=115 | max extra favorable after hit mean=+0.416pp | median=+0.281pp | mean final net=-0.083% | profitable=52/115
++0.30% | N=91 | max extra favorable after hit mean=+0.414pp | median=+0.310pp | mean final net=+0.027% | profitable=50/91
++0.50% | N=56 | max extra favorable after hit mean=+0.414pp | median=+0.325pp | mean final net=+0.186% | profitable=42/56
+
+3) SIDE SPLIT
+----------------------------------------------------------------------------------
+SHORT: N=116
+  +0.20% reached 74/116 | bars>=level mean 19.72 | giveback mean 0.555pp | final positive 34/74
+  +0.30% reached 59/116 | bars>=level mean 18.69 | giveback mean 0.576pp | final positive 33/59
+  +0.50% reached 36/116 | bars>=level mean 15.28 | giveback mean 0.640pp | final positive 26/36
+LONG: N=84
+  +0.20% reached 41/84 | bars>=level mean 20.61 | giveback mean 0.539pp | final positive 18/41
+  +0.30% reached 32/84 | bars>=level mean 20.44 | giveback mean 0.488pp | final positive 17/32
+  +0.50% reached 20/84 | bars>=level mean 17.10 | giveback mean 0.534pp | final positive 16/20
+
+4) TRADE-LEVEL THRESHOLD PATH TABLE
+----------------------------------------------------------------------------------
+# 1 SHORT final=-0.280% | +0.20: hold=26b gb=+0.615pp below=True | +0.30: hold=22b gb=+0.615pp below=True | +0.50: hold=1b gb=+0.615pp below=True
+# 2 SHORT final=+0.128% | +0.20: hold=39b gb=+0.576pp below=True | +0.30: hold=36b gb=+0.576pp below=True | +0.50: hold=26b gb=+0.576pp below=True
+# 3 SHORT final=-0.714% | +0.20: NO | +0.30: NO | +0.50: NO
+# 4 SHORT final=+0.161% | +0.20: hold=32b gb=+0.224pp below=True | +0.30: hold=23b gb=+0.224pp below=True | +0.50: hold=3b gb=+0.224pp below=True
+# 5 SHORT final=-0.450% | +0.20: hold=1b gb=+0.300pp below=True | +0.30: NO | +0.50: NO
+# 6 LONG  final=-0.571% | +0.20: NO | +0.30: NO | +0.50: NO
+# 7 SHORT final=-0.438% | +0.20: hold=45b gb=+1.128pp below=True | +0.30: hold=38b gb=+1.128pp below=True | +0.50: hold=23b gb=+1.128pp below=True
+# 8 SHORT final=-2.581% | +0.20: NO | +0.30: NO | +0.50: NO
+# 9 SHORT final=-0.026% | +0.20: hold=30b gb=+0.819pp below=True | +0.30: hold=19b gb=+0.819pp below=True | +0.50: hold=6b gb=+0.819pp below=True
+#10 SHORT final=+0.522% | +0.20: hold=10b gb=+0.120pp below=True | +0.30: hold=8b gb=+0.120pp below=True | +0.50: hold=4b gb=+0.120pp below=False
+#11 SHORT final=-0.549% | +0.20: hold=15b gb=+0.762pp below=True | +0.30: hold=9b gb=+0.762pp below=True | +0.50: NO
+#12 LONG  final=-0.319% | +0.20: NO | +0.30: NO | +0.50: NO
+#13 LONG  final=-0.496% | +0.20: hold=2b gb=+0.527pp below=True | +0.30: NO | +0.50: NO
+#14 SHORT final=+0.266% | +0.20: hold=32b gb=+0.408pp below=False | +0.30: hold=29b gb=+0.408pp below=False | +0.50: hold=18b gb=+0.408pp below=True
+#15 LONG  final=-0.846% | +0.20: hold=3b gb=+0.853pp below=True | +0.30: NO | +0.50: NO
+#16 SHORT final=-0.401% | +0.20: NO | +0.30: NO | +0.50: NO
+#17 LONG  final=-0.003% | +0.20: hold=3b gb=+0.193pp below=True | +0.30: hold=1b gb=+0.193pp below=True | +0.50: NO
+#18 LONG  final=-0.497% | +0.20: NO | +0.30: NO | +0.50: NO
+#19 SHORT final=-0.135% | +0.20: hold=19b gb=+0.182pp below=False | +0.30: hold=17b gb=+0.182pp below=True | +0.50: NO
+#20 LONG  final=-0.685% | +0.20: hold=2b gb=+2.729pp below=True | +0.30: hold=2b gb=+2.729pp below=True | +0.50: hold=2b gb=+2.729pp below=True
+#21 LONG  final=+1.029% | +0.20: hold=52b gb=+0.038pp below=True | +0.30: hold=49b gb=+0.038pp below=True | +0.50: hold=42b gb=+0.038pp below=False
+#22 LONG  final=+0.422% | +0.20: hold=47b gb=+0.405pp below=True | +0.30: hold=46b gb=+0.405pp below=False | +0.50: hold=36b gb=+0.405pp below=True
+#23 LONG  final=-0.019% | +0.20: hold=10b gb=+0.154pp below=True | +0.30: NO | +0.50: NO
+#24 SHORT final=+0.214% | +0.20: hold=39b gb=+0.646pp below=True | +0.30: hold=32b gb=+0.646pp below=True | +0.50: hold=23b gb=+0.646pp below=True
+#25 LONG  final=-0.096% | +0.20: hold=11b gb=+0.324pp below=True | +0.30: hold=4b gb=+0.324pp below=True | +0.50: NO
+#26 LONG  final=+0.006% | +0.20: hold=61b gb=+0.432pp below=False | +0.30: hold=58b gb=+0.432pp below=True | +0.50: hold=10b gb=+0.432pp below=True
+#27 SHORT final=-0.385% | +0.20: NO | +0.30: NO | +0.50: NO
+#28 SHORT final=+0.230% | +0.20: hold=47b gb=+0.340pp below=True | +0.30: hold=39b gb=+0.340pp below=True | +0.50: hold=11b gb=+0.340pp below=True
+#29 LONG  final=+0.033% | +0.20: hold=48b gb=+0.834pp below=False | +0.30: hold=46b gb=+0.834pp below=True | +0.50: hold=34b gb=+0.834pp below=True
+#30 SHORT final=-0.440% | +0.20: hold=8b gb=+0.402pp below=True | +0.30: hold=3b gb=+0.402pp below=True | +0.50: NO
+#31 LONG  final=+0.454% | +0.20: hold=13b gb=+0.276pp below=False | +0.30: hold=12b gb=+0.276pp below=False | +0.50: hold=10b gb=+0.276pp below=True
+#32 SHORT final=-0.506% | +0.20: hold=14b gb=+0.708pp below=True | +0.30: hold=10b gb=+0.708pp below=True | +0.50: hold=2b gb=+0.708pp below=True
+#33 LONG  final=-0.742% | +0.20: NO | +0.30: NO | +0.50: NO
+#34 SHORT final=+0.175% | +0.20: hold=3b gb=+0.000pp below=True | +0.30: hold=1b gb=+0.000pp below=False | +0.50: NO
+#35 SHORT final=+0.900% | +0.20: hold=55b gb=+0.545pp below=False | +0.30: hold=51b gb=+0.545pp below=False | +0.50: hold=45b gb=+0.545pp below=False
+#36 SHORT final=-0.292% | +0.20: hold=9b gb=+0.460pp below=True | +0.30: NO | +0.50: NO
+#37 LONG  final=-0.256% | +0.20: hold=13b gb=+0.568pp below=True | +0.30: hold=3b gb=+0.568pp below=True | +0.50: NO
+#38 LONG  final=-0.026% | +0.20: hold=25b gb=+0.528pp below=True | +0.30: hold=12b gb=+0.528pp below=True | +0.50: hold=2b gb=+0.528pp below=True
+#39 SHORT final=-0.375% | +0.20: NO | +0.30: NO | +0.50: NO
+#40 SHORT final=+0.083% | +0.20: hold=36b gb=+0.422pp below=True | +0.30: hold=18b gb=+0.422pp below=True | +0.50: hold=1b gb=+0.422pp below=True
+#41 SHORT final=-0.048% | +0.20: hold=13b gb=+0.388pp below=True | +0.30: hold=4b gb=+0.388pp below=True | +0.50: NO
+#42 LONG  final=+0.441% | +0.20: hold=14b gb=+0.219pp below=True | +0.30: hold=11b gb=+0.219pp below=False | +0.50: hold=6b gb=+0.219pp below=False
+#43 SHORT final=+0.071% | +0.20: hold=26b gb=+0.128pp below=True | +0.30: hold=5b gb=+0.128pp below=True | +0.50: NO
+#44 LONG  final=-0.571% | +0.20: NO | +0.30: NO | +0.50: NO
+#45 SHORT final=-0.516% | +0.20: hold=5b gb=+0.667pp below=True | +0.30: NO | +0.50: NO
+#46 SHORT final=+0.145% | +0.20: hold=6b gb=+0.303pp below=True | +0.30: hold=3b gb=+0.303pp below=True | +0.50: NO
+#47 SHORT final=-0.329% | +0.20: NO | +0.30: NO | +0.50: NO
+#48 SHORT final=+0.262% | +0.20: hold=42b gb=+0.378pp below=True | +0.30: hold=38b gb=+0.378pp below=False | +0.50: hold=20b gb=+0.378pp below=True
+#49 LONG  final=-0.556% | +0.20: NO | +0.30: NO | +0.50: NO
+#50 SHORT final=+0.135% | +0.20: hold=22b gb=+0.711pp below=False | +0.30: hold=15b gb=+0.711pp below=True | +0.50: hold=4b gb=+0.711pp below=True
+#51 SHORT final=-0.920% | +0.20: NO | +0.30: NO | +0.50: NO
+#52 LONG  final=+0.043% | +0.20: hold=2b gb=+0.017pp below=False | +0.30: NO | +0.50: NO
+#53 SHORT final=-0.347% | +0.20: hold=5b gb=+0.434pp below=True | +0.30: NO | +0.50: NO
+#54 LONG  final=+0.451% | +0.20: hold=15b gb=+0.080pp below=False | +0.30: hold=15b gb=+0.080pp below=False | +0.50: hold=13b gb=+0.080pp below=False
+#55 SHORT final=+0.109% | +0.20: hold=18b gb=+0.087pp below=True | +0.30: hold=4b gb=+0.087pp below=True | +0.50: NO
+#56 LONG  final=-0.140% | +0.20: NO | +0.30: NO | +0.50: NO
+#57 LONG  final=+0.169% | +0.20: hold=43b gb=+0.696pp below=False | +0.30: hold=43b gb=+0.696pp below=False | +0.50: hold=11b gb=+0.696pp below=True
+#58 SHORT final=-0.367% | +0.20: NO | +0.30: NO | +0.50: NO
+#59 SHORT final=-0.385% | +0.20: hold=2b gb=+0.479pp below=True | +0.30: hold=1b gb=+0.479pp below=True | +0.50: NO
+#60 LONG  final=-0.069% | +0.20: NO | +0.30: NO | +0.50: NO
+#61 SHORT final=-0.063% | +0.20: NO | +0.30: NO | +0.50: NO
+#62 LONG  final=-0.698% | +0.20: NO | +0.30: NO | +0.50: NO
+#63 SHORT final=-0.237% | +0.20: NO | +0.30: NO | +0.50: NO
+#64 LONG  final=-0.460% | +0.20: hold=28b gb=+0.736pp below=True | +0.30: hold=6b gb=+0.736pp below=True | +0.50: NO
+#65 SHORT final=-1.171% | +0.20: NO | +0.30: NO | +0.50: NO
+#66 SHORT final=-0.284% | +0.20: hold=18b gb=+0.453pp below=True | +0.30: hold=3b gb=+0.453pp below=True | +0.50: NO
+#67 LONG  final=-0.003% | +0.20: hold=41b gb=+0.260pp below=True | +0.30: hold=20b gb=+0.260pp below=True | +0.50: NO
+#68 SHORT final=-0.982% | +0.20: hold=1b gb=+1.092pp below=True | +0.30: NO | +0.50: NO
+#69 SHORT final=-0.266% | +0.20: NO | +0.30: NO | +0.50: NO
+#70 LONG  final=-0.233% | +0.20: hold=5b gb=+0.359pp below=True | +0.30: NO | +0.50: NO
+#71 LONG  final=-0.258% | +0.20: NO | +0.30: NO | +0.50: NO
+#72 LONG  final=-0.398% | +0.20: NO | +0.30: NO | +0.50: NO
+#73 SHORT final=+0.243% | +0.20: hold=6b gb=+0.046pp below=False | +0.30: hold=6b gb=+0.046pp below=False | +0.50: NO
+#74 SHORT final=-0.289% | +0.20: NO | +0.30: NO | +0.50: NO
+#75 LONG  final=-0.076% | +0.20: NO | +0.30: NO | +0.50: NO
+#76 SHORT final=+0.243% | +0.20: hold=47b gb=+0.488pp below=False | +0.30: hold=46b gb=+0.488pp below=True | +0.50: hold=24b gb=+0.488pp below=True
+#77 SHORT final=+0.244% | +0.20: hold=19b gb=+0.356pp below=False | +0.30: hold=17b gb=+0.356pp below=True | +0.50: hold=13b gb=+0.356pp below=True
+#78 SHORT final=-0.576% | +0.20: NO | +0.30: NO | +0.50: NO
+#79 LONG  final=-0.259% | +0.20: NO | +0.30: NO | +0.50: NO
+#80 SHORT final=-0.338% | +0.20: NO | +0.30: NO | +0.50: NO
+#81 SHORT final=+0.197% | +0.20: hold=30b gb=+0.090pp below=False | +0.30: hold=26b gb=+0.090pp below=True | +0.50: hold=3b gb=+0.090pp below=True
+#82 SHORT final=-0.094% | +0.20: hold=3b gb=+0.339pp below=True | +0.30: NO | +0.50: NO
+#83 SHORT final=-0.257% | +0.20: NO | +0.30: NO | +0.50: NO
+#84 LONG  final=-0.012% | +0.20: hold=31b gb=+0.330pp below=False | +0.30: hold=31b gb=+0.330pp below=False | +0.50: hold=4b gb=+0.330pp below=True
+#85 SHORT final=-0.002% | +0.20: hold=6b gb=+0.089pp below=True | +0.30: NO | +0.50: NO
+#86 LONG  final=-0.144% | +0.20: NO | +0.30: NO | +0.50: NO
+#87 LONG  final=-0.339% | +0.20: NO | +0.30: NO | +0.50: NO
+#88 LONG  final=-0.293% | +0.20: hold=11b gb=+0.550pp below=True | +0.30: hold=2b gb=+0.550pp below=True | +0.50: NO
+#89 SHORT final=-0.316% | +0.20: NO | +0.30: NO | +0.50: NO
+#90 SHORT final=-0.716% | +0.20: NO | +0.30: NO | +0.50: NO
+#91 LONG  final=-0.232% | +0.20: NO | +0.30: NO | +0.50: NO
+#92 LONG  final=-0.124% | +0.20: hold=19b gb=+0.446pp below=True | +0.30: hold=1b gb=+0.446pp below=True | +0.50: NO
+#93 LONG  final=-0.200% | +0.20: NO | +0.30: NO | +0.50: NO
+#94 LONG  final=-0.420% | +0.20: NO | +0.30: NO | +0.50: NO
+#95 LONG  final=+0.137% | +0.20: hold=6b gb=+0.124pp below=False | +0.30: hold=3b gb=+0.124pp below=True | +0.50: NO
+#96 SHORT final=-0.178% | +0.20: hold=1b gb=+0.591pp below=True | +0.30: NO | +0.50: NO
+#97 LONG  final=-0.809% | +0.20: NO | +0.30: NO | +0.50: NO
+#98 SHORT final=-0.216% | +0.20: NO | +0.30: NO | +0.50: NO
+#99 LONG  final=-0.654% | +0.20: NO | +0.30: NO | +0.50: NO
+#100 LONG  final=-0.799% | +0.20: NO | +0.30: NO | +0.50: NO
+#101 SHORT final=-0.203% | +0.20: NO | +0.30: NO | +0.50: NO
+#102 LONG  final=+0.184% | +0.20: hold=11b gb=+0.000pp below=False | +0.30: hold=7b gb=+0.000pp below=False | +0.50: hold=1b gb=+0.000pp below=False
+#103 SHORT final=-0.000% | +0.20: hold=3b gb=+0.057pp below=False | +0.30: hold=2b gb=+0.057pp below=True | +0.50: NO
+#104 SHORT final=+0.377% | +0.20: hold=33b gb=+0.735pp below=True | +0.30: hold=29b gb=+0.735pp below=False | +0.50: hold=25b gb=+0.735pp below=False
+#105 LONG  final=-0.423% | +0.20: NO | +0.30: NO | +0.50: NO
+#106 SHORT final=-0.011% | +0.20: NO | +0.30: NO | +0.50: NO
+#107 SHORT final=-0.052% | +0.20: hold=11b gb=+0.282pp below=True | +0.30: hold=2b gb=+0.282pp below=True | +0.50: NO
+#108 SHORT final=+0.025% | +0.20: hold=34b gb=+0.325pp below=True | +0.30: hold=20b gb=+0.325pp below=True | +0.50: NO
+#109 SHORT final=-0.296% | +0.20: NO | +0.30: NO | +0.50: NO
+#110 LONG  final=+0.215% | +0.20: hold=63b gb=+0.339pp below=False | +0.30: hold=62b gb=+0.339pp below=False | +0.50: hold=29b gb=+0.339pp below=True
+#111 SHORT final=-0.191% | +0.20: hold=1b gb=+0.412pp below=True | +0.30: NO | +0.50: NO
+#112 SHORT final=-0.083% | +0.20: hold=4b gb=+0.283pp below=True | +0.30: hold=1b gb=+0.283pp below=True | +0.50: NO
+#113 LONG  final=+0.264% | +0.20: hold=37b gb=+0.641pp below=False | +0.30: hold=36b gb=+0.641pp below=False | +0.50: hold=23b gb=+0.641pp below=True
+#114 SHORT final=-0.639% | +0.20: NO | +0.30: NO | +0.50: NO
+#115 SHORT final=-0.178% | +0.20: hold=6b gb=+0.228pp below=True | +0.30: NO | +0.50: NO
+#116 LONG  final=-0.190% | +0.20: NO | +0.30: NO | +0.50: NO
+#117 SHORT final=-0.632% | +0.20: NO | +0.30: NO | +0.50: NO
+#118 SHORT final=-0.548% | +0.20: NO | +0.30: NO | +0.50: NO
+#119 LONG  final=+0.583% | +0.20: hold=19b gb=+0.000pp below=False | +0.30: hold=18b gb=+0.000pp below=False | +0.50: hold=15b gb=+0.000pp below=True
+#120 LONG  final=-0.746% | +0.20: NO | +0.30: NO | +0.50: NO
+#121 SHORT final=-0.685% | +0.20: NO | +0.30: NO | +0.50: NO
+#122 SHORT final=-0.188% | +0.20: hold=1b gb=+0.312pp below=True | +0.30: NO | +0.50: NO
+#123 SHORT final=-0.275% | +0.20: NO | +0.30: NO | +0.50: NO
+#124 SHORT final=-0.793% | +0.20: hold=3b gb=+0.953pp below=True | +0.30: hold=1b gb=+0.953pp below=True | +0.50: NO
+#125 LONG  final=-0.713% | +0.20: NO | +0.30: NO | +0.50: NO
+#126 SHORT final=-0.266% | +0.20: NO | +0.30: NO | +0.50: NO
+#127 LONG  final=-0.309% | +0.20: NO | +0.30: NO | +0.50: NO
+#128 SHORT final=+0.005% | +0.20: hold=6b gb=+0.128pp below=True | +0.30: hold=2b gb=+0.128pp below=True | +0.50: NO
+#129 SHORT final=-0.116% | +0.20: hold=23b gb=+0.335pp below=True | +0.30: hold=17b gb=+0.335pp below=True | +0.50: NO
+#130 SHORT final=-0.863% | +0.20: NO | +0.30: NO | +0.50: NO
+#131 SHORT final=-0.965% | +0.20: NO | +0.30: NO | +0.50: NO
+#132 SHORT final=-0.403% | +0.20: NO | +0.30: NO | +0.50: NO
+#133 LONG  final=-0.203% | +0.20: NO | +0.30: NO | +0.50: NO
+#134 SHORT final=-0.343% | +0.20: hold=40b gb=+0.681pp below=True | +0.30: hold=29b gb=+0.681pp below=True | +0.50: hold=5b gb=+0.681pp below=True
+#135 LONG  final=-0.345% | +0.20: NO | +0.30: NO | +0.50: NO
+#136 SHORT final=-0.036% | +0.20: hold=3b gb=+0.118pp below=True | +0.30: NO | +0.50: NO
+#137 SHORT final=-0.586% | +0.20: NO | +0.30: NO | +0.50: NO
+#138 LONG  final=-0.425% | +0.20: NO | +0.30: NO | +0.50: NO
+#139 LONG  final=-0.487% | +0.20: NO | +0.30: NO | +0.50: NO
+#140 SHORT final=-0.197% | +0.20: hold=9b gb=+0.529pp below=True | +0.30: hold=2b gb=+0.529pp below=True | +0.50: NO
+#141 LONG  final=-0.305% | +0.20: NO | +0.30: NO | +0.50: NO
+#142 SHORT final=-0.088% | +0.20: NO | +0.30: NO | +0.50: NO
+#143 LONG  final=-0.125% | +0.20: NO | +0.30: NO | +0.50: NO
+#144 SHORT final=+0.004% | +0.20: hold=1b gb=+0.000pp below=False | +0.30: NO | +0.50: NO
+#145 SHORT final=-0.536% | +0.20: NO | +0.30: NO | +0.50: NO
+#146 LONG  final=-0.322% | +0.20: NO | +0.30: NO | +0.50: NO
+#147 SHORT final=+1.140% | +0.20: hold=61b gb=+0.000pp below=False | +0.30: hold=61b gb=+0.000pp below=False | +0.50: hold=25b gb=+0.000pp below=True
+#148 SHORT final=+0.389% | +0.20: hold=22b gb=+0.683pp below=False | +0.30: hold=22b gb=+0.683pp below=False | +0.50: hold=21b gb=+0.683pp below=True
+#149 SHORT final=+0.921% | +0.20: hold=6b gb=+0.000pp below=False | +0.30: hold=6b gb=+0.000pp below=False | +0.50: hold=6b gb=+0.000pp below=False
+#150 LONG  final=+0.746% | +0.20: hold=66b gb=+0.881pp below=True | +0.30: hold=64b gb=+0.881pp below=True | +0.50: hold=58b gb=+0.881pp below=True
+#151 SHORT final=+0.060% | +0.20: hold=25b gb=+0.754pp below=False | +0.30: hold=23b gb=+0.754pp below=True | +0.50: hold=14b gb=+0.754pp below=True
+#152 LONG  final=-1.795% | +0.20: hold=1b gb=+1.524pp below=True | +0.30: NO | +0.50: NO
+#153 SHORT final=+1.416% | +0.20: hold=26b gb=+0.224pp below=False | +0.30: hold=26b gb=+0.224pp below=False | +0.50: hold=24b gb=+0.224pp below=True
+#154 SHORT final=-1.581% | +0.20: hold=56b gb=+1.459pp below=True | +0.30: hold=55b gb=+1.459pp below=True | +0.50: hold=38b gb=+1.459pp below=True
+#155 LONG  final=-0.522% | +0.20: NO | +0.30: NO | +0.50: NO
+#156 SHORT final=-2.624% | +0.20: NO | +0.30: NO | +0.50: NO
+#157 LONG  final=-1.026% | +0.20: NO | +0.30: NO | +0.50: NO
+#158 LONG  final=-0.564% | +0.20: hold=4b gb=+0.603pp below=True | +0.30: hold=2b gb=+0.603pp below=True | +0.50: NO
+#159 SHORT final=-0.249% | +0.20: NO | +0.30: NO | +0.50: NO
+#160 SHORT final=+1.342% | +0.20: hold=44b gb=+0.027pp below=True | +0.30: hold=41b gb=+0.027pp below=True | +0.50: hold=29b gb=+0.027pp below=True
+#161 LONG  final=-1.296% | +0.20: NO | +0.30: NO | +0.50: NO
+#162 SHORT final=+0.252% | +0.20: hold=47b gb=+0.507pp below=True | +0.30: hold=27b gb=+0.507pp below=True | +0.50: hold=6b gb=+0.507pp below=True
+#163 SHORT final=-0.359% | +0.20: NO | +0.30: NO | +0.50: NO
+#164 LONG  final=-0.433% | +0.20: NO | +0.30: NO | +0.50: NO
+#165 SHORT final=+0.551% | +0.20: hold=49b gb=+0.737pp below=True | +0.30: hold=45b gb=+0.737pp below=True | +0.50: hold=43b gb=+0.737pp below=False
+#166 SHORT final=-1.181% | +0.20: hold=1b gb=+1.760pp below=True | +0.30: hold=1b gb=+1.760pp below=True | +0.50: NO
+#167 SHORT final=-0.818% | +0.20: hold=10b gb=+1.795pp below=True | +0.30: hold=6b gb=+1.795pp below=True | +0.50: hold=4b gb=+1.795pp below=True
+#168 SHORT final=-0.185% | +0.20: hold=30b gb=+1.799pp below=True | +0.30: hold=30b gb=+1.799pp below=True | +0.50: hold=26b gb=+1.799pp below=True
+#169 SHORT final=-1.693% | +0.20: hold=1b gb=+2.053pp below=True | +0.30: NO | +0.50: NO
+#170 SHORT final=-1.141% | +0.20: hold=1b gb=+1.216pp below=True | +0.30: hold=1b gb=+1.216pp below=True | +0.50: NO
+#171 LONG  final=-0.737% | +0.20: NO | +0.30: NO | +0.50: NO
+#172 SHORT final=-1.436% | +0.20: hold=21b gb=+2.117pp below=True | +0.30: hold=11b gb=+2.117pp below=True | +0.50: hold=3b gb=+2.117pp below=True
+#173 LONG  final=-0.062% | +0.20: hold=10b gb=+0.444pp below=True | +0.30: hold=4b gb=+0.444pp below=True | +0.50: NO
+#174 LONG  final=-0.748% | +0.20: hold=1b gb=+0.707pp below=True | +0.30: NO | +0.50: NO
+#175 SHORT final=-0.406% | +0.20: NO | +0.30: NO | +0.50: NO
+#176 LONG  final=-0.555% | +0.20: NO | +0.30: NO | +0.50: NO
+#177 SHORT final=+0.298% | +0.20: hold=42b gb=+0.835pp below=False | +0.30: hold=42b gb=+0.835pp below=False | +0.50: hold=41b gb=+0.835pp below=False
+#178 SHORT final=-0.449% | +0.20: NO | +0.30: NO | +0.50: NO
+#179 SHORT final=-0.032% | +0.20: hold=20b gb=+0.646pp below=True | +0.30: hold=14b gb=+0.646pp below=True | +0.50: hold=1b gb=+0.646pp below=True
+#180 LONG  final=-1.399% | +0.20: NO | +0.30: NO | +0.50: NO
+#181 SHORT final=-0.204% | +0.20: hold=13b gb=+0.540pp below=True | +0.30: hold=7b gb=+0.540pp below=True | +0.50: NO
+#182 LONG  final=-1.992% | +0.20: hold=1b gb=+1.630pp below=True | +0.30: NO | +0.50: NO
+#183 SHORT final=+0.081% | +0.20: hold=17b gb=+0.634pp below=True | +0.30: hold=11b gb=+0.634pp below=True | +0.50: hold=3b gb=+0.634pp below=True
+#184 LONG  final=+0.804% | +0.20: hold=19b gb=+0.000pp below=True | +0.30: hold=14b gb=+0.000pp below=False | +0.50: hold=12b gb=+0.000pp below=True
+#185 LONG  final=+0.006% | +0.20: NO | +0.30: NO | +0.50: NO
+#186 SHORT final=+0.049% | +0.20: hold=18b gb=+0.420pp below=True | +0.30: hold=14b gb=+0.420pp below=True | +0.50: hold=1b gb=+0.420pp below=True
+#187 LONG  final=-0.851% | +0.20: NO | +0.30: NO | +0.50: NO
+#188 SHORT final=-0.868% | +0.20: NO | +0.30: NO | +0.50: NO
+#189 SHORT final=-0.947% | +0.20: NO | +0.30: NO | +0.50: NO
+#190 SHORT final=-0.047% | +0.20: hold=1b gb=+0.000pp below=False | +0.30: NO | +0.50: NO
+#191 SHORT final=+0.281% | +0.20: hold=36b gb=+0.428pp below=True | +0.30: hold=29b gb=+0.428pp below=True | +0.50: hold=8b gb=+0.428pp below=True
+#192 LONG  final=+0.128% | +0.20: hold=51b gb=+0.628pp below=True | +0.30: hold=41b gb=+0.628pp below=True | +0.50: hold=13b gb=+0.628pp below=True
+#193 LONG  final=-0.679% | +0.20: hold=2b gb=+0.714pp below=True | +0.30: NO | +0.50: NO
+#194 SHORT final=-0.684% | +0.20: NO | +0.30: NO | +0.50: NO
+#195 LONG  final=-0.014% | +0.20: hold=3b gb=+0.193pp below=False | +0.30: hold=2b gb=+0.193pp below=True | +0.50: NO
+#196 SHORT final=-1.040% | +0.20: hold=4b gb=+1.280pp below=True | +0.30: hold=3b gb=+1.280pp below=True | +0.50: NO
+#197 LONG  final=-0.021% | +0.20: hold=17b gb=+1.036pp below=True | +0.30: hold=14b gb=+1.036pp below=True | +0.50: hold=6b gb=+1.036pp below=True
+#198 LONG  final=+0.115% | +0.20: hold=28b gb=+0.591pp below=True | +0.30: hold=23b gb=+0.591pp below=True | +0.50: hold=15b gb=+0.591pp below=True
+#199 LONG  final=-1.571% | +0.20: NO | +0.30: NO | +0.50: NO
+#200 LONG  final=-0.326% | +0.20: hold=7b gb=+0.483pp below=True | +0.30: hold=2b gb=+0.483pp below=True | +0.50: NO
+
+INTEGRITY
+----------------------------------------------------------------------------------
+[PASS] Ordinary trade count matches reconstructed paths
+[PASS] No duplicate trade numbers
+[PASS] Every reconstructed path starts at entry
+[PASS] No path uses post-exit normal-signal bars
+[PASS] Thresholds are descriptive only
+[PASS] No strategy parameters modified
+[PASS] CSV export written
+RESULT: 7/7 PASS
+
+SAFETY: NO ORDERS WERE SENT
+SAFETY: RESEARCH MODE ONLY
+==================================================================================

@@ -1,0 +1,142 @@
+==============================================================================
+MOEX TRADING LAB v5.20
+COUNTERFACTUAL EXIT LAB
+RESEARCH ONLY - STRATEGY LOGIC UNCHANGED
+NO COUNTERFACTUAL EXIT IS INSTALLED
+==============================================================================
+
+1. DATA INTEGRITY
+------------------------------------------------------------------------------
+Rows:                            200
+Unique trade_number:             200
+Ordinary backtest trade count:   200
+CF horizons (bars):              [3, 6, 9, 12, 18, 24]
+Actual net PnL total:            -42721.24
+CSV:                             v5.20_counterfactual_exit_lab.csv
+
+2. ACTUAL ORDINARY BASELINE
+------------------------------------------------------------------------------
+  actual mean net PnL:           -213.61
+  actual median net PnL:         -208.37
+  actual total net PnL:          -42721.24
+  actual mean return_pct:        -0.2766
+  actual median return_pct:      -0.2565
+
+3. COUNTERFACTUAL EXIT - AGGREGATE
+------------------------------------------------------------------------------
+  Horizon | N_applied | mean_net | median_net | total_net | mean_ret% | median_ret%
+  N= 3    |  193 /200 |    -170.97 |    -181.53 |    -34193.40 |    -0.2130 |    -0.2197
+  N= 6    |  188 /200 |    -174.31 |    -185.50 |    -34861.37 |    -0.2207 |    -0.2281
+  N= 9    |  184 /200 |    -179.14 |    -191.86 |    -35828.74 |    -0.2278 |    -0.2249
+  N=12    |  179 /200 |    -173.39 |    -190.38 |    -34678.41 |    -0.2214 |    -0.2242
+  N=18    |  167 /200 |    -196.58 |    -178.11 |    -39316.40 |    -0.2485 |    -0.2310
+  N=24    |  149 /200 |    -167.77 |    -174.53 |    -33554.08 |    -0.2154 |    -0.2159
+
+4. COUNTERFACTUAL EXIT - BY SIDE
+------------------------------------------------------------------------------
+LONG: N=84
+  actual total net PnL:          -18901.38
+  N= 3 total_net:    -15547.78
+  N= 6 total_net:    -15982.86
+  N= 9 total_net:    -14863.59
+  N=12 total_net:    -13706.98
+  N=18 total_net:    -15600.68
+  N=24 total_net:    -15294.48
+
+SHORT: N=116
+  actual total net PnL:          -23819.86
+  N= 3 total_net:    -18645.62
+  N= 6 total_net:    -18878.50
+  N= 9 total_net:    -20965.15
+  N=12 total_net:    -20971.42
+  N=18 total_net:    -23715.73
+  N=24 total_net:    -18259.60
+
+5. COUNTERFACTUAL EXIT - BY PERIOD
+------------------------------------------------------------------------------
+DISCOVERY: N=95
+  actual total net PnL:          -17070.56
+  N= 3 total_net:    -17896.33
+  N= 6 total_net:    -16515.04
+  N= 9 total_net:    -16633.47
+  N=12 total_net:    -15331.88
+  N=18 total_net:    -18553.09
+  N=24 total_net:    -13792.23
+
+VALIDATION: N=43
+  actual total net PnL:          -9929.09
+  N= 3 total_net:     -6648.40
+  N= 6 total_net:     -6683.07
+  N= 9 total_net:     -6234.39
+  N=12 total_net:     -7323.97
+  N=18 total_net:     -8256.54
+  N=24 total_net:     -9060.44
+
+OOS: N=61
+  actual total net PnL:          -15534.35
+  N= 3 total_net:     -9598.12
+  N= 6 total_net:    -11604.67
+  N= 9 total_net:    -12938.47
+  N=12 total_net:    -12066.47
+  N=18 total_net:    -12355.71
+  N=24 total_net:    -10644.82
+
+6. COUNTERFACTUAL EXIT - BY MFE BUCKET
+------------------------------------------------------------------------------
+MFE < 0: N=0
+  actual total net PnL:          0.00
+  N= 3 total_net:         0.00
+  N= 6 total_net:         0.00
+  N= 9 total_net:         0.00
+  N=12 total_net:         0.00
+  N=18 total_net:         0.00
+  N=24 total_net:         0.00
+
+0 <= MFE < 0.20: N=104
+  actual total net PnL:          -45035.39
+  N= 3 total_net:    -24865.55
+  N= 6 total_net:    -27907.35
+  N= 9 total_net:    -30474.88
+  N=12 total_net:    -33651.98
+  N=18 total_net:    -37253.72
+  N=24 total_net:    -40018.80
+
+0.20 <= MFE < 0.30: N=21
+  actual total net PnL:          -4259.79
+  N= 3 total_net:     -2447.24
+  N= 6 total_net:     -2322.93
+  N= 9 total_net:     -1823.46
+  N=12 total_net:     -1754.83
+  N=18 total_net:     -2528.51
+  N=24 total_net:     -2404.37
+
+MFE >= 0.30: N=75
+  actual total net PnL:          6573.94
+  N= 3 total_net:     -6880.61
+  N= 6 total_net:     -4631.09
+  N= 9 total_net:     -3530.40
+  N=12 total_net:       728.41
+  N=18 total_net:       465.83
+  N=24 total_net:      8869.10
+
+7. BEST-COUNTERFACTUAL COMPARISON
+------------------------------------------------------------------------------
+actual total net PnL: -42721.24
+best counterfactual horizon: N=24
+best counterfactual total net PnL: -33554.08
+delta vs actual: 9167.16
+
+8. WHAT THE DATA SHOW
+------------------------------------------------------------------------------
+All numbers are research-only. No counterfactual exit is installed.
+
+9. WHAT REMAINS UNKNOWN
+------------------------------------------------------------------------------
+Counterfactual time-stop is just one family of exit rules.
+Trailing/peak-based/structural counterfactuals are separate labs.
+
+10. NEXT EXPERIMENT
+------------------------------------------------------------------------------
+If time-stop N shows improvement on GOOD-MFE bucket, consider
+counterfactual trailing lab next. Otherwise consider bad-opportunity
+filter lab based on v5.18 causal features.

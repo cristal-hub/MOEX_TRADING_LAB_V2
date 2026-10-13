@@ -1,0 +1,56 @@
+==============================================================================
+MOEX TRADING LAB — v5.18 ENTRY LOCATION LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+Causal 1M entry features within 0..30 min after BOS close.
+==============================================================================
+
+Entry candidates: 9417
+Unique BOS: 315
+  DISCOVERY   rows=4771 | LONG=1829 / SHORT=2942
+  VALIDATION  rows=1922 | LONG=622 / SHORT=1300
+  OOS         rows=2662 | LONG=1160 / SHORT=1502
+
+Feature correlations vs mfe_6 (LONG, then SHORT).
+------------------------------------------------------------------------------
+
+LONG — correlations vs mfe_6 / future_return_6
+feature                                 N    corr_mfe6    corr_ret6
+distance_to_bos_level_atr            3660        0.056       -0.015
+distance_to_bos_close_atr            3660        0.057       -0.035
+distance_to_vwap_pct                 3660        0.119       -0.072
+entry_1m_body_pct                    3659        0.034        0.010
+entry_1m_range_atr                   3660        0.074       -0.014
+entry_1m_return_1                    3660        0.008       -0.058
+entry_1m_return_3                    3660        0.003       -0.059
+entry_1m_volume_ratio                3660        0.085        0.003
+entry_1m_consecutive_same_direction   3660        0.064        0.004
+entry_1m_pullback_depth_atr          3660       -0.002        0.002
+entry_1m_continuation_atr            3660        0.057       -0.035
+entry_offset_min                     3660       -0.072       -0.031
+
+SHORT — correlations vs mfe_6 / future_return_6
+feature                                 N    corr_mfe6    corr_ret6
+distance_to_bos_level_atr            5733        0.107       -0.041
+distance_to_bos_close_atr            5733        0.082       -0.046
+distance_to_vwap_pct                 5733        0.247       -0.048
+entry_1m_body_pct                    5733        0.045        0.004
+entry_1m_range_atr                   5733        0.069        0.013
+entry_1m_return_1                    5733        0.031       -0.005
+entry_1m_return_3                    5733        0.075       -0.007
+entry_1m_volume_ratio                5733        0.075        0.005
+entry_1m_consecutive_same_direction   5733        0.105        0.030
+entry_1m_pullback_depth_atr          5733       -0.043       -0.004
+entry_1m_continuation_atr            5733        0.082       -0.046
+entry_offset_min                     5733       -0.002        0.017
+
+Entry offset distribution after BOS close (all rows).
+------------------------------------------------------------------------------
+  Q10: 2.00 min
+  Q25: 7.00 min
+  Q50: 15.00 min
+  Q75: 23.00 min
+  Q90: 27.00 min
+
+Outputs:
+  v5.18_entry_location_dataset.csv
+==============================================================================

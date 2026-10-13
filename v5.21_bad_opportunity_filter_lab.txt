@@ -1,0 +1,165 @@
+==============================================================================
+MOEX TRADING LAB v5.21
+BAD OPPORTUNITY FILTER LAB
+RESEARCH ONLY - STRATEGY LOGIC UNCHANGED
+NO FILTER IS INSTALLED. NO THRESHOLD IS OPTIMIZED.
+==============================================================================
+
+1. DATA INTEGRITY
+------------------------------------------------------------------------------
+Rows:                          200
+Unique trade_number:           200
+Ordinary backtest trades:      200
+Buckets (definition):
+  BAD  : mfe_pct < 0.2
+  MID  : 0.2 <= mfe_pct < 0.3
+  GOOD : mfe_pct >= 0.3
+
+Bucket counts:
+  BAD : 85
+  MID : 24
+  GOOD: 91
+
+Feature columns used (from v5.18 BOS Quality dataset):
+  - displacement_atr
+  - candle_range_atr
+  - candle_body_pct
+  - upper_wick_pct
+  - lower_wick_pct
+  - volume_ratio
+  - pre_move_3_pct
+  - pre_move_6_pct
+  - pre_move_12_pct
+  - vwap_signed_pct
+  - ema9_21_signed
+  - ema21_50_signed
+  - rsi_delta_signed
+  - macd_hist_signed
+  - session_minutes_from_open
+  - session_minutes_to_close
+  - consecutive_same_direction_bos
+  - entry_distance_atr
+  - event_strength
+CSV: v5.21_bad_opportunity_filter_lab.csv
+
+2. FEATURE DISTRIBUTION BY BUCKET (ALL PERIODS)
+------------------------------------------------------------------------------
+For each feature: median (BAD) vs median (GOOD), robust effect = (medBAD - medGOOD) / IQR(GOOD).
+Descriptive only. No threshold, no p-value, no verdict.
+
+  feature                               N     medBAD     medMID    medGOOD   IQR_GOOD   robust_eff
+  displacement_atr                    200     0.9808     0.9753     0.8623     1.1311        0.105
+  candle_range_atr                    200     1.3624     1.4244     1.6945     1.1575       -0.287
+  candle_body_pct                     200    78.3333    67.8354    76.1905    26.4013        0.081
+  upper_wick_pct                      200     8.3333    14.9258     7.4074    13.2132        0.070
+  lower_wick_pct                      200     6.9767    10.8970     8.9552    22.9219       -0.086
+  volume_ratio                        200     2.6858     3.0195     2.4867     2.0891        0.095
+  pre_move_3_pct                      200     0.1921     0.1970     0.2365     0.2187       -0.203
+  pre_move_6_pct                      200     0.2552     0.2624     0.2666     0.2393       -0.048
+  pre_move_12_pct                     200     0.2841     0.3313     0.3278     0.3349       -0.130
+  vwap_signed_pct                     200     0.2478     0.2922     0.2848     0.2093       -0.177
+  ema9_21_signed                      200     0.1924     0.1812     0.2116     0.2442       -0.079
+  ema21_50_signed                     200     0.1035     0.1736     0.1453     0.5527       -0.076
+  rsi_delta_signed                    200     8.7563     8.5434    10.4775     6.9474       -0.248
+  macd_hist_signed                    200     0.2998     0.3062     0.2547     0.2017        0.224
+  session_minutes_from_open           200   305.0000   252.5000   215.0000   122.5000        0.735
+  session_minutes_to_close            200   195.0000   247.5000   285.0000   122.5000       -0.735
+  consecutive_same_direction_bos      200     1.0000     1.0000     1.0000     0.0000          n/a
+  entry_distance_atr                  200    -0.1940     0.0401     0.0408     1.0392       -0.226
+  event_strength                      200    80.3771    76.7567    82.4934    14.9598       -0.141
+
+3. ROBUST EFFECT BY SIDE (ALL PERIODS)
+------------------------------------------------------------------------------
+Same metric, split by side.
+
+  feature                                LONG_eff      SHORT_eff
+  displacement_atr                          0.164          0.090
+  candle_range_atr                         -0.291         -0.146
+  candle_body_pct                          -0.075          0.119
+  upper_wick_pct                            0.046         -0.038
+  lower_wick_pct                           -0.127         -0.124
+  volume_ratio                              0.053          0.061
+  pre_move_3_pct                           -0.278         -0.163
+  pre_move_6_pct                           -0.067         -0.034
+  pre_move_12_pct                          -0.124         -0.153
+  vwap_signed_pct                          -0.047         -0.182
+  ema9_21_signed                            0.011         -0.202
+  ema21_50_signed                          -0.116         -0.040
+  rsi_delta_signed                         -0.388         -0.216
+  macd_hist_signed                          0.312          0.145
+  session_minutes_from_open                 0.672          0.692
+  session_minutes_to_close                 -0.672         -0.692
+  consecutive_same_direction_bos              n/a            n/a
+  entry_distance_atr                       -0.202         -0.242
+  event_strength                           -0.381          0.150
+
+4. ROBUST EFFECT BY PERIOD (POOLED SIDES)
+------------------------------------------------------------------------------
+Out-of-sample stability check: same metric per period.
+
+  feature                                DISCOV        VALID          OOS
+  displacement_atr                        0.166        0.389       -0.208
+  candle_range_atr                       -0.267        0.121       -0.676
+  candle_body_pct                         0.056       -0.514        0.004
+  upper_wick_pct                         -0.148        0.155        0.099
+  lower_wick_pct                         -0.012        0.322       -0.348
+  volume_ratio                            0.155        0.480       -0.228
+  pre_move_3_pct                         -0.205        0.297       -0.474
+  pre_move_6_pct                          0.053        1.659       -0.508
+  pre_move_12_pct                        -0.192        2.153       -0.362
+  vwap_signed_pct                        -0.077        0.723       -0.503
+  ema9_21_signed                         -0.014        0.429       -0.357
+  ema21_50_signed                         0.009       -0.543       -0.282
+  rsi_delta_signed                       -0.156       -0.320       -0.594
+  macd_hist_signed                        0.243        1.043       -0.007
+  session_minutes_from_open               1.270        0.222        0.491
+  session_minutes_to_close               -1.270       -0.222       -0.491
+  consecutive_same_direction_bos            n/a          n/a          n/a
+  entry_distance_atr                     -0.459       -0.151       -0.188
+  event_strength                          0.360       -0.265       -0.559
+
+5. TOP FEATURES BY |EFFECT| IN DISCOVERY (descriptive)
+------------------------------------------------------------------------------
+Only used to point to candidate features for further reading.
+NOT a filter, NOT a threshold, NOT a recommendation.
+
+  feature                                 |eff|     eff(D-G)
+  session_minutes_from_open               1.270        1.270
+  session_minutes_to_close                1.270       -1.270
+  entry_distance_atr                      0.459       -0.459
+  event_strength                          0.360        0.360
+  candle_range_atr                        0.267       -0.267
+  macd_hist_signed                        0.243        0.243
+  pre_move_3_pct                          0.205       -0.205
+  pre_move_12_pct                         0.192       -0.192
+  displacement_atr                        0.166        0.166
+  rsi_delta_signed                        0.156       -0.156
+
+6. STABILITY OF TOP-5 DISCOVERY FEATURES (VALIDATION / OOS)
+------------------------------------------------------------------------------
+If sign flips or magnitude collapses out-of-sample, treat as unstable.
+
+  feature                              DISC eff      VAL eff      OOS eff
+  session_minutes_from_open               1.270        0.222        0.491
+  session_minutes_to_close               -1.270       -0.222       -0.491
+  entry_distance_atr                     -0.459       -0.151       -0.188
+  event_strength                          0.360       -0.265       -0.559
+  candle_range_atr                       -0.267        0.121       -0.676
+
+7. WHAT THE DATA SHOW
+------------------------------------------------------------------------------
+Bucket sizes: BAD=85 MID=24 GOOD=91
+All numbers are descriptive. Nothing is installed, nothing is filtered.
+
+8. WHAT REMAINS UNKNOWN
+------------------------------------------------------------------------------
+  - Real-world effect of a hypothetical filter is not simulated.
+  - Sample is small for VALIDATION and OOS buckets.
+  - A causal feature can look separating in-sample and fail out-of-sample.
+  - No threshold, no ranking, no decision rule is proposed by this lab.
+
+9. NEXT EXPERIMENT
+------------------------------------------------------------------------------
+If a feature stays separating in VALIDATION and OOS with non-trivial
+magnitude, next step is a read-only counterfactual-filter lab that
+only measures hypothetical result WITHOUT installing the filter.

@@ -1,0 +1,68 @@
+==============================================================================
+MOEX TRADING LAB — v5.18 GIVEBACK LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+==============================================================================
+
+Rows: 553
+  ORDINARY  rows=200 | LONG=84 / SHORT=116
+  MANAGED   rows=353 | LONG=139 / SHORT=214
+
+Peak bar offset distribution (bars after entry to MFE peak).
+------------------------------------------------------------------------------
+  ORDINARY  mean=15.15 | median=9.00 | Q90=41.10
+  MANAGED   mean=7.52 | median=4.00 | Q90=21.00
+
+Giveback from peak to final, %.
+------------------------------------------------------------------------------
+  ORDINARY  mean=0.514 | median=0.410 | Q90=1.041
+  MANAGED   mean=0.194 | median=0.106 | Q90=0.467
+
+Bars at or above threshold (ordinary, by side).
+------------------------------------------------------------------------------
+  LONG: N=84
+    >= 0.20%: reached=41/84 | mean_bars=10.06 | median=0.00
+    >= 0.30%: reached=32/84 | mean_bars=7.79 | median=0.00
+    >= 0.50%: reached=20/84 | mean_bars=4.07 | median=0.00
+  SHORT: N=116
+    >= 0.20%: reached=74/116 | mean_bars=12.58 | median=3.50
+    >= 0.30%: reached=59/116 | mean_bars=9.51 | median=1.00
+    >= 0.50%: reached=36/116 | mean_bars=4.74 | median=0.00
+
+Exit reason decomposition (ordinary).
+------------------------------------------------------------------------------
+  END_OF_SESSION   N=164 | mean_peak=0.398 | mean_final=0.015 | mean_giveback=0.490
+  OPPOSITE_SIGNAL  N=35 | mean_peak=0.232 | mean_final=-0.384 | mean_giveback=0.623
+  END_OF_DATA      N=1 | mean_peak=0.332 | mean_final=-0.145 | mean_giveback=0.483
+
+By event_class × side (ordinary).
+------------------------------------------------------------------------------
+
+LONG
+  BOS_BAD_FROM_OUTSET                N= 43 | peak=0.087 | final=-0.257 | gb=0.401 | win=2.3%
+  MANAGED_REENTRY_GIVEBACK           N= 15 | peak=0.414 | final=0.013 | gb=0.488 | win=26.7%
+  MARGINAL_BOS                       N=  7 | peak=0.249 | final=-0.608 | gb=0.950 | win=0.0%
+  GOOD_BOS_LATE_ENTRY                N=  1 | peak=1.509 | final=-0.401 | gb=2.729 | win=0.0%
+  GOOD_BOS_ENGINE_EARNED             N= 14 | peak=0.794 | final=0.547 | gb=0.283 | win=100.0%
+  GOOD_BOS_ENGINE_FAILED_TO_CAPTURE  N=  4 | peak=0.470 | final=0.106 | gb=0.380 | win=0.0%
+
+SHORT
+  MARGINAL_BOS                       N= 16 | peak=0.330 | final=-0.084 | gb=0.484 | win=0.0%
+  GOOD_BOS_ENGINE_EARNED             N= 16 | peak=0.909 | final=0.562 | gb=0.433 | win=100.0%
+  BOS_BAD_FROM_OUTSET                N= 67 | peak=0.293 | final=-0.128 | gb=0.521 | win=22.4%
+  MANAGED_REENTRY_GIVEBACK           N= 10 | peak=0.473 | final=-0.178 | gb=0.830 | win=30.0%
+  GOOD_BOS_ENGINE_FAILED_TO_CAPTURE  N=  7 | peak=0.471 | final=-0.147 | gb=0.770 | win=0.0%
+
+By period (ordinary).
+------------------------------------------------------------------------------
+  DISCOVERY  N=95 | peak=0.376 | final=0.018 | gb=0.436
+  VALIDATION N=43 | peak=0.218 | final=-0.089 | gb=0.369
+  OOS        N=61 | peak=0.464 | final=-0.146 | gb=0.736
+
+Ordinary vs Managed, same side.
+------------------------------------------------------------------------------
+  LONG: ordinary N=84 mean_final=-0.301 | managed N=139 mean_final=-0.238
+  SHORT: ordinary N=116 mean_final=-0.259 | managed N=214 mean_final=-0.236
+
+Outputs:
+  v5.18_giveback_lab.csv
+==============================================================================

@@ -1,0 +1,168 @@
+==============================================================================
+MOEX TRADING LAB v5.19
+BAD OPPORTUNITY vs BAD CAPTURE LAB
+RESEARCH ONLY - STRATEGY LOGIC UNCHANGED
+==============================================================================
+
+1. DATA INTEGRITY
+------------------------------------------------------------------------------
+Rows:                              200
+Unique trade_number:               200
+Ordinary backtest trade count:     200
+Missing MFE rows:                  0
+Missing final_net_return_pct rows: 0
+CSV:                               v5.19_bad_opportunity_vs_bad_capture.csv
+Giveback_gross arithmetic OK:      True
+
+2. RETURN / COST SEMANTICS
+------------------------------------------------------------------------------
+max_mfe_pct            : GROSS, high/low vs entry fill
+final_fav_pct          : GROSS, last bar of observation path
+final_net_return_pct   : NET of commissions (both) + slippage (both)
+V519_COST_REF_PCT      : 0.2% round-trip reference (informational)
+
+delta = final_fav_pct - final_net_return_pct (pp):
+  mean   = 0.2208
+  median = 0.1901
+  min    = 0.1496
+  max    = 1.2258
+cost_pct_from_trade = (commission + slippage)/notional*100:
+  mean   = 0.2000
+  median = 0.2000
+residual = delta - cost_pct_from_trade:
+  mean   = 0.0208
+  median = -0.0096
+  max|residual| = 1.024302
+Note: residual includes gap between last observed bar and true exit fill.
+
+3. MFE DISTRIBUTION
+------------------------------------------------------------------------------
+  N      = 200
+  mean   = 0.3684
+  median = 0.2464
+  Q25    = 0.0364
+  Q75    = 0.5560
+  Q90    = 0.9746
+  min    = -0.0500
+  max    = 1.8478
+Buckets (descriptive only):
+  MFE < 0              : 34
+  0 <= MFE < 0.20      : 51
+  0.20 <= MFE < 0.30   : 24
+  MFE >= 0.30          : 91
+
+4. GIVEBACK DISTRIBUTION
+------------------------------------------------------------------------------
+giveback_gross_pct = mfe_pct - final_fav_pct
+  mean   = 0.4242
+  median = 0.3327
+  Q25    = 0.1283
+  Q75    = 0.5662
+  Q90    = 0.8770
+
+5. CAPTURE DISTRIBUTION
+------------------------------------------------------------------------------
+capture_ratio_gross = final_fav_pct / mfe_pct
+  N      = 166
+  mean   = -8.9455
+  median = 0.1743
+  Q25    = -1.8464
+  Q75    = 0.5761
+capture_ratio_net = final_net_return_pct / mfe_pct (mixed semantics)
+  N      = 166
+  mean   = -16.0698
+  median = -0.5350
+
+6. END_OF_SESSION
+------------------------------------------------------------------------------
+N = 164
+  mean/median mfe_pct                 = 0.398 / 0.281
+  mean/median final_fav_pct           = 0.015 / 0.023
+  mean/median final_net_return_pct    = -0.186 / -0.181
+  mean/median giveback_gross_pct      = 0.383 / 0.254
+  mean/median capture_ratio_gross     = -9.792 / 0.338
+  mean/median peak_bar_from_entry     = 17.76 / 10.50
+  mean/median bars_after_peak         = 24.74 / 21.00
+  mean/median session_minutes_to_close_at_entry = 212.53 / 240.00
+
+Quartile split by session_minutes_to_close_at_entry:
+  Q1: N=41 | mfe=0.186/0.045 | final_net=-0.174/-0.233 | giveback=0.168/0.102 | capture_gross=-27.909/0.659 | peak_bar=5.49/2.00 | bars_after_peak=6.61/3.00 | mins_to_close=60.5/60.0
+  Q2: N=45 | mfe=0.433/0.330 | final_net=-0.149/-0.083 | giveback=0.392/0.376 | capture_gross=-4.003/0.344 | peak_bar=14.47/13.00 | bars_after_peak=22.76/24.00 | mins_to_close=186.1/180.0
+  Q3: N=43 | mfe=0.408/0.349 | final_net=-0.288/-0.185 | giveback=0.487/0.340 | capture_gross=-11.070/0.174 | peak_bar=19.58/12.00 | bars_after_peak=37.12/44.00 | mins_to_close=283.5/285.0
+  Q4: N=35 | mfe=0.587/0.491 | final_net=-0.122/-0.062 | giveback=0.495/0.378 | capture_gross=-0.145/0.334 | peak_bar=34.14/37.00 | bars_after_peak=33.34/33.00 | mins_to_close=337.4/330.0
+
+7. OPPOSITE_SIGNAL
+------------------------------------------------------------------------------
+N = 35
+  mean/median mfe_pct                 = 0.232 / 0.203
+  mean/median final_net_return_pct    = -0.701 / -0.654
+  mean/median giveback_gross_pct      = 0.616 / 0.527
+  mean/median capture_ratio_gross     = -4.747 / -1.405
+  mean/median peak_bar_from_entry     = 8.66 / 3.00
+  mean/median bars_after_peak         = 27.23 / 24.00
+
+8. LONG vs SHORT
+------------------------------------------------------------------------------
+LONG: N=84
+  mfe_pct               mean/median = 0.312 / 0.192
+  final_net_return_pct  mean/median = -0.301 / -0.276
+  giveback_gross_pct    mean/median = 0.400 / 0.337
+  capture_ratio_gross   mean/median = -15.551 / 0.144
+  peak_bar_from_entry   mean/median = 12.37 / 7.00
+  bars_after_peak       mean/median = 23.99 / 21.00
+SHORT: N=116
+  mfe_pct               mean/median = 0.409 / 0.320
+  final_net_return_pct  mean/median = -0.259 / -0.227
+  giveback_gross_pct    mean/median = 0.442 / 0.330
+  capture_ratio_gross   mean/median = -4.586 / 0.218
+  peak_bar_from_entry   mean/median = 18.89 / 11.50
+  bars_after_peak       mean/median = 26.21 / 24.00
+
+9. DISCOVERY
+------------------------------------------------------------------------------
+N = 95
+  mfe_pct               mean/median = 0.376 / 0.294
+  final_net_return_pct  mean/median = -0.196 / -0.233
+  giveback_gross_pct    mean/median = 0.357 / 0.301
+  capture_ratio_gross   mean/median = -3.216 / 0.291
+
+10. VALIDATION
+------------------------------------------------------------------------------
+N = 43
+  mfe_pct               mean/median = 0.218 / 0.076
+  final_net_return_pct  mean/median = -0.296 / -0.266
+  giveback_gross_pct    mean/median = 0.307 / 0.237
+  capture_ratio_gross   mean/median = -2.537 / -0.121
+
+11. OOS
+------------------------------------------------------------------------------
+N = 61
+  mfe_pct               mean/median = 0.464 / 0.255
+  final_net_return_pct  mean/median = -0.388 / -0.322
+  giveback_gross_pct    mean/median = 0.610 / 0.403
+  capture_ratio_gross   mean/median = -21.624 / 0.067
+
+12. PNL CONTRIBUTION
+------------------------------------------------------------------------------
+Total net PnL over ordinary trades: -42721.24
+
+  MFE < 0                N=  34 | PnL=   -15896.79 | share= +37.21%
+  0 <= MFE < 0.20        N=  51 | PnL=   -20162.63 | share= +47.20%
+  0.20 <= MFE < 0.30     N=  24 | PnL=    -9135.83 | share= +21.38%
+  MFE >= 0.30            N=  91 | PnL=    +2474.01 | share=  -5.79%
+
+13. WHAT THE DATA SHOW
+------------------------------------------------------------------------------
+  Rows                            = 200
+  MFE >= 0.20%                    = 115 / 200
+  MFE >= 0.30%                    = 91 / 200
+  capture_ratio_gross median      = 0.174
+
+14. WHAT REMAINS UNKNOWN
+------------------------------------------------------------------------------
+  Counterfactual exits not tested. Managed not mixed. No causal filter proposed.
+
+15. NEXT EXPERIMENT
+------------------------------------------------------------------------------
+  Candidate: read-only counterfactual exit lab (fixed horizon / peak-based /
+  time-stop), WITHOUT installing any of them. Separate patch.

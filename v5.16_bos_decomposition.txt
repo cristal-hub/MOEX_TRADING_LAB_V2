@@ -1,0 +1,153 @@
+==================================================================================
+MOEX TRADING LAB — v5.16 BOS DECOMPOSITION LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+Purpose: separate event quality, timing, entry distance and managed re-entry effects.
+IMPORTANT: all buckets are descriptive; they are NOT strategy filters or optimized thresholds.
+==================================================================================
+BOS events: 319
+
+1) EVENT CLASS DECOMPOSITION
+----------------------------------------------------------------------------------
+MARGINAL_BOS                           N=23 (  7.2%) | MFE=+0.298% | ordinary=-396.32
+BOS_NO_TRADE                           N=17 (  5.3%) | MFE=+0.295% | ordinary=n/a
+GOOD_BOS_ENGINE_EARNED                 N=30 (  9.4%) | MFE=+0.586% | ordinary=+279.10
+BOS_GOOD_NO_ORDINARY_TRADE             N=20 (  6.3%) | MFE=+0.537% | ordinary=n/a
+BOS_BAD_FROM_OUTSET                    N=192 ( 60.2%) | MFE=+0.070% | ordinary=-303.47
+MANAGED_REENTRY_GIVEBACK               N=25 (  7.8%) | MFE=+0.427% | ordinary=-202.89
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE      N=11 (  3.4%) | MFE=+0.485% | ordinary=-262.60
+GOOD_BOS_LATE_ENTRY                    N= 1 (  0.3%) | MFE=+1.725% | ordinary=-636.63
+
+2) EVENT -> SIGNAL DELAY
+----------------------------------------------------------------------------------
+0            N=309 | mean MFE=+0.216% | ordinary trades=192 | mean ordinary PnL=-211.61
+3-4          N= 1 | mean MFE=+0.090% | ordinary trades= 0 | mean ordinary PnL=n/a
+1-2          N= 9 | mean MFE=+0.517% | ordinary trades= 8 | mean ordinary PnL=-261.45
+
+3) EVENT -> ENTRY DELAY
+----------------------------------------------------------------------------------
+1-2          N=238 | mean MFE=+0.225% | ordinary trades=196 | mean ordinary PnL=-217.36
+3-4          N=25 | mean MFE=+0.276% | ordinary trades= 4 | mean ordinary PnL=-29.53
+5+           N=24 | mean MFE=+0.258% | ordinary trades= 0 | mean ordinary PnL=n/a
+NO_ENTRY     N=32 | mean MFE=+0.151% | ordinary trades= 0 | mean ordinary PnL=n/a
+
+4) EVENT -> ENTRY DISTANCE (ATR OF EVENT BAR)
+----------------------------------------------------------------------------------
+<0.5 ATR       N=124 | mean MFE=+0.231% | ordinary trades=100 | mean ordinary PnL=-222.29
+0.5-1.0 ATR    N=77 | mean MFE=+0.229% | ordinary trades=55 | mean ordinary PnL=-238.38
+1.0-1.5 ATR    N=46 | mean MFE=+0.221% | ordinary trades=30 | mean ordinary PnL=-170.65
+>=1.5 ATR      N=40 | mean MFE=+0.252% | ordinary trades=15 | mean ordinary PnL=-150.84
+NO_ENTRY       N=32 | mean MFE=+0.151% | ordinary trades= 0 | mean ordinary PnL=n/a
+
+5) MANAGED RE-ENTRY AUDIT
+----------------------------------------------------------------------------------
+BOS with managed re-entry: 52
+Mean first managed PnL: -43.11
+Mean lifecycle PnL:      -227.10
+Mean lifecycle-first:    -183.98
+Lifecycle worse than first: 41/52
+Lifecycle better than first: 11/52
+
+BOS #2568 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-198.17 | lifecycle=-1035.62 | delta=-837.45
+BOS #66 SHORT | class=BOS_NO_TRADE | trades=2 | first=-130.25 | lifecycle=-844.72 | delta=-714.46
+BOS #15983 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-17.40 | lifecycle=-613.36 | delta=-595.95
+BOS #13200 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=4 | first=+228.32 | lifecycle=-359.75 | delta=-588.06
+BOS #1448 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-46.89 | lifecycle=-596.02 | delta=-549.13
+BOS #3814 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=2 | first=-147.47 | lifecycle=-680.24 | delta=-532.77
+BOS #22056 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-146.05 | lifecycle=-640.23 | delta=-494.18
+BOS #10137 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-140.92 | lifecycle=-615.41 | delta=-474.49
+BOS #3190 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=3 | first=-36.28 | lifecycle=-500.77 | delta=-464.49
+BOS #12263 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-74.74 | lifecycle=-477.73 | delta=-402.99
+BOS #23489 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=+75.54 | lifecycle=-318.15 | delta=-393.68
+BOS #7612 SHORT | class=BOS_BAD_FROM_OUTSET | trades=3 | first=-204.59 | lifecycle=-585.57 | delta=-380.97
+BOS #24898 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-59.40 | lifecycle=-411.41 | delta=-352.01
+BOS #23085 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=+342.62 | lifecycle=+8.70 | delta=-333.92
+BOS #7309 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-46.24 | lifecycle=-364.15 | delta=-317.91
+BOS #8430 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-116.16 | lifecycle=-409.22 | delta=-293.06
+BOS #8537 LONG | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-118.43 | lifecycle=-385.29 | delta=-266.85
+BOS #24111 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=4 | first=-21.89 | lifecycle=-259.25 | delta=-237.36
+BOS #480 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-88.11 | lifecycle=-299.73 | delta=-211.62
+BOS #11250 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=+28.30 | lifecycle=-165.17 | delta=-193.47
+BOS #18436 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-116.90 | lifecycle=-299.94 | delta=-183.04
+BOS #23707 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=-25.59 | lifecycle=-204.03 | delta=-178.44
+BOS #3713 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-16.78 | lifecycle=-194.66 | delta=-177.88
+BOS #3978 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=+69.73 | lifecycle=-104.79 | delta=-174.52
+BOS #1346 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=3 | first=-112.30 | lifecycle=-283.20 | delta=-170.90
+BOS #22886 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-99.90 | lifecycle=-241.64 | delta=-141.74
+BOS #9435 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-78.59 | lifecycle=-205.75 | delta=-127.15
+BOS #21662 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=+61.98 | lifecycle=-54.85 | delta=-116.84
+BOS #11753 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-83.27 | lifecycle=-193.07 | delta=-109.80
+BOS #23595 SHORT | class=BOS_NO_TRADE | trades=2 | first=-118.45 | lifecycle=-219.47 | delta=-101.02
+BOS #18780 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-77.97 | lifecycle=-166.65 | delta=-88.68
+BOS #10278 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-110.40 | lifecycle=-185.09 | delta=-74.69
+BOS #22156 SHORT | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-42.78 | lifecycle=-116.40 | delta=-73.62
+BOS #10641 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-105.80 | lifecycle=-165.83 | delta=-60.02
+BOS #13875 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=2 | first=-67.32 | lifecycle=-124.26 | delta=-56.93
+BOS #25426 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | trades=2 | first=-22.36 | lifecycle=-74.84 | delta=-52.48
+BOS #13586 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+42.07 | lifecycle=+8.50 | delta=-33.57
+BOS #7165 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-96.90 | lifecycle=-126.57 | delta=-29.66
+BOS #9935 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-91.28 | lifecycle=-104.39 | delta=-13.11
+BOS #25797 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-36.74 | lifecycle=-40.11 | delta=-3.37
+BOS #20944 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+53.17 | lifecycle=+51.15 | delta=-2.02
+BOS #1480 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+231.61 | lifecycle=+235.51 | delta=+3.90
+BOS #19821 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-146.38 | lifecycle=-102.40 | delta=+43.98
+BOS #14925 LONG | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+197.47 | lifecycle=+243.71 | delta=+46.24
+BOS #5924 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-169.24 | lifecycle=-111.44 | delta=+57.79
+BOS #5507 LONG | class=MANAGED_REENTRY_GIVEBACK | trades=2 | first=-177.68 | lifecycle=-95.96 | delta=+81.72
+BOS #21438 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=-26.02 | lifecycle=+65.93 | delta=+91.95
+BOS #4733 LONG | class=GOOD_BOS_ENGINE_EARNED | trades=2 | first=+109.62 | lifecycle=+221.36 | delta=+111.73
+BOS #23901 LONG | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=-92.23 | lifecycle=+39.38 | delta=+131.61
+BOS #19529 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=+140.71 | lifecycle=+284.43 | delta=+143.73
+BOS #157 SHORT | class=GOOD_BOS_ENGINE_EARNED | trades=3 | first=-40.87 | lifecycle=+107.39 | delta=+148.26
+BOS #348 SHORT | class=BOS_BAD_FROM_OUTSET | trades=2 | first=-274.21 | lifecycle=-98.00 | delta=+176.21
+
+6) MISSED / LATE GOOD BOS CANDIDATES
+----------------------------------------------------------------------------------
+No ordinary trade + MAX MFE >= 0.30%: 27
+BOS #13200 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.913%
+BOS #20073 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=5.0 | MFE=+0.786%
+BOS #25200 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=8.0 | MFE=+0.739%
+BOS #21883 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=4.0 | MFE=+0.726%
+BOS #20596 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.593%
+BOS #3814 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=8.0 | MFE=+0.562%
+BOS #9548 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=nan | MFE=+0.545%
+BOS #24794 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=10.0 | MFE=+0.523%
+BOS #25426 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.507%
+BOS #23923 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=7.0 | MFE=+0.491%
+BOS #3190 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.483%
+BOS #1148 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=7.0 | MFE=+0.473%
+BOS #5005 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.446%
+BOS #169 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=7.0 | MFE=+0.444%
+BOS #7257 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=nan | MFE=+0.434%
+BOS #3388 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.423%
+BOS #1305 SHORT | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.420%
+BOS #13875 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=4.0 | MFE=+0.418%
+BOS #8532 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=nan | MFE=+0.410%
+BOS #12813 LONG | class=BOS_GOOD_NO_ORDINARY_TRADE | signal_delay=0 | entry_delay=nan | MFE=+0.409%
+BOS #61 SHORT | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=4.0 | MFE=+0.392%
+BOS #13483 SHORT | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=4.0 | MFE=+0.383%
+BOS #21494 SHORT | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=1.0 | MFE=+0.365%
+BOS #8124 LONG | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=6.0 | MFE=+0.353%
+BOS #24784 LONG | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=4.0 | MFE=+0.347%
+BOS #23595 SHORT | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=5.0 | MFE=+0.326%
+BOS #4395 SHORT | class=BOS_NO_TRADE | signal_delay=0 | entry_delay=nan | MFE=+0.304%
+
+7) GOOD-BOS / ENGINE CAPTURE CROSS-CHECK
+----------------------------------------------------------------------------------
+BOS with MAX MFE >= 0.30%: 89
+  ordinary trade present: 62
+  ordinary trade absent:  27
+  mean ordinary PnL when traded: -73.34
+  positive ordinary PnL: 29/62
+
+INTEGRITY
+----------------------------------------------------------------------------------
+[PASS] v5.15 source exists
+[PASS] One row per BOS
+[PASS] No duplicate event/direction
+[PASS] CSV export written
+[PASS] No strategy parameters modified
+RESULT: 5/5 PASS
+
+SAFETY: NO ORDERS WERE SENT
+SAFETY: RESEARCH MODE ONLY
+==================================================================================

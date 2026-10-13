@@ -1,0 +1,2034 @@
+==============================================================================
+MOEX TRADING LAB v5.22
+COUNTERFACTUAL FILTER SIMULATION
+RESEARCH ONLY - STRATEGY LOGIC UNCHANGED
+NO FILTER IS INSTALLED. THRESHOLDS ARE FROZEN FROM DISCOVERY ONLY.
+==============================================================================
+
+1. DATA INTEGRITY
+------------------------------------------------------------------------------
+Rows in joined dataset:        200
+Unique trade_number:           200
+Ordinary backtest trades:      200
+Baseline total net PnL:        -42721.24
+
+Bucket counts by period:
+  DISCOVERY  : N = 95
+  VALIDATION : N = 43
+  OOS        : N = 61
+  TOTAL      : N = 200
+
+Frozen DISCOVERY-only descriptive boundaries (NOT optimized):
+  session_minutes_from_open
+    Q25    = 187.5000
+    MEDIAN = 230.0000
+    Q75    = 352.5000
+  rsi_delta_signed
+    Q25    = 6.4073
+    MEDIAN = 9.5106
+    Q75    = 14.0558
+  entry_distance_atr
+    Q25    = -0.4836
+    MEDIAN = 0.0321
+    Q75    = 0.4688
+CSV: v5.22_counterfactual_filter_simulation.csv
+
+2. BASELINE BY PERIOD (no filter)
+------------------------------------------------------------------------------
+  DISCOVERY
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+
+  VALIDATION
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+
+  OOS
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+
+  TOTAL
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+
+3. A. session_minutes_from_open
+------------------------------------------------------------------------------
+Направление: считаем оба варианта — оставить низкие и оставить высокие.
+Пороги заморожены из DISCOVERY. Не оптимизируем, не выбираем лучший.
+
+  ---- direction = keep_lo ----
+
+  [DISCOVERY] KEEP session_minutes_from_open <= Q25 (thr=187.500)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 24
+    Net PnL    = -5500.79
+    Return %   = -0.251
+    Max DD %   = -1177.095
+    Win rate % = 29.17
+    PF         = 0.326
+    Avg trade  = -229.20
+  REMOVED
+    N          = 71
+    Net PnL    = -11569.78
+    Return %   = -0.179
+    Max DD %   = -7567.447
+    Win rate % = 29.58
+    PF         = 0.269
+    Avg trade  = -162.95
+
+  [DISCOVERY] KEEP session_minutes_from_open <= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 49
+    Net PnL    = -8786.37
+    Return %   = -0.197
+    Max DD %   = -5619.805
+    Win rate % = 32.65
+    PF         = 0.337
+    Avg trade  = -179.31
+  REMOVED
+    N          = 46
+    Net PnL    = -8284.19
+    Return %   = -0.198
+    Max DD %   = -5411.153
+    Win rate % = 26.09
+    PF         = 0.227
+    Avg trade  = -180.09
+
+  [DISCOVERY] KEEP session_minutes_from_open <= Q75 (thr=352.500)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 71
+    Net PnL    = -12531.53
+    Return %   = -0.193
+    Max DD %   = -184192.460
+    Win rate % = 30.99
+    PF         = 0.310
+    Avg trade  = -176.50
+  REMOVED
+    N          = 24
+    Net PnL    = -4539.03
+    Return %   = -0.210
+    Max DD %   = -552.420
+    Win rate % = 25.00
+    PF         = 0.220
+    Avg trade  = -189.13
+
+  [VALIDATION] KEEP session_minutes_from_open <= Q25 (thr=187.500)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 9
+    Net PnL    = -2520.00
+    Return %   = -0.357
+    Max DD %   = -9931.581
+    Win rate % = 11.11
+    PF         = 0.064
+    Avg trade  = -280.00
+  REMOVED
+    N          = 34
+    Net PnL    = -7409.09
+    Return %   = -0.277
+    Max DD %   = -1006.065
+    Win rate % = 17.65
+    PF         = 0.134
+    Avg trade  = -217.91
+
+  [VALIDATION] KEEP session_minutes_from_open <= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 18
+    Net PnL    = -5030.70
+    Return %   = -0.355
+    Max DD %   = -3314.346
+    Win rate % = 11.11
+    PF         = 0.087
+    Avg trade  = -279.48
+  REMOVED
+    N          = 25
+    Net PnL    = -4898.39
+    Return %   = -0.249
+    Max DD %   = -631.256
+    Win rate % = 20.00
+    PF         = 0.147
+    Avg trade  = -195.94
+
+  [VALIDATION] KEEP session_minutes_from_open <= Q75 (thr=352.500)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 31
+    Net PnL    = -8571.70
+    Return %   = -0.350
+    Max DD %   = -5717.627
+    Win rate % = 16.13
+    PF         = 0.077
+    Avg trade  = -276.51
+  REMOVED
+    N          = 12
+    Net PnL    = -1357.39
+    Return %   = -0.145
+    Max DD %   = -603.916
+    Win rate % = 16.67
+    PF         = 0.309
+    Avg trade  = -113.12
+
+  [OOS] KEEP session_minutes_from_open <= Q25 (thr=187.500)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 14
+    Net PnL    = -2167.02
+    Return %   = -0.232
+    Max DD %   = -263.826
+    Win rate % = 42.86
+    PF         = 0.573
+    Avg trade  = -154.79
+  REMOVED
+    N          = 47
+    Net PnL    = -13367.33
+    Return %   = -0.430
+    Max DD %   = -3656.779
+    Win rate % = 25.53
+    PF         = 0.184
+    Avg trade  = -284.41
+
+  [OOS] KEEP session_minutes_from_open <= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 21
+    Net PnL    = -8221.07
+    Return %   = -0.581
+    Max DD %   = -1060.069
+    Win rate % = 28.57
+    PF         = 0.262
+    Avg trade  = -391.48
+  REMOVED
+    N          = 40
+    Net PnL    = -7313.28
+    Return %   = -0.278
+    Max DD %   = -808.404
+    Win rate % = 30.00
+    PF         = 0.292
+    Avg trade  = -182.83
+
+  [OOS] KEEP session_minutes_from_open <= Q75 (thr=352.500)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 43
+    Net PnL    = -15130.91
+    Return %   = -0.534
+    Max DD %   = -2989.601
+    Win rate % = 27.91
+    PF         = 0.204
+    Avg trade  = -351.88
+  REMOVED
+    N          = 18
+    Net PnL    = -403.43
+    Return %   = -0.033
+    Max DD %   = -174.276
+    Win rate % = 33.33
+    PF         = 0.836
+    Avg trade  = -22.41
+
+  [TOTAL] KEEP session_minutes_from_open <= Q25 (thr=187.500)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 47
+    Net PnL    = -10187.81
+    Return %   = -0.266
+    Max DD %   = -2280.163
+    Win rate % = 29.79
+    PF         = 0.361
+    Avg trade  = -216.76
+  REMOVED
+    N          = 153
+    Net PnL    = -32533.43
+    Return %   = -0.264
+    Max DD %   = -21251.339
+    Win rate % = 25.49
+    PF         = 0.206
+    Avg trade  = -212.64
+
+  [TOTAL] KEEP session_minutes_from_open <= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 89
+    Net PnL    = -22225.38
+    Return %   = -0.302
+    Max DD %   = -14062.501
+    Win rate % = 26.97
+    PF         = 0.261
+    Avg trade  = -249.72
+  REMOVED
+    N          = 111
+    Net PnL    = -20495.86
+    Return %   = -0.234
+    Max DD %   = -13351.213
+    Win rate % = 26.13
+    PF         = 0.235
+    Avg trade  = -184.65
+
+  [TOTAL] KEEP session_minutes_from_open <= Q75 (thr=352.500)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 146
+    Net PnL    = -36421.38
+    Return %   = -0.308
+    Max DD %   = -535142.484
+    Win rate % = 26.71
+    PF         = 0.219
+    Avg trade  = -249.46
+  REMOVED
+    N          = 54
+    Net PnL    = -6299.86
+    Return %   = -0.146
+    Max DD %   = -811.811
+    Win rate % = 25.93
+    PF         = 0.385
+    Avg trade  = -116.66
+
+  ---- direction = keep_hi ----
+
+  [DISCOVERY] KEEP session_minutes_from_open >= Q25 (thr=187.500)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 71
+    Net PnL    = -11569.78
+    Return %   = -0.179
+    Max DD %   = -7567.447
+    Win rate % = 29.58
+    PF         = 0.269
+    Avg trade  = -162.95
+  REMOVED
+    N          = 24
+    Net PnL    = -5500.79
+    Return %   = -0.251
+    Max DD %   = -1177.095
+    Win rate % = 29.17
+    PF         = 0.326
+    Avg trade  = -229.20
+
+  [DISCOVERY] KEEP session_minutes_from_open >= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 49
+    Net PnL    = -8074.15
+    Return %   = -0.182
+    Max DD %   = -5273.303
+    Win rate % = 28.57
+    PF         = 0.280
+    Avg trade  = -164.78
+  REMOVED
+    N          = 46
+    Net PnL    = -8996.42
+    Return %   = -0.214
+    Max DD %   = -5751.759
+    Win rate % = 30.43
+    PF         = 0.295
+    Avg trade  = -195.57
+
+  [DISCOVERY] KEEP session_minutes_from_open >= Q75 (thr=352.500)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 24
+    Net PnL    = -4539.03
+    Return %   = -0.210
+    Max DD %   = -552.420
+    Win rate % = 25.00
+    PF         = 0.220
+    Avg trade  = -189.13
+  REMOVED
+    N          = 71
+    Net PnL    = -12531.53
+    Return %   = -0.193
+    Max DD %   = -184192.460
+    Win rate % = 30.99
+    PF         = 0.310
+    Avg trade  = -176.50
+
+  [VALIDATION] KEEP session_minutes_from_open >= Q25 (thr=187.500)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 34
+    Net PnL    = -7409.09
+    Return %   = -0.277
+    Max DD %   = -1006.065
+    Win rate % = 17.65
+    PF         = 0.134
+    Avg trade  = -217.91
+  REMOVED
+    N          = 9
+    Net PnL    = -2520.00
+    Return %   = -0.357
+    Max DD %   = -9931.581
+    Win rate % = 11.11
+    PF         = 0.064
+    Avg trade  = -280.00
+
+  [VALIDATION] KEEP session_minutes_from_open >= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 26
+    Net PnL    = -4940.02
+    Return %   = -0.241
+    Max DD %   = -637.470
+    Win rate % = 19.23
+    PF         = 0.146
+    Avg trade  = -190.00
+  REMOVED
+    N          = 17
+    Net PnL    = -4989.07
+    Return %   = -0.373
+    Max DD %   = -3286.093
+    Win rate % = 11.76
+    PF         = 0.087
+    Avg trade  = -293.47
+
+  [VALIDATION] KEEP session_minutes_from_open >= Q75 (thr=352.500)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 12
+    Net PnL    = -1357.39
+    Return %   = -0.145
+    Max DD %   = -603.916
+    Win rate % = 16.67
+    PF         = 0.309
+    Avg trade  = -113.12
+  REMOVED
+    N          = 31
+    Net PnL    = -8571.70
+    Return %   = -0.350
+    Max DD %   = -5717.627
+    Win rate % = 16.13
+    PF         = 0.077
+    Avg trade  = -276.51
+
+  [OOS] KEEP session_minutes_from_open >= Q25 (thr=187.500)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 47
+    Net PnL    = -13367.33
+    Return %   = -0.430
+    Max DD %   = -3656.779
+    Win rate % = 25.53
+    PF         = 0.184
+    Avg trade  = -284.41
+  REMOVED
+    N          = 14
+    Net PnL    = -2167.02
+    Return %   = -0.232
+    Max DD %   = -263.826
+    Win rate % = 42.86
+    PF         = 0.573
+    Avg trade  = -154.79
+
+  [OOS] KEEP session_minutes_from_open >= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 40
+    Net PnL    = -7313.28
+    Return %   = -0.278
+    Max DD %   = -808.404
+    Win rate % = 30.00
+    PF         = 0.292
+    Avg trade  = -182.83
+  REMOVED
+    N          = 21
+    Net PnL    = -8221.07
+    Return %   = -0.581
+    Max DD %   = -1060.069
+    Win rate % = 28.57
+    PF         = 0.262
+    Avg trade  = -391.48
+
+  [OOS] KEEP session_minutes_from_open >= Q75 (thr=352.500)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 18
+    Net PnL    = -403.43
+    Return %   = -0.033
+    Max DD %   = -174.276
+    Win rate % = 33.33
+    PF         = 0.836
+    Avg trade  = -22.41
+  REMOVED
+    N          = 43
+    Net PnL    = -15130.91
+    Return %   = -0.534
+    Max DD %   = -2989.601
+    Win rate % = 27.91
+    PF         = 0.204
+    Avg trade  = -351.88
+
+  [TOTAL] KEEP session_minutes_from_open >= Q25 (thr=187.500)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 153
+    Net PnL    = -32533.43
+    Return %   = -0.264
+    Max DD %   = -21251.339
+    Win rate % = 25.49
+    PF         = 0.206
+    Avg trade  = -212.64
+  REMOVED
+    N          = 47
+    Net PnL    = -10187.81
+    Return %   = -0.266
+    Max DD %   = -2280.163
+    Win rate % = 29.79
+    PF         = 0.361
+    Avg trade  = -216.76
+
+  [TOTAL] KEEP session_minutes_from_open >= MEDIAN (thr=230.000)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 115
+    Net PnL    = -20327.45
+    Return %   = -0.223
+    Max DD %   = -13240.683
+    Win rate % = 26.96
+    PF         = 0.256
+    Avg trade  = -176.76
+  REMOVED
+    N          = 85
+    Net PnL    = -22393.79
+    Return %   = -0.320
+    Max DD %   = -14168.304
+    Win rate % = 25.88
+    PF         = 0.242
+    Avg trade  = -263.46
+
+  [TOTAL] KEEP session_minutes_from_open >= Q75 (thr=352.500)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 54
+    Net PnL    = -6299.86
+    Return %   = -0.146
+    Max DD %   = -811.811
+    Win rate % = 25.93
+    PF         = 0.385
+    Avg trade  = -116.66
+  REMOVED
+    N          = 146
+    Net PnL    = -36421.38
+    Return %   = -0.308
+    Max DD %   = -535142.484
+    Win rate % = 26.71
+    PF         = 0.219
+    Avg trade  = -249.46
+
+4. B. rsi_delta_signed
+------------------------------------------------------------------------------
+  ---- direction = keep_lo ----
+
+  [DISCOVERY] KEEP rsi_delta_signed <= Q25 (thr=6.407)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 24
+    Net PnL    = -4305.85
+    Return %   = -0.198
+    Max DD %   = -2593.688
+    Win rate % = 33.33
+    PF         = 0.255
+    Avg trade  = -179.41
+  REMOVED
+    N          = 71
+    Net PnL    = -12764.71
+    Return %   = -0.197
+    Max DD %   = -4557.125
+    Win rate % = 28.17
+    PF         = 0.299
+    Avg trade  = -179.78
+
+  [DISCOVERY] KEEP rsi_delta_signed <= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 48
+    Net PnL    = -11236.94
+    Return %   = -0.257
+    Max DD %   = -3959.706
+    Win rate % = 27.08
+    PF         = 0.237
+    Avg trade  = -234.10
+  REMOVED
+    N          = 47
+    Net PnL    = -5833.63
+    Return %   = -0.137
+    Max DD %   = -4685.832
+    Win rate % = 31.91
+    PF         = 0.369
+    Avg trade  = -124.12
+
+  [DISCOVERY] KEEP rsi_delta_signed <= Q75 (thr=14.056)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 71
+    Net PnL    = -12932.98
+    Return %   = -0.200
+    Max DD %   = -8462.106
+    Win rate % = 28.17
+    PF         = 0.266
+    Avg trade  = -182.15
+  REMOVED
+    N          = 24
+    Net PnL    = -4137.58
+    Return %   = -0.190
+    Max DD %   = -69081.466
+    Win rate % = 33.33
+    PF         = 0.349
+    Avg trade  = -172.40
+
+  [VALIDATION] KEEP rsi_delta_signed <= Q25 (thr=6.407)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 10
+    Net PnL    = -1549.41
+    Return %   = -0.194
+    Max DD %   = -12667.113
+    Win rate % = 20.00
+    PF         = 0.098
+    Avg trade  = -154.94
+  REMOVED
+    N          = 33
+    Net PnL    = -8379.68
+    Return %   = -0.324
+    Max DD %   = -1150.960
+    Win rate % = 15.15
+    PF         = 0.121
+    Avg trade  = -253.93
+
+  [VALIDATION] KEEP rsi_delta_signed <= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 22
+    Net PnL    = -4907.67
+    Return %   = -0.283
+    Max DD %   = -3230.845
+    Win rate % = 13.64
+    PF         = 0.088
+    Avg trade  = -223.08
+  REMOVED
+    N          = 21
+    Net PnL    = -5021.42
+    Return %   = -0.304
+    Max DD %   = -649.622
+    Win rate % = 19.05
+    PF         = 0.145
+    Avg trade  = -239.12
+
+  [VALIDATION] KEEP rsi_delta_signed <= Q75 (thr=14.056)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 32
+    Net PnL    = -7927.49
+    Return %   = -0.316
+    Max DD %   = -5280.401
+    Win rate % = 15.62
+    PF         = 0.076
+    Avg trade  = -247.73
+  REMOVED
+    N          = 11
+    Net PnL    = -2001.60
+    Return %   = -0.229
+    Max DD %   = -198.809
+    Win rate % = 18.18
+    PF         = 0.251
+    Avg trade  = -181.96
+
+  [OOS] KEEP rsi_delta_signed <= Q25 (thr=6.407)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 12
+    Net PnL    = -4249.30
+    Return %   = -0.558
+    Max DD %   = -10134.259
+    Win rate % = 16.67
+    PF         = 0.097
+    Avg trade  = -354.11
+  REMOVED
+    N          = 49
+    Net PnL    = -11285.05
+    Return %   = -0.344
+    Max DD %   = -1399.538
+    Win rate % = 32.65
+    PF         = 0.327
+    Avg trade  = -230.31
+
+  [OOS] KEEP rsi_delta_signed <= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 32
+    Net PnL    = -8059.42
+    Return %   = -0.381
+    Max DD %   = -2507.672
+    Win rate % = 31.25
+    PF         = 0.302
+    Avg trade  = -251.86
+  REMOVED
+    N          = 29
+    Net PnL    = -7474.93
+    Return %   = -0.387
+    Max DD %   = -1500.717
+    Win rate % = 27.59
+    PF         = 0.246
+    Avg trade  = -257.76
+
+  [OOS] KEEP rsi_delta_signed <= Q75 (thr=14.056)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 49
+    Net PnL    = -10956.62
+    Return %   = -0.339
+    Max DD %   = -2328.346
+    Win rate % = 32.65
+    PF         = 0.312
+    Avg trade  = -223.60
+  REMOVED
+    N          = 12
+    Net PnL    = -4577.73
+    Return %   = -0.562
+    Max DD %   = -1324.996
+    Win rate % = 16.67
+    PF         = 0.172
+    Avg trade  = -381.48
+
+  [TOTAL] KEEP rsi_delta_signed <= Q25 (thr=6.407)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 47
+    Net PnL    = -10291.80
+    Return %   = -0.271
+    Max DD %   = -6173.411
+    Win rate % = 25.53
+    PF         = 0.169
+    Avg trade  = -218.97
+  REMOVED
+    N          = 153
+    Net PnL    = -32429.44
+    Return %   = -0.263
+    Max DD %   = -11423.570
+    Win rate % = 26.80
+    PF         = 0.271
+    Avg trade  = -211.96
+
+  [TOTAL] KEEP rsi_delta_signed <= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 103
+    Net PnL    = -24391.26
+    Return %   = -0.295
+    Max DD %   = -8624.200
+    Win rate % = 25.24
+    PF         = 0.234
+    Avg trade  = -236.81
+  REMOVED
+    N          = 97
+    Net PnL    = -18329.98
+    Return %   = -0.234
+    Max DD %   = -14509.253
+    Win rate % = 27.84
+    PF         = 0.268
+    Avg trade  = -188.97
+
+  [TOTAL] KEEP rsi_delta_signed <= Q75 (thr=14.056)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 153
+    Net PnL    = -32004.33
+    Return %   = -0.261
+    Max DD %   = -20904.093
+    Win rate % = 26.80
+    PF         = 0.244
+    Avg trade  = -209.18
+  REMOVED
+    N          = 47
+    Net PnL    = -10716.91
+    Return %   = -0.277
+    Max DD %   = -178771.729
+    Win rate % = 25.53
+    PF         = 0.264
+    Avg trade  = -228.02
+
+  ---- direction = keep_hi ----
+
+  [DISCOVERY] KEEP rsi_delta_signed >= Q25 (thr=6.407)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 71
+    Net PnL    = -12764.71
+    Return %   = -0.197
+    Max DD %   = -4557.125
+    Win rate % = 28.17
+    PF         = 0.299
+    Avg trade  = -179.78
+  REMOVED
+    N          = 24
+    Net PnL    = -4305.85
+    Return %   = -0.198
+    Max DD %   = -2593.688
+    Win rate % = 33.33
+    PF         = 0.255
+    Avg trade  = -179.41
+
+  [DISCOVERY] KEEP rsi_delta_signed >= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 48
+    Net PnL    = -6137.45
+    Return %   = -0.141
+    Max DD %   = -4924.671
+    Win rate % = 31.25
+    PF         = 0.358
+    Avg trade  = -127.86
+  REMOVED
+    N          = 47
+    Net PnL    = -10933.11
+    Return %   = -0.256
+    Max DD %   = -3851.034
+    Win rate % = 27.66
+    PF         = 0.242
+    Avg trade  = -232.62
+
+  [DISCOVERY] KEEP rsi_delta_signed >= Q75 (thr=14.056)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 24
+    Net PnL    = -4137.58
+    Return %   = -0.190
+    Max DD %   = -69081.466
+    Win rate % = 33.33
+    PF         = 0.349
+    Avg trade  = -172.40
+  REMOVED
+    N          = 71
+    Net PnL    = -12932.98
+    Return %   = -0.200
+    Max DD %   = -8462.106
+    Win rate % = 28.17
+    PF         = 0.266
+    Avg trade  = -182.15
+
+  [VALIDATION] KEEP rsi_delta_signed >= Q25 (thr=6.407)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 33
+    Net PnL    = -8379.68
+    Return %   = -0.324
+    Max DD %   = -1150.960
+    Win rate % = 15.15
+    PF         = 0.121
+    Avg trade  = -253.93
+  REMOVED
+    N          = 10
+    Net PnL    = -1549.41
+    Return %   = -0.194
+    Max DD %   = -12667.113
+    Win rate % = 20.00
+    PF         = 0.098
+    Avg trade  = -154.94
+
+  [VALIDATION] KEEP rsi_delta_signed >= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 21
+    Net PnL    = -5021.42
+    Return %   = -0.304
+    Max DD %   = -649.622
+    Win rate % = 19.05
+    PF         = 0.145
+    Avg trade  = -239.12
+  REMOVED
+    N          = 22
+    Net PnL    = -4907.67
+    Return %   = -0.283
+    Max DD %   = -3230.845
+    Win rate % = 13.64
+    PF         = 0.088
+    Avg trade  = -223.08
+
+  [VALIDATION] KEEP rsi_delta_signed >= Q75 (thr=14.056)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 11
+    Net PnL    = -2001.60
+    Return %   = -0.229
+    Max DD %   = -198.809
+    Win rate % = 18.18
+    PF         = 0.251
+    Avg trade  = -181.96
+  REMOVED
+    N          = 32
+    Net PnL    = -7927.49
+    Return %   = -0.316
+    Max DD %   = -5280.401
+    Win rate % = 15.62
+    PF         = 0.076
+    Avg trade  = -247.73
+
+  [OOS] KEEP rsi_delta_signed >= Q25 (thr=6.407)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 49
+    Net PnL    = -11285.05
+    Return %   = -0.344
+    Max DD %   = -1399.538
+    Win rate % = 32.65
+    PF         = 0.327
+    Avg trade  = -230.31
+  REMOVED
+    N          = 12
+    Net PnL    = -4249.30
+    Return %   = -0.558
+    Max DD %   = -10134.259
+    Win rate % = 16.67
+    PF         = 0.097
+    Avg trade  = -354.11
+
+  [OOS] KEEP rsi_delta_signed >= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 29
+    Net PnL    = -7474.93
+    Return %   = -0.387
+    Max DD %   = -1500.717
+    Win rate % = 27.59
+    PF         = 0.246
+    Avg trade  = -257.76
+  REMOVED
+    N          = 32
+    Net PnL    = -8059.42
+    Return %   = -0.381
+    Max DD %   = -2507.672
+    Win rate % = 31.25
+    PF         = 0.302
+    Avg trade  = -251.86
+
+  [OOS] KEEP rsi_delta_signed >= Q75 (thr=14.056)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 12
+    Net PnL    = -4577.73
+    Return %   = -0.562
+    Max DD %   = -1324.996
+    Win rate % = 16.67
+    PF         = 0.172
+    Avg trade  = -381.48
+  REMOVED
+    N          = 49
+    Net PnL    = -10956.62
+    Return %   = -0.339
+    Max DD %   = -2328.346
+    Win rate % = 32.65
+    PF         = 0.312
+    Avg trade  = -223.60
+
+  [TOTAL] KEEP rsi_delta_signed >= Q25 (thr=6.407)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 153
+    Net PnL    = -32429.44
+    Return %   = -0.263
+    Max DD %   = -11423.570
+    Win rate % = 26.80
+    PF         = 0.271
+    Avg trade  = -211.96
+  REMOVED
+    N          = 47
+    Net PnL    = -10291.80
+    Return %   = -0.271
+    Max DD %   = -6173.411
+    Win rate % = 25.53
+    PF         = 0.169
+    Avg trade  = -218.97
+
+  [TOTAL] KEEP rsi_delta_signed >= MEDIAN (thr=9.511)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 98
+    Net PnL    = -18633.80
+    Return %   = -0.235
+    Max DD %   = -14748.092
+    Win rate % = 27.55
+    PF         = 0.265
+    Avg trade  = -190.14
+  REMOVED
+    N          = 102
+    Net PnL    = -24087.43
+    Return %   = -0.294
+    Max DD %   = -8515.528
+    Win rate % = 25.49
+    PF         = 0.236
+    Avg trade  = -236.15
+
+  [TOTAL] KEEP rsi_delta_signed >= Q75 (thr=14.056)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 47
+    Net PnL    = -10716.91
+    Return %   = -0.277
+    Max DD %   = -178771.729
+    Win rate % = 25.53
+    PF         = 0.264
+    Avg trade  = -228.02
+  REMOVED
+    N          = 153
+    Net PnL    = -32004.33
+    Return %   = -0.261
+    Max DD %   = -20904.093
+    Win rate % = 26.80
+    PF         = 0.244
+    Avg trade  = -209.18
+
+5. C. entry_distance_atr — EARLY-ENTRY OBSERVATION (NOT pre-entry)
+------------------------------------------------------------------------------
+ВАЖНО:
+  entry_distance_atr в v5.18 BOS Quality dataset описывает Close бара
+  ENTRY относительно Close бара BOS, нормированный на ATR бара BOS.
+  Значение становится известно ТОЛЬКО после закрытия бара ENTRY.
+  Это НЕ pre-entry information.
+
+  Для целей counterfactual simulation мы применяем ту же логику:
+  'если бы мы знали entry_distance_atr и могли бы отменить сделку'.
+  В реальном трейдинге это невозможно — сделка уже открыта на OPEN
+  entry-бара, а entry_distance_atr известна только на CLOSE entry-бара.
+  Поэтому результаты ниже — ЧИСТО исследовательские.
+  Они показывают только ПОТЕНЦИАЛ признака, а не реализуемое правило.
+
+  ---- direction = keep_lo ----
+
+  [DISCOVERY] KEEP entry_distance_atr <= Q25 (thr=-0.484)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 24
+    Net PnL    = -4976.57
+    Return %   = -0.229
+    Max DD %   = -1456.094
+    Win rate % = 12.50
+    PF         = 0.286
+    Avg trade  = -207.36
+  REMOVED
+    N          = 71
+    Net PnL    = -12093.99
+    Return %   = -0.187
+    Max DD %   = -7911.485
+    Win rate % = 35.21
+    PF         = 0.289
+    Avg trade  = -170.34
+
+  [DISCOVERY] KEEP entry_distance_atr <= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 48
+    Net PnL    = -10192.38
+    Return %   = -0.234
+    Max DD %   = -1706.011
+    Win rate % = 20.83
+    PF         = 0.252
+    Avg trade  = -212.34
+  REMOVED
+    N          = 47
+    Net PnL    = -6878.18
+    Return %   = -0.160
+    Max DD %   = -4488.402
+    Win rate % = 38.30
+    PF         = 0.336
+    Avg trade  = -146.34
+
+  [DISCOVERY] KEEP entry_distance_atr <= Q75 (thr=0.469)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 71
+    Net PnL    = -13513.30
+    Return %   = -0.209
+    Max DD %   = -4733.399
+    Win rate % = 25.35
+    PF         = 0.268
+    Avg trade  = -190.33
+  REMOVED
+    N          = 24
+    Net PnL    = -3557.27
+    Return %   = -0.163
+    Max DD %   = -2985.409
+    Win rate % = 41.67
+    PF         = 0.354
+    Avg trade  = -148.22
+
+  [VALIDATION] KEEP entry_distance_atr <= Q25 (thr=-0.484)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 9
+    Net PnL    = -2202.17
+    Return %   = -0.315
+    Max DD %   = -228.751
+    Win rate % = 11.11
+    PF         = 0.002
+    Avg trade  = -244.69
+  REMOVED
+    N          = 34
+    Net PnL    = -7726.92
+    Return %   = -0.288
+    Max DD %   = -5144.274
+    Win rate % = 17.65
+    PF         = 0.146
+    Avg trade  = -227.26
+
+  [VALIDATION] KEEP entry_distance_atr <= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 23
+    Net PnL    = -4763.20
+    Return %   = -0.264
+    Max DD %   = -1106.696
+    Win rate % = 17.39
+    PF         = 0.161
+    Avg trade  = -207.10
+  REMOVED
+    N          = 20
+    Net PnL    = -5165.89
+    Return %   = -0.328
+    Max DD %   = -3406.099
+    Win rate % = 15.00
+    PF         = 0.073
+    Avg trade  = -258.29
+
+  [VALIDATION] KEEP entry_distance_atr <= Q75 (thr=0.469)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 32
+    Net PnL    = -7247.15
+    Return %   = -0.289
+    Max DD %   = -1735.622
+    Win rate % = 15.62
+    PF         = 0.131
+    Avg trade  = -226.47
+  REMOVED
+    N          = 11
+    Net PnL    = -2681.94
+    Return %   = -0.308
+    Max DD %   = -1720.236
+    Win rate % = 18.18
+    PF         = 0.080
+    Avg trade  = -243.81
+
+  [OOS] KEEP entry_distance_atr <= Q25 (thr=-0.484)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 24
+    Net PnL    = -5329.17
+    Return %   = -0.336
+    Max DD %   = -36615.780
+    Win rate % = 20.83
+    PF         = 0.202
+    Avg trade  = -222.05
+  REMOVED
+    N          = 37
+    Net PnL    = -10205.18
+    Return %   = -0.415
+    Max DD %   = -1295.529
+    Win rate % = 35.14
+    PF         = 0.310
+    Avg trade  = -275.82
+
+  [OOS] KEEP entry_distance_atr <= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 38
+    Net PnL    = -9173.40
+    Return %   = -0.365
+    Max DD %   = -1054.576
+    Win rate % = 26.32
+    PF         = 0.275
+    Avg trade  = -241.41
+  REMOVED
+    N          = 23
+    Net PnL    = -6360.95
+    Return %   = -0.416
+    Max DD %   = -785.932
+    Win rate % = 34.78
+    PF         = 0.278
+    Avg trade  = -276.56
+
+  [OOS] KEEP entry_distance_atr <= Q75 (thr=0.469)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 50
+    Net PnL    = -13157.37
+    Return %   = -0.397
+    Max DD %   = -3515.820
+    Win rate % = 28.00
+    PF         = 0.269
+    Avg trade  = -263.15
+  REMOVED
+    N          = 11
+    Net PnL    = -2376.98
+    Return %   = -0.324
+    Max DD %   = -626.497
+    Win rate % = 36.36
+    PF         = 0.315
+    Avg trade  = -216.09
+
+  [TOTAL] KEEP entry_distance_atr <= Q25 (thr=-0.484)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 57
+    Net PnL    = -12507.91
+    Return %   = -0.280
+    Max DD %   = -3526.586
+    Win rate % = 15.79
+    PF         = 0.211
+    Avg trade  = -219.44
+  REMOVED
+    N          = 143
+    Net PnL    = -30213.33
+    Return %   = -0.259
+    Max DD %   = -19728.680
+    Win rate % = 30.77
+    PF         = 0.264
+    Avg trade  = -211.28
+
+  [TOTAL] KEEP entry_distance_atr <= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 109
+    Net PnL    = -24128.99
+    Return %   = -0.278
+    Max DD %   = -4187.324
+    Win rate % = 22.02
+    PF         = 0.245
+    Avg trade  = -221.37
+  REMOVED
+    N          = 91
+    Net PnL    = -18592.25
+    Return %   = -0.249
+    Max DD %   = -12101.893
+    Win rate % = 31.87
+    PF         = 0.254
+    Avg trade  = -204.31
+
+  [TOTAL] KEEP entry_distance_atr <= Q75 (thr=0.469)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 153
+    Net PnL    = -33917.82
+    Return %   = -0.276
+    Max DD %   = -12031.633
+    Win rate % = 24.18
+    PF         = 0.243
+    Avg trade  = -221.69
+  REMOVED
+    N          = 47
+    Net PnL    = -8803.42
+    Return %   = -0.229
+    Max DD %   = -7020.398
+    Win rate % = 34.04
+    PF         = 0.271
+    Avg trade  = -187.31
+
+  ---- direction = keep_hi ----
+
+  [DISCOVERY] KEEP entry_distance_atr >= Q25 (thr=-0.484)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 71
+    Net PnL    = -12093.99
+    Return %   = -0.187
+    Max DD %   = -7911.485
+    Win rate % = 35.21
+    PF         = 0.289
+    Avg trade  = -170.34
+  REMOVED
+    N          = 24
+    Net PnL    = -4976.57
+    Return %   = -0.229
+    Max DD %   = -1456.094
+    Win rate % = 12.50
+    PF         = 0.286
+    Avg trade  = -207.36
+
+  [DISCOVERY] KEEP entry_distance_atr >= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 48
+    Net PnL    = -7228.36
+    Return %   = -0.165
+    Max DD %   = -4718.226
+    Win rate % = 37.50
+    PF         = 0.325
+    Avg trade  = -150.59
+  REMOVED
+    N          = 47
+    Net PnL    = -9842.20
+    Return %   = -0.231
+    Max DD %   = -1643.960
+    Win rate % = 21.28
+    PF         = 0.258
+    Avg trade  = -209.41
+
+  [DISCOVERY] KEEP entry_distance_atr >= Q75 (thr=0.469)
+  BASELINE
+    N          = 95
+    Net PnL    = -17070.56
+    Return %   = -0.198
+    Max DD %   = -11177.554
+    Win rate % = 29.47
+    PF         = 0.288
+    Avg trade  = -179.69
+  KEPT
+    N          = 24
+    Net PnL    = -3557.27
+    Return %   = -0.163
+    Max DD %   = -2985.409
+    Win rate % = 41.67
+    PF         = 0.354
+    Avg trade  = -148.22
+  REMOVED
+    N          = 71
+    Net PnL    = -13513.30
+    Return %   = -0.209
+    Max DD %   = -4733.399
+    Win rate % = 25.35
+    PF         = 0.268
+    Avg trade  = -190.33
+
+  [VALIDATION] KEEP entry_distance_atr >= Q25 (thr=-0.484)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 34
+    Net PnL    = -7726.92
+    Return %   = -0.288
+    Max DD %   = -5144.274
+    Win rate % = 17.65
+    PF         = 0.146
+    Avg trade  = -227.26
+  REMOVED
+    N          = 9
+    Net PnL    = -2202.17
+    Return %   = -0.315
+    Max DD %   = -228.751
+    Win rate % = 11.11
+    PF         = 0.002
+    Avg trade  = -244.69
+
+  [VALIDATION] KEEP entry_distance_atr >= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 20
+    Net PnL    = -5165.89
+    Return %   = -0.328
+    Max DD %   = -3406.099
+    Win rate % = 15.00
+    PF         = 0.073
+    Avg trade  = -258.29
+  REMOVED
+    N          = 23
+    Net PnL    = -4763.20
+    Return %   = -0.264
+    Max DD %   = -1106.696
+    Win rate % = 17.39
+    PF         = 0.161
+    Avg trade  = -207.10
+
+  [VALIDATION] KEEP entry_distance_atr >= Q75 (thr=0.469)
+  BASELINE
+    N          = 43
+    Net PnL    = -9929.09
+    Return %   = -0.294
+    Max DD %   = -6638.892
+    Win rate % = 16.28
+    PF         = 0.117
+    Avg trade  = -230.91
+  KEPT
+    N          = 11
+    Net PnL    = -2681.94
+    Return %   = -0.308
+    Max DD %   = -1720.236
+    Win rate % = 18.18
+    PF         = 0.080
+    Avg trade  = -243.81
+  REMOVED
+    N          = 32
+    Net PnL    = -7247.15
+    Return %   = -0.289
+    Max DD %   = -1735.622
+    Win rate % = 15.62
+    PF         = 0.131
+    Avg trade  = -226.47
+
+  [OOS] KEEP entry_distance_atr >= Q25 (thr=-0.484)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 37
+    Net PnL    = -10205.18
+    Return %   = -0.415
+    Max DD %   = -1295.529
+    Win rate % = 35.14
+    PF         = 0.310
+    Avg trade  = -275.82
+  REMOVED
+    N          = 24
+    Net PnL    = -5329.17
+    Return %   = -0.336
+    Max DD %   = -36615.780
+    Win rate % = 20.83
+    PF         = 0.202
+    Avg trade  = -222.05
+
+  [OOS] KEEP entry_distance_atr >= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 23
+    Net PnL    = -6360.95
+    Return %   = -0.416
+    Max DD %   = -785.932
+    Win rate % = 34.78
+    PF         = 0.278
+    Avg trade  = -276.56
+  REMOVED
+    N          = 38
+    Net PnL    = -9173.40
+    Return %   = -0.365
+    Max DD %   = -1054.576
+    Win rate % = 26.32
+    PF         = 0.275
+    Avg trade  = -241.41
+
+  [OOS] KEEP entry_distance_atr >= Q75 (thr=0.469)
+  BASELINE
+    N          = 61
+    Net PnL    = -15534.35
+    Return %   = -0.384
+    Max DD %   = -1888.869
+    Win rate % = 29.51
+    PF         = 0.276
+    Avg trade  = -254.66
+  KEPT
+    N          = 11
+    Net PnL    = -2376.98
+    Return %   = -0.324
+    Max DD %   = -626.497
+    Win rate % = 36.36
+    PF         = 0.315
+    Avg trade  = -216.09
+  REMOVED
+    N          = 50
+    Net PnL    = -13157.37
+    Return %   = -0.397
+    Max DD %   = -3515.820
+    Win rate % = 28.00
+    PF         = 0.269
+    Avg trade  = -263.15
+
+  [TOTAL] KEEP entry_distance_atr >= Q25 (thr=-0.484)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 143
+    Net PnL    = -30213.33
+    Return %   = -0.259
+    Max DD %   = -19728.680
+    Win rate % = 30.77
+    PF         = 0.264
+    Avg trade  = -211.28
+  REMOVED
+    N          = 57
+    Net PnL    = -12507.91
+    Return %   = -0.280
+    Max DD %   = -3526.586
+    Win rate % = 15.79
+    PF         = 0.211
+    Avg trade  = -219.44
+
+  [TOTAL] KEEP entry_distance_atr >= MEDIAN (thr=0.032)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 92
+    Net PnL    = -18942.44
+    Return %   = -0.251
+    Max DD %   = -12331.717
+    Win rate % = 31.52
+    PF         = 0.251
+    Avg trade  = -205.90
+  REMOVED
+    N          = 108
+    Net PnL    = -23778.80
+    Return %   = -0.277
+    Max DD %   = -4125.274
+    Win rate % = 22.22
+    PF         = 0.248
+    Avg trade  = -220.17
+
+  [TOTAL] KEEP entry_distance_atr >= Q75 (thr=0.469)
+  BASELINE
+    N          = 200
+    Net PnL    = -42721.24
+    Return %   = -0.265
+    Max DD %   = -27937.487
+    Win rate % = 26.50
+    PF         = 0.249
+    Avg trade  = -213.61
+  KEPT
+    N          = 47
+    Net PnL    = -8803.42
+    Return %   = -0.229
+    Max DD %   = -7020.398
+    Win rate % = 34.04
+    PF         = 0.271
+    Avg trade  = -187.31
+  REMOVED
+    N          = 153
+    Net PnL    = -33917.82
+    Return %   = -0.276
+    Max DD %   = -12031.633
+    Win rate % = 24.18
+    PF         = 0.243
+    Avg trade  = -221.69
+
+6. LONG vs SHORT (ALL PERIODS, POOLED)
+------------------------------------------------------------------------------
+Для каждой фичи и каждого направления показываем baseline/KEPT по стороне.
+
+  feature = session_minutes_from_open
+    direction = keep_lo
+      LONG BASELINE: N=84 net=-18901.38 pf=0.213 wr=22.62 dd=-3249.18
+      SHORT BASELINE: N=116 net=-23819.86 pf=0.276 wr=29.31 dd=-15532.71
+      LONG KEPT MEDIAN: N=31 net=-6928.46 pf=0.249 wr=22.58 dd=-1803.47
+      SHORT KEPT MEDIAN: N=58 net=-15296.91 pf=0.267 wr=29.31 dd=-9709.88
+    direction = keep_hi
+      LONG BASELINE: N=84 net=-18901.38 pf=0.213 wr=22.62 dd=-3249.18
+      SHORT BASELINE: N=116 net=-23819.86 pf=0.276 wr=29.31 dd=-15532.71
+      LONG KEPT MEDIAN: N=53 net=-11972.92 pf=0.190 wr=22.64 dd=-2021.51
+      SHORT KEPT MEDIAN: N=62 net=-8354.53 pf=0.335 wr=30.65 dd=-5382.99
+
+  feature = rsi_delta_signed
+    direction = keep_lo
+      LONG BASELINE: N=84 net=-18901.38 pf=0.213 wr=22.62 dd=-3249.18
+      SHORT BASELINE: N=116 net=-23819.86 pf=0.276 wr=29.31 dd=-15532.71
+      LONG KEPT MEDIAN: N=36 net=-10270.87 pf=0.143 wr=22.22 dd=-3280.51
+      SHORT KEPT MEDIAN: N=67 net=-14120.39 pf=0.289 wr=26.87 dd=-4950.54
+    direction = keep_hi
+      LONG BASELINE: N=84 net=-18901.38 pf=0.213 wr=22.62 dd=-3249.18
+      SHORT BASELINE: N=116 net=-23819.86 pf=0.276 wr=29.31 dd=-15532.71
+      LONG KEPT MEDIAN: N=49 net=-8934.33 pf=0.275 wr=22.45 dd=-1483.09
+      SHORT KEPT MEDIAN: N=49 net=-9699.47 pf=0.255 wr=32.65 dd=-6407.14
+
+  feature = entry_distance_atr
+    direction = keep_lo
+      LONG BASELINE: N=84 net=-18901.38 pf=0.213 wr=22.62 dd=-3249.18
+      SHORT BASELINE: N=116 net=-23819.86 pf=0.276 wr=29.31 dd=-15532.71
+      LONG KEPT MEDIAN: N=46 net=-11418.61 pf=0.140 wr=13.04 dd=-12892.38
+      SHORT KEPT MEDIAN: N=63 net=-12710.38 pf=0.320 wr=28.57 dd=-2850.92
+    direction = keep_hi
+      LONG BASELINE: N=84 net=-18901.38 pf=0.213 wr=22.62 dd=-3249.18
+      SHORT BASELINE: N=116 net=-23819.86 pf=0.276 wr=29.31 dd=-15532.71
+      LONG KEPT MEDIAN: N=38 net=-7482.78 pf=0.303 wr=34.21 dd=-2362.84
+      SHORT KEPT MEDIAN: N=54 net=-11459.66 pf=0.212 wr=29.63 dd=-7420.85
+
+7. WHAT THE DATA SHOW — READ-ONLY SUMMARY
+------------------------------------------------------------------------------
+Все цифры выше — counterfactual research only.
+Никакие пороги не установлены. Baseline всегда показан первым.
+Комбинации фич НЕ тестировались.
+
+8. FINAL CONCLUSION
+------------------------------------------------------------------------------
+Ответы будут заполнены вручную на основе прочтения чисел выше:
+  1. Есть ли кандидат, улучшающий результат одновременно в VALIDATION и OOS?
+  2. Какова цена улучшения в количестве сделок?
+  3. Снижается ли Max DD?
+  4. Улучшается ли PF?
+  5. Есть ли кандидат, ухудшающий результат несмотря на хороший v5.21 separation?
+  6. Evidence sufficient для v5.23?

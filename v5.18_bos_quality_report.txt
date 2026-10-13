@@ -1,0 +1,232 @@
+==============================================================================
+MOEX TRADING LAB — v5.18 BOS QUALITY LAB
+RESEARCH ONLY — STRATEGY LOGIC UNCHANGED
+Causal features known at the BOS bar; future labels research only.
+==============================================================================
+
+BOS events: 319
+  DISCOVERY   N=161 (LONG=62 / SHORT=99)
+  VALIDATION  N=66 (LONG=23 / SHORT=43)
+  OOS         N=90 (LONG=39 / SHORT=51)
+
+Feature correlations vs mfe_6 (research only, not strategy rules).
+------------------------------------------------------------------------------
+
+LONG — DISCOVERY
+------------------------------------------------------------------------------
+feature                             N   corr mfe_6   corr ret_6
+displacement_atr                   62        0.043        0.120
+candle_range_atr                   62        0.019        0.231
+candle_body_pct                    62       -0.288        0.215
+upper_wick_pct                     62        0.083        0.087
+lower_wick_pct                     62        0.251       -0.279
+volume_ratio                       62        0.092        0.349
+pre_move_3_pct                     62        0.421       -0.093
+pre_move_6_pct                     62        0.106       -0.105
+pre_move_12_pct                    62        0.211        0.114
+vwap_signed_pct                    62        0.013        0.057
+ema9_21_signed                     62        0.037        0.093
+ema21_50_signed                    62       -0.002        0.135
+rsi_delta_signed                   62        0.335       -0.101
+macd_hist_signed                   62       -0.037       -0.077
+session_minutes_from_open          62       -0.091       -0.094
+session_minutes_to_close           62        0.091        0.094
+consecutive_same_direction_bos     62       -0.103       -0.016
+entry_distance_atr                 58        0.612        0.360
+event_strength                     62       -0.125        0.172
+
+LONG — VALIDATION
+------------------------------------------------------------------------------
+feature                             N   corr mfe_6   corr ret_6
+displacement_atr                   21       -0.039       -0.012
+candle_range_atr                   21        0.216        0.145
+candle_body_pct                    21        0.211        0.137
+upper_wick_pct                     21       -0.200       -0.276
+lower_wick_pct                     21       -0.104        0.082
+volume_ratio                       21        0.182        0.085
+pre_move_3_pct                     21        0.070       -0.235
+pre_move_6_pct                     21       -0.145       -0.424
+pre_move_12_pct                    21       -0.219       -0.609
+vwap_signed_pct                    21       -0.196       -0.521
+ema9_21_signed                     21       -0.249       -0.578
+ema21_50_signed                    21       -0.078       -0.330
+rsi_delta_signed                   21        0.382        0.360
+macd_hist_signed                   21       -0.260       -0.452
+session_minutes_from_open          21       -0.358       -0.165
+session_minutes_to_close           21        0.358        0.165
+consecutive_same_direction_bos     21       -0.111       -0.201
+entry_distance_atr                 18        0.396        0.512
+event_strength                     21        0.205        0.122
+
+LONG — OOS
+------------------------------------------------------------------------------
+feature                             N   corr mfe_6   corr ret_6
+displacement_atr                   39       -0.137       -0.059
+candle_range_atr                   39        0.301        0.247
+candle_body_pct                    39        0.151        0.031
+upper_wick_pct                     39       -0.019       -0.054
+lower_wick_pct                     39       -0.148        0.008
+volume_ratio                       39       -0.087        0.036
+pre_move_3_pct                     39        0.191       -0.021
+pre_move_6_pct                     39        0.130       -0.105
+pre_move_12_pct                    39        0.246       -0.040
+vwap_signed_pct                    39        0.345        0.026
+ema9_21_signed                     39       -0.049       -0.153
+ema21_50_signed                    39       -0.126        0.005
+rsi_delta_signed                   39        0.062        0.058
+macd_hist_signed                   39       -0.089       -0.152
+session_minutes_from_open          39       -0.129        0.144
+session_minutes_to_close           39        0.129       -0.144
+consecutive_same_direction_bos     39        0.149        0.189
+entry_distance_atr                 36        0.551        0.577
+event_strength                     39        0.150        0.131
+
+SHORT — DISCOVERY
+------------------------------------------------------------------------------
+feature                             N   corr mfe_6   corr ret_6
+displacement_atr                   99        0.106        0.140
+candle_range_atr                   99       -0.095       -0.105
+candle_body_pct                    99       -0.180       -0.205
+upper_wick_pct                     99        0.163        0.216
+lower_wick_pct                     99        0.065        0.043
+volume_ratio                       99       -0.117       -0.073
+pre_move_3_pct                     99        0.147       -0.030
+pre_move_6_pct                     99        0.087       -0.026
+pre_move_12_pct                    99        0.109       -0.097
+vwap_signed_pct                    99        0.087       -0.176
+ema9_21_signed                     99        0.111       -0.228
+ema21_50_signed                    99        0.082       -0.241
+rsi_delta_signed                   99        0.040        0.111
+macd_hist_signed                   99       -0.032        0.133
+session_minutes_from_open          99       -0.083       -0.079
+session_minutes_to_close           99        0.083        0.079
+consecutive_same_direction_bos     99       -0.039       -0.146
+entry_distance_atr                 89        0.523        0.565
+event_strength                     99       -0.097       -0.021
+
+SHORT — VALIDATION
+------------------------------------------------------------------------------
+feature                             N   corr mfe_6   corr ret_6
+displacement_atr                   42       -0.134       -0.232
+candle_range_atr                   42        0.040       -0.131
+candle_body_pct                    42       -0.010        0.026
+upper_wick_pct                     42        0.189        0.122
+lower_wick_pct                     42       -0.240       -0.203
+volume_ratio                       42        0.008       -0.111
+pre_move_3_pct                     42       -0.130       -0.244
+pre_move_6_pct                     42       -0.266       -0.471
+pre_move_12_pct                    42       -0.314       -0.402
+vwap_signed_pct                    42       -0.295       -0.349
+ema9_21_signed                     42       -0.317       -0.378
+ema21_50_signed                    42        0.059       -0.042
+rsi_delta_signed                   42       -0.038       -0.010
+macd_hist_signed                   42       -0.346       -0.341
+session_minutes_from_open          42       -0.196        0.002
+session_minutes_to_close           42        0.196       -0.002
+consecutive_same_direction_bos     42       -0.148       -0.035
+entry_distance_atr                 38        0.685        0.605
+event_strength                     42       -0.081       -0.190
+
+SHORT — OOS
+------------------------------------------------------------------------------
+feature                             N   corr mfe_6   corr ret_6
+displacement_atr                   50       -0.098       -0.125
+candle_range_atr                   50        0.021        0.061
+candle_body_pct                    50        0.222        0.419
+upper_wick_pct                     50       -0.145       -0.368
+lower_wick_pct                     50       -0.175       -0.234
+volume_ratio                       50       -0.121        0.033
+pre_move_3_pct                     50        0.078       -0.185
+pre_move_6_pct                     50        0.111       -0.195
+pre_move_12_pct                    50       -0.082       -0.277
+vwap_signed_pct                    50        0.141       -0.067
+ema9_21_signed                     50        0.068       -0.197
+ema21_50_signed                    50        0.130        0.083
+rsi_delta_signed                   50        0.078        0.043
+macd_hist_signed                   50       -0.162       -0.185
+session_minutes_from_open          50       -0.031        0.028
+session_minutes_to_close           50        0.031       -0.028
+consecutive_same_direction_bos     50       -0.035        0.057
+entry_distance_atr                 46        0.252        0.384
+event_strength                     50        0.163        0.180
+
+Event class summary by side × period.
+------------------------------------------------------------------------------
+
+LONG — DISCOVERY
+------------------------------------------------------------------------------
+event_class                             N      mfe6      ret6     win   +MFE>=0.30
+BOS_BAD_FROM_OUTSET                    32    +0.052    -0.108     6.2            0
+MANAGED_REENTRY_GIVEBACK               10    +0.321    +0.110    70.0            5
+MARGINAL_BOS                            2    +0.141    +0.084    50.0            0
+GOOD_BOS_LATE_ENTRY                     1    +1.725    -0.883     0.0            1
+GOOD_BOS_ENGINE_EARNED                  6    +0.377    +0.198    66.7            3
+BOS_NO_TRADE                            4    +0.154    -0.030    50.0            1
+BOS_GOOD_NO_ORDINARY_TRADE              4    +0.385    +0.260   100.0            3
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE       3    +0.300    +0.199   100.0            1
+
+LONG — VALIDATION
+------------------------------------------------------------------------------
+event_class                             N      mfe6      ret6     win   +MFE>=0.30
+NO_DATA                                 2      +nan      +nan     nan            0
+BOS_BAD_FROM_OUTSET                    13    +0.031    -0.102    15.4            0
+MANAGED_REENTRY_GIVEBACK                1    +0.245    +0.063   100.0            0
+GOOD_BOS_ENGINE_EARNED                  4    +0.435    +0.338    75.0            3
+BOS_GOOD_NO_ORDINARY_TRADE              2    +0.288    +0.189   100.0            1
+MARGINAL_BOS                            1    +0.189    +0.118   100.0            0
+
+LONG — OOS
+------------------------------------------------------------------------------
+event_class                             N      mfe6      ret6     win   +MFE>=0.30
+BOS_BAD_FROM_OUTSET                    22    +0.046    -0.226     9.1            0
+MANAGED_REENTRY_GIVEBACK                3    +0.401    +0.044    33.3            1
+MARGINAL_BOS                            4    +0.131    -0.182    25.0            1
+GOOD_BOS_ENGINE_EARNED                  4    +0.255    +0.110    75.0            2
+BOS_GOOD_NO_ORDINARY_TRADE              4    +0.501    +0.349   100.0            3
+BOS_NO_TRADE                            1    +0.100    -0.140     0.0            0
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE       1    +0.055    -0.218     0.0            0
+
+SHORT — DISCOVERY
+------------------------------------------------------------------------------
+event_class                             N      mfe6      ret6     win   +MFE>=0.30
+MARGINAL_BOS                            8    +0.149    +0.113    75.0            0
+BOS_NO_TRADE                            6    +0.143    -0.026    33.3            0
+GOOD_BOS_ENGINE_EARNED                  8    +0.307    +0.207    87.5            4
+BOS_GOOD_NO_ORDINARY_TRADE              6    +0.454    +0.262   100.0            6
+BOS_BAD_FROM_OUTSET                    64    +0.075    -0.099    18.8            0
+MANAGED_REENTRY_GIVEBACK                3    +0.248    +0.190   100.0            1
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE       4    +0.262    +0.139    75.0            2
+
+SHORT — VALIDATION
+------------------------------------------------------------------------------
+event_class                             N      mfe6      ret6     win   +MFE>=0.30
+MANAGED_REENTRY_GIVEBACK                2    +0.325    +0.062   100.0            1
+BOS_BAD_FROM_OUTSET                    32    +0.057    -0.096    18.8            0
+NO_DATA                                 1      +nan      +nan     nan            0
+BOS_GOOD_NO_ORDINARY_TRADE              1    +0.358    +0.349   100.0            1
+MARGINAL_BOS                            4    +0.283    +0.211   100.0            1
+BOS_NO_TRADE                            1    +0.382    +0.347   100.0            1
+GOOD_BOS_ENGINE_EARNED                  1    +0.425    +0.263   100.0            1
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE       1    +0.403    +0.254   100.0            1
+
+SHORT — OOS
+------------------------------------------------------------------------------
+event_class                             N      mfe6      ret6     win   +MFE>=0.30
+MARGINAL_BOS                            4    +0.227    -0.083    50.0            1
+BOS_BAD_FROM_OUTSET                    24    +0.068    -0.280     8.3            0
+GOOD_BOS_ENGINE_EARNED                  7    +0.793    +0.441    85.7            6
+NO_DATA                                 1      +nan      +nan     nan            0
+BOS_GOOD_NO_ORDINARY_TRADE              3    +0.697    +0.260    66.7            3
+BOS_NO_TRADE                            5    +0.250    +0.040    80.0            1
+GOOD_BOS_ENGINE_FAILED_TO_CAPTURE       2    +0.451    -0.101    50.0            2
+MANAGED_REENTRY_GIVEBACK                5    +0.605    +0.267   100.0            5
+
+Causality note:
+  All causal features are read from the BOS bar itself or from
+  earlier bars of the same 5M dataframe. Future labels (mfe_*, mae_*,
+  future_return_*) are computed strictly inside the event's session
+  and are never used as inputs to any strategy decision.
+
+Outputs:
+  v5.18_bos_quality_dataset.csv
+==============================================================================

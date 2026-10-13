@@ -1,0 +1,156 @@
+==============================================================================
+v5.23 REGIME STUDY -- INTEGRITY REPORT
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY -- NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED
+==============================================================================
+
+Rows: 319
+
+GROUP COUNTS
+------------------------------------------------------------------------------
+BAD_FROM_OUTSET      N= 188
+GOOD_ENGINE_EARNED   N=  30
+INTERMEDIATE         N= 101
+
+GROUP x DIRECTION
+------------------------------------------------------------------------------
+BAD_FROM_OUTSET      LONG=  68  SHORT= 120
+GOOD_ENGINE_EARNED   LONG=  14  SHORT=  16
+INTERMEDIATE         LONG=  44  SHORT=  57
+
+GROUP x PERIOD
+------------------------------------------------------------------------------
+BAD_FROM_OUTSET      DISCOVERY   N=  96
+BAD_FROM_OUTSET      VALIDATION  N=  45
+BAD_FROM_OUTSET      OOS         N=  46
+
+GOOD_ENGINE_EARNED   DISCOVERY   N=  14
+GOOD_ENGINE_EARNED   VALIDATION  N=   5
+GOOD_ENGINE_EARNED   OOS         N=  11
+
+INTERMEDIATE         DISCOVERY   N=  51
+INTERMEDIATE         VALIDATION  N=  16
+INTERMEDIATE         OOS         N=  33
+
+LEAKAGE ASSERT
+------------------------------------------------------------------------------
+pre_bos_* columns: 58
+NOTE: _debug_max_idx_used is a GLOBAL df_5m index; event_index is
+      the SESSION-LOCAL position. Strict per-row leakage check
+      is performed in v5.23_regime_negative_control.txt.
+rows with finite _debug_max_idx_used: 319 / 319
+
+NaN / MISSING COUNTS (top 40)
+------------------------------------------------------------------------------
+pre_bos_5m_prev_swing_high_label              NaN=  319 / 319
+pre_bos_5m_prev_swing_low_label               NaN=  319 / 319
+pre_bos_5m_structure_state                    NaN=  319 / 319
+pre_bos_5m_current_trend                      NaN=  319 / 319
+pre_bos_15m_trend                             NaN=  319 / 319
+pre_bos_mkt_volatility_regime                 NaN=  319 / 319
+pre_bos_mkt_day_type                          NaN=  319 / 319
+pre_bos_15m_atr_ratio_20                      NaN=    3 / 319
+pre_bos_mkt_dist_prev_day_high_atr            NaN=    3 / 319
+pre_bos_mkt_dist_prev_day_low_atr             NaN=    3 / 319
+pre_bos_mkt_prev_day_range_pct                NaN=    3 / 319
+pre_bos_mkt_prev_day_close_atr                NaN=    3 / 319
+pre_bos_mkt_day_open_gap_pct                  NaN=    3 / 319
+pre_bos_1m_ret_5m                             NaN=    0 / 319
+pre_bos_1m_ret_10m                            NaN=    0 / 319
+pre_bos_1m_ret_20m                            NaN=    0 / 319
+pre_bos_1m_ret_30m                            NaN=    0 / 319
+pre_bos_1m_range_5m_pct                       NaN=    0 / 319
+pre_bos_1m_range_20m_pct                      NaN=    0 / 319
+pre_bos_1m_range_atr_5m                       NaN=    0 / 319
+pre_bos_1m_range_atr_20m                      NaN=    0 / 319
+pre_bos_1m_vol_ratio_5m                       NaN=    0 / 319
+pre_bos_1m_vol_ratio_20m                      NaN=    0 / 319
+pre_bos_1m_compression_ratio                  NaN=    0 / 319
+pre_bos_1m_hh_count_20m                       NaN=    0 / 319
+pre_bos_1m_ll_count_20m                       NaN=    0 / 319
+pre_bos_1m_pullback_depth_atr_20m             NaN=    0 / 319
+pre_bos_1m_consec_same_dir                    NaN=    0 / 319
+pre_bos_1m_last_body_pct                      NaN=    0 / 319
+pre_bos_1m_last_upper_wick_pct                NaN=    0 / 319
+pre_bos_1m_last_lower_wick_pct                NaN=    0 / 319
+pre_bos_5m_atr14                              NaN=    0 / 319
+pre_bos_5m_atr_ratio_20                       NaN=    0 / 319
+pre_bos_5m_ema9_21_signed                     NaN=    0 / 319
+pre_bos_5m_ema21_50_signed                    NaN=    0 / 319
+pre_bos_5m_close_ema21_signed                 NaN=    0 / 319
+pre_bos_5m_rsi14                              NaN=    0 / 319
+pre_bos_5m_rsi_delta_3                        NaN=    0 / 319
+pre_bos_5m_macd_hist_atr                      NaN=    0 / 319
+pre_bos_5m_macd_hist_delta_3                  NaN=    0 / 319
+
+COLUMN LIST
+------------------------------------------------------------------------------
+  event_index
+  event_time
+  direction
+  session_key
+  event_class
+  period
+  group
+  _debug_max_idx_used
+  pre_bos_1m_ret_5m
+  pre_bos_1m_ret_10m
+  pre_bos_1m_ret_20m
+  pre_bos_1m_ret_30m
+  pre_bos_1m_range_5m_pct
+  pre_bos_1m_range_20m_pct
+  pre_bos_1m_range_atr_5m
+  pre_bos_1m_range_atr_20m
+  pre_bos_1m_vol_ratio_5m
+  pre_bos_1m_vol_ratio_20m
+  pre_bos_1m_compression_ratio
+  pre_bos_1m_hh_count_20m
+  pre_bos_1m_ll_count_20m
+  pre_bos_1m_pullback_depth_atr_20m
+  pre_bos_1m_consec_same_dir
+  pre_bos_1m_last_body_pct
+  pre_bos_1m_last_upper_wick_pct
+  pre_bos_1m_last_lower_wick_pct
+  pre_bos_5m_atr14
+  pre_bos_5m_atr_ratio_20
+  pre_bos_5m_ema9_21_signed
+  pre_bos_5m_ema21_50_signed
+  pre_bos_5m_close_ema21_signed
+  pre_bos_5m_rsi14
+  pre_bos_5m_rsi_delta_3
+  pre_bos_5m_macd_hist_atr
+  pre_bos_5m_macd_hist_delta_3
+  pre_bos_5m_vwap_distance_pct_signed
+  pre_bos_5m_volume_ratio
+  pre_bos_5m_range_atr_current
+  pre_bos_5m_range_atr_prev
+  pre_bos_5m_prev_swing_high_label
+  pre_bos_5m_prev_swing_low_label
+  pre_bos_5m_prev_impulse_size_atr
+  pre_bos_5m_prev_pullback_depth_atr
+  pre_bos_5m_structure_state
+  pre_bos_5m_current_trend
+  pre_bos_15m_ema9_21_signed
+  pre_bos_15m_ema21_50_signed
+  pre_bos_15m_close_vs_ema21_signed
+  pre_bos_15m_trend
+  pre_bos_15m_atr14
+  pre_bos_15m_atr_ratio_20
+  pre_bos_15m_range_current
+  pre_bos_15m_range_avg5
+  pre_bos_15m_position_in_range
+  pre_bos_mkt_session_minutes_from_open
+  pre_bos_mkt_session_minutes_to_close
+  pre_bos_mkt_day_range_pct
+  pre_bos_mkt_day_position
+  pre_bos_mkt_dist_session_open_atr
+  pre_bos_mkt_dist_prev_day_high_atr
+  pre_bos_mkt_dist_prev_day_low_atr
+  pre_bos_mkt_prev_day_range_pct
+  pre_bos_mkt_prev_day_close_atr
+  pre_bos_mkt_day_open_gap_pct
+  pre_bos_mkt_volatility_regime
+  pre_bos_mkt_day_type
+
+NO ORDERS WERE SENT. NO TRADING ACTION WAS PERFORMED.
+==============================================================================
