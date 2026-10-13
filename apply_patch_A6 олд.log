@@ -1,0 +1,49 @@
+======================================================================
+MOEX TRADING LAB — apply_patch_A6.py
+======================================================================
+Папка: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+Целевой файл: main_v5.17_threshold_path_lab_v2.py
+
+[OK] Файл найден: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+     Размер: 373354 байт
+     SHA256: e82d90dcb5be59ab0fc7308b07fba5a50024aace0a8fdbb5c300281ef75b1bb6
+[OK] SHA256 совпадает с ожидаемым (оригинал v5.17 + A9 + A2).
+[OK] Оба оригинальных блока найдены.
+[OK] Резервная копия: main_v5.17_threshold_path_lab_v2.py.bak_A6
+[OK] Патч A6 применён.
+
+======================================================================
+DIFF — что изменилось (в общих чертах):
+======================================================================
+
+1) _aggregate_5m_uncached:
+   В agg-словарь добавлено: 'begin': 'count'
+   Переименовано в n_1m через .rename(columns={'begin': 'n_1m'})
+
+2) Новая функция _a6_audit_5m_groups:
+   - считает n_1m по каждой 5M свече
+   - определяет is_full_group / is_incomplete / is_oversized
+   - исключает последнюю свечу сессии из требования n_1m == 5
+   - пишет v5.14_5m_group_audit.csv
+   - печатает отчёт в консоль
+
+3) _validate_5m_frame:
+   В конце добавлен вызов _a6_audit_5m_groups(result, source_label)
+
+======================================================================
+До патча:    362425 символов
+После патча: 365856 символов
+Разница:     3431 символов
+======================================================================
+
+[PASS] Патч A6 применён успешно.
+
+ВАЖНО: перед запуском убедитесь, что cache 5M переименован в .bak_A6.
+Иначе _aggregate_5m_uncached не будет вызван, и n_1m не появится.
+
+Запуск:
+    python main_v5.17_threshold_path_lab_v2.py *>&1 | Tee-Object -FilePath v5.17_v2_A6_output.txt
+
+Откат (если 27 trades изменятся):
+    Copy-Item "main_v5.17_threshold_path_lab_v2.py.bak_A6" "main_v5.17_threshold_path_lab_v2.py" -Force
+

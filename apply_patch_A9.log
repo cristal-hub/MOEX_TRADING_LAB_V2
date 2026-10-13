@@ -1,0 +1,14 @@
+======================================================================
+MOEX TRADING LAB — apply_patch_A9.py
+======================================================================
+Папка: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+Целевой файл: main_v5.17_threshold_path_lab_v2.py
+
+[OK] Файл найден: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+     Размер: 361203 байт
+     SHA256: 98df3ed0c75551a65f020537c6dfac00e0e0e829bd4b0706b72f200357521016
+
+[INFO] Проверка SHA256 пропущена (эталон не задан).
+       Убедимся хотя бы, что A1 уже применён и A9 ещё не применён.
+[STOP] Не найден маркер A1 (signal_event_global).
+       Похоже, A1 ещё не применён. Сначала запустите apply_patch_A1.py.

@@ -1,0 +1,69 @@
+======================================================================
+MOEX TRADING LAB — apply_patch_A1_full.py (version 2)
+======================================================================
+Папка: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+Целевой файл: main_v5.17_threshold_path_lab_v2.py
+
+[OK] Файл найден: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+     Размер: 377392 байт
+     SHA256: be85058290ca7fad9b6f0954c701b4598fbb2faee93d7348027d84f1644c0c62
+[OK] SHA256 совпадает с ожидаемым (A9 + A2 + A6).
+
+Найдено вызовов _v511_session_global_index( в исходнике: 10
+Из них 1 — это определение самой функции (def), остальные — реальные вызовы.
+
+Проверка наличия всех блоков:
+  [OK] build_signal_timeline
+  [OK] _v511_event_trade_attribution
+  [OK] _v514_event_universe
+  [OK] _v515_event_universe
+  [OK] _v515_trade_map
+  [OK] run_v512_bos_lifecycle_lab / block 1
+  [OK] run_v512_bos_lifecycle_lab / block 2
+  [OK] run_v513_bos_mfe_time_lab / block 1
+  [OK] run_v513_bos_mfe_time_lab / block 2
+
+[OK] Все 9 блоков найдены.
+[OK] Резервная копия: main_v5.17_threshold_path_lab_v2.py.bak_A1_full_v2
+[OK] Патч A1-full v2 применён.
+
+Вызовов _v511_session_global_index( осталось: 2
+(должно быть 1 — определение самой функции 'def _v511_session_global_index')
+
+======================================================================
+ЧТО ИЗМЕНИЛОСЬ:
+======================================================================
+
+1) build_signal_timeline:
+   signal_event теперь содержит ГЛОБАЛЬНЫЙ индекс
+
+2-5) v5.11.2, v5.14, v5.15:
+   убрана двойная конвертация (5 мест)
+
+6-7) run_v512_bos_lifecycle_lab:
+   убрана двойная конвертация (2 места)
+
+8-9) run_v513_bos_mfe_time_lab:
+   убрана двойная конвертация (2 места)
+
+======================================================================
+До патча:    366078 символов
+После патча: 367056 символов
+Разница:     978 символов
+======================================================================
+
+[PASS] Патч A1-full v2 применён успешно.
+
+ЧТО ОЖИДАТЬ:
+  - 27 ordinary trades: НЕ изменились
+  - 53 managed trades:  НЕ изменились
+  - CSV v5.17_threshold_path_lab.csv: совпадает с _ORIGINAL
+  - diag_signal_event_index: ГЛОБАЛЬНЫЙ (2776 вместо 49)
+  - v5.11.2 / v5.12 / v5.13 / v5.15 / v5.16 / v5.16.1 / v5.17: PASS
+
+Запуск:
+    python main_v5.17_threshold_path_lab_v2.py *>&1 | Tee-Object -FilePath v5.17_v2_A1full_v2_output.txt
+
+Откат:
+    Copy-Item "main_v5.17_threshold_path_lab_v2.py.bak_A1_full_v2" "main_v5.17_threshold_path_lab_v2.py" -Force
+

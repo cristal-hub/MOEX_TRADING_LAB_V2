@@ -1,0 +1,45 @@
+======================================================================
+MOEX TRADING LAB — apply_patch_A2.py
+======================================================================
+Папка: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+Целевой файл: main_v5.17_threshold_path_lab_v2.py
+
+[OK] Файл найден: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+     Размер: 372664 байт
+     SHA256: 03a815f216a503106d6bc6d96f99c514cd2f4881a838e9ad1d82a410ec42ee0b
+[OK] SHA256 совпадает с ожидаемым (оригинал v5.17 + A9).
+[OK] Оригинальный блок RSI найден.
+     Вхождений оригинального блока: 1
+[OK] Резервная копия: main_v5.17_threshold_path_lab_v2.py.bak_A2
+[OK] Патч A2 применён.
+
+======================================================================
+DIFF — что изменилось:
+======================================================================
+
+БЫЛО:
+    rs = avg_gain / avg_loss.replace(0, np.nan)
+    df['rsi14'] = 100 - (100 / (1 + rs))
+
+СТАЛО:
+    rs = avg_gain / avg_loss.replace(0, np.nan)
+    _rsi = 100 - (100 / (1 + rs))
+    # A2: корректные края
+    _rsi = _rsi.mask((avg_loss == 0) & (avg_gain > 0), 100.0)
+    _rsi = _rsi.mask((avg_loss == 0) & (avg_gain == 0), 50.0)
+    df['rsi14'] = _rsi
+
+======================================================================
+До патча:    361754 символов
+После патча: 362425 символов
+Разница:     671 символов
+======================================================================
+
+[PASS] Патч A2 применён успешно.
+
+Следующий шаг — запуск:
+    python main_v5.17_threshold_path_lab_v2.py *>&1 | Tee-Object -FilePath v5.17_v2_A2_output.txt
+
+Откат (если 27 trades изменятся):
+    Copy-Item "main_v5.17_threshold_path_lab_v2.py.bak_A2" "main_v5.17_threshold_path_lab_v2.py" -Force
+

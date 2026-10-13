@@ -1,0 +1,65 @@
+======================================================================
+MOEX TRADING LAB — apply_patch_A1_full.py
+======================================================================
+Папка: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+Целевой файл: main_v5.17_threshold_path_lab_v2.py
+
+[OK] Файл найден: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+     Размер: 377392 байт
+     SHA256: be85058290ca7fad9b6f0954c701b4598fbb2faee93d7348027d84f1644c0c62
+[OK] SHA256 совпадает с ожидаемым (A9 + A2 + A6).
+
+Проверка наличия всех блоков:
+  [OK] build_signal_timeline
+  [OK] _v511_event_trade_attribution
+  [OK] _v514_event_universe
+  [OK] _v515_event_universe
+  [OK] _v515_trade_map
+
+[OK] Все 5 блоков найдены.
+[OK] Резервная копия: main_v5.17_threshold_path_lab_v2.py.bak_A1_full
+[OK] Патч A1-full применён.
+
+======================================================================
+ЧТО ИЗМЕНИЛОСЬ:
+======================================================================
+
+1) build_signal_timeline:
+   signal_event теперь содержит ГЛОБАЛЬНЫЙ индекс
+   (first_session_index + local_index)
+
+2) _v511_event_trade_attribution:
+   убрана двойная конвертация через _v511_session_global_index
+   event_index = int(event_local_raw)
+
+3) _v514_event_universe:
+   убрана двойная конвертация
+
+4) _v515_event_universe:
+   убрана двойная конвертация
+
+5) _v515_trade_map:
+   убрана двойная конвертация
+
+======================================================================
+До патча:    366078 символов
+После патча: 367158 символов
+Разница:     1080 символов
+======================================================================
+
+[PASS] Патч A1-full применён успешно.
+
+ЧТО ОЖИДАТЬ:
+  - 27 ordinary trades: НЕ изменились
+  - 53 managed trades:  НЕ изменились
+  - CSV v5.17_threshold_path_lab.csv: совпадает с _ORIGINAL
+  - diag_signal_event_index в v5.9_research_features.csv:
+    теперь ГЛОБАЛЬНЫЙ (например, 2776 вместо 49)
+  - v5.11.2 / v5.12 / v5.13 / v5.15 / v5.16 / v5.16.1 / v5.17: PASS
+
+Запуск:
+    python main_v5.17_threshold_path_lab_v2.py *>&1 | Tee-Object -FilePath v5.17_v2_A1full_output.txt
+
+Откат:
+    Copy-Item "main_v5.17_threshold_path_lab_v2.py.bak_A1_full" "main_v5.17_threshold_path_lab_v2.py" -Force
+

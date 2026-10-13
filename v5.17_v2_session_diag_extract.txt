@@ -1,0 +1,102 @@
+﻿
+################ BLOCK: DIAGNOSTIC: IRREGULAR MOEX SESSIONS ################
+DIAGNOSTIC: IRREGULAR MOEX SESSIONS
+======================================================================
+Total sessions (1M): 256
+Irregular sessions:  3
+
+[INFO] Irregular sessions (first candle outside 06:55-07:00 band or last candle outside 15:15-15:20 band):
+
+  2026-02-23 | 2026-02-23 09:59:00 -> 2026-02-23 18:18:00 |   500 1M |  101 5M
+  2026-05-01 | 2026-05-01 09:59:00 -> 2026-05-01 18:18:00 |   500 1M |  101 5M
+  2026-06-12 | 2026-06-12 09:59:00 -> 2026-06-12 18:18:00 |   500 1M |  101 5M
+
+Irregular 1M candles total: 1500
+Irregular 5M candles total: 303
+======================================================================
+
+################ BLOCK: DIAG PATCH 1b: SESSION BOUNDARY AUDIT ################
+DIAG PATCH 1b: SESSION BOUNDARY AUDIT (5M)
+======================================================================
+SESSION 2025-09-15 | last_begin=2025-09-15 15:15:00 last_end=2025-09-15 15:18:59 | next_key=2025-09-16 next_first_begin=2025-09-16 06:55:00 candles=101
+SESSION 2025-09-16 | last_begin=2025-09-16 15:15:00 last_end=2025-09-16 15:18:59 | next_key=2025-09-17 next_first_begin=2025-09-17 06:55:00 candles=101
+SESSION 2025-09-17 | last_begin=2025-09-17 15:15:00 last_end=2025-09-17 15:18:59 | next_key=2025-09-18 next_first_begin=2025-09-18 06:55:00 candles=101
+SESSION 2025-09-18 | last_begin=2025-09-18 15:15:00 last_end=2025-09-18 15:18:59 | next_key=2025-09-19 next_first_begin=2025-09-19 06:55:00 candles=101
+SESSION 2025-09-19 | last_begin=2025-09-19 15:15:00 last_end=2025-09-19 15:18:59 | next_key=2025-09-22 next_first_begin=2025-09-22 06:55:00 candles=101
+SESSION 2025-09-22 | last_begin=2025-09-22 15:15:00 last_end=2025-09-22 15:18:59 | next_key=2025-09-23 next_first_begin=2025-09-23 06:55:00 candles=101
+SESSION 2025-09-23 | last_begin=2025-09-23 15:15:00 last_end=2025-09-23 15:18:59 | next_key=2025-09-24 next_first_begin=2025-09-24 06:55:00 candles=101
+SESSION 2025-09-24 | last_begin=2025-09-24 15:15:00 last_end=2025-09-24 15:18:59 | next_key=2025-09-25 next_first_begin=2025-09-25 06:55:00 candles=101
+SESSION 2025-09-25 | last_begin=2025-09-25 15:15:00 last_end=2025-09-25 15:18:59 | next_key=2025-09-26 next_first_begin=2025-09-26 06:55:00 candles=101
+SESSION 2025-09-26 | last_begin=2025-09-26 15:15:00 last_end=2025-09-26 15:18:59 | next_key=2025-09-29 next_first_begin=2025-09-29 06:55:00 candles=101
+
+Total sessions:            256
+Boundary transitions:      255
+Non-adjacent transitions:  0
+NOTE: a non-adjacent transition means the last bar of one
+session is NOT immediately followed by the first bar of the
+next session in the 5M dataframe. The backtest still detects
+END_OF_SESSION on the first bar of the next session.
+======================================================================
+
+################ BLOCK: BACKTEST INTEGRITY TESTS ################
+BACKTEST INTEGRITY TESTS
+======================================================================
+
+[PASS] No trade uses future entry beyond dataset
+[PASS] All entries occur one bar after signal
+[PASS] Trade prices are positive
+[PASS] No weekend candles remain in backtest dataset
+[PASS] No overlapping trades
+[PASS] Timeline is chronological
+[PASS] Timeline covers every backtest bar exactly once
+[PASS] Trade exits are valid relative to entries
+[PASS] No entry crosses into a new trading session
+[DIAG WARN] Trades crossing an MOEX trading-session boundary:
+
+  #2 SHORT entry=2025-09-16 11:40:00 (2025-09-16 00:00:00) -> exit=2025-09-17 06:55:00 (2025-09-17 00:00:00) reason=OPPOSITE_SIGNAL
+  #99 LONG entry=2026-03-10 10:30:00 (2026-03-10 00:00:00) -> exit=2026-03-11 06:55:00 (2026-03-11 00:00:00) reason=OPPOSITE_SIGNAL
+  #132 SHORT entry=2026-05-13 09:55:00 (2026-05-13 00:00:00) -> exit=2026-05-14 06:55:00 (2026-05-14 00:00:00) reason=OPPOSITE_SIGNAL
+
+[FAIL] No position crosses an MOEX trading-session boundary
+[PASS] Timeline session keys are chronological
+[PASS] Trade sequence is chronological
+[PASS] Diagnostics fields exist on every trade
+[PASS] Diagnostic MFE/MAE are finite when diagnostics are enabled
+[PASS] Diagnostic holding bars match entry/exit indexes
+[PASS] Diagnostic structure events are strictly after signal
+[PASS] Backtest remains research-only
+
+----------------------------------------------------------------------
+
+################ BLOCK: MANAGED BACKTEST INTEGRITY TESTS ################
+MANAGED BACKTEST INTEGRITY TESTS
+======================================================================
+
+[PASS] No future entry beyond dataset
+[PASS] All entries occur one bar after signal
+[PASS] All exits are valid relative to entries
+[PASS] No entry crosses session boundary
+[PASS] Non-forced exits execute on next bar
+[DIAG WARN] MANAGED trades crossing an MOEX trading-session boundary:
+
+  #67 LONG entry=2025-11-19 14:40:00 (2025-11-19 00:00:00) -> exit=2025-11-20 06:55:00 (2025-11-20 00:00:00) reason=TRAILING_STOP
+  #107 LONG entry=2025-12-24 13:20:00 (2025-12-24 00:00:00) -> exit=2025-12-25 06:55:00 (2025-12-25 00:00:00) reason=TRAILING_STOP
+  #187 LONG entry=2026-03-17 13:30:00 (2026-03-17 00:00:00) -> exit=2026-03-18 06:55:00 (2026-03-18 00:00:00) reason=TRAILING_STOP
+  #188 SHORT entry=2026-03-19 09:30:00 (2026-03-19 00:00:00) -> exit=2026-03-20 06:55:00 (2026-03-20 00:00:00) reason=TRAILING_STOP
+  #240 SHORT entry=2026-05-25 13:45:00 (2026-05-25 00:00:00) -> exit=2026-05-26 06:55:00 (2026-05-26 00:00:00) reason=TRAILING_STOP
+
+[FAIL] No session boundary crossing
+[PASS] No overlapping trades
+[PASS] Timeline covers every bar
+[PASS] No weekend candles
+[PASS] Trailing activation is never before entry
+[PASS] Trailing levels are finite when present
+[PASS] MFE/MAE are finite
+[PASS] Holding bars match indexes
+[PASS] Management is research-only
+
+----------------------------------------------------------------------
+
+################ [DBG][ORD] ################
+
+################ [DBG][MGD] ################
