@@ -1,0 +1,2225 @@
+﻿H4 SOURCE EVIDENCE COMPLETION v2 -- READ ONLY
+Generated: 2026-10-14T18:35:14.7286319+03:00
+CWD: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD IS OPTIMIZED. NO FILTER IS INSTALLED. NO LIVE ORDERS.
+OOS: SEALED. H4 EXECUTION: NOT AUTHORIZED.
+
+==============================================================================
+BLOCK 1: v600_hypothesis_lab.py :: build_forward_labels (L340..L450)
+==============================================================================
+  341:                     break
+  342:         return count
+  343: 
+  344:     feats = {
+  345:         "feat_1m_return_5m_signed": _ret(5),
+  346:         "feat_1m_return_20m_signed": _ret(20),
+  347:         "feat_1m_range_5m_pct": _range(5),
+  348:         "feat_1m_range_20m_pct": _range(20),
+  349:         "feat_1m_vol_ratio_5m": _vol_ratio(5),
+  350:         "feat_1m_consec_same_dir": _consec_same_dir(),
+  351:     }
+  352:     return feats, max_idx
+  353: 
+  354: 
+  355: # ============================================================
+  356: # FORWARD LABELS
+  357: # ============================================================
+  358: 
+  359: def build_forward_labels(df_5m, sk_5m, t0_index):
+  360:     """
+  361:     Compute all forward labels for horizons HORIZONS.
+  362:     Session-safe: stop at session boundary.
+  363:     Returns dict of label_* -> value, and bool whether any partial window.
+  364:     """
+  365:     out = {}
+  366:     session = sk_5m.iloc[t0_index]
+  367:     close_t0 = float(df_5m.iloc[t0_index]["close"])
+  368:     if close_t0 <= 0:
+  369:         return {}, False
+  370: 
+  371:     # Gather future indices per horizon (session-safe)
+  372:     future_indices_all = []
+  373:     for j in range(t0_index + 1, len(df_5m)):
+  374:         if sk_5m.iloc[j] != session:
+  375:             break
+  376:         future_indices_all.append(j)
+  377: 
+  378:     max_available = len(future_indices_all)
+  379: 
+  380:     any_partial = False
+  381:     for h in HORIZONS:
+  382:         if h > max_available:
+  383:             any_partial = True
+  384:             out["label_forward_return_" + str(h)] = np.nan
+  385:             out["label_forward_mfe_" + str(h)] = np.nan
+  386:             out["label_forward_mae_" + str(h)] = np.nan
+  387:             for lv in REACH_LEVELS:
+  388:                 tag = str(lv).replace(".", "_")
+  389:                 out["label_reach_plus_" + tag + "_" + str(h)] = np.nan
+  390:                 out["label_reach_minus_" + tag + "_" + str(h)] = np.nan
+  391:             out["label_first_reach_dir_" + str(h)] = "NEITHER"
+  392:             out["label_partial_window_" + str(h)] = True
+  393:             continue
+  394: 
+  395:         fwd = future_indices_all[:h]
+  396:         fwd_df = df_5m.iloc[fwd]
+  397: 
+  398:         closes = fwd_df["close"].astype(float).to_numpy()
+  399:         highs = fwd_df["high"].astype(float).to_numpy()
+  400:         lows = fwd_df["low"].astype(float).to_numpy()
+  401: 
+  402:         close_h = float(closes[-1])
+  403:         ret_h = (close_h / close_t0 - 1.0) * 100.0
+  404: 
+  405:         max_high = float(np.nanmax(highs))
+  406:         min_low = float(np.nanmin(lows))
+  407:         mfe = (max_high / close_t0 - 1.0) * 100.0
+  408:         mae = (min_low / close_t0 - 1.0) * 100.0
+  409: 
+  410:         out["label_forward_return_" + str(h)] = ret_h
+  411:         out["label_forward_mfe_" + str(h)] = mfe
+  412:         out["label_forward_mae_" + str(h)] = mae
+  413: 
+  414:         for lv in REACH_LEVELS:
+  415:             tag = str(lv).replace(".", "_")
+  416:             up_hit = bool((highs >= close_t0 * (1.0 + lv / 100.0)).any())
+  417:             dn_hit = bool((lows <= close_t0 * (1.0 - lv / 100.0)).any())
+  418:             out["label_reach_plus_" + tag + "_" + str(h)] = up_hit
+  419:             out["label_reach_minus_" + tag + "_" + str(h)] = dn_hit
+  420: 
+  421:         # first reach direction using +-0.10%
+  422:         first_up = np.nan
+  423:         first_dn = np.nan
+  424:         for k, idx in enumerate(fwd):
+  425:             hi = float(df_5m.iloc[idx]["high"])
+  426:             lo = float(df_5m.iloc[idx]["low"])
+  427:             if np.isnan(first_up) and hi >= close_t0 * 1.001:
+  428:                 first_up = k
+  429:             if np.isnan(first_dn) and lo <= close_t0 * 0.999:
+  430:                 first_dn = k
+  431:             if not np.isnan(first_up) and not np.isnan(first_dn):
+  432:                 break
+  433:         if np.isnan(first_up) and np.isnan(first_dn):
+  434:             fr = "NEITHER"
+  435:         elif np.isnan(first_up):
+  436:             fr = "DOWN"
+  437:         elif np.isnan(first_dn):
+  438:             fr = "UP"
+  439:         else:
+  440:             fr = "UP" if first_up < first_dn else "DOWN" if first_dn < first_up else "BOTH"
+  441:         out["label_first_reach_dir_" + str(h)] = fr
+  442:         out["label_partial_window_" + str(h)] = False
+  443: 
+  444:     return out, any_partial
+  445: 
+  446: 
+  447: # ============================================================
+  448: # STATE TAGS (30 frozen tags, 7 blocks)
+  449: # ============================================================
+  450: 
+  451: def build_state_tags(df_5m, i, session_local_idx, session_key, structure_timeline,
+  452:                      df_1m_feats, quantiles):
+  453:     """
+  454:     Build all 30 state tags for the observation at df_5m index i.
+  455:     Uses df_5m.iloc[i] row for continuous values, but everything
+  456:     corresponds to state at close of bar i.
+  457:     """
+  458:     row = df_5m.iloc[i]
+  459:     out = {}
+  460: 
+
+==============================================================================
+BLOCK 1b: HORIZONS / REACH_LEVELS / PERIODS / max_available
+==============================================================================
+   56: HORIZONS = (1, 2, 3, 4, 6, 8, 12, 18, 24)
+
+   59: REACH_LEVELS = (0.10, 0.20, 0.30, 0.50)
+
+   62: PERIODS = (
+
+  378:     max_available = len(future_indices_all)
+
+  380:     any_partial = False
+
+  382:         if h > max_available:
+
+  383:             any_partial = True
+
+  444:     return out, any_partial
+
+
+==============================================================================
+BLOCK 2: v600_hypothesis_lab.py :: assign_period (L130..L180)
+==============================================================================
+  131: 
+  132:     print("  5M session_count=" + str(df_5m["session_key"].nunique()))
+  133:     print()
+  134: 
+  135:     return df_1m, df_5m, sk_1m, sk_5m
+  136: 
+  137: 
+  138: # ============================================================
+  139: # PERIOD ASSIGNMENT
+  140: # ============================================================
+  141: 
+  142: def assign_period(ts):
+  143:     ts = pd.Timestamp(ts)
+  144:     for name, lo, hi in PERIODS:
+  145:         if pd.Timestamp(lo) <= ts <= pd.Timestamp(hi):
+  146:             return name
+  147:     return "OUT_OF_RANGE"
+  148: 
+  149: 
+  150: # ============================================================
+  151: # 5M STRUCTURE TIMELINE (causal, per session)
+  152: # ============================================================
+  153: 
+  154: def build_session_structure_timelines(df_5m, main):
+  155:     """
+  156:     For each session, build a per-bar structure snapshot using only the
+  157:     session prefix up to that bar. This is the same causal information
+  158:     that run_structure_engine would give on a prefix, but computed once
+  159:     per session (O(N) not O(N^2)).
+  160: 
+  161:     Returns dict: session_key -> list of dicts (one per bar, index within session)
+  162:     Each dict contains:
+  163:       - 'bar_index' (session-local position)
+  164:       - 'state' (TREND / TRANSITION / INITIALIZING)
+  165:       - 'current_trend' (BULLISH / BEARISH / None)
+  166:       - 'last_event' or None
+  167:       - 'confirmed_swings_high' (list, snapshot at this bar)
+  168:       - 'confirmed_swings_low' (list, snapshot at this bar)
+  169:     """
+  170:     print("Building causal per-session structure timelines ...")
+  171:     timelines = {}
+  172: 
+  173:     for session_key, grp in df_5m.groupby("session_key"):
+  174:         grp = grp.sort_values("begin").reset_index(drop=True)
+  175:         session_len = len(grp)
+  176: 
+  177:         snapshots = [None] * session_len
+  178: 
+  179:         # We must call run_structure_engine on growing prefixes to stay strictly causal.
+  180:         # To keep it tractable we do it incrementally by re-running on each prefix.
+
+==============================================================================
+BLOCK 2b: assign_period call sites
+==============================================================================
+  142: def assign_period(ts):
+
+  671:             "period": assign_period(row["begin"]),
+
+
+==============================================================================
+BLOCK 3: main :: calculate_indicators (L481..L740)
+==============================================================================
+  482: 
+  483:     df = df.copy()
+  484: 
+  485:     close = df["close"]
+  486: 
+  487:     df["ema9"] = (
+  488:         close
+  489:         .ewm(
+  490:             span=9,
+  491:             adjust=False,
+  492:         )
+  493:         .mean()
+  494:     )
+  495: 
+  496:     df["ema21"] = (
+  497:         close
+  498:         .ewm(
+  499:             span=21,
+  500:             adjust=False,
+  501:         )
+  502:         .mean()
+  503:     )
+  504: 
+  505:     df["ema50"] = (
+  506:         close
+  507:         .ewm(
+  508:             span=50,
+  509:             adjust=False,
+  510:         )
+  511:         .mean()
+  512:     )
+  513: 
+  514:     # --------------------------------------------------------
+  515:     # RSI 14 вЂ” Wilder style
+  516:     # --------------------------------------------------------
+  517: 
+  518:     delta = close.diff()
+  519: 
+  520:     gain = delta.clip(
+  521:         lower=0
+  522:     )
+  523: 
+  524:     loss = -delta.clip(
+  525:         upper=0
+  526:     )
+  527: 
+  528:     avg_gain = (
+  529:         gain
+  530:         .ewm(
+  531:             alpha=1 / 14,
+  532:             adjust=False,
+  533:             min_periods=14,
+  534:         )
+  535:         .mean()
+  536:     )
+  537: 
+  538:     avg_loss = (
+  539:         loss
+  540:         .ewm(
+  541:             alpha=1 / 14,
+  542:             adjust=False,
+  543:             min_periods=14,
+  544:         )
+  545:         .mean()
+  546:     )
+  547: 
+  548:     rs = (
+  549:         avg_gain /
+  550:         avg_loss.replace(
+  551:             0,
+  552:             np.nan,
+  553:         )
+  554:     )
+  555: 
+  556:     _rsi = (
+  557:         100 -
+  558:         (
+  559:             100 /
+  560:             (1 + rs)
+  561:         )
+  562:     )
+  563: 
+  564:     # --------------------------------------------------------
+  565:     # v5.17-V2 A2: mathematically correct RSI edges.
+  566:     # avg_loss == 0 and avg_gain > 0   -> RSI = 100 (no losses).
+  567:     # avg_loss == 0 and avg_gain == 0  -> RSI = 50  (no movement).
+  568:     # Strategy logic is unchanged; RSI is not part of
+  569:     # calculate_technical_score. This only affects research output
+  570:     # and makes rsi14 mathematically well defined.
+  571:     # --------------------------------------------------------
+  572:     _rsi = _rsi.mask(
+  573:         (avg_loss == 0) & (avg_gain > 0),
+  574:         100.0,
+  575:     )
+  576:     _rsi = _rsi.mask(
+  577:         (avg_loss == 0) & (avg_gain == 0),
+  578:         50.0,
+  579:     )
+  580: 
+  581:     df["rsi14"] = _rsi
+  582: 
+  583:     # --------------------------------------------------------
+  584:     # MACD
+  585:     # --------------------------------------------------------
+  586: 
+  587:     ema12 = (
+  588:         close
+  589:         .ewm(
+  590:             span=12,
+  591:             adjust=False,
+  592:         )
+  593:         .mean()
+  594:     )
+  595: 
+  596:     ema26 = (
+  597:         close
+  598:         .ewm(
+  599:             span=26,
+  600:             adjust=False,
+  601:         )
+  602:         .mean()
+  603:     )
+  604: 
+  605:     df["macd"] = (
+  606:         ema12 -
+  607:         ema26
+  608:     )
+  609: 
+  610:     df["macd_signal"] = (
+  611:         df["macd"]
+  612:         .ewm(
+  613:             span=9,
+  614:             adjust=False,
+  615:         )
+  616:         .mean()
+  617:     )
+  618: 
+  619:     df["macd_hist"] = (
+  620:         df["macd"] -
+  621:         df["macd_signal"]
+  622:     )
+  623: 
+  624:     # --------------------------------------------------------
+  625:     # VWAP
+  626:     # --------------------------------------------------------
+  627: 
+  628:     typical_price = (
+  629:         df["high"] +
+  630:         df["low"] +
+  631:         df["close"]
+  632:     ) / 3
+  633: 
+  634:     session = df["begin"].dt.date
+  635: 
+  636:     cumulative_value = (
+  637:         typical_price *
+  638:         df["volume"]
+  639:     ).groupby(session).cumsum()
+  640: 
+  641:     cumulative_volume = (
+  642:         df["volume"]
+  643:     ).groupby(session).cumsum()
+  644: 
+  645:     df["vwap"] = (
+  646:         cumulative_value /
+  647:         cumulative_volume.replace(
+  648:             0,
+  649:             np.nan,
+  650:         )
+  651:     )
+  652: 
+  653:     # --------------------------------------------------------
+  654:     # ATR 14 вЂ” Wilder
+  655:     # --------------------------------------------------------
+  656: 
+  657:     previous_close = close.shift(1)
+  658: 
+  659:     tr1 = (
+  660:         df["high"] -
+  661:         df["low"]
+  662:     )
+  663: 
+  664:     tr2 = (
+  665:         df["high"] -
+  666:         previous_close
+  667:     ).abs()
+  668: 
+  669:     tr3 = (
+  670:         df["low"] -
+  671:         previous_close
+  672:     ).abs()
+  673: 
+  674:     true_range = pd.concat(
+  675:         [
+  676:             tr1,
+  677:             tr2,
+  678:             tr3,
+  679:         ],
+  680:         axis=1,
+  681:     ).max(axis=1)
+  682: 
+  683:     df["atr14"] = (
+  684:         true_range
+  685:         .ewm(
+  686:             alpha=1 / 14,
+  687:             adjust=False,
+  688:             min_periods=14,
+  689:         )
+  690:         .mean()
+  691:     )
+  692: 
+  693:     # --------------------------------------------------------
+  694:     # Volume
+  695:     # --------------------------------------------------------
+  696: 
+  697:     df["volume_avg20"] = (
+  698:         df["volume"]
+  699:         .rolling(20)
+  700:         .mean()
+  701:     )
+  702: 
+  703:     df["volume_ratio"] = (
+  704:         df["volume"] /
+  705:         df["volume_avg20"].replace(
+  706:             0,
+  707:             np.nan,
+  708:         )
+  709:     )
+  710: 
+  711:     return df
+  712: 
+  713: 
+  714: # ============================================================
+  715: # v5.7 RESEARCH FEATURE ENGINE
+  716: # ============================================================
+  717: 
+  718: def _safe_ratio(numerator, denominator):
+  719:     if pd.isna(numerator) or pd.isna(denominator) or float(denominator) == 0:
+  720:         return np.nan
+  721:     return float(numerator) / float(denominator)
+  722: 
+  723: 
+  724: def build_research_features(df):
+  725:     """Build causal, bar-by-bar research features without changing strategy logic.
+  726: 
+  727:     Every feature at row i uses information available no later than the close
+  728:     of row i. Forward-return columns are research labels only and are never
+  729:     used by the signal/backtest engines.
+  730:     """
+  731:     work = df.copy()
+  732:     session_keys = build_session_keys(work)
+  733: 
+  734:     work["feature_ema9_21_spread"] = work["ema9"] - work["ema21"]
+  735:     work["feature_ema21_50_spread"] = work["ema21"] - work["ema50"]
+  736:     work["feature_close_ema21_pct"] = (work["close"] - work["ema21"]) / work["ema21"] * 100.0
+  737:     work["feature_close_ema50_pct"] = (work["close"] - work["ema50"]) / work["ema50"] * 100.0
+  738:     work["feature_ema9_slope_3"] = work["ema9"] - work["ema9"].shift(3)
+  739:     work["feature_ema21_slope_3"] = work["ema21"] - work["ema21"].shift(3)
+  740:     work["feature_ema50_slope_5"] = work["ema50"] - work["ema50"].shift(5)
+  741: 
+
+==============================================================================
+BLOCK 4: EXCLUDE_WEEKEND_SESSIONS / filter_weekend_sessions / session_key defs and calls
+==============================================================================
+   72: EXCLUDE_WEEKEND_SESSIONS = True
+
+  276: def filter_weekend_sessions(df):
+
+  278:     if not EXCLUDE_WEEKEND_SESSIONS:
+
+  481: def calculate_indicators(df):
+
+ 4452: def trading_session_key(timestamp):
+
+ 4458:     function is used because EXCLUDE_WEEKEND_SESSIONS=True.
+
+ 4472: def build_session_keys(df):
+
+ 5493:             not EXCLUDE_WEEKEND_SESSIONS
+
+ 6195:     test("No weekend candles", not EXCLUDE_WEEKEND_SESSIONS or not (df["begin"].dt.weekday >= 5).any())
+
+ 9681:     df_1m, weekend_removed = filter_weekend_sessions(
+
+ 9691:     if EXCLUDE_WEEKEND_SESSIONS:
+
+
+==============================================================================
+BLOCK 4b: filter_weekend_sessions body (L276..L300)
+==============================================================================
+  277:     """Remove Saturday/Sunday candles from the research dataset."""
+  278:     if not EXCLUDE_WEEKEND_SESSIONS:
+  279:         return df.copy(), 0
+  280: 
+  281:     weekend_mask = df["begin"].dt.weekday >= 5
+  282:     removed = int(weekend_mask.sum())
+  283: 
+  284:     filtered = (
+  285:         df.loc[~weekend_mask]
+  286:         .sort_values("begin")
+  287:         .reset_index(drop=True)
+  288:     )
+  289: 
+  290:     if len(filtered) < MIN_1M_CANDLES:
+  291:         raise RuntimeError(
+  292:             "Too few 1m candles after weekend filtering: "
+  293:             f"{len(filtered)}"
+  294:         )
+  295: 
+  296:     return filtered, removed
+  297: 
+  298: 
+  299: # ============================================================
+  300: # 1M -> 5M
+  301: # ============================================================
+
+==============================================================================
+BLOCK 4c: trading_session_key + build_session_keys body (L4447..L4480)
+==============================================================================
+ 4448: # ============================================================
+ 4449: # EXCHANGE SESSION ENGINE v5.4.4
+ 4450: # ============================================================
+ 4451: 
+ 4452: def trading_session_key(timestamp):
+ 4453:     """
+ 4454:     Return the MOEX trading-day key for a candle timestamp.
+ 4455: 
+ 4456:     Return the ordinary weekday trading-session key used by the
+ 4457:     research engine. Weekend candles are normally removed before this
+ 4458:     function is used because EXCLUDE_WEEKEND_SESSIONS=True.
+ 4459:     """
+ 4460:     ts = pd.Timestamp(timestamp)
+ 4461:     date = ts.normalize()
+ 4462: 
+ 4463:     if date.weekday() == 5:
+ 4464:         return date + pd.Timedelta(days=2)
+ 4465: 
+ 4466:     if date.weekday() == 6:
+ 4467:         return date + pd.Timedelta(days=1)
+ 4468: 
+ 4469:     return date
+ 4470: 
+ 4471: 
+ 4472: def build_session_keys(df):
+ 4473:     """Build one exchange-session key for every candle."""
+ 4474:     return df["begin"].map(trading_session_key)
+ 4475: 
+ 4476: 
+ 4477: def audit_irregular_sessions(df_1m, df_5m):
+ 4478:     """
+ 4479:     DIAGNOSTIC ONLY: list irregular MOEX sessions.
+ 4480: 
+ 4481:     Irregular = first 1M candle is not at 06:55
+ 4482:               OR last 1M candle is not at 15:15 (5M timeframe,
+
+==============================================================================
+BLOCK 5a: FULL audit_research_roadmap_v1_h4_spec_v3_4_PROPOSED.md
+==============================================================================
+    1: # audit_research_roadmap_v1_h4_spec_v3_4_PROPOSED.md
+    2: 
+    3: MOEX TRADING LAB вЂ” H4 SPECIFICATION v3.4 (PROPOSED)
+    4: 
+    5: STATUS: NOT READY вЂ” NOT AUTHORIZED FOR EXECUTION.
+    6: 
+    7: STRATEGY LOGIC: UNCHANGED.
+    8: RESEARCH ONLY.
+    9: NO THRESHOLD IS OPTIMIZED.
+   10: NO FILTER IS INSTALLED.
+   11: NO LIVE ORDERS.
+   12: 
+   13: This is a proposed revision of v3.3. It does not authorize execution.
+   14: v2, v3, v3.1, v3.2, v3.3 remain separately preserved.
+   15: 
+   16: This version leaves confirmatory inference UNRESOLVED, because:
+   17: 
+   18:   (i)  the joint bootstrap method (В§7.1) is proposed but not authorized;
+   19:   (ii) dataset date coverage is DATA COVERAGE NOT VERIFIED until the
+   20:        provenance audit (В§5.7) is run;
+   21:   (iii) PC1, PC2, PC3, PC4 remain proposed decisions.
+   22: 
+   23: ---
+   24: 
+   25: ## 1. Status of H4 in v600
+   26: 
+   27: Frozen quantiles verified by audit_v600_frozen_quantiles_v1_report.txt.
+   28: No multi-bar realized-volatility contraction event exists in v600 as a
+   29: predefined tag. H4 uses only existing frozen quantiles.
+   30: 
+   31: ## 2. Event definition (frozen, unchanged)
+   32: 
+   33: Event at 5M bar t:
+   34: 
+   35:   range_atr[t] < q25(range_atr) = +0.54835695
+   36: 
+   37: Source: v600 DISCOVERY. Not recomputed from VALIDATION, OOS, or full sample.
+   38: 
+   39: ## 3. Signal timing and horizons
+   40: 
+   41: Observation timestamp: close of 5M bar t.
+   42: Execution reference: open of 5M bar t+1.
+   43: 
+   44: Horizons: h in {1, 2, 3, 6, 12} bars of 5M.
+   45: 
+   46: Primary horizon (proposed): h = 6.
+   47: Exploratory horizons: h = 1, 2, 3, 12.
+   48: 
+   49: Primary outcome variable (forward range):
+   50: 
+   51:   forward_range_h = (max(high[t+1 .. t+h]) - min(low[t+1 .. t+h]))
+   52:                     / close[t] * 100.
+   53: 
+   54: Secondary (reported, not primary):
+   55: 
+   56:   forward_close_h = (close[t+h] / close[t] - 1) * 100.
+   57: 
+   58: ## 4. Direction (frozen)
+   59: 
+   60: Pre-declared positive direction for the primary metric at h=6:
+   61: 
+   62:   H4+: forward_range_6 after event > forward_range_6 in matched baseline.
+   63: 
+   64: One-sided confirmatory test. Opposite direction handled by
+   65: EVIDENCE AGAINST category (В§8).
+   66: 
+   67: ## 5. Eligibility, target population, and data provenance
+   68: 
+   69: ### 5.1. Target population for the confirmatory decision
+   70: 
+   71: Confirmatory at h = 6 only, using eligible event and control sets at
+   72: h = 6. Target population: distribution of events eligible at horizon
+   73: h = 6 across the four frozen atr14 groups, per dataset.
+   74: 
+   75: ### 5.2. Eligibility of a bar x at horizon h
+   76: 
+   77: Bar x is eligible at horizon h if and only if:
+   78: 
+   79:   (a) session_key[t+h] == session_key[t]
+   80:   (b) open, high, low, close are finite and > 0 at every bar in
+   81:       [t+1, t+h]
+   82:   (c) high >= low, high >= open, high >= close, low <= open,
+   83:       low <= close at every bar in [t+1, t+h]
+   84:   (d) open[t], high[t], low[t], close[t] are finite and > 0
+   85:   (e) high[t] >= low[t], high[t] >= open[t], high[t] >= close[t],
+   86:       low[t] <= open[t], low[t] <= close[t]
+   87:   (f) atr14[t] is finite
+   88:   (g) range_atr[t] is finite
+   89:   (h) if x is an event: range_atr[t] < +0.54835695
+   90:   (i) if x is a control: range_atr[t] >= +0.54835695
+   91: 
+   92: ### 5.3. Horizon-specific sets
+   93: 
+   94: For each horizon h and dataset d:
+   95: 
+   96:   E_h^d = { event bars eligible at horizon h in dataset d }
+   97:   C_h^d = { control bars eligible at horizon h in dataset d }
+   98: 
+   99: ### 5.4. atr14 grouping (frozen)
+  100: 
+  101:   Group A: atr14 <  +0.23032463
+  102:   Group B: +0.23032463 <= atr14 < +0.29683005
+  103:   Group C: +0.29683005 <= atr14 < +0.39754511
+  104:   Group D: +0.39754511 <= atr14
+  105: 
+  106: ### 5.5. Per-dataset horizon-specific estimand
+  107: 
+  108: For dataset d at horizon h:
+  109: 
+  110:   Y_h(x)              = forward_range_h for bar x in E_h^d в€Є C_h^d.
+  111:   N_event_h^d(g)      = number of bars in E_h^d with group g.
+  112:   N_event_h_total^d   = |E_h^d|.
+  113:   w_h^d(g)            = N_event_h^d(g) / N_event_h_total^d.
+  114: 
+  115:   mean_event_h^d(g)   = mean of Y_h over { e in E_h^d : g(e) = g }.
+  116:   mean_control_h^d(g) = mean of Y_h over { c in C_h^d : g(c) = g }.
+  117: 
+  118:   О”_h^d = ОЈ_g w_h^d(g) В· ( mean_event_h^d(g) в€’ mean_control_h^d(g) ).
+  119: 
+  120: ### 5.6. Aggregation across datasets (PROPOSED вЂ” PC1)
+  121: 
+  122: For confirmatory period P in {DISCOVERY, VALIDATION}:
+  123: 
+  124: Let D_P = set of datasets present in period P.
+  125: 
+  126:   О”_6^aggregate(P) = (1 / |D_P|) В· ОЈ_{d in D_P} О”_6^d(P)
+  127: 
+  128: Equal weight per dataset. Target population: equal-weighted average
+  129: of per-dataset effects at h=6 over datasets present in period P.
+  130: 
+  131: This is PROPOSED (PC1). Not authorized. Not to be replaced by
+  132: pooled-bars aggregation without a separate PROTOCOL CHANGE decision.
+  133: 
+  134: ### 5.7. Datasets and periods (PROPOSED вЂ” PC2; DATA COVERAGE NOT VERIFIED)
+  135: 
+  136: Actual date ranges must be verified from source files by
+  137: audit_dataset_provenance_v1.py. Without that report, the following
+  138: ranges remain tentative:
+  139: 
+  140:   SBER 2025-2026: path cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+  141:   SBER 2024-2025: path cache_2024_2025/5m/SBER_TQBR_2024-09-15_2025-09-14_5m.csv
+  142:   GAZP 2025-2026: path cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+  143:   LKOH 2025-2026: path cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+  144: 
+  145: Period definitions (unchanged):
+  146: 
+  147:   DISCOVERY: 2025-09-15 .. 2026-02-28
+  148:   VALIDATION: 2026-03-01 .. 2026-05-31
+  149:   OOS: 2026-06-01 .. 2026-09-14
+  150: 
+  151: Tentative coverage:
+  152: 
+  153:   DISCOVERY: SBER 2025-2026, GAZP 2025-2026, LKOH 2025-2026
+  154:   VALIDATION: SBER 2025-2026, GAZP 2025-2026, LKOH 2025-2026
+  155:   OOS: SBER 2025-2026, GAZP 2025-2026, LKOH 2025-2026
+  156:   SBER 2024-2025: no overlap with any period; treated as out-of-time
+  157:                   portability test only.
+  158: 
+  159: Status: DATA COVERAGE NOT VERIFIED. Must be confirmed by the
+  160: provenance audit before PC2 can be authorized.
+  161: 
+  162: ### 5.8. Non-estimability
+  163: 
+  164: For dataset d and horizon h, if some group g in {A,B,C,D} has:
+  165: 
+  166:   N_event_h^d(g) > 0 AND N_control_h^d(g) == 0
+  167: 
+  168: then О”_h^d is NOT ESTIMABLE. Do not drop the group. Do not
+  169: renormalize. If any О”_h^d is NOT ESTIMABLE for d in D_P, then
+  170: О”_h^aggregate(P) is UNRESOLVED.
+  171: 
+  172: ## 6. Baselines
+  173: 
+  174: Matched baseline (primary): В§5.5.
+  175: Unconditional baseline: descriptive only, not used for confirmatory.
+  176: 
+  177: ## 7. Bootstrap (PROPOSED вЂ” PC4)
+  178: 
+  179: ### 7.1. Calendar-session joint bootstrap
+  180: 
+  181: Session-block bootstrap with joint calendar-session resampling
+  182: across all datasets present in period P.
+  183: 
+  184: For each replicate k = 1 .. N_iter:
+  185: 
+  186:   1. Form S_all = union of session_keys over all datasets in D_P.
+  187:   2. Resample S_all with replacement -> S_k (size |S_all|).
+  188:   3. For each dataset d in D_P:
+  189:        - take sessions of d that appear in S_k,
+  190:        - include all eligible bars from those sessions of d,
+  191:        - preserve overlapping forward windows within each session,
+  192:        - recompute О”_6^{d,k} by В§5.5.
+  193:   4. Compute aggregate:
+  194:        О”_6^{aggregate,k} = (1/|D_P|) В· ОЈ_d О”_6^{d,k}.
+  195:   5. If for any d, any atr14 group g has N_event>0 and N_control=0
+  196:      in the resampled data, mark the replicate INVALID for dataset d.
+  197: 
+  198: Key properties:
+  199: 
+  200:   - Sessions are shared across datasets: a calendar session is
+  201:     present in all datasets for that day, or in none.
+  202:   - Cross-instrument dependence is preserved because all three
+  203:     datasets are resampled on the same calendar sessions.
+  204:   - Forward windows are never joined across resampled sessions,
+  205:     because each session is taken as a block from its own dataset.
+  206:   - Aggregate uses equal weight per dataset.
+  207: 
+  208: N_iter = 1000. seed = 42.
+  209: 
+  210: ### 7.2. Treatment of invalid replicates
+  211: 
+  212: For period P at horizon h:
+  213: 
+  214:   n_invalid^P = number of replicates where any dataset is INVALID.
+  215:   fraction_invalid^P = n_invalid^P / N_iter.
+  216: 
+  217: Rules:
+  218: 
+  219:   - If n_invalid^P == 0: CI95(О”_h^aggregate) computed from valid
+  220:     replicates.
+  221:   - If n_invalid^P > 0: confirmatory inference for that period and
+  222:     horizon is UNRESOLVED. No CI is treated as confirmatory. No
+  223:     diagnostic threshold is applied. Both counts are reported for
+  224:     diagnostics.
+  225: 
+  226: This is PROPOSED (PC3, carried over from v3.3 with calendar-session
+  227: modification).
+  228: 
+  229: ### 7.3. Alternative bootstrap (proposed only, not implemented)
+  230: 
+  231: Cluster-stratified bootstrap. Not implemented. Requires separate
+  232: authorization. Not executed in v3.4.
+  233: 
+  234: ### 7.4. Assumptions
+  235: 
+  236: - Calendar sessions are independent across days. Required for
+  237:   resampling.
+  238: - Intra-session dependence preserved by complete-session block.
+  239: - Cross-instrument dependence preserved by joint resampling.
+  240: - Bootstrap does not guarantee coverage.
+  241: 
+  242: ## 8. Decision categories (mutually exclusive, precedence-ordered)
+  243: 
+  244: Confirmatory at h=6 only.
+  245: 
+  246: Category 1 вЂ” CONFIRMED:
+  247:   (a) О”_6^d ESTIMABLE for all d in D_DISCOVERY.
+  248:   (b) О”_6^aggregate(DISCOVERY) ESTIMABLE.
+  249:   (c) CI95(О”_6^aggregate(DISCOVERY)) excludes zero on positive side.
+  250:   (d) n_invalid^DISCOVERY == 0.
+  251:   (e) dataset-level criterion В§8.1 met in DISCOVERY.
+  252:   (f) О”_6^aggregate(VALIDATION) ESTIMABLE.
+  253:   (g) CI95(О”_6^aggregate(VALIDATION)) excludes zero on positive side.
+  254:   (h) n_invalid^VALIDATION == 0.
+  255:   (i) Same horizon, metric, estimand, baseline, direction in both.
+  256: 
+  257: Category 2 вЂ” EVIDENCE AGAINST POSITIVE EFFECT:
+  258:   (a) О”_6^aggregate(DISCOVERY) ESTIMABLE.
+  259:   (b) CI95(О”_6^aggregate(DISCOVERY)) has upper bound < 0.
+  260:   (c) Category 1 not met.
+  261: 
+  262: Category 3 вЂ” NOT CONFIRMED / INCONCLUSIVE:
+  263:   All other cases, including UNRESOLVED bootstrap, UNRESOLVED
+  264:   estimability, dataset-level criterion not met, VALIDATION not
+  265:   confirming, or any other state.
+  266: 
+  267: ### 8.1. Dataset-level criterion in DISCOVERY (PROPOSED вЂ” PC2)
+  268: 
+  269: A dataset d in DISCOVERY counts as confirming at h=6 if:
+  270: 
+  271:   - О”_6^d is ESTIMABLE,
+  272:   - О”_6^d > 0,
+  273:   - CI95(О”_6^d) excludes zero on the positive side,
+  274:   - n_invalid^{d,6} == 0.
+  275: 
+  276: DISCOVERY dataset-level criterion: at least 2 of the 3 datasets
+  277: present in DISCOVERY (tentative: SBER 2025-2026, GAZP 2025-2026,
+  278: LKOH 2025-2026) are confirming.
+  279: 
+  280: VALIDATION: О”_6^aggregate(VALIDATION) must be positive with CI95
+  281: excluding zero. Per-dataset VALIDATION results are diagnostics.
+  282: 
+  283: SBER 2024-2025: separate portability test, not part of confirmatory.
+  284: 
+  285: This is PROPOSED (PC2). Requires authorization. Coverage of the
+  286: three datasets in DISCOVERY must be verified by the provenance audit.
+  287: 
+  288: ## 9. OOS handling
+  289: 
+  290: OOS remains SEALED until separate authorization, decided before
+  291: viewing OOS results.
+  292: 
+  293: ## 10. Multiplicity
+  294: 
+  295: Only h=6 is confirmatory. Exploratory horizons do not determine
+  296: the confirmatory decision.
+  297: 
+  298: ## 11. Data validity rules (CLARIFICATION, not DEFECT FIX)
+  299: 
+  300: These rules are a clarification introduced in v3.2 onwards. They
+  301: were not in v2. They are not a defect fix of v2.
+  302: 
+  303: Deterministic exclusion order, first match wins:
+  304: 
+  305:   1. D1: range_atr[t] missing or non-finite.
+  306:   2. D2: atr14[t] missing or non-finite.
+  307:   3. D7: close[t] <= 0.
+  308:   4. D3: any of open[t], high[t], low[t], close[t] missing or
+  309:          non-finite.
+  310:   5. D4: invalid OHLC relation at bar t:
+  311:          high[t] < low[t], or high[t] < open[t], or high[t] < close[t],
+  312:          or low[t] > open[t], or low[t] > close[t].
+  313: 
+  314: Each excluded bar is counted ONCE, under the first matching rule.
+  315: Reported per dataset, period, group, and rule.
+  316: 
+  317: Horizon-specific eligibility rules:
+  318: 
+  319:   6. D5: any OHLC missing or non-finite in [t+1, t+h]:
+  320:          bar t not eligible at horizon h.
+  321:   7. D6: invalid OHLC relation in [t+1, t+h]:
+  322:          bar t not eligible at horizon h.
+  323: 
+  324: D5 and D6 are counted per horizon, separately from D1-D4, D7,
+  325: without overlap.
+  326: 
+  327: Total exclusion counter = |excluded_from_sets| + |not_eligible_at_h|.
+  328: 
+  329: ## 12. Reporting requirements
+  330: 
+  331: - events and controls per dataset, period, horizon, group,
+  332: - exclusions per dataset, period, horizon, group, by rule,
+  333: - per-horizon mean/median/std/quartiles of forward_range and
+  334:   forward_close per group and per baseline,
+  335: - О”_h^d and О”_h^aggregate where estimable, with CI95 where
+  336:   not UNRESOLVED,
+  337: - n_invalid per dataset, period, horizon,
+  338: - UNRESOLVED markers where applicable,
+  339: - dataset-level confirming count in DISCOVERY,
+  340: - per-dataset VALIDATION diagnostics,
+  341: - SBER 2024-2025 portability diagnostics,
+  342: - exploratory results for h=1,2,3,12,
+  343: - all three cost scenarios,
+  344: - bootstrap diagnostics (n_iter, seed),
+  345: - all results regardless of outcome.
+  346: 
+  347: ## 13. Non-authorization clause
+  348: 
+  349: NOT AUTHORIZED FOR EXECUTION.
+  350: 
+  351: ## 14. PROPOSED items requiring authorization
+  352: 
+  353: PC1. Equal-weight per dataset aggregation (В§5.6).
+  354: PC2. Dataset/period coverage as in В§5.7; requires provenance audit
+  355:      and treats SBER 2024-2025 as portability test only.
+  356: PC3. Invalid replicate handling: any invalid replicate ->
+  357:      UNRESOLVED inference (В§7.2).
+  358: PC4. Calendar-session joint bootstrap (В§7.1).
+
+==============================================================================
+BLOCK 5b: FULL audit_research_roadmap_v1_h4_spec_v3_6_2_PROPOSED.md
+==============================================================================
+    1: # audit_research_roadmap_v1_h4_spec_v3_6_2_PROPOSED.md
+    2: 
+    3: MOEX TRADING LAB вЂ” H4 SPECIFICATION v3.6.2 (PROPOSED)
+    4: 
+    5: STATUS: NOT READY вЂ” NOT AUTHORIZED FOR EXECUTION.
+    6: 
+    7: STRATEGY LOGIC: UNCHANGED.
+    8: RESEARCH ONLY.
+    9: NO THRESHOLD IS OPTIMIZED.
+   10: NO FILTER IS INSTALLED.
+   11: NO LIVE ORDERS.
+   12: 
+   13: This is a proposed editorial revision of v3.6.1.
+   14: It does not authorize execution.
+   15: v2, v3, v3.1, v3.2, v3.3, v3.4, v3.5, v3.6, v3.6.1 remain separately
+   16: preserved and unchanged.
+   17: 
+   18: v3.6.2 formalizes the 5-minute step check (l) with explicit
+   19: definitions and no auto-applied tolerance, clarifies the last-bar
+   20: argument, separates specification / code / data layers for atr14 and
+   21: range_atr edge cases, and restructures the forward-window plan into
+   22: four explicit blocks (A: formal, B: code behavior, C: executed
+   23: verification, D: planned verification).
+   24: 
+   25: No H4 effects, no CI, no bootstrap, no OOS analysis were computed.
+   26: 
+   27: ---
+   28: 
+   29: ## 1. Status of H4 in v600
+   30: 
+   31: Frozen quantiles verified by
+   32: audit_v600_frozen_quantiles_v1_report.txt.
+   33: No multi-bar realized-volatility contraction event exists in v600 as
+   34: a predefined tag. H4 uses only existing frozen quantiles.
+   35: 
+   36: ## 2. Event tag (frozen, unchanged)
+   37: 
+   38: Event_tag(t) := range_atr[t] < q25(range_atr) = +0.54835695
+   39: 
+   40: Source: v600 DISCOVERY. Not recomputed from VALIDATION, OOS, or full
+   41: sample.
+   42: 
+   43: ## 3. Observation timestamp, horizons, direction
+   44: 
+   45: Observation timestamp: close of 5M bar t.
+   46: Execution reference: open of 5M bar t+1.
+   47: 
+   48: Horizons: h in {1, 2, 3, 6, 12} bars of 5M.
+   49: Primary horizon (proposed): h = 6.
+   50: Exploratory horizons: h = 1, 2, 3, 12.
+   51: 
+   52: Primary outcome: forward_range_h.
+   53: Secondary (reported only): forward_close_h.
+   54: 
+   55: Confirmatory direction: one-sided, positive.
+   56: 
+   57: M1 (open): one-sided direction vs two-sided CI [q025, q975].
+   58: UNRESOLVED. Requires authorization.
+   59: 
+   60: ## 4. Counts (unchanged from v3.6.1)
+   61: 
+   62: N1 = all bars with Event_tag(t) = True (descriptive).
+   63: N2 = eligible event observations for horizon h (denominator of
+   64:      event weights w_h(g)).
+   65: N3 = excluded tags per h with reasons (descriptive, not deleted).
+   66: N4 = symmetric control side.
+   67: 
+   68: Event_tag and Control_tag are disjoint. Tag-only counts do not enter
+   69: the estimand О”_h.
+   70: 
+   71: ## 5. Last bar of a session (QA-2 refinement)
+   72: 
+   73: For any h >= 1, consider the last bar t of a session.
+   74: 
+   75:   Case A: t+h is not a valid index in the dataset.
+   76:     Then В§6(j) fails. Bar t is ineligible.
+   77:   Case B: t+h is a valid index, but session_key[t+h] !=
+   78:           session_key[t].
+   79:     Then В§6(k) fails. Bar t is ineligible.
+   80:   Case C: t+h is a valid index, and session_key[t+k] ==
+   81:           session_key[t] for every k in [0, h].
+   82:     Then t is not the last bar of the session (there are at least h
+   83:     bars after it within the same session).
+   84: 
+   85: Therefore, for any h >= 1, the last bar of a session is ineligible
+   86: as an event and ineligible as a control. This is a direct
+   87: consequence of В§6(j)-(k), not an independent decision.
+   88: 
+   89: Whether Event_tag(t) or Control_tag(t) is displayed in a report for
+   90: such a bar is a presentation choice (U1/U1b). It does not change
+   91: eligibility or the estimand.
+   92: 
+   93: ## 6. Eligibility of a bar at horizon h (unchanged)
+   94: 
+   95: Bar t is eligible at horizon h iff all of the following hold.
+   96: 
+   97:   (a) Event_tag(t) or Control_tag(t) is defined by range_atr[t]
+   98:       against the frozen threshold; the two are disjoint.
+   99:   (b) session_key[t] is defined and finite.
+  100:   (c) close[t] is finite and > 0.
+  101:   (d) atr14[t] is finite.
+  102:   (e) range_atr[t] is finite.
+  103:   (f) open[t], high[t], low[t], close[t] are finite and > 0.
+  104:   (g) high[t] >= low[t], high[t] >= open[t], high[t] >= close[t],
+  105:       low[t] <= open[t], low[t] <= close[t].
+  106:   (h) For every bar y in [t+1, t+h]:
+  107:       open[y], high[y], low[y], close[y] are finite and > 0.
+  108:   (i) For every bar y in [t+1, t+h]:
+  109:       high[y] >= low[y], high[y] >= open[y], high[y] >= close[y],
+  110:       low[y] <= open[y], low[y] <= close[y].
+  111:   (j) t+h is a valid index in the dataset.
+  112:   (k) For every k in [0, h]:
+  113:       session_key[t+k] == session_key[t].
+  114: 
+  115: Conditions (a)-(k) are the current eligibility criteria.
+  116: Condition (l) in В§6.2 is NOT part of them.
+  117: 
+  118: ### 6.1. Formal, code, executed, planned (QA-4 refinement)
+  119: 
+  120: Block A вЂ” Formal requirement:
+  121:   (j) t+h is a valid index.
+  122:   (k) session_key is constant over [t, t+h].
+  123: 
+  124: Block B вЂ” Directly established behavior of existing code:
+  125:   - In v600 build_forward_labels, the future-indices loop starts at
+  126:     t+1 and stops at the first bar whose session_key differs from
+  127:     the session of t.
+  128:   - This is established by reading the source, not by executing the
+  129:     script.
+  130:   - It implies that, for bars that v600 currently labels as
+  131:     non-partial for a given h, the collected indices all share the
+  132:     session of t, and t+h was a valid index.
+  133:   - Whether that implication holds for every bar and every h in all
+  134:     datasets is a separate question, addressed in Block D.
+  135: 
+  136: Block C вЂ” Empirical verification actually executed:
+  137:   - QA-A2 verification of В§6(j)-(k) against v600 partial-window
+  138:     flags was completed in audit_h4_forensic_followup_v2_fast.py.
+  139:   - Result: per-bar match = 0 mismatches on all 15 combinations
+  140:     (3 datasets x 5 horizons).
+  141:   - See audit_h4_forensic_followup_v2_fast_qa_a2.csv and
+  142:     audit_h4_forensic_followup_v2_addendum.md.
+  143: 
+  144: Block D вЂ” Planned verification (NOT executed):
+  145:   - No further verification is currently planned for В§6(j)-(k)
+  146:     beyond what was already executed and recorded in Block C.
+  147: 
+  148: ### 6.2. Proposed condition (l): 5-minute step check
+  149: PROPOSED CHANGE вЂ” NOT AUTHORIZED (PC5)
+  150: 
+  151: This condition is NOT part of the current eligibility criteria and is
+  152: NOT applied automatically. No bars are excluded under (l) in v3.6.2.
+  153: 
+  154: Timestamp field used:
+  155:   - The check uses the `begin` column of the 5M cache for each
+  156:     dataset, as read by the existing loaders.
+  157:   - No other timestamp field is used.
+  158: 
+  159: Interval between adjacent bars:
+  160:   For indices y and y+1 within the window [t, t+h],
+  161:     delta(y) := (begin[y+1] - begin[y]) as a Pandas Timedelta.
+  162:   The step check concerns delta(y) for every y in [t, t+h-1].
+  163: 
+  164: Expected step:
+  165:   The expected step is 5 minutes. This is the nominal grid of the 5M
+  166:   caches, not a parameter to be tuned.
+  167: 
+  168: Proposed tolerance:
+  169:   A specific numeric tolerance is NOT fixed in this document. It
+  170:   must be chosen before any application of (l), with a stated
+  171:   external justification. A candidate tolerance of 1 second is
+  172:   mentioned only as a placeholder and is explicitly NOT adopted here.
+  173: 
+  174: Missing or invalid timestamps:
+  175:   If begin[y] or begin[y+1] is missing or not parseable, (l) is not
+  176:   evaluated for that pair; the bar t is treated as ineligible for
+  177:   horizon h by other conditions (В§6(h) is expected to cover the OHLC
+  178:   side; the timestamp side is recorded as a separate exclusion).
+  179:   A specific rule for this case is not adopted here; it is part of
+  180:   the proposed-but-not-authorized specification of (l).
+  181: 
+  182: Action on violation (proposed, not enacted):
+  183:   - Mark bar t as ineligible for horizon h.
+  184:   - Record the exclusion with reason "step != 5 minutes".
+  185:   - Do not delete or modify any data.
+  186: 
+  187: Rationale for treating (l) separately:
+  188:   - audit_session_anomalies_v1 observed all adjacent steps in the
+  189:     studied sessions to be exactly 5.0000 minutes.
+  190:   - This suggests that adopting (l) may not change the sample on the
+  191:     audited datasets.
+  192:   - However, this has NOT been verified for the full 5M caches of all
+  193:     three datasets, and no claim of sample invariance is made.
+  194:   - (l) is therefore PROPOSED CHANGE вЂ” NOT AUTHORIZED.
+  195: 
+  196: ## 7. Control definition (unchanged)
+  197: 
+  198: Control_tag(t) := range_atr[t] >= +0.54835695.
+  199: Event_tag and Control_tag are disjoint.
+  200: Controls use the same В§6 eligibility (b)-(k).
+  201: 
+  202: ## 8. ATR14 groups (frozen, unchanged)
+  203: 
+  204:   Group A: atr14 <  +0.23032463
+  205:   Group B: +0.23032463 <= atr14 < +0.29683005
+  206:   Group C: +0.29683005 <= atr14 < +0.39754511
+  207:   Group D: +0.39754511 <= atr14
+  208: 
+  209: ## 9. Estimand (unchanged)
+  210: 
+  211: О”_h^d = ОЈ_g w_h^d(g) В· ( mean_event_h^d(g) в€’ mean_control_h^d(g) ).
+  212: Equal-weight aggregation across datasets: PC1, PROPOSED, NOT
+  213: AUTHORIZED.
+  214: Empty groups в†’ NOT ESTIMABLE, no renormalization.
+  215: 
+  216: ## 10. Bootstrap (PC3, PC4; not authorized, unchanged)
+  217: 
+  218: M2 (open): calendar-session joint bootstrap scheme not fully
+  219: specified (dates present in only some instruments; unique bootstrap-
+  220: copy identifiers; extent of cross-instrument dependence
+  221: preservation).
+  222: 
+  223: ## 11. Decision categories (not executable, unchanged)
+  224: 
+  225: M1, PC2 and the aggregate/per-dataset interaction remain open.
+  226: Status: UNRESOLVED вЂ” DECISION RULE NOT YET EXECUTABLE.
+  227: 
+  228: ## 12. OOS
+  229: 
+  230: OOS remains SEALED.
+  231: 
+  232: ## 13. QA on atr14 and range_atr edge cases
+  233: 
+  234: Q1. What does the current specification allow?
+  235:   - В§6(d) requires atr14[t] finite.
+  236:   - В§6(e) requires range_atr[t] finite.
+  237:   - Neither condition states that atr14[t] > 0 or range_atr[t] > 0.
+  238:   - The specification does NOT explicitly forbid zero or negative
+  239:     atr14 / range_atr.
+  240:   - The behavior of downstream formulas (division, grouping, weight
+  241:     computation) on zero or negative values is NOT specified here.
+  242: 
+  243: Q2. What does the existing code directly check?
+  244:   - v600 compute_discovery_quantiles uses
+  245:     (ema9 - ema21).abs() / atr14.replace(0, np.nan) and similar
+  246:     expressions in other ratio features.
+  247:   - This indicates that a zero atr14 is treated as NaN for the
+  248:     purpose of ratio features in v600.
+  249:   - The direct behavior of range_atr itself on zero or negative
+  250:     atr14 is not fully established by reading the source alone.
+  251:   - Per audit_h4_atr14_compare_v3_report.md, atr14 in v600 is
+  252:     Wilder EWM (alpha=1/14, adjust=False, min_periods=14), not a
+  253:     rolling mean.
+  254: 
+  255: Q3. Do such values occur in the data?
+  256:   - Per audit_h4_atr14_compare_v3_report.md, on the three audited
+  257:     datasets, atr14 has no zero, no negative and no infinite
+  258:     values; the first 13 values are NaN due to min_periods=14.
+  259: 
+  260: Outcome:
+  261:   - QA-A1 status: PARTIALLY CLOSED
+  262:     (SOURCE FORMULA VERIFIED + REPRODUCTION VERIFIED;
+  263:      HISTORICAL AUDIT-SIDE MATCH NOT POSSIBLE because the historical
+  264:      array was not saved).
+  265:   - No new eligibility restriction is added.
+  266:   - No change to (d) or (e) is proposed.
+  267: 
+  268: ## 14. UNRESOLVED and OPEN items
+  269: 
+  270: U1.  Presentation rule for tag-only bars at h=6.
+  271: U1b. Whether tag-only bars are shown in the report, counted
+  272:      separately, or omitted.
+  273: U3.  Classification of sessions with last_begin = 15:20 (Q-NEW).
+  274: U4.  Classification of sessions with first_begin = 09:55 and
+  275:      last_begin in 18:15..18:45 (Q-NEW).
+  276: U5.  Exact rules for forming events, controls, forward windows.
+  277: 
+  278: M1.  One-sided direction vs two-sided CI. UNRESOLVED.
+  279: M2.  Calendar-session bootstrap scheme. UNRESOLVED.
+  280: M3.  Consistency of В§6 (this document) with D1-D7 from v3.4 В§11.
+  281:      A targeted source audit is required to compare v3.4 and v3.6.2
+  282:      word-for-word. Until that audit is performed on the actual
+  283:      files, M3 remains OPEN.
+  284: 
+  285: QA-A1. PARTIALLY CLOSED (see В§13).
+  286: QA-A2. CLOSED (see В§6.1 Block C and audit_h4_forensic_followup_v2_addendum.md).
+  287: QA-A3. PC5 diagnostic: all non-5-minute steps are session
+  288:       boundaries on the audited datasets. PC5 remains PROPOSED
+  289:       CHANGE вЂ” NOT AUTHORIZED.
+  290: 
+  291: PC1-PC5 as in В§15.
+  292: 
+  293: ## 15. PROPOSED items
+  294: 
+  295: PC1. Equal-weight per dataset aggregation.
+  296: PC2. Dataset / period coverage; "2 of 4" NOT changed silently.
+  297: PC3. Invalid bootstrap replicate handling.
+  298: PC4. Calendar-session joint bootstrap.
+  299: PC5. Condition (l) 5-minute step check. PROPOSED CHANGE вЂ” NOT
+  300:      AUTHORIZED.
+  301: 
+  302: ## 16. Data facts (unchanged)
+  303: 
+  304: Unusual sessions:
+  305:   SBER: 3, GAZP: 5, LKOH: 33.
+  306:   Total entries (dataset, session_key): 41.
+  307:   Distinct calendar dates covered: 36.
+  308: Cause not established. Q-NEW open.
+  309: 
+  310: ## 17. Non-authorization clause
+  311: 
+  312: NOT AUTHORIZED FOR EXECUTION.
+  313: NOT READY: U1, U1b, U3-U5, M1-M3, QA-A1, PC1-PC5 open.
+  314: 
+  315: No strategy logic is changed.
+  316: No threshold is optimized.
+  317: No filter is installed.
+  318: No live order is sent.
+
+==============================================================================
+BLOCK 6a: audit_h4_implementation_v1.py :: audit_bounds (L127..L172)
+==============================================================================
+  128:     """For each bar t and each h, classify:
+  129:          ok, fail_j_only, fail_k_only, fail_both, both_ok
+  130:        plus report v600's label_partial_window_H flag if present.
+  131:     """
+  132:     n = len(df)
+  133:     sk = df["session_key"].to_numpy()
+  134:     rows = []
+  135:     for h in HORIZONS:
+  136:         c_j = 0
+  137:         c_k = 0
+  138:         c_both = 0
+  139:         c_ok = 0
+  140:         for t in range(n):
+  141:             j_ok = (t + h) < n
+  142:             if j_ok:
+  143:                 # k: session_key constant over [t, t+h]
+  144:                 k_ok = True
+  145:                 target = sk[t]
+  146:                 for k in range(1, h + 1):
+  147:                     if sk[t + k] != target:
+  148:                         k_ok = False
+  149:                         break
+  150:             else:
+  151:                 k_ok = False  # cannot be evaluated -> treat as fail
+  152:             if j_ok and k_ok:
+  153:                 c_ok += 1
+  154:             elif (not j_ok) and k_ok:
+  155:                 c_j += 1
+  156:             elif j_ok and (not k_ok):
+  157:                 c_k += 1
+  158:             else:
+  159:                 c_both += 1
+  160:         rows.append({
+  161:             "dataset": ds_name,
+  162:             "h": h,
+  163:             "ok": c_ok,
+  164:             "fail_j_only": c_j,
+  165:             "fail_k_only": c_k,
+  166:             "fail_both": c_both,
+  167:             "total": n,
+  168:         })
+  169:     return rows
+  170: 
+  171: 
+  172: def audit_atr(df, ds_name):
+  173:     atr = compute_atr14(df)
+
+==============================================================================
+BLOCK 6b: audit_h4_forensic_followup_v2_fast.py :: formal_classification (L147..L190)
+==============================================================================
+  148:     """
+  149:     Formal (j)-(k) classification.
+  150:     Returns boolean arrays ok, fail_j, fail_k, fail_both.
+  151:     """
+  152:     n = len(session_keys)
+  153:     ok = np.zeros(n, dtype=bool)
+  154:     fail_j = np.zeros(n, dtype=bool)
+  155:     fail_k = np.zeros(n, dtype=bool)
+  156:     fail_both = np.zeros(n, dtype=bool)
+  157:     for i in range(n):
+  158:         j_ok = (i + h) < n
+  159:         k_ok = True
+  160:         tgt = session_keys[i]
+  161:         if j_ok:
+  162:             for k in range(1, h + 1):
+  163:                 if session_keys[i + k] != tgt:
+  164:                     k_ok = False
+  165:                     break
+  166:         else:
+  167:             k_ok = False
+  168:         if j_ok and k_ok:
+  169:             ok[i] = True
+  170:         elif (not j_ok) and k_ok:
+  171:             fail_j[i] = True
+  172:         elif j_ok and (not k_ok):
+  173:             fail_k[i] = True
+  174:         else:
+  175:             fail_both[i] = True
+  176:     return ok, fail_j, fail_k, fail_both
+  177: 
+  178: 
+  179: def pc5_diagnostics(df):
+  180:     b = df["begin"]
+  181:     sk = df["session_key"]
+  182:     rows = []
+  183:     for i in range(1, len(df)):
+  184:         if pd.isna(b.iloc[i]) or pd.isna(b.iloc[i - 1]):
+  185:             rows.append({
+  186:                 "i_prev": i - 1, "i_curr": i,
+  187:                 "begin_prev": str(b.iloc[i - 1]),
+  188:                 "begin_curr": str(b.iloc[i]),
+  189:                 "step_min": None,
+  190:                 "sk_prev": str(sk.iloc[i - 1]),
+  191:                 "sk_curr": str(sk.iloc[i]),
+
+==============================================================================
+BLOCK 6c: audit_h4_forensic_followup_v2_fast.py :: v600_partial_flags_reconstructed (L98..L150)
+==============================================================================
+   99:     """
+  100:     Exact reconstruction of v600 build_forward_labels partial-window
+  101:     logic, per horizon h.
+  102: 
+  103:     v600 code (L359-L393):
+  104:       session = sk_5m.iloc[t0_index]
+  105:       future_indices_all = []
+  106:       for j in range(t0_index + 1, len(df_5m)):
+  107:           if sk_5m.iloc[j] != session:
+  108:               break
+  109:           future_indices_all.append(j)
+  110:       max_available = len(future_indices_all)
+  111:       for h in HORIZONS:
+  112:           if h > max_available:
+  113:               label_partial_window_H = True
+  114:           else:
+  115:               label_partial_window_H = False
+  116: 
+  117:     So: for each t and h,
+  118:         partial(t, h) = (h > max_available(t))
+  119:     where max_available(t) is the number of consecutive bars after t
+  120:     with the same session_key.
+  121: 
+  122:     We compute max_available vectorized.
+  123:     """
+  124:     n = len(session_keys)
+  125:     # max_available[t] = number of bars after t in same session
+  126:     # = (session_end_index - t) where session_end_index is the last
+  127:     #   index of the session containing t.
+  128:     # We compute it directly.
+  129:     max_avail = np.zeros(n, dtype=np.int64)
+  130:     i = n - 1
+  131:     while i >= 0:
+  132:         sk = session_keys[i]
+  133:         j = i
+  134:         while j >= 0 and session_keys[j] == sk:
+  135:             j -= 1
+  136:         # bars in [j+1, i] belong to this session
+  137:         # for each t in [j+1, i]: max_avail[t] = i - t
+  138:         for t in range(j + 1, i + 1):
+  139:             max_avail[t] = i - t
+  140:         i = j
+  141:     flags = {}
+  142:     for h in horizons:
+  143:         flags[h] = max_avail < h
+  144:     return flags, max_avail
+  145: 
+  146: 
+  147: def formal_classification(session_keys, h):
+  148:     """
+  149:     Formal (j)-(k) classification.
+  150:     Returns boolean arrays ok, fail_j, fail_k, fail_both.
+  151:     """
+
+==============================================================================
+BLOCK 6d: audit_h4_forensic_followup_v1.py :: formal_classification (L108..L150)
+==============================================================================
+  109:     """Return arrays of categories for horizon h:
+  110:        ok, fail_j, fail_k, fail_both.
+  111:     """
+  112:     n = len(df)
+  113:     sk = df["session_key"].to_numpy()
+  114:     ok = np.zeros(n, dtype=bool)
+  115:     fail_j = np.zeros(n, dtype=bool)
+  116:     fail_k = np.zeros(n, dtype=bool)
+  117:     fail_both = np.zeros(n, dtype=bool)
+  118:     for i in range(n):
+  119:         j_ok = (i + h) < n
+  120:         if j_ok:
+  121:             k_ok = True
+  122:             tgt = sk[i]
+  123:             for k in range(1, h + 1):
+  124:                 if sk[i + k] != tgt:
+  125:                     k_ok = False
+  126:                     break
+  127:         else:
+  128:             k_ok = False
+  129:         if j_ok and k_ok:
+  130:             ok[i] = True
+  131:         elif not j_ok and k_ok:
+  132:             fail_j[i] = True
+  133:         elif j_ok and not k_ok:
+  134:             fail_k[i] = True
+  135:         else:
+  136:             fail_both[i] = True
+  137:     return ok, fail_j, fail_k, fail_both
+  138: 
+  139: 
+  140: def v600_partial_flags(mod, df, horizons):
+  141:     """
+  142:     Call v600 build_forward_labels for each bar.
+  143:     Skip bars in the last MAX_H bars of each session:
+  144:       for those bars, all partial flags are True by construction.
+  145:     Returns dict: h -> np.ndarray of bool (True = partial).
+  146:     """
+  147:     n = len(df)
+  148:     sk = df["session_key"].to_numpy()
+  149:     flags = {h: np.zeros(n, dtype=bool) for h in horizons}
+  150: 
+  151:     # find session boundaries
+
+==============================================================================
+BLOCK 7: REAL CALL SITES in *.py (not definitions)
+==============================================================================
+apply_patch_diag_irregular_sessions.py  L150: trading_session_key(
+apply_patch_diag_irregular_sessions.py  L153: == trading_session_key(
+apply_patch_diag_irregular_sessions.py  L164: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L165: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L172: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L173: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L195: 'trading_session_key(df.iloc[t["entry_index"]]["begin"]) '
+apply_patch_diag_irregular_sessions.py  L196: '== trading_session_key(df.iloc[t["exit_index"]]["begin"]) '
+apply_patch_diag_irregular_sessions.py  L202: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L203: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L210: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+apply_patch_diag_irregular_sessions.py  L211: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+apply_patch_fix_integrity_tests.py  L87: "            trading_session_key(df.iloc[i][\"begin\"])\n"
+apply_patch_fix_integrity_tests.py  L88: "            == trading_session_key(df.iloc[i + 1][\"begin\"])\n"
+apply_patch_fix_session_boundary_exit.py  L85: "            trading_session_key(df.iloc[i][\"begin\"])\n"
+apply_patch_fix_session_boundary_exit.py  L86: "            == trading_session_key(df.iloc[i + 1][\"begin\"])\n"
+apply_patch_v518_attach_causal_features.py  L22: Call it from main() right after df_5m = calculate_indicators(df_5m).
+apply_patch_v518_attach_causal_features.py  L167: "    df_5m = calculate_indicators(\n"
+apply_patch_v518_attach_causal_features.py  L172: "    df_5m = calculate_indicators(\n"
+apply_patch_v518_attach_causal_features.py  L181: die("Could not locate calculate_indicators(df_5m) call in main().")
+apply_patch_v518_attach_causal_features.py  L215: print("  2. Called it in main() after calculate_indicators(df_5m)")
+apply_patch_v518_bos_quality_lab.py  L132: session_keys = build_session_keys(df_5m)
+apply_patch_v518_entry_location_lab.py  L242: sk_1m = build_session_keys(df_1m)
+apply_patch_v518_entry_location_lab.py  L243: sk_5m = build_session_keys(df_5m)
+audit_h4_forensic_followup_v1.py  L175: labels, _ = mod.build_forward_labels(df, sk_series, i)
+main_v5.17_threshold_path_lab_v2.py  L732: session_keys = build_session_keys(work)
+main_v5.17_threshold_path_lab_v2.py  L830: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L975: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L4660: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L4735: trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L4736: == trading_session_key(df.iloc[i + 1]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L4838: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L4922: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L5242: previous_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2.py  L5245: current_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2.py  L5291: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5292: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5540: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5541: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5552: trading_session_key(df.iloc[trade["signal_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5553: == trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5562: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5563: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5570: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5571: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L5721: if trading_session_key(df.iloc[confirmation_index]["begin"]) != session_key:
+main_v5.17_threshold_path_lab_v2.py  L5953: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L6053: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6054: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6147: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6148: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6152: test("No entry crosses session boundary", all(trading_session_key(df.iloc[t["signal_index"]]["begin"]) == trading_session_key(df.iloc[t["entry_index"]]["begin"]) for t in trades))
+main_v5.17_threshold_path_lab_v2.py  L6172: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6173: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6180: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6181: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2.py  L6928: mutated_df = calculate_indicators(mutated_df)
+main_v5.17_threshold_path_lab_v2.py  L7546: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L7679: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L7894: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L7941: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L8054: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L8379: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L8640: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L9018: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L9059: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L9242: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L9275: prefix_ind = calculate_indicators(df.iloc[: idx + 1].copy())
+main_v5.17_threshold_path_lab_v2.py  L9358: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L9461: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L9681: df_1m, weekend_removed = filter_weekend_sessions(
+main_v5.17_threshold_path_lab_v2.py  L9732: df_5m = calculate_indicators(
+main_v5.17_threshold_path_lab_v2.py  L9761: latest_session_key = trading_session_key(
+main_v5.17_threshold_path_lab_v2.py  L9765: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2.py  L10174: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L10229: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L10337: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2.py  L11639: sk_1m = build_session_keys(df_1m)
+main_v5.17_threshold_path_lab_v2.py  L11640: sk_5m = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2.py  L11884: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2.py  L12635: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2.py  L13089: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L732: session_keys = build_session_keys(work)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L830: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L975: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4660: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4735: trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4736: == trading_session_key(df.iloc[i + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4838: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4922: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5242: previous_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5245: current_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5291: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5292: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5540: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5541: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5552: trading_session_key(df.iloc[trade["signal_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5553: == trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5562: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5563: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5570: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5571: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5721: if trading_session_key(df.iloc[confirmation_index]["begin"]) != session_key:
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5953: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6053: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6054: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6147: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6148: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6152: test("No entry crosses session boundary", all(trading_session_key(df.iloc[t["signal_index"]]["begin"]) == trading_session_key(df.iloc[t["entry_index"]]["begin"]) for t in trades))
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6172: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6173: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6180: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6181: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6928: mutated_df = calculate_indicators(mutated_df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7546: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7679: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7894: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7941: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L8054: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L8379: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L8640: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L8981: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9022: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9205: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9238: prefix_ind = calculate_indicators(df.iloc[: idx + 1].copy())
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9321: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9424: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9644: df_1m, weekend_removed = filter_weekend_sessions(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9695: df_5m = calculate_indicators(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9724: latest_session_key = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9728: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L10092: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L10147: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L10255: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11557: sk_1m = build_session_keys(df_1m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11558: sk_5m = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11802: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L732: session_keys = build_session_keys(work)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L830: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L975: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4660: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4735: trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4736: == trading_session_key(df.iloc[i + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4838: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4922: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5242: previous_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5245: current_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5291: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5292: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5540: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5541: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5552: trading_session_key(df.iloc[trade["signal_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5553: == trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5562: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5563: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5570: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5571: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5721: if trading_session_key(df.iloc[confirmation_index]["begin"]) != session_key:
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5953: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6053: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6054: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6147: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6148: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6152: test("No entry crosses session boundary", all(trading_session_key(df.iloc[t["signal_index"]]["begin"]) == trading_session_key(df.iloc[t["entry_index"]]["begin"]) for t in trades))
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6172: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6173: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6180: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6181: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6928: mutated_df = calculate_indicators(mutated_df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7546: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7679: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7894: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7941: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L8054: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L8379: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L8640: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L8990: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9031: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9214: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9247: prefix_ind = calculate_indicators(df.iloc[: idx + 1].copy())
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9330: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9433: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9653: df_1m, weekend_removed = filter_weekend_sessions(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9704: df_5m = calculate_indicators(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9733: latest_session_key = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9737: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L10110: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L10165: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L10273: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L11575: sk_1m = build_session_keys(df_1m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L11576: sk_5m = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L11820: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L12571: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L732: session_keys = build_session_keys(work)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L830: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L975: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4660: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4735: trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4736: == trading_session_key(df.iloc[i + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4838: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4922: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5242: previous_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5245: current_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5291: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5292: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5540: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5541: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5552: trading_session_key(df.iloc[trade["signal_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5553: == trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5562: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5563: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5570: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5571: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5721: if trading_session_key(df.iloc[confirmation_index]["begin"]) != session_key:
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5953: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6053: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6054: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6147: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6148: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6152: test("No entry crosses session boundary", all(trading_session_key(df.iloc[t["signal_index"]]["begin"]) == trading_session_key(df.iloc[t["entry_index"]]["begin"]) for t in trades))
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6172: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6173: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6180: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6181: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6928: mutated_df = calculate_indicators(mutated_df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7546: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7679: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7894: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7941: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L8054: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L8379: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L8640: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L8997: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9038: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9221: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9254: prefix_ind = calculate_indicators(df.iloc[: idx + 1].copy())
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9337: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9440: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9660: df_1m, weekend_removed = filter_weekend_sessions(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9711: df_5m = calculate_indicators(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9740: latest_session_key = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9744: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L10126: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L10181: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L10289: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L11591: sk_1m = build_session_keys(df_1m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L11592: sk_5m = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L11836: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L12587: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L13041: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L732: session_keys = build_session_keys(work)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L830: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L975: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4660: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4735: trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4736: == trading_session_key(df.iloc[i + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4838: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4922: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5242: previous_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5245: current_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5291: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5292: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5540: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5541: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5552: trading_session_key(df.iloc[trade["signal_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5553: == trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5562: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5563: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5570: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5571: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5721: if trading_session_key(df.iloc[confirmation_index]["begin"]) != session_key:
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5953: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6053: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6054: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6147: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6148: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6152: test("No entry crosses session boundary", all(trading_session_key(df.iloc[t["signal_index"]]["begin"]) == trading_session_key(df.iloc[t["entry_index"]]["begin"]) for t in trades))
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6172: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6173: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6180: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6181: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6928: mutated_df = calculate_indicators(mutated_df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7546: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7679: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7894: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7941: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L8054: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L8379: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L8640: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9004: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9045: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9228: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9261: prefix_ind = calculate_indicators(df.iloc[: idx + 1].copy())
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9344: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9447: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9667: df_1m, weekend_removed = filter_weekend_sessions(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9718: df_5m = calculate_indicators(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9747: latest_session_key = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9751: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L10142: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L10197: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L10305: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L11607: sk_1m = build_session_keys(df_1m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L11608: sk_5m = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L11852: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L12603: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L13057: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L732: session_keys = build_session_keys(work)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L830: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L975: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4660: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4735: trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4736: == trading_session_key(df.iloc[i + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4838: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4922: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5242: previous_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5245: current_session = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5291: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5292: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5540: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5541: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5552: trading_session_key(df.iloc[trade["signal_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5553: == trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5562: trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5563: == trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5570: entry_key = trading_session_key(df.iloc[trade["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5571: exit_key = trading_session_key(df.iloc[trade["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5721: if trading_session_key(df.iloc[confirmation_index]["begin"]) != session_key:
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5953: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6053: and trading_session_key(df.iloc[next_index]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6054: != trading_session_key(df.iloc[i]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6147: trading_session_key(df.iloc[idx]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6148: != trading_session_key(df.iloc[idx + 1]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6152: test("No entry crosses session boundary", all(trading_session_key(df.iloc[t["signal_index"]]["begin"]) == trading_session_key(df.iloc[t["entry_index"]]["begin"]) for t in trades))
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6172: trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6173: == trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6180: entry_key = trading_session_key(df.iloc[t["entry_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6181: exit_key = trading_session_key(df.iloc[t["exit_index"]]["begin"])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6928: mutated_df = calculate_indicators(mutated_df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7546: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7679: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7894: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7941: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L8054: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L8379: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L8640: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9011: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9052: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9235: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9268: prefix_ind = calculate_indicators(df.iloc[: idx + 1].copy())
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9351: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9454: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9674: df_1m, weekend_removed = filter_weekend_sessions(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9725: df_5m = calculate_indicators(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9754: latest_session_key = trading_session_key(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9758: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L10158: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L10213: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L10321: session_keys = build_session_keys(df)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L11623: sk_1m = build_session_keys(df_1m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L11624: sk_5m = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L11868: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L12619: session_keys = build_session_keys(df_5m)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L13073: session_keys = build_session_keys(df_5m)
+patch_v519.py  L126: session_keys = build_session_keys(df_5m)
+v519_block_b.py  L107: session_keys = build_session_keys(df_5m)
+v520_block_b.py  L120: session_keys = build_session_keys(df_5m)
+v523_patch.py  L65: '    sk_5m = main.build_session_keys(df_5m)',
+v523_patch.py  L73: '    sk_5m = main.build_session_keys(df_5m)',
+v523_regime_study.py  L139: df_1m, weekend_removed = main.filter_weekend_sessions(df_1m_raw)
+v523_regime_study.py  L147: print("Calculating indicators via main.calculate_indicators() ...")
+v523_regime_study.py  L148: df_5m = main.calculate_indicators(df_5m)
+v523_regime_study.py  L151: sk_5m = main.build_session_keys(df_5m)
+v523_regime_study_BACKUP.py  L134: df_1m, weekend_removed = main.filter_weekend_sessions(df_1m_raw)
+v523_regime_study_BACKUP.py  L142: print("Calculating indicators via main.calculate_indicators() ...")
+v523_regime_study_BACKUP.py  L143: df_5m = main.calculate_indicators(df_5m)
+v523_regime_study_BACKUP.py  L146: sk_5m = main.build_session_keys(df_5m)
+v600_generalization_2024_2025.py  L264: df = main.calculate_indicators(df_5m)
+v600_generalization_2024_2025.py  L265: sk = main.build_session_keys(df)
+v600_generalization_2024_2025.py  L685: df_1m, weekend_removed = main_mod.filter_weekend_sessions(df_1m_raw)
+v600_generalization_2024_2025_BACKUP_5mcache.py  L260: df = main.calculate_indicators(df_5m)
+v600_generalization_2024_2025_BACKUP_5mcache.py  L261: sk = main.build_session_keys(df)
+v600_generalization_2024_2025_BACKUP_5mcache.py  L687: df_1m, weekend_removed = main_mod.filter_weekend_sessions(df_1m_raw)
+v600_generalization_2024_2025_BACKUP_reach.py  L260: df = main.calculate_indicators(df_5m)
+v600_generalization_2024_2025_BACKUP_reach.py  L261: sk = main.build_session_keys(df)
+v600_generalization_2024_2025_BACKUP_reach.py  L687: df_1m, weekend_removed = main_mod.filter_weekend_sessions(df_1m_raw)
+v600_generalization_2024_2025_BACKUP_reach2.py  L263: df = main.calculate_indicators(df_5m)
+v600_generalization_2024_2025_BACKUP_reach2.py  L264: sk = main.build_session_keys(df)
+v600_generalization_2024_2025_BACKUP_reach2.py  L690: df_1m, weekend_removed = main_mod.filter_weekend_sessions(df_1m_raw)
+v600_generalization_2024_2025_BACKUP_stdout.py  L255: df = main.calculate_indicators(df_5m)
+v600_generalization_2024_2025_BACKUP_stdout.py  L256: sk = main.build_session_keys(df)
+v600_generalization_2024_2025_BACKUP_stdout.py  L674: df_1m, weekend_removed = main_mod.filter_weekend_sessions(df_1m_raw)
+v600_generalization_other_tickers.py  L253: df = main.calculate_indicators(df_5m)
+v600_generalization_other_tickers.py  L254: sk = main.build_session_keys(df)
+v600_generalization_other_tickers.py  L594: df_1m, weekend_removed = main_mod.filter_weekend_sessions(df_1m_raw)
+v600_hypothesis_lab.py  L115: df_1m, weekend_removed = main.filter_weekend_sessions(df_1m_raw)
+v600_hypothesis_lab.py  L123: df_5m = main.calculate_indicators(df_5m)
+v600_hypothesis_lab.py  L126: sk_5m = main.build_session_keys(df_5m)
+v600_hypothesis_lab.py  L663: labels, _ = build_forward_labels(df_5m, sk_5m, i)
+v600_hypothesis_lab.py  L671: "period": assign_period(row["begin"]),
+v600_hypothesis_lab_BACKUP_audit.py  L113: df_1m, weekend_removed = main.filter_weekend_sessions(df_1m_raw)
+v600_hypothesis_lab_BACKUP_audit.py  L121: df_5m = main.calculate_indicators(df_5m)
+v600_hypothesis_lab_BACKUP_audit.py  L124: sk_5m = main.build_session_keys(df_5m)
+v600_hypothesis_lab_BACKUP_audit.py  L661: labels, _ = build_forward_labels(df_5m, sk_5m, i)
+v600_hypothesis_lab_BACKUP_audit.py  L668: "period": assign_period(row["begin"]),
+v600_hypothesis_lab_BACKUP_close.py  L114: df_1m, weekend_removed = main.filter_weekend_sessions(df_1m_raw)
+v600_hypothesis_lab_BACKUP_close.py  L122: df_5m = main.calculate_indicators(df_5m)
+v600_hypothesis_lab_BACKUP_close.py  L125: sk_5m = main.build_session_keys(df_5m)
+v600_hypothesis_lab_BACKUP_close.py  L662: labels, _ = build_forward_labels(df_5m, sk_5m, i)
+v600_hypothesis_lab_BACKUP_close.py  L669: "period": assign_period(row["begin"]),
+v600_patch_close.py  L36: '            "period": assign_period(row["begin"]),',
+v600_patch_close.py  L48: '            "period": assign_period(row["begin"]),',
+v600_path_analysis.py  L90: df_1m, _ = main.filter_weekend_sessions(df_1m_raw)
+v600_path_analysis.py  L94: df_5m = main.calculate_indicators(df_5m)
+v600_path_analysis.py  L96: sk = main.build_session_keys(df_5m)
+v600_path_analysis_BACKUP_fix2.py  L89: df_1m, _ = main.filter_weekend_sessions(df_1m_raw)
+v600_path_analysis_BACKUP_fix2.py  L93: df_5m = main.calculate_indicators(df_5m)
+v600_path_analysis_BACKUP_fix2.py  L95: sk = main.build_session_keys(df_5m)
+v600_path_analysis_BACKUP_fix3.py  L89: df_1m, _ = main.filter_weekend_sessions(df_1m_raw)
+v600_path_analysis_BACKUP_fix3.py  L93: df_5m = main.calculate_indicators(df_5m)
+v600_path_analysis_BACKUP_fix3.py  L95: sk = main.build_session_keys(df_5m)
+v600_path_analysis_BACKUP_stdout.py  L81: df_1m, _ = main.filter_weekend_sessions(df_1m_raw)
+v600_path_analysis_BACKUP_stdout.py  L85: df_5m = main.calculate_indicators(df_5m)
+v600_path_analysis_BACKUP_stdout.py  L87: sk = main.build_session_keys(df_5m)
+
+==============================================================================
+BLOCK 8: def sites related to forward/session/mask/range/atr/period/window
+==============================================================================
+apply_patch_v518_bos_quality_lab.py  L89: def _v518_period_of(ts):
+apply_patch_v518_bos_quality_lab.py  L103: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+apply_patch_v518_bos_quality_lab.py  L320: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+apply_patch_v518_bos_quality_lab.py  L348: def _v518_class_table(df, side_filter, period_filter):
+apply_patch_v518_entry_location_lab.py  L80: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+audit_dataset_provenance_v1.py  L81: def period_of(ts):
+audit_h4_atr14_compare_v2.py  L108: def find_atr14_block(body):
+audit_h4_atr14_compare_v2.py  L121: def reproduce_atr14_as_read(df, window=14):
+audit_h4_atr14_compare_v2.py  L140: def control_atr14(df, window=14):
+audit_h4_atr14_compare_v3.py  L105: def reproduce_atr14_wilder(df, window=14):
+audit_h4_forensic_followup_v1.py  L96: def audit_side_atr(df, window=14):
+audit_h4_forensic_followup_v1.py  L140: def v600_partial_flags(mod, df, horizons):
+audit_h4_forensic_followup_v2_fast.py  L98: def v600_partial_flags_reconstructed(session_keys, horizons):
+audit_h4_forensic_followup_v2_fast.py  L147: def formal_classification(session_keys, h):
+audit_h4_implementation_v1.py  L103: def compute_atr14(df, window=14):
+audit_h4_implementation_v1.py  L120: def compute_range_atr(df, atr):
+audit_h4_implementation_v1.py  L172: def audit_atr(df, ds_name):
+audit_h4_m5_1_m5_2_forensic_v1.py  L91: def compute_atr14_wilder(df, window=14):
+audit_h4_m5_1_m5_2_forensic_v1.py  L121: def f1_range_atr(df, atr):
+audit_h4_m5_1_m5_2_forensic_v1.py  L131: def f2_range_atr(df, atr):
+audit_session_anomalies_v1.py  L68: def classify_session(begin_series):
+audit_signal_edge_v1.py  L119: def forward_returns_for_index(df, i, horizons):
+audit_signal_edge_v1.py  L183: def session_block_bootstrap_diff(vals_a_by_sess, vals_b_by_sess,
+audit_v601_trades.py  L25: def report_check(name, mask):
+main_v5.17_threshold_path_lab_v2.py  L276: def filter_weekend_sessions(df):
+main_v5.17_threshold_path_lab_v2.py  L965: def _directional_forward_mfe_mae(df, signal_index, side, horizon):
+main_v5.17_threshold_path_lab_v2.py  L1007: def _attach_directional_forward_stats(signal_rows, df, horizon=6):
+main_v5.17_threshold_path_lab_v2.py  L1028: def _print_distance_bucket_table(rows, title, horizon=6):
+main_v5.17_threshold_path_lab_v2.py  L1284: def _print_context_matrix(rows, side):
+main_v5.17_threshold_path_lab_v2.py  L4452: def trading_session_key(timestamp):
+main_v5.17_threshold_path_lab_v2.py  L4472: def build_session_keys(df):
+main_v5.17_threshold_path_lab_v2.py  L4477: def audit_irregular_sessions(df_1m, df_5m):
+main_v5.17_threshold_path_lab_v2.py  L4565: def audit_session_boundaries(df_5m, timeline=None):
+main_v5.17_threshold_path_lab_v2.py  L4658: def print_session_audit(df):
+main_v5.17_threshold_path_lab_v2.py  L4723: def _next_bar_is_same_session(df, i):
+main_v5.17_threshold_path_lab_v2.py  L4920: def build_global_session_swings(df):
+main_v5.17_threshold_path_lab_v2.py  L5708: def _latest_confirmed_swing(swings, current_index, session_key,
+main_v5.17_threshold_path_lab_v2.py  L7057: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2.py  L7264: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2.py  L7367: def _print_v576_group(work, side, label, mask):
+main_v5.17_threshold_path_lab_v2.py  L7544: def _v577_directional_path_stats(df, signal_index, side, horizons=(1, 3, 6, 12)):
+main_v5.17_threshold_path_lab_v2.py  L7669: def _v510_directional_forward_metrics(df, source_index, side, horizon):
+main_v5.17_threshold_path_lab_v2.py  L7881: def _v511_session_global_index(df, session_key, local_index):
+main_v5.17_threshold_path_lab_v2.py  L7917: def _v511_event_forward_window(df, source_index, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2.py  L7996: def _v511_event_forward_metrics(df, source_index, side, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2.py  L9179: def _v514_compare_structure_items(timeline_item, prefix_structure, session_start):
+main_v5.17_threshold_path_lab_v2.py  L10210: def _v515_forward_indices(df, session_keys, event_index, horizon=12):
+main_v5.17_threshold_path_lab_v2.py  L11477: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+main_v5.17_threshold_path_lab_v2.py  L11841: def _v518_period_of(ts):
+main_v5.17_threshold_path_lab_v2.py  L11855: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+main_v5.17_threshold_path_lab_v2.py  L12072: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+main_v5.17_threshold_path_lab_v2.py  L12100: def _v518_class_table(df, side_filter, period_filter):
+main_v5.17_threshold_path_lab_v2.py  L13830: def _v522_period_subset(work, period):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L276: def filter_weekend_sessions(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L965: def _directional_forward_mfe_mae(df, signal_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L1007: def _attach_directional_forward_stats(signal_rows, df, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L1028: def _print_distance_bucket_table(rows, title, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L1284: def _print_context_matrix(rows, side):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4452: def trading_session_key(timestamp):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4472: def build_session_keys(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4477: def audit_irregular_sessions(df_1m, df_5m):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4565: def audit_session_boundaries(df_5m, timeline=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4658: def print_session_audit(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4723: def _next_bar_is_same_session(df, i):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4920: def build_global_session_swings(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5708: def _latest_confirmed_swing(swings, current_index, session_key,
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7057: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7264: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7367: def _print_v576_group(work, side, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7544: def _v577_directional_path_stats(df, signal_index, side, horizons=(1, 3, 6, 12)):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7669: def _v510_directional_forward_metrics(df, source_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7881: def _v511_session_global_index(df, session_key, local_index):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7917: def _v511_event_forward_window(df, source_index, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L7996: def _v511_event_forward_metrics(df, source_index, side, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9142: def _v514_compare_structure_items(timeline_item, prefix_structure, session_start):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L10128: def _v515_forward_indices(df, session_keys, event_index, horizon=12):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11395: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11759: def _v518_period_of(ts):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11773: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L11990: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L12018: def _v518_class_table(df, side_filter, period_filter):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L276: def filter_weekend_sessions(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L965: def _directional_forward_mfe_mae(df, signal_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L1007: def _attach_directional_forward_stats(signal_rows, df, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L1028: def _print_distance_bucket_table(rows, title, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L1284: def _print_context_matrix(rows, side):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4452: def trading_session_key(timestamp):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4472: def build_session_keys(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4477: def audit_irregular_sessions(df_1m, df_5m):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4565: def audit_session_boundaries(df_5m, timeline=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4658: def print_session_audit(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4723: def _next_bar_is_same_session(df, i):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4920: def build_global_session_swings(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5708: def _latest_confirmed_swing(swings, current_index, session_key,
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7057: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7264: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7367: def _print_v576_group(work, side, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7544: def _v577_directional_path_stats(df, signal_index, side, horizons=(1, 3, 6, 12)):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7669: def _v510_directional_forward_metrics(df, source_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7881: def _v511_session_global_index(df, session_key, local_index):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7917: def _v511_event_forward_window(df, source_index, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L7996: def _v511_event_forward_metrics(df, source_index, side, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9151: def _v514_compare_structure_items(timeline_item, prefix_structure, session_start):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L10146: def _v515_forward_indices(df, session_keys, event_index, horizon=12):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L11413: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L11777: def _v518_period_of(ts):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L11791: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L12008: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L12036: def _v518_class_table(df, side_filter, period_filter):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L276: def filter_weekend_sessions(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L965: def _directional_forward_mfe_mae(df, signal_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L1007: def _attach_directional_forward_stats(signal_rows, df, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L1028: def _print_distance_bucket_table(rows, title, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L1284: def _print_context_matrix(rows, side):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4452: def trading_session_key(timestamp):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4472: def build_session_keys(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4477: def audit_irregular_sessions(df_1m, df_5m):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4565: def audit_session_boundaries(df_5m, timeline=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4658: def print_session_audit(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4723: def _next_bar_is_same_session(df, i):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4920: def build_global_session_swings(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5708: def _latest_confirmed_swing(swings, current_index, session_key,
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7057: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7264: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7367: def _print_v576_group(work, side, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7544: def _v577_directional_path_stats(df, signal_index, side, horizons=(1, 3, 6, 12)):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7669: def _v510_directional_forward_metrics(df, source_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7881: def _v511_session_global_index(df, session_key, local_index):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7917: def _v511_event_forward_window(df, source_index, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L7996: def _v511_event_forward_metrics(df, source_index, side, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9158: def _v514_compare_structure_items(timeline_item, prefix_structure, session_start):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L10162: def _v515_forward_indices(df, session_keys, event_index, horizon=12):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L11429: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L11793: def _v518_period_of(ts):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L11807: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L12024: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L12052: def _v518_class_table(df, side_filter, period_filter):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L276: def filter_weekend_sessions(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L965: def _directional_forward_mfe_mae(df, signal_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L1007: def _attach_directional_forward_stats(signal_rows, df, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L1028: def _print_distance_bucket_table(rows, title, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L1284: def _print_context_matrix(rows, side):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4452: def trading_session_key(timestamp):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4472: def build_session_keys(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4477: def audit_irregular_sessions(df_1m, df_5m):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4565: def audit_session_boundaries(df_5m, timeline=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4658: def print_session_audit(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4723: def _next_bar_is_same_session(df, i):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4920: def build_global_session_swings(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5708: def _latest_confirmed_swing(swings, current_index, session_key,
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7057: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7264: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7367: def _print_v576_group(work, side, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7544: def _v577_directional_path_stats(df, signal_index, side, horizons=(1, 3, 6, 12)):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7669: def _v510_directional_forward_metrics(df, source_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7881: def _v511_session_global_index(df, session_key, local_index):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7917: def _v511_event_forward_window(df, source_index, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L7996: def _v511_event_forward_metrics(df, source_index, side, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9165: def _v514_compare_structure_items(timeline_item, prefix_structure, session_start):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L10178: def _v515_forward_indices(df, session_keys, event_index, horizon=12):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L11445: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L11809: def _v518_period_of(ts):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L11823: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L12040: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L12068: def _v518_class_table(df, side_filter, period_filter):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L276: def filter_weekend_sessions(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L965: def _directional_forward_mfe_mae(df, signal_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L1007: def _attach_directional_forward_stats(signal_rows, df, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L1028: def _print_distance_bucket_table(rows, title, horizon=6):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L1284: def _print_context_matrix(rows, side):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4452: def trading_session_key(timestamp):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4472: def build_session_keys(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4477: def audit_irregular_sessions(df_1m, df_5m):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4565: def audit_session_boundaries(df_5m, timeline=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4658: def print_session_audit(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4723: def _next_bar_is_same_session(df, i):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4920: def build_global_session_swings(df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5708: def _latest_confirmed_swing(swings, current_index, session_key,
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7057: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7264: def _print_anatomy_group(work, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7367: def _print_v576_group(work, side, label, mask):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7544: def _v577_directional_path_stats(df, signal_index, side, horizons=(1, 3, 6, 12)):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7669: def _v510_directional_forward_metrics(df, source_index, side, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7881: def _v511_session_global_index(df, session_key, local_index):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7917: def _v511_event_forward_window(df, source_index, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L7996: def _v511_event_forward_metrics(df, source_index, side, horizon, session_keys=None):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9172: def _v514_compare_structure_items(timeline_item, prefix_structure, session_start):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L10194: def _v515_forward_indices(df, session_keys, event_index, horizon=12):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L11461: def _v518_entry_1m_metrics(df_1m_slice, entry_pos, direction, horizon):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L11825: def _v518_period_of(ts):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L11839: def _v518_forward_metrics(df, event_index, direction, horizon, session_keys):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L12056: def _v518_feature_table(df, side_filter, period_filter, feature_cols, label_col):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L12084: def _v518_class_table(df, side_filter, period_filter):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L13814: def _v522_period_subset(work, period):
+v5.27_exact_structure_v2.py  L69: def session_key(ts):
+v522_block_b.py  L115: def _v522_period_subset(work, period):
+v523_category_stability.py  L55: def _block_for_period(df, period):
+v523_regime_study.py  L271: def build_1m_features(df_1m, sk_1m, session_key, t0_begin_ts, atr5m, direction):
+v523_regime_study.py  L297: def _window_ret(bars_back):
+v523_regime_study.py  L305: def _window_range(bars_back):
+v523_regime_study.py  L311: def _window_range_atr(bars_back):
+v523_regime_study.py  L317: def _window_vol_ratio(bars_back):
+v523_regime_study.py  L393: def build_5m_features(df_5m, session_prefix_indices, t0_local_pos, direction, main, atr5m):
+v523_regime_study.py  L492: def build_15m_features(df_15m, session_key, t0_begin_ts, direction):
+v523_regime_study.py  L540: def build_mkt_features(df_5m, session_prefix_indices, t0_local_pos, prev_day_levels, session_key, direction):
+v523_regime_study_BACKUP.py  L259: def build_1m_features(df_1m, sk_1m, session_key, t0_begin_ts, atr5m, direction):
+v523_regime_study_BACKUP.py  L285: def _window_ret(bars_back):
+v523_regime_study_BACKUP.py  L293: def _window_range(bars_back):
+v523_regime_study_BACKUP.py  L299: def _window_range_atr(bars_back):
+v523_regime_study_BACKUP.py  L305: def _window_vol_ratio(bars_back):
+v523_regime_study_BACKUP.py  L381: def build_5m_features(df_5m, session_prefix_indices, t0_local_pos, direction, main, atr5m):
+v523_regime_study_BACKUP.py  L480: def build_15m_features(df_15m, session_key, t0_begin_ts, direction):
+v523_regime_study_BACKUP.py  L528: def build_mkt_features(df_5m, session_prefix_indices, t0_local_pos, prev_day_levels, session_key, direction):
+v600_cost_adjusted_reach_audit.py  L188: def _aggregate_cell(df, tag, period, level_tag, direction, H):
+v600_cost_adjusted_reach_audit_BACKUP_fix1.py  L162: def _paired_delta_bootstrap(tag_bools, base_bools, session_ids,
+v600_cost_adjusted_reach_audit_BACKUP_fix1.py  L223: def _aggregate_cell(df, tag, period, level_tag, direction, H):
+v600_generalization_2024_2025.py  L166: def download_1m_period():
+v600_generalization_2024_2025.py  L325: def _session_forward_indices(df, session_keys, t0, horizon):
+v600_generalization_2024_2025.py  L337: def build_reach(df, session_keys):
+v600_generalization_2024_2025.py  L402: def _bootstrap_prop_diff_by_session(tag_b, base_b, sess, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_generalization_2024_2025_BACKUP_5mcache.py  L164: def download_1m_period():
+v600_generalization_2024_2025_BACKUP_5mcache.py  L321: def _session_forward_indices(df, session_keys, t0, horizon):
+v600_generalization_2024_2025_BACKUP_5mcache.py  L333: def build_reach(df, session_keys):
+v600_generalization_2024_2025_BACKUP_5mcache.py  L404: def _bootstrap_prop_diff_by_session(tag_b, base_b, sess, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_generalization_2024_2025_BACKUP_reach.py  L164: def download_1m_period():
+v600_generalization_2024_2025_BACKUP_reach.py  L321: def _session_forward_indices(df, session_keys, t0, horizon):
+v600_generalization_2024_2025_BACKUP_reach.py  L333: def build_reach(df, session_keys):
+v600_generalization_2024_2025_BACKUP_reach.py  L404: def _bootstrap_prop_diff_by_session(tag_b, base_b, sess, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_generalization_2024_2025_BACKUP_reach2.py  L165: def download_1m_period():
+v600_generalization_2024_2025_BACKUP_reach2.py  L324: def _session_forward_indices(df, session_keys, t0, horizon):
+v600_generalization_2024_2025_BACKUP_reach2.py  L336: def build_reach(df, session_keys):
+v600_generalization_2024_2025_BACKUP_reach2.py  L407: def _bootstrap_prop_diff_by_session(tag_b, base_b, sess, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_generalization_2024_2025_BACKUP_stdout.py  L159: def download_1m_period():
+v600_generalization_2024_2025_BACKUP_stdout.py  L316: def _session_forward_indices(df, session_keys, t0, horizon):
+v600_generalization_2024_2025_BACKUP_stdout.py  L328: def build_reach(df, session_keys):
+v600_generalization_2024_2025_BACKUP_stdout.py  L391: def _bootstrap_prop_diff_by_session(tag_b, base_b, sess, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_generalization_other_tickers.py  L299: def _session_forward_indices(df, session_keys, t0, horizon):
+v600_generalization_other_tickers.py  L311: def build_reach(df, session_keys):
+v600_hypothesis_lab.py  L142: def assign_period(ts):
+v600_hypothesis_lab.py  L154: def build_session_structure_timelines(df_5m, main):
+v600_hypothesis_lab.py  L284: def build_1m_features_for_bar(df_1m, sk_1m, session_key, t0_begin_ts):
+v600_hypothesis_lab.py  L310: def _range(bars_back):
+v600_hypothesis_lab.py  L359: def build_forward_labels(df_5m, sk_5m, t0_index):
+v600_hypothesis_lab.py  L451: def build_state_tags(df_5m, i, session_local_idx, session_key, structure_timeline,
+v600_hypothesis_lab.py  L689: def _n_by_period(df):
+v600_hypothesis_lab_BACKUP_audit.py  L140: def assign_period(ts):
+v600_hypothesis_lab_BACKUP_audit.py  L152: def build_session_structure_timelines(df_5m, main):
+v600_hypothesis_lab_BACKUP_audit.py  L282: def build_1m_features_for_bar(df_1m, sk_1m, session_key, t0_begin_ts):
+v600_hypothesis_lab_BACKUP_audit.py  L308: def _range(bars_back):
+v600_hypothesis_lab_BACKUP_audit.py  L357: def build_forward_labels(df_5m, sk_5m, t0_index):
+v600_hypothesis_lab_BACKUP_audit.py  L449: def build_state_tags(df_5m, i, session_local_idx, session_key, structure_timeline,
+v600_hypothesis_lab_BACKUP_audit.py  L686: def _n_by_period(df):
+v600_hypothesis_lab_BACKUP_close.py  L141: def assign_period(ts):
+v600_hypothesis_lab_BACKUP_close.py  L153: def build_session_structure_timelines(df_5m, main):
+v600_hypothesis_lab_BACKUP_close.py  L283: def build_1m_features_for_bar(df_1m, sk_1m, session_key, t0_begin_ts):
+v600_hypothesis_lab_BACKUP_close.py  L309: def _range(bars_back):
+v600_hypothesis_lab_BACKUP_close.py  L358: def build_forward_labels(df_5m, sk_5m, t0_index):
+v600_hypothesis_lab_BACKUP_close.py  L450: def build_state_tags(df_5m, i, session_local_idx, session_key, structure_timeline,
+v600_hypothesis_lab_BACKUP_close.py  L687: def _n_by_period(df):
+v600_path_analysis.py  L107: def _session_forward_indices(df_5m, session_keys, t0_index, horizon):
+v600_path_analysis.py  L120: def _path_metrics_for_horizon(df_5m, session_keys, t0_index, horizon, base_close):
+v600_path_analysis.py  L203: def _bootstrap_mean_by_session(values, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis.py  L226: def _bootstrap_prop_by_session(bools, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis.py  L265: def summarize_block(subset, sessions):
+v600_path_analysis.py  L325: def _write_tag_block(add, df, tag, period, subset, H):
+v600_path_analysis.py  L354: def _baseline_for_period(df, period, H):
+v600_path_analysis.py  L359: def _write_baseline_block(add, sub_h, period, H):
+v600_path_analysis_BACKUP_fix2.py  L106: def _session_forward_indices(df_5m, session_keys, t0_index, horizon):
+v600_path_analysis_BACKUP_fix2.py  L119: def _path_metrics_for_horizon(df_5m, session_keys, t0_index, horizon, base_close):
+v600_path_analysis_BACKUP_fix2.py  L202: def _bootstrap_mean_by_session(values, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis_BACKUP_fix2.py  L225: def _bootstrap_prop_by_session(bools, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis_BACKUP_fix2.py  L264: def summarize_block(subset, sessions):
+v600_path_analysis_BACKUP_fix2.py  L324: def _write_tag_block(add, df, tag, period, subset, H):
+v600_path_analysis_BACKUP_fix2.py  L353: def _baseline_for_period(df, period, H):
+v600_path_analysis_BACKUP_fix2.py  L358: def _write_baseline_block(add, sub_h, period, H):
+v600_path_analysis_BACKUP_fix3.py  L106: def _session_forward_indices(df_5m, session_keys, t0_index, horizon):
+v600_path_analysis_BACKUP_fix3.py  L119: def _path_metrics_for_horizon(df_5m, session_keys, t0_index, horizon, base_close):
+v600_path_analysis_BACKUP_fix3.py  L202: def _bootstrap_mean_by_session(values, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis_BACKUP_fix3.py  L225: def _bootstrap_prop_by_session(bools, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis_BACKUP_fix3.py  L264: def summarize_block(subset, sessions):
+v600_path_analysis_BACKUP_fix3.py  L324: def _write_tag_block(add, df, tag, period, subset, H):
+v600_path_analysis_BACKUP_fix3.py  L353: def _baseline_for_period(df, period, H):
+v600_path_analysis_BACKUP_fix3.py  L358: def _write_baseline_block(add, sub_h, period, H):
+v600_path_analysis_BACKUP_stdout.py  L98: def _session_forward_indices(df_5m, session_keys, t0_index, horizon):
+v600_path_analysis_BACKUP_stdout.py  L111: def _path_metrics_for_horizon(df_5m, session_keys, t0_index, horizon, base_close):
+v600_path_analysis_BACKUP_stdout.py  L194: def _bootstrap_mean_by_session(values, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis_BACKUP_stdout.py  L217: def _bootstrap_prop_by_session(bools, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v600_path_analysis_BACKUP_stdout.py  L256: def summarize_block(subset, sessions):
+v600_path_analysis_BACKUP_stdout.py  L316: def _write_tag_block(add, df, tag, period, subset, H):
+v600_path_analysis_BACKUP_stdout.py  L345: def _baseline_for_period(df, period, H):
+v600_path_analysis_BACKUP_stdout.py  L350: def _write_baseline_block(add, df, period, H):
+v600_stability_check.py  L63: def _block_bootstrap_ci_by_session(df_subset, value_col, session_col="session_key",
+v600_stability_check.py  L92: def _block_bootstrap_ci_for_binary_by_session(df_subset, value_col,
+v600_stability_check.py  L180: def _write_tag_block(add, df, tag_name, period, subset):
+v600_stability_check.py  L216: def _write_baseline_block(add, df, period, subset):
+v600_stability_check.py  L233: def _write_period_price_trend(add, df, period, subset):
+v600_stability_check_BACKUP_close.py  L62: def _block_bootstrap_ci_by_session(df_subset, value_col, session_col="session_key",
+v600_stability_check_BACKUP_close.py  L91: def _block_bootstrap_ci_for_binary_by_session(df_subset, value_col,
+v600_stability_check_BACKUP_close.py  L179: def _write_tag_block(add, df, tag_name, period, subset):
+v600_stability_check_BACKUP_close.py  L215: def _write_baseline_block(add, df, period, subset):
+v600_stability_check_BACKUP_close.py  L232: def _write_period_price_trend(add, df, period, subset):
+v601_forensic_audit.py  L301: def _build_signal_with_session_reset(df, q25, reset_on_session=True):
+v601_predefined_entry_exit.py  L163: def _next_session_first_bar(df, i):
+v602_edge_diagnostics.py  L99: def _session_bootstrap_ci(values, sessions, n_iter=BOOT_N, seed=BOOT_SEED):
+v602_edge_diagnostics.py  L160: def forward_returns_for_dataset(df, signal_indices, dataset_name):
+v602_edge_diagnostics.py  L228: def summarize_forward_returns(all_fwd):
+v602_edge_diagnostics.py  L298: def session_boundary_diff_summary(df, dataset_name):
+
+==============================================================================
+BLOCK 9: H4 spec files inventory
+==============================================================================
+audit_research_roadmap_v1_h4_spec_v1.md  4700 bytes  2026-10-13T11:12:11.1127841+03:00
+audit_research_roadmap_v1_h4_spec_v2.md  5808 bytes  2026-10-13T11:36:36.2937872+03:00
+audit_research_roadmap_v1_h4_spec_v3_1_PROPOSED.md  11966 bytes  2026-10-13T12:00:21.8858930+03:00
+audit_research_roadmap_v1_h4_spec_v3_2_PROPOSED.md  13394 bytes  2026-10-13T12:02:25.4623223+03:00
+audit_research_roadmap_v1_h4_spec_v3_3_PROPOSED.md  11977 bytes  2026-10-13T12:04:25.1447123+03:00
+audit_research_roadmap_v1_h4_spec_v3_4_PROPOSED.md  12499 bytes  2026-10-13T17:01:51.1249921+03:00
+audit_research_roadmap_v1_h4_spec_v3_5_PROPOSED.md  11784 bytes  2026-10-13T17:16:51.8627046+03:00
+audit_research_roadmap_v1_h4_spec_v3_5_QA_report.md  3696 bytes  2026-10-13T17:24:10.8429681+03:00
+audit_research_roadmap_v1_h4_spec_v3_6_1_change_log.md  4139 bytes  2026-10-13T17:28:46.7387418+03:00
+audit_research_roadmap_v1_h4_spec_v3_6_1_PROPOSED.md  15523 bytes  2026-10-13T17:28:14.1678332+03:00
+audit_research_roadmap_v1_h4_spec_v3_6_2_PROPOSED.md  12095 bytes  2026-10-13T19:43:31.4120213+03:00
+audit_research_roadmap_v1_h4_spec_v3_6_change_log.md  5833 bytes  2026-10-13T17:23:41.0539463+03:00
+audit_research_roadmap_v1_h4_spec_v3_6_PROPOSED.md  11666 bytes  2026-10-13T17:23:03.3700063+03:00
+audit_research_roadmap_v1_h4_spec_v3_6_QA_report.md  4510 bytes  2026-10-13T17:29:11.9429423+03:00
+audit_research_roadmap_v1_h4_spec_v3_PROPOSED.md  11042 bytes  2026-10-13T11:58:14.6799603+03:00
+----- COUNT -----
+15
+
+==============================================================================
+FOOTER
+==============================================================================
+BYTES: 135330
+LINES: 2221
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD IS OPTIMIZED. NO FILTER IS INSTALLED. NO LIVE ORDERS.
+OOS: SEALED. H4 EXECUTION: NOT AUTHORIZED.

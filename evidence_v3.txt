@@ -1,0 +1,1199 @@
+H4 ABSENCE CLAIM VERIFICATION v3 -- READ ONLY
+Generated: 2026-10-14T18:43:44.190308
+CWD: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD IS OPTIMIZED. NO FILTER IS INSTALLED. NO LIVE ORDERS.
+OOS: SEALED. H4 EXECUTION: NOT AUTHORIZED.
+
+==============================================================================
+BLOCK A: def + call sites for build_signal_timeline / run_backtest / run_managed_backtest
+==============================================================================
+extract_h4_evidence_v3.py  L17:     "def build_signal_timeline",
+extract_h4_evidence_v3.py  L18:     "def run_backtest",
+extract_h4_evidence_v3.py  L19:     "def run_managed_backtest",
+extract_h4_evidence_v3.py  L20:     "build_signal_timeline(",
+extract_h4_evidence_v3.py  L21:     "run_backtest(",
+extract_h4_evidence_v3.py  L22:     "run_managed_backtest(",
+main_v5.17_threshold_path_lab_v2.py  L888:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2.py  L4826: def build_signal_timeline(df, highs, lows):
+main_v5.17_threshold_path_lab_v2.py  L4954: def run_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2.py  L4959:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2.py  L5443: def run_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2.py  L5728: def run_managed_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2.py  L5740:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2.py  L6117: def run_managed_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2.py  L6915:     original = build_signal_timeline(df, [], [])
+main_v5.17_threshold_path_lab_v2.py  L6930:     mutated = build_signal_timeline(mutated_df, [], [])
+main_v5.17_threshold_path_lab_v2.py  L9930:         backtest = run_backtest(
+main_v5.17_threshold_path_lab_v2.py  L9959:             managed_backtest = run_managed_backtest(
+main_v5.17_threshold_path_lab_v2.py  L10018:                     build_signal_timeline(df_5m, global_highs, global_lows),
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L888:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4826: def build_signal_timeline(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4954: def run_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L4959:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5443: def run_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5728: def run_managed_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L5740:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6117: def run_managed_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6915:     original = build_signal_timeline(df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L6930:     mutated = build_signal_timeline(mutated_df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9893:         backtest = run_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9922:             managed_backtest = run_managed_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  L9981:                     build_signal_timeline(df_5m, global_highs, global_lows),
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L888:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4826: def build_signal_timeline(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4954: def run_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L4959:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5443: def run_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5728: def run_managed_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L5740:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6117: def run_managed_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6915:     original = build_signal_timeline(df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L6930:     mutated = build_signal_timeline(mutated_df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9902:         backtest = run_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9931:             managed_backtest = run_managed_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  L9990:                     build_signal_timeline(df_5m, global_highs, global_lows),
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L888:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4826: def build_signal_timeline(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4954: def run_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L4959:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5443: def run_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5728: def run_managed_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L5740:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6117: def run_managed_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6915:     original = build_signal_timeline(df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L6930:     mutated = build_signal_timeline(mutated_df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9909:         backtest = run_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9938:             managed_backtest = run_managed_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  L9997:                     build_signal_timeline(df_5m, global_highs, global_lows),
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L888:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4826: def build_signal_timeline(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4954: def run_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L4959:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5443: def run_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5728: def run_managed_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L5740:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6117: def run_managed_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6915:     original = build_signal_timeline(df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L6930:     mutated = build_signal_timeline(mutated_df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9916:         backtest = run_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L9945:             managed_backtest = run_managed_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  L10004:                     build_signal_timeline(df_5m, global_highs, global_lows),
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L888:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4826: def build_signal_timeline(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4954: def run_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L4959:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5443: def run_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5728: def run_managed_backtest(df, highs, lows):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L5740:     timeline = build_signal_timeline(df, highs, lows)
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6117: def run_managed_backtest_integrity_tests(backtest, df):
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6915:     original = build_signal_timeline(df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L6930:     mutated = build_signal_timeline(mutated_df, [], [])
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9923:         backtest = run_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L9952:             managed_backtest = run_managed_backtest(
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  L10011:                     build_signal_timeline(df_5m, global_highs, global_lows),
+TOTAL: 84
+
+==============================================================================
+BLOCK B: main :: build_signal_timeline full body
+==============================================================================
+ 4826: def build_signal_timeline(df, highs, lows):
+ 4827:     """
+ 4828:     Build a causal intraday signal timeline.
+ 4829: 
+ 4830:     Structure resets by MOEX exchange session, not simply by calendar
+ 4831:     date. This is important because MOEX can run additional weekend
+ 4832:     sessions which belong to the following trading day.
+ 4833: 
+ 4834:     Technical indicators remain continuous across the full dataset.
+ 4835:     """
+ 4836:     timeline = []
+ 4837: 
+ 4838:     session_keys = build_session_keys(df)
+ 4839: 
+ 4840:     for i in range(len(df)):
+ 4841:         current_session = session_keys.iloc[i]
+ 4842: 
+ 4843:         session_mask = session_keys == current_session
+ 4844:         session_indices = df.index[session_mask]
+ 4845:         first_session_index = int(session_indices[0])
+ 4846: 
+ 4847:         prefix = df.iloc[first_session_index : i + 1].copy()
+ 4848: 
+ 4849:         prefix_highs, prefix_lows = find_swings(prefix)
+ 4850:         prefix_highs = classify_highs(prefix_highs)
+ 4851:         prefix_lows = classify_lows(prefix_lows)
+ 4852: 
+ 4853:         structure = run_structure_engine(
+ 4854:             prefix,
+ 4855:             prefix_highs,
+ 4856:             prefix_lows,
+ 4857:         )
+ 4858: 
+ 4859:         # Structure is intentionally reset per session, so its internal
+ 4860:         # indices are local to `prefix`. Convert event indices to the
+ 4861:         # global dataframe coordinate system before they leave this scope.
+ 4862:         global_events = []
+ 4863:         for local_event in structure["events"]:
+ 4864:             event = local_event.copy()
+ 4865:             local_index = int(event["index"])
+ 4866:             global_index = first_session_index + local_index
+ 4867:             event["index"] = global_index
+ 4868:             event["time"] = df.iloc[global_index]["end"]
+ 4869:             event["bar_begin"] = df.iloc[global_index]["begin"]
+ 4870:             global_events.append(event)
+ 4871: 
+ 4872:         technical_score, technical_state = (
+ 4873:             calculate_technical_score(df.iloc[i])
+ 4874:         )
+ 4875: 
+ 4876:         signal_result = run_signal_engine(
+ 4877:             structure,
+ 4878:             technical_score,
+ 4879:             technical_state,
+ 4880:         )
+ 4881: 
+ 4882:         # ----------------------------------------------------
+ 4883:         # v5.17-V2 A1-full v2: signal_event.index is session-local
+ 4884:         # inside the structure prefix. Convert it to the global
+ 4885:         # 5M dataframe index, matching the global_events
+ 4886:         # conversion above. This does not change signals,
+ 4887:         # entries, exits, sizing, or management.
+ 4888:         # ----------------------------------------------------
+ 4889:         signal_event_global = None
+ 4890:         if signal_result["last_event"] is not None:
+ 4891:             signal_event_global = signal_result["last_event"].copy()
+ 4892:             local_signal_index = int(signal_event_global["index"])
+ 4893:             global_signal_index = first_session_index + local_signal_index
+ 4894:             signal_event_global["index"] = global_signal_index
+ 4895:             signal_event_global["time"] = df.iloc[global_signal_index]["end"]
+ 4896:             signal_event_global["bar_begin"] = df.iloc[global_signal_index]["begin"]
+ 4897: 
+ 4898:         timeline.append(
+ 4899:             {
+ 4900:                 "index": i,
+ 4901:                 "time": df.iloc[i]["begin"],
+ 4902:                 "date": df.iloc[i]["begin"].normalize(),
+ 4903:                 "session_key": current_session,
+ 4904:                 "signal": signal_result["signal"],
+ 4905:                 "technical_score": technical_score,
+ 4906:                 "technical_state": technical_state,
+ 4907:                 "last_event": signal_result["last_event"],
+ 4908:                 "signal_event": signal_event_global,
+ 4909:                 "structure_state": structure["state"],
+ 4910:                 "current_trend": structure["current_trend"],
+ 4911:                 "events_snapshot": global_events,
+ 4912:                 "atr14": df.iloc[i].get("atr14", np.nan),
+ 4913:                 "volume_ratio": df.iloc[i].get("volume_ratio", np.nan),
+ 4914:             }
+ 4915:         )
+ 4916: 
+ 4917:     return timeline
+ 4918: 
+ 4919: 
+ 4920: def build_global_session_swings(df):
+ 4921:     """Build session-local swings while preserving global dataframe indices."""
+ 4922:     session_keys = build_session_keys(df)
+ 4923:     all_highs = []
+ 4924:     all_lows = []
+ 4925: 
+ 4926:     for session_key in session_keys.drop_duplicates():
+ 4927:         global_indices = list(df.index[session_keys == session_key])
+ 4928:         session_df = df.iloc[global_indices].reset_index(drop=True)
+ 4929:         raw_highs, raw_lows = find_swings(session_df)
+ 4930:         session_highs = classify_highs(raw_highs)
+ 4931:         session_lows = classify_lows(raw_lows)
+ 4932: 
+ 4933:         for swing in session_highs:
+ 4934:             item = swing.copy()
+ 4935:             item["index"] = int(global_indices[item["index"]])
+ 4936:             item["confirmation_index"] = int(global_indices[item["confirmation_index"]])
+ 4937:             item["time"] = df.iloc[item["index"]]["begin"]
+ 4938:             item["confirmation_time"] = df.iloc[item["confirmation_index"]]["begin"]
+ 4939:             all_highs.append(item)
+ 4940: 
+ 4941:         for swing in session_lows:
+ 4942:             item = swing.copy()
+ 4943:             item["index"] = int(global_indices[item["index"]])
+ 4944:             item["confirmation_index"] = int(global_indices[item["confirmation_index"]])
+ 4945:             item["time"] = df.iloc[item["index"]]["begin"]
+ 4946:             item["confirmation_time"] = df.iloc[item["confirmation_index"]]["begin"]
+ 4947:             all_lows.append(item)
+ 4948: 
+ 4949:     all_highs.sort(key=lambda x: x["confirmation_index"])
+ 4950:     all_lows.sort(key=lambda x: x["confirmation_index"])
+ 4951:     return all_highs, all_lows
+ 4952: 
+ 4953: 
+ 4954: def run_backtest(df, highs, lows):
+ 4955:     """Run a conservative, research-only signal backtest."""
+ 4956:     if len(df) < 2:
+ 4957:         raise RuntimeError("Not enough candles for backtest")
+ 4958: 
+ 4959:     timeline = build_signal_timeline(df, highs, lows)
+ 4960: 
+ 4961:     capital = float(BACKTEST_INITIAL_CAPITAL)
+ 4962:     starting_capital = capital
+ 4963:     position = None
+ 4964:     trades = []
+ 4965:     equity_curve = []
+ 4966: 
+ 4967:     def open_position(side, signal_index):
+ 4968:         nonlocal capital
+ 4969: 
+ 4970:         next_index = signal_index + 1
+ 4971:         if next_index >= len(df):
+ 4972:             return None
+ 4973: 
+ 4974:         raw_price = float(df.iloc[next_index]["open"])
+ 4975:         fill_price = apply_slippage(
+ 4976:             raw_price,
+ 4977:             side,
+ 4978:             True,
+ 4979:         )
+ 4980: 
+ 4981:         if fill_price <= 0:
+ 4982:             raise RuntimeError("Invalid backtest entry price")
+ 4983: 
+ 4984:         allocation = (
+ 4985:             capital * BACKTEST_POSITION_SIZE_PCT / 100.0
+ 4986:         )
+ 4987: 
+ 4988:         if allocation <= 0:
+ 4989:             raise RuntimeError("Non-positive backtest allocation")
+ 4990: 
+ 4991:         quantity = allocation / fill_price
+ 4992:         entry_notional = quantity * fill_price
+ 4993:         entry_commission = commission_for_notional(
+ 4994:             entry_notional
+ 4995:         )
+ 4996: 
+ 4997:         capital -= entry_commission
+ 4998: 
+ 4999:         signal_item = timeline[signal_index]
+ 5000:         signal_event = signal_item.get("signal_event")
+ 5001:         signal_strength = (
+ 5002:             signal_event.get("strength")
+ 5003:             if signal_event is not None
+ 5004:             else None
+ 5005:         )
+ 5006: 
+ 5007:         return {
+ 5008:             "side": side,
+ 5009:             "signal_index": signal_index,
+ 5010:             "signal_time": signal_item["time"],
+ 5011:             "signal_technical_score": signal_item["technical_score"],
+ 5012:             "signal_technical_state": signal_item["technical_state"],
+ 5013:             "signal_structure_state": signal_item["structure_state"],
+ 5014:             "signal_current_trend": signal_item["current_trend"],
+ 5015:             "signal_event": signal_event.copy() if signal_event is not None else None,
+ 5016:             "signal_event_strength": signal_strength,
+ 5017:             "signal_atr14": signal_item.get("atr14", np.nan),
+ 5018:             "signal_volume_ratio": signal_item.get("volume_ratio", np.nan),
+ 5019:             "entry_index": next_index,
+ 5020:             "entry_time": df.iloc[next_index]["begin"],
+ 5021:             "entry_price": fill_price,
+ 5022:             "raw_entry_price": raw_price,
+ 5023:             "quantity": quantity,
+ 5024:             "entry_commission": entry_commission,
+ 5025:         }
+ 5026: 
+ 5027:     def close_position(pos, signal_index, reason, forced_exit_index=None):
+ 5028:         nonlocal capital
+ 5029: 
+ 5030:         # Normal signal exits use the next bar open. Forced session/end exits
+ 5031:         # must not cross into another trading session, so they use an explicit
+ 5032:         # bar and that bar's close price.
+ 5033:         if forced_exit_index is not None:
+ 5034:             exit_index = int(forced_exit_index)
+ 5035:             if exit_index < 0 or exit_index >= len(df):
+ 5036:                 raise RuntimeError("Invalid forced exit index")
+ 5037:             raw_price = float(df.iloc[exit_index]["close"])
+ 5038:         else:
+ 5039:             # PATCH 2: non-forced exits must not cross a session
+ 5040:             # boundary. If i+1 is in a different session, close on
+ 5041:             # this bar's close instead of the next session's open.
+ 5042:             # Strategy logic, entry, TP and reasons are unchanged.
+ 5043:             if _next_bar_is_same_session(df, signal_index):
+ 5044:                 exit_index = signal_index + 1
+ 5045:                 if exit_index >= len(df):
+ 5046:                     exit_index = len(df) - 1
+ 5047:                 raw_price = float(df.iloc[exit_index]["open"])
+ 5048:             else:
+ 5049:                 exit_index = signal_index
+ 5050:                 raw_price = float(df.iloc[exit_index]["close"])
+ 5051:         exit_price = apply_slippage(
+ 5052:             raw_price,
+ 5053:             pos["side"],
+ 5054:             False,
+ 5055:         )
+ 5056: 
+ 5057:         quantity = pos["quantity"]
+ 5058:         entry_price = pos["entry_price"]
+ 5059:         raw_entry_price = float(pos.get("raw_entry_price", entry_price))
+ 5060:         entry_slippage_cost = abs(entry_price - raw_entry_price) * quantity
+ 5061:         exit_slippage_cost = abs(exit_price - raw_price) * quantity
+ 5062: 
+ 5063:         if pos["side"] == "LONG":
+ 5064:             gross_pnl = (
+ 5065:                 exit_price - entry_price
+ 5066:             ) * quantity
+ 5067:         else:
+ 5068:             gross_pnl = (
+ 5069:                 entry_price - exit_price
+ 5070:             ) * quantity
+ 5071: 
+ 5072:         exit_notional = quantity * exit_price
+ 5073:         exit_commission = commission_for_notional(
+ 5074:             exit_notional
+ 5075:         )
+
+==============================================================================
+BLOCK C: main :: run_backtest full body
+==============================================================================
+ 4954: def run_backtest(df, highs, lows):
+ 4955:     """Run a conservative, research-only signal backtest."""
+ 4956:     if len(df) < 2:
+ 4957:         raise RuntimeError("Not enough candles for backtest")
+ 4958: 
+ 4959:     timeline = build_signal_timeline(df, highs, lows)
+ 4960: 
+ 4961:     capital = float(BACKTEST_INITIAL_CAPITAL)
+ 4962:     starting_capital = capital
+ 4963:     position = None
+ 4964:     trades = []
+ 4965:     equity_curve = []
+ 4966: 
+ 4967:     def open_position(side, signal_index):
+ 4968:         nonlocal capital
+ 4969: 
+ 4970:         next_index = signal_index + 1
+ 4971:         if next_index >= len(df):
+ 4972:             return None
+ 4973: 
+ 4974:         raw_price = float(df.iloc[next_index]["open"])
+ 4975:         fill_price = apply_slippage(
+ 4976:             raw_price,
+ 4977:             side,
+ 4978:             True,
+ 4979:         )
+ 4980: 
+ 4981:         if fill_price <= 0:
+ 4982:             raise RuntimeError("Invalid backtest entry price")
+ 4983: 
+ 4984:         allocation = (
+ 4985:             capital * BACKTEST_POSITION_SIZE_PCT / 100.0
+ 4986:         )
+ 4987: 
+ 4988:         if allocation <= 0:
+ 4989:             raise RuntimeError("Non-positive backtest allocation")
+ 4990: 
+ 4991:         quantity = allocation / fill_price
+ 4992:         entry_notional = quantity * fill_price
+ 4993:         entry_commission = commission_for_notional(
+ 4994:             entry_notional
+ 4995:         )
+ 4996: 
+ 4997:         capital -= entry_commission
+ 4998: 
+ 4999:         signal_item = timeline[signal_index]
+ 5000:         signal_event = signal_item.get("signal_event")
+ 5001:         signal_strength = (
+ 5002:             signal_event.get("strength")
+ 5003:             if signal_event is not None
+ 5004:             else None
+ 5005:         )
+ 5006: 
+ 5007:         return {
+ 5008:             "side": side,
+ 5009:             "signal_index": signal_index,
+ 5010:             "signal_time": signal_item["time"],
+ 5011:             "signal_technical_score": signal_item["technical_score"],
+ 5012:             "signal_technical_state": signal_item["technical_state"],
+ 5013:             "signal_structure_state": signal_item["structure_state"],
+ 5014:             "signal_current_trend": signal_item["current_trend"],
+ 5015:             "signal_event": signal_event.copy() if signal_event is not None else None,
+ 5016:             "signal_event_strength": signal_strength,
+ 5017:             "signal_atr14": signal_item.get("atr14", np.nan),
+ 5018:             "signal_volume_ratio": signal_item.get("volume_ratio", np.nan),
+ 5019:             "entry_index": next_index,
+ 5020:             "entry_time": df.iloc[next_index]["begin"],
+ 5021:             "entry_price": fill_price,
+ 5022:             "raw_entry_price": raw_price,
+ 5023:             "quantity": quantity,
+ 5024:             "entry_commission": entry_commission,
+ 5025:         }
+ 5026: 
+ 5027:     def close_position(pos, signal_index, reason, forced_exit_index=None):
+ 5028:         nonlocal capital
+ 5029: 
+ 5030:         # Normal signal exits use the next bar open. Forced session/end exits
+ 5031:         # must not cross into another trading session, so they use an explicit
+ 5032:         # bar and that bar's close price.
+ 5033:         if forced_exit_index is not None:
+ 5034:             exit_index = int(forced_exit_index)
+ 5035:             if exit_index < 0 or exit_index >= len(df):
+ 5036:                 raise RuntimeError("Invalid forced exit index")
+ 5037:             raw_price = float(df.iloc[exit_index]["close"])
+ 5038:         else:
+ 5039:             # PATCH 2: non-forced exits must not cross a session
+ 5040:             # boundary. If i+1 is in a different session, close on
+ 5041:             # this bar's close instead of the next session's open.
+ 5042:             # Strategy logic, entry, TP and reasons are unchanged.
+ 5043:             if _next_bar_is_same_session(df, signal_index):
+ 5044:                 exit_index = signal_index + 1
+ 5045:                 if exit_index >= len(df):
+ 5046:                     exit_index = len(df) - 1
+ 5047:                 raw_price = float(df.iloc[exit_index]["open"])
+ 5048:             else:
+ 5049:                 exit_index = signal_index
+ 5050:                 raw_price = float(df.iloc[exit_index]["close"])
+ 5051:         exit_price = apply_slippage(
+ 5052:             raw_price,
+ 5053:             pos["side"],
+ 5054:             False,
+ 5055:         )
+ 5056: 
+ 5057:         quantity = pos["quantity"]
+ 5058:         entry_price = pos["entry_price"]
+ 5059:         raw_entry_price = float(pos.get("raw_entry_price", entry_price))
+ 5060:         entry_slippage_cost = abs(entry_price - raw_entry_price) * quantity
+ 5061:         exit_slippage_cost = abs(exit_price - raw_price) * quantity
+ 5062: 
+ 5063:         if pos["side"] == "LONG":
+ 5064:             gross_pnl = (
+ 5065:                 exit_price - entry_price
+ 5066:             ) * quantity
+ 5067:         else:
+ 5068:             gross_pnl = (
+ 5069:                 entry_price - exit_price
+ 5070:             ) * quantity
+ 5071: 
+ 5072:         exit_notional = quantity * exit_price
+ 5073:         exit_commission = commission_for_notional(
+ 5074:             exit_notional
+ 5075:         )
+ 5076: 
+ 5077:         net_pnl = (
+ 5078:             gross_pnl
+ 5079:             - pos["entry_commission"]
+ 5080:             - exit_commission
+ 5081:         )
+ 5082: 
+ 5083:         capital += gross_pnl
+ 5084:         capital -= exit_commission
+ 5085: 
+ 5086:         entry_index = int(pos["entry_index"])
+ 5087:         entry_fill = float(pos["entry_price"])
+ 5088: 
+ 5089:         max_favorable_price_move = 0.0
+ 5090:         max_adverse_price_move = 0.0
+ 5091: 
+ 5092:         diagnostic_end_index = (
+ 5093:             exit_index
+ 5094:             if forced_exit_index is not None
+ 5095:             else signal_index
+ 5096:         )
+ 5097: 
+ 5098:         if diagnostic_end_index < entry_index:
+ 5099:             diagnostic_end_index = entry_index
+ 5100: 
+ 5101:         if BACKTEST_DIAGNOSTICS:
+ 5102:             for mark_index in range(entry_index, diagnostic_end_index + 1):
+ 5103:                 bar = df.iloc[mark_index]
+ 5104:                 bar_high = float(bar["high"])
+ 5105:                 bar_low = float(bar["low"])
+ 5106: 
+ 5107:                 if pos["side"] == "LONG":
+ 5108:                     favorable_move = bar_high - entry_fill
+ 5109:                     adverse_move = bar_low - entry_fill
+ 5110:                 else:
+ 5111:                     favorable_move = entry_fill - bar_low
+ 5112:                     adverse_move = entry_fill - bar_high
+ 5113: 
+ 5114:                 max_favorable_price_move = max(
+ 5115:                     max_favorable_price_move,
+ 5116:                     favorable_move,
+ 5117:                 )
+ 5118:                 max_adverse_price_move = min(
+ 5119:                     max_adverse_price_move,
+ 5120:                     adverse_move,
+ 5121:                 )
+ 5122: 
+ 5123:         signal_event = pos.get("signal_event")
+ 5124:         signal_level = (
+ 5125:             float(signal_event["level"])
+ 5126:             if signal_event is not None
+ 5127:             and signal_event.get("level") is not None
+ 5128:             else np.nan
+ 5129:         )
+ 5130: 
+ 5131:         entry_to_event_distance = (
+ 5132:             abs(entry_fill - signal_level)
+ 5133:             if not pd.isna(signal_level)
+ 5134:             else np.nan
+ 5135:         )
+ 5136: 
+ 5137:         signal_atr = pos.get("signal_atr14", np.nan)
+ 5138:         entry_to_event_distance_atr = (
+ 5139:             entry_to_event_distance / float(signal_atr)
+ 5140:             if not pd.isna(signal_atr)
+ 5141:             and float(signal_atr) > 0
+ 5142:             and not pd.isna(entry_to_event_distance)
+ 5143:             else np.nan
+ 5144:         )
+ 5145: 
+ 5146:         trade_events = []
+ 5147:         for timeline_item in timeline:
+ 5148:             timeline_index = timeline_item["index"]
+ 5149:             if entry_index <= timeline_index <= diagnostic_end_index:
+ 5150:                 for event in timeline_item.get("events_snapshot", []):
+ 5151:                     if (
+ 5152:                         event["index"] > pos["signal_index"]
+ 5153:                         and event["index"] <= diagnostic_end_index
+ 5154:                     ):
+ 5155:                         trade_events.append(event)
+ 5156: 
+ 5157:         unique_events = []
+ 5158:         seen_event_keys = set()
+ 5159:         for event in trade_events:
+ 5160:             key = (
+ 5161:                 event.get("index"),
+ 5162:                 event.get("event"),
+ 5163:                 event.get("direction"),
+ 5164:                 event.get("level"),
+ 5165:             )
+ 5166:             if key not in seen_event_keys:
+ 5167:                 seen_event_keys.add(key)
+ 5168:                 unique_events.append(event)
+ 5169: 
+ 5170:         return {
+ 5171:             "side": pos["side"],
+ 5172:             "entry_time": pos["entry_time"],
+ 5173:             "exit_time": df.iloc[exit_index]["begin"],
+ 5174:             "entry_price": entry_price,
+ 5175:             "exit_price": exit_price,
+ 5176:             "quantity": quantity,
+ 5177:             "gross_pnl": gross_pnl,
+ 5178:             "entry_commission": pos["entry_commission"],
+ 5179:             "exit_commission": exit_commission,
+ 5180:             "total_commission": pos["entry_commission"] + exit_commission,
+ 5181:             "entry_slippage_cost": entry_slippage_cost,
+ 5182:             "exit_slippage_cost": exit_slippage_cost,
+ 5183:             "total_slippage_cost": entry_slippage_cost + exit_slippage_cost,
+ 5184:             "net_pnl": net_pnl,
+ 5185:             "return_pct": (
+ 5186:                 net_pnl /
+ 5187:                 (entry_price * quantity) * 100
+ 5188:             ),
+ 5189:             "reason": reason,
+ 5190:             "signal_index": pos["signal_index"],
+ 5191:             "entry_index": pos["entry_index"],
+ 5192:             # PATCH 2c: bar index at which the exit condition fired.
+ 5193:             # Managed trades already record this field; ordinary trades
+ 5194:             # now record it too. Purely informational. Does not affect
+ 5195:             # any price, P&L, index, reason, or strategy decision.
+ 5196:             "exit_condition_index": signal_index,
+ 5197:             "exit_index": exit_index,
+ 5198:             "signal_time": pos.get("signal_time"),
+ 5199:             "technical_score_at_signal": pos.get("signal_technical_score"),
+ 5200:             "technical_state_at_signal": pos.get("signal_technical_state"),
+ 5201:             "structure_state_at_signal": pos.get("signal_structure_state"),
+ 5202:             "trend_at_signal": pos.get("signal_current_trend"),
+ 5203:             "signal_event": signal_event.copy() if signal_event is not None else None,
+
+==============================================================================
+BLOCK C2: main :: run_managed_backtest full body
+==============================================================================
+ 5728: def run_managed_backtest(df, highs, lows):
+ 5729:     """
+ 5730:     Conservative v5.6 trade management on the exact v5.5 entries.
+ 5731: 
+ 5732:     Entry logic is untouched. Management uses only information known at
+ 5733:     the current closed 5M bar. Trailing/reversal conditions trigger an
+ 5734:     exit on the next 5M bar open. Session-end and final-data exits remain
+ 5735:     forced exits on the current bar close.
+ 5736:     """
+ 5737:     if len(df) < 2:
+ 5738:         raise RuntimeError("Not enough candles for managed backtest")
+ 5739: 
+ 5740:     timeline = build_signal_timeline(df, highs, lows)
+ 5741:     capital = float(BACKTEST_INITIAL_CAPITAL)
+ 5742:     starting_capital = capital
+ 5743:     position = None
+ 5744:     trades = []
+ 5745:     equity_curve = []
+ 5746: 
+ 5747:     def open_position(side, signal_index):
+ 5748:         nonlocal capital
+ 5749:         next_index = signal_index + 1
+ 5750:         if next_index >= len(df):
+ 5751:             return None
+ 5752: 
+ 5753:         raw_price = float(df.iloc[next_index]["open"])
+ 5754:         fill_price = apply_slippage(raw_price, side, True)
+ 5755:         if fill_price <= 0:
+ 5756:             raise RuntimeError("Invalid managed backtest entry price")
+ 5757: 
+ 5758:         allocation = capital * BACKTEST_POSITION_SIZE_PCT / 100.0
+ 5759:         if allocation <= 0:
+ 5760:             raise RuntimeError("Non-positive managed backtest allocation")
+ 5761: 
+ 5762:         quantity = allocation / fill_price
+ 5763:         entry_notional = quantity * fill_price
+ 5764:         entry_commission = commission_for_notional(entry_notional)
+ 5765:         capital -= entry_commission
+ 5766: 
+ 5767:         item = timeline[signal_index]
+ 5768:         signal_event = item.get("signal_event")
+ 5769:         signal_strength = (
+ 5770:             signal_event.get("strength")
+ 5771:             if signal_event is not None else None
+ 5772:         )
+ 5773:         signal_atr = item.get("atr14", np.nan)
+ 5774:         if pd.isna(signal_atr) or float(signal_atr) <= 0:
+ 5775:             signal_atr = np.nan
+ 5776: 
+ 5777:         return {
+ 5778:             "side": side,
+ 5779:             "signal_index": signal_index,
+ 5780:             "signal_time": item["time"],
+ 5781:             "signal_technical_score": item["technical_score"],
+ 5782:             "signal_technical_state": item["technical_state"],
+ 5783:             "signal_structure_state": item["structure_state"],
+ 5784:             "signal_current_trend": item["current_trend"],
+ 5785:             "signal_event": signal_event.copy() if signal_event is not None else None,
+ 5786:             "signal_event_strength": signal_strength,
+ 5787:             "signal_atr14": signal_atr,
+ 5788:             "signal_volume_ratio": item.get("volume_ratio", np.nan),
+ 5789:             "entry_index": next_index,
+ 5790:             "entry_time": df.iloc[next_index]["begin"],
+ 5791:             "entry_price": fill_price,
+ 5792:             "raw_entry_price": raw_price,
+ 5793:             "quantity": quantity,
+ 5794:             "entry_commission": entry_commission,
+ 5795:             "management_active": False,
+ 5796:             "activation_index": None,
+ 5797:             "activation_time": None,
+ 5798:             "trail_level": None,
+ 5799:             "max_favorable_close": fill_price,
+ 5800:             "tightened": False,
+ 5801:             "reversal_warning_index": None,
+ 5802:             "reversal_warning_time": None,
+ 5803:             "reversal_warning_level": None,
+ 5804:             "management_events": [],
+ 5805:             "last_management_index": signal_index,
+ 5806:         }
+ 5807: 
+ 5808:     def close_position(pos, condition_index, reason, forced_exit_index=None):
+ 5809:         nonlocal capital
+ 5810:         if forced_exit_index is not None:
+ 5811:             exit_index = int(forced_exit_index)
+ 5812:             raw_price = float(df.iloc[exit_index]["close"])
+ 5813:         else:
+ 5814:             # PATCH 2: same session-boundary guard for managed exits.
+ 5815:             # Trailing stop / structural reversal must not execute on
+ 5816:             # the next session's first bar open.
+ 5817:             if _next_bar_is_same_session(df, int(condition_index)):
+ 5818:                 exit_index = int(condition_index) + 1
+ 5819:                 if exit_index >= len(df):
+ 5820:                     # No next bar exists. Preserve terminal-bar
+ 5821:                     # semantics: realize the exit on final bar close.
+ 5822:                     exit_index = len(df) - 1
+ 5823:                     raw_price = float(df.iloc[exit_index]["close"])
+ 5824:                 else:
+ 5825:                     raw_price = float(df.iloc[exit_index]["open"])
+ 5826:             else:
+ 5827:                 exit_index = int(condition_index)
+ 5828:                 raw_price = float(df.iloc[exit_index]["close"])
+ 5829: 
+ 5830:         exit_price = apply_slippage(raw_price, pos["side"], False)
+ 5831:         quantity = pos["quantity"]
+ 5832:         entry_price = pos["entry_price"]
+ 5833:         raw_entry_price = float(pos.get("raw_entry_price", entry_price))
+ 5834:         entry_slippage_cost = abs(entry_price - raw_entry_price) * quantity
+ 5835:         exit_slippage_cost = abs(exit_price - raw_price) * quantity
+ 5836:         if pos["side"] == "LONG":
+ 5837:             gross_pnl = (exit_price - entry_price) * quantity
+ 5838:         else:
+ 5839:             gross_pnl = (entry_price - exit_price) * quantity
+ 5840: 
+ 5841:         exit_notional = quantity * exit_price
+ 5842:         exit_commission = commission_for_notional(exit_notional)
+ 5843:         net_pnl = gross_pnl - pos["entry_commission"] - exit_commission
+ 5844:         capital += gross_pnl
+ 5845:         capital -= exit_commission
+ 5846: 
+ 5847:         diagnostic_end_index = exit_index if forced_exit_index is not None else condition_index
+ 5848:         diagnostic_end_index = max(diagnostic_end_index, pos["entry_index"])
+ 5849:         mfe = 0.0
+ 5850:         mae = 0.0
+ 5851:         for mark_index in range(pos["entry_index"], diagnostic_end_index + 1):
+ 5852:             bar = df.iloc[mark_index]
+ 5853:             hi = float(bar["high"]); lo = float(bar["low"])
+ 5854:             if pos["side"] == "LONG":
+ 5855:                 fav = hi - entry_price; adv = lo - entry_price
+ 5856:             else:
+ 5857:                 fav = entry_price - lo; adv = entry_price - hi
+ 5858:             mfe = max(mfe, fav); mae = min(mae, adv)
+ 5859: 
+ 5860:         signal_event = pos.get("signal_event")
+ 5861:         signal_level = (
+ 5862:             float(signal_event["level"])
+ 5863:             if signal_event is not None and signal_event.get("level") is not None
+ 5864:             else np.nan
+ 5865:         )
+ 5866:         entry_distance = abs(entry_price - signal_level) if not pd.isna(signal_level) else np.nan
+ 5867:         signal_atr = pos.get("signal_atr14", np.nan)
+ 5868:         entry_distance_atr = (
+ 5869:             entry_distance / float(signal_atr)
+ 5870:             if not pd.isna(signal_atr) and float(signal_atr) > 0 and not pd.isna(entry_distance)
+ 5871:             else np.nan
+ 5872:         )
+ 5873: 
+ 5874:         trade_events = []
+ 5875:         for item in timeline:
+ 5876:             idx = item["index"]
+ 5877:             if pos["entry_index"] <= idx <= diagnostic_end_index:
+ 5878:                 for event in item.get("events_snapshot", []):
+ 5879:                     if event["index"] > pos["signal_index"] and event["index"] <= diagnostic_end_index:
+ 5880:                         trade_events.append(event)
+ 5881:         unique_events = []
+ 5882:         seen = set()
+ 5883:         for event in trade_events:
+ 5884:             key = _managed_event_key(event)
+ 5885:             if key not in seen:
+ 5886:                 seen.add(key); unique_events.append(event)
+ 5887: 
+ 5888:         realized_favorable = (
+ 5889:             (exit_price - entry_price) if pos["side"] == "LONG"
+ 5890:             else (entry_price - exit_price)
+ 5891:         )
+ 5892:         mfe_capture = (realized_favorable / mfe) if mfe > 0 else np.nan
+ 5893: 
+ 5894:         return {
+ 5895:             "side": pos["side"],
+ 5896:             "entry_time": pos["entry_time"],
+ 5897:             "exit_time": df.iloc[exit_index]["begin"],
+ 5898:             "entry_price": entry_price,
+ 5899:             "exit_price": exit_price,
+ 5900:             "quantity": quantity,
+ 5901:             "gross_pnl": gross_pnl,
+ 5902:             "entry_commission": pos["entry_commission"],
+ 5903:             "exit_commission": exit_commission,
+ 5904:             "total_commission": pos["entry_commission"] + exit_commission,
+ 5905:             "entry_slippage_cost": entry_slippage_cost,
+ 5906:             "exit_slippage_cost": exit_slippage_cost,
+ 5907:             "total_slippage_cost": entry_slippage_cost + exit_slippage_cost,
+ 5908:             "net_pnl": net_pnl,
+ 5909:             "return_pct": net_pnl / (entry_price * quantity) * 100,
+ 5910:             "reason": reason,
+ 5911:             "signal_index": pos["signal_index"],
+ 5912:             "entry_index": pos["entry_index"],
+ 5913:             "exit_condition_index": condition_index,
+ 5914:             "exit_index": exit_index,
+ 5915:             "signal_time": pos.get("signal_time"),
+ 5916:             "technical_score_at_signal": pos.get("signal_technical_score"),
+ 5917:             "technical_state_at_signal": pos.get("signal_technical_state"),
+ 5918:             "structure_state_at_signal": pos.get("signal_structure_state"),
+ 5919:             "trend_at_signal": pos.get("signal_current_trend"),
+ 5920:             "signal_event": signal_event.copy() if signal_event is not None else None,
+ 5921:             "signal_event_type": signal_event.get("event") if signal_event is not None else None,
+ 5922:             "signal_event_direction": signal_event.get("direction") if signal_event is not None else None,
+ 5923:             "signal_event_level": signal_level,
+ 5924:             "signal_event_strength_score": (
+ 5925:                 signal_event.get("strength", {}).get("score")
+ 5926:                 if signal_event is not None and signal_event.get("strength") is not None
+ 5927:                 else np.nan
+ 5928:             ),
+ 5929:             "signal_atr14": pos.get("signal_atr14", np.nan),
+ 5930:             "signal_volume_ratio": pos.get("signal_volume_ratio", np.nan),
+ 5931:             "entry_to_signal_level_distance": entry_distance,
+ 5932:             "entry_to_signal_level_atr": entry_distance_atr,
+ 5933:             "holding_bars": exit_index - pos["entry_index"],
+ 5934:             "mfe_price": mfe,
+ 5935:             "mae_price": mae,
+ 5936:             "mfe_money": mfe * quantity,
+ 5937:             "mae_money": mae * quantity,
+ 5938:             "mfe_pct_of_entry": mfe / entry_price * 100 if entry_price > 0 else 0.0,
+ 5939:             "mae_pct_of_entry": mae / entry_price * 100 if entry_price > 0 else 0.0,
+ 5940:             "mfe_capture_ratio": mfe_capture,
+ 5941:             "management_active": pos["management_active"],
+ 5942:             "activation_index": pos["activation_index"],
+ 5943:             "activation_time": pos["activation_time"],
+ 5944:             "final_trail_level": pos["trail_level"],
+ 5945:             "tightened": pos["tightened"],
+ 5946:             "reversal_warning_index": pos["reversal_warning_index"],
+ 5947:             "reversal_warning_time": pos["reversal_warning_time"],
+ 5948:             "reversal_warning_level": pos["reversal_warning_level"],
+ 5949:             "management_events": list(pos["management_events"]),
+ 5950:             "structure_events_during_trade": unique_events,
+ 5951:         }
+ 5952: 
+ 5953:     session_keys = build_session_keys(df)
+ 5954: 
+ 5955:     for item in timeline:
+ 5956:         i = item["index"]
+ 5957:         signal = item["signal"]
+ 5958: 
+ 5959:         if position is not None and i > 0 and session_keys.iloc[i] != session_keys.iloc[i - 1]:
+ 5960:             trade = close_position(position, i - 1, "END_OF_SESSION", forced_exit_index=i - 1)
+ 5961:             trades.append(trade); position = None
+ 5962: 
+ 5963:         if position is not None:
+ 5964:             side = position["side"]
+ 5965:             current_close = float(df.iloc[i]["close"])
+ 5966:             signal_atr = position.get("signal_atr14", np.nan)
+ 5967:             if pd.isna(signal_atr) or float(signal_atr) <= 0:
+ 5968:                 signal_atr = float(df.iloc[i].get("atr14", np.nan))
+ 5969:             if pd.isna(signal_atr) or float(signal_atr) <= 0:
+ 5970:                 signal_atr = np.nan
+ 5971: 
+ 5972:             favorable_close = (current_close - position["entry_price"] if side == "LONG"
+ 5973:                                else position["entry_price"] - current_close)
+ 5974:             position["max_favorable_close"] = max(position["max_favorable_close"], favorable_close + position["entry_price"])
+ 5975: 
+ 5976:             # 1. Activation after +0.50 ATR.
+ 5977:             if (not position["management_active"] and not pd.isna(signal_atr)
+
+==============================================================================
+BLOCK D: v600_hypothesis_lab.py L1..L130 (config)
+==============================================================================
+    1: # -*- coding: utf-8 -*-
+    2: """
+    3: v600_hypothesis_lab.py
+    4: 
+    5: MARKET BEHAVIOR / ENTRY MECHANISM STUDY -- READ-ONLY descriptive lab.
+    6: 
+    7: STRATEGY LOGIC: UNCHANGED
+    8: RESEARCH ONLY
+    9: NO THRESHOLD IS OPTIMIZED
+   10: NO FILTER IS INSTALLED
+   11: 
+   12: Does NOT modify main.py, v523_regime_study.py, or any trading logic.
+   13: Does NOT install any filter, signal, threshold, or trading rule.
+   14: Does NOT compute PF / WR / Sharpe / PnL.
+   15: 
+   16: Builds one observation per ordinary 5M bar:
+   17:   STATE (causal, known at T0-1) -> FUTURE PATH / REACH / RETURN (T0+1..T0+N)
+   18: 
+   19: Outputs:
+   20:   v600_hypothesis_dataset.csv
+   21:   v600_state_summary.txt
+   22:   v600_reach_summary.txt
+   23:   v600_transition_summary.txt
+   24:   v600_distribution_summary.txt
+   25:   v600_audit.txt
+   26: """
+   27: 
+   28: # v600_patch_close_applied_v1
+   29: import sys as _sys, io as _io
+   30: # We deliberately do NOT wrap sys.stdout/stderr. The reports are written
+   31: # to files with explicit encoding="utf-8", so console encoding does not
+   32: # matter. Wrapping here caused GC to close the underlying buffer after
+   33: # main.py's importlib re-wraps it.
+   34: 
+   35: import importlib.util
+   36: from pathlib import Path
+   37: import numpy as np
+   38: import pandas as pd
+   39: 
+   40: 
+   41: # ============================================================
+   42: # CONFIG
+   43: # ============================================================
+   44: 
+   45: # v600_patch_audit_already_applied_v1
+   46: MAIN_FILE = "main_v5.17_threshold_path_lab_v2.py"
+   47: 
+   48: OUT_DATASET_CSV = "v600_hypothesis_dataset.csv"
+   49: OUT_STATE_TXT = "v600_state_summary.txt"
+   50: OUT_REACH_TXT = "v600_reach_summary.txt"
+   51: OUT_TRANSITION_TXT = "v600_transition_summary.txt"
+   52: OUT_DISTRIBUTION_TXT = "v600_distribution_summary.txt"
+   53: OUT_AUDIT_TXT = "v600_audit.txt"
+   54: 
+   55: # Horizons in 5M bars
+   56: HORIZONS = (1, 2, 3, 4, 6, 8, 12, 18, 24)
+   57: 
+   58: # Descriptive reach levels in % (NOT trading thresholds)
+   59: REACH_LEVELS = (0.10, 0.20, 0.30, 0.50)
+   60: 
+   61: # Period boundaries (must match v5.18 / v5.23)
+   62: PERIODS = (
+   63:     ("DISCOVERY",  "2025-09-15", "2026-02-28"),
+   64:     ("VALIDATION", "2026-03-01", "2026-05-31"),
+   65:     ("OOS",        "2026-06-01", "2026-09-14"),
+   66: )
+   67: 
+   68: 
+   69: # ============================================================
+   70: # IMPORT main.py
+   71: # ============================================================
+   72: 
+   73: def load_main_module():
+   74:     base = Path(__file__).resolve().parent
+   75:     main_path = base / MAIN_FILE
+   76:     if not main_path.exists():
+   77:         raise RuntimeError("main file not found: " + str(main_path))
+   78: 
+   79:     # Save current stdout/stderr as raw objects. We will NOT wrap them.
+   80:     # main.py itself wraps sys.stdout at import time. We simply keep
+   81:     # references to the wrappers so GC does not close the buffer.
+   82:     spec = importlib.util.spec_from_file_location("moex_main_v5", str(main_path))
+   83:     module = importlib.util.module_from_spec(spec)
+   84: 
+   85:     # Hold references on module so nothing gets GC'd
+   86:     module._v600_keepalive = []
+   87: 
+   88:     try:
+   89:         spec.loader.exec_module(module)
+   90:     finally:
+   91:         # After main.py import, sys.stdout may be main's TextIOWrapper.
+   92:         # Keep a reference so the wrapper is not collected.
+   93:         try:
+   94:             module._v600_keepalive.append(_sys.stdout)
+   95:             module._v600_keepalive.append(_sys.stderr)
+   96:         except Exception:
+   97:             pass
+   98: 
+   99:     return module
+  100: 
+  101: 
+  102: # ============================================================
+  103: # LOAD DATA (same source as main / v523)
+  104: # ============================================================
+  105: 
+  106: def load_data(main):
+  107:     print("=" * 78)
+  108:     print("v600 HYPOTHESIS LAB -- DATA LOAD")
+  109:     print("STRATEGY LOGIC: UNCHANGED -- RESEARCH ONLY")
+  110:     print("NO THRESHOLD IS OPTIMIZED -- NO FILTER IS INSTALLED")
+  111:     print("=" * 78)
+  112: 
+  113:     print("Loading 1M ...")
+  114:     df_1m_raw = main.download_1m_data()
+  115:     df_1m, weekend_removed = main.filter_weekend_sessions(df_1m_raw)
+  116:     print("  1M raw=" + str(len(df_1m_raw)) + "  weekend_removed=" + str(weekend_removed) + "  filtered=" + str(len(df_1m)))
+  117: 
+  118:     print("Aggregating 5M ...")
+  119:     df_5m = main.aggregate_5m(df_1m)
+  120:     print("  5M rows=" + str(len(df_5m)))
+  121: 
+  122:     print("Calculating indicators ...")
+  123:     df_5m = main.calculate_indicators(df_5m)
+  124: 
+  125:     print("Building session keys ...")
+  126:     sk_5m = main.build_session_keys(df_5m)
+  127:     df_5m = df_5m.copy()
+  128:     df_5m["session_key"] = sk_5m
+  129: 
+  130:     sk_1m = df_1m["begin"].map(main.trading_session_key)
+
+==============================================================================
+BLOCK E: def sites related to mask / event / control / horizon / window
+==============================================================================
+extract_h4_evidence_v3.py  L179:             "def _mask", "def build_mask", "def _event", "def build_event",
+extract_h4_evidence_v3.py  L180:             "def _control", "def build_control", "def _horizon",
+extract_h4_evidence_v3.py  L181:             "def build_horizon", "def _window", "def build_window",
+v523_regime_study.py  L297:     def _window_ret(bars_back):
+v523_regime_study.py  L305:     def _window_range(bars_back):
+v523_regime_study.py  L311:     def _window_range_atr(bars_back):
+v523_regime_study.py  L317:     def _window_vol_ratio(bars_back):
+v523_regime_study_BACKUP.py  L285:     def _window_ret(bars_back):
+v523_regime_study_BACKUP.py  L293:     def _window_range(bars_back):
+v523_regime_study_BACKUP.py  L299:     def _window_range_atr(bars_back):
+v523_regime_study_BACKUP.py  L305:     def _window_vol_ratio(bars_back):
+TOTAL: 11
+
+==============================================================================
+BLOCK F: v3.6.2 section 6 conditions in code
+==============================================================================
+audit_h4_forensic_followup_v1.py  L32:   label_partial_window_H flags are True by construction. We skip
+audit_h4_forensic_followup_v1.py  L181:             key = "label_partial_window_" + str(h)
+audit_h4_forensic_followup_v1.py  L242:     add("  label_partial_window_H are True by construction of v600.")
+audit_h4_forensic_followup_v2_fast.py  L113:               label_partial_window_H = True
+audit_h4_forensic_followup_v2_fast.py  L115:               label_partial_window_H = False
+audit_h4_implementation_v1.py  L130:        plus report v600's label_partial_window_H flag if present.
+audit_h4_implementation_v1.py  L375:     add("      if h > max_available -> label_partial_window_H = True")
+audit_h4_implementation_v1.py  L408:         ("A1.p", "label_partial_window_H matches behavior", "v600 L382-L393", "bounds CSV", "see CSV"),
+audit_session_boundary_rules_v1.py  L224:     add("label_partial_window")
+audit_session_boundary_rules_v1.py  L336:     add("  - if h > max_available, label is NaN and label_partial_window_H = True.")
+extract_h4_evidence_v3.py  L26:     "session_key[t+k]",
+extract_h4_evidence_v3.py  L27:     "session_key[t+h]",
+extract_h4_evidence_v3.py  L28:     "range_atr[t]",
+extract_h4_evidence_v3.py  L29:     "atr14[t]",
+extract_h4_evidence_v3.py  L30:     "label_partial_window",
+v600_hypothesis_lab.py  L392:             out["label_partial_window_" + str(h)] = True
+v600_hypothesis_lab.py  L442:         out["label_partial_window_" + str(h)] = False
+v600_hypothesis_lab.py  L1005:     add("   partial windows at session end: marked with label_partial_window_H = True.")
+v600_hypothesis_lab.py  L1007:         col = "label_partial_window_" + str(h)
+v600_hypothesis_lab_BACKUP_audit.py  L390:             out["label_partial_window_" + str(h)] = True
+v600_hypothesis_lab_BACKUP_audit.py  L440:         out["label_partial_window_" + str(h)] = False
+v600_hypothesis_lab_BACKUP_audit.py  L994:     add("   partial windows at session end: marked with label_partial_window_H = True.")
+v600_hypothesis_lab_BACKUP_audit.py  L996:         col = "label_partial_window_" + str(h)
+v600_hypothesis_lab_BACKUP_close.py  L391:             out["label_partial_window_" + str(h)] = True
+v600_hypothesis_lab_BACKUP_close.py  L441:         out["label_partial_window_" + str(h)] = False
+v600_hypothesis_lab_BACKUP_close.py  L1003:     add("   partial windows at session end: marked with label_partial_window_H = True.")
+v600_hypothesis_lab_BACKUP_close.py  L1005:         col = "label_partial_window_" + str(h)
+TOTAL: 27
+
+==============================================================================
+BLOCK G: .py size map
+==============================================================================
+apply_patch_A1.py  lines=274  size=11269
+apply_patch_A1_full.py  lines=509  size=19615
+apply_patch_A1_full_v3.py  lines=149  size=5438
+apply_patch_A2.py  lines=239  size=8137
+apply_patch_A6.py  lines=358  size=13794
+apply_patch_A9.py  lines=230  size=8630
+apply_patch_A9_only.py  lines=186  size=6783
+apply_patch_diag_irregular_sessions.py  lines=327  size=12500
+apply_patch_diag_session_boundary.py  lines=334  size=14516
+apply_patch_finalize_integrity_tests.py  lines=289  size=12934
+apply_patch_fix_helpers_2d.py  lines=229  size=9845
+apply_patch_fix_integrity_helpers.py  lines=396  size=19468
+apply_patch_fix_integrity_tests.py  lines=288  size=12892
+apply_patch_fix_session_boundary_exit.py  lines=215  size=9404
+apply_patch_remove_dbg_1b.py  lines=161  size=6283
+apply_patch_v518_attach_causal_features.py  lines=235  size=9423
+apply_patch_v518_bos_quality_lab.py  lines=567  size=23767
+apply_patch_v518_entry_location_lab.py  lines=510  size=19452
+apply_patch_v518_giveback_lab.py  lines=485  size=18627
+audit_1m_alignment_debug_v1.py  lines=131  size=3965
+audit_1m_data_integrity_v1.py  lines=515  size=18589
+audit_5m_bucket_coverage_v1.py  lines=203  size=6758
+audit_5m_grid_check_v1.py  lines=358  size=12874
+audit_5m_long_sessions_v1.py  lines=173  size=5610
+audit_dataset_provenance_v1.py  lines=244  size=8101
+audit_h4_atr14_compare_v2.py  lines=439  size=16407
+audit_h4_atr14_compare_v3.py  lines=420  size=15464
+audit_h4_forensic_followup_v1.py  lines=410  size=13904
+audit_h4_forensic_followup_v2_fast.py  lines=386  size=12884
+audit_h4_implementation_v1.py  lines=461  size=15818
+audit_h4_m5_1_m5_2_forensic_v1.py  lines=375  size=13365
+audit_h7_context_count_v1.py  lines=157  size=4675
+audit_session_anomalies_v1.py  lines=260  size=8766
+audit_session_boundary_rules_v1.py  lines=411  size=15501
+audit_signal_edge_v1.py  lines=679  size=24489
+audit_v600_frozen_quantiles_v1.py  lines=197  size=6195
+audit_v601_forensic.py  lines=989  size=39149
+audit_v601_tp.py  lines=68  size=1906
+audit_v601_trades.py  lines=155  size=5224
+collect_source_fragments.py  lines=182  size=5679
+extract_h4_evidence_v3.py  lines=247  size=8383
+inspect_v601_trades.py  lines=41  size=967
+main_v5.17_threshold_path_lab_v2.py  lines=14518  size=530947
+main_v5.17_threshold_path_lab_v2_BACKUP_v519.py  lines=12471  size=445316
+main_v5.17_threshold_path_lab_v2_BACKUP_v520.py  lines=12930  size=467887
+main_v5.17_threshold_path_lab_v2_BACKUP_v521.py  lines=13298  size=481811
+main_v5.17_threshold_path_lab_v2_BACKUP_v522.py  lines=13708  size=496747
+main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py  lines=14141  size=515553
+patch_v519.py  lines=552  size=25809
+v5.27_exact_structure_v2.py  lines=545  size=25562
+v519_block_b.py  lines=441  size=21741
+v519_install.py  lines=120  size=4733
+v520_block_b.py  lines=352  size=13181
+v520_install.py  lines=115  size=4384
+v521_block_b.py  lines=394  size=14164
+v521_install.py  lines=115  size=4417
+v522_block_b.py  lines=417  size=18019
+v522_install.py  lines=115  size=4439
+v522b_block_b.py  lines=360  size=14724
+v522b_install.py  lines=100  size=4250
+v523_category_stability.py  lines=244  size=8305
+v523_patch.py  lines=252  size=9752
+v523_regime_study.py  lines=1105  size=44118
+v523_regime_study_BACKUP.py  lines=1073  size=42928
+v600_cost_adjusted_reach_audit.py  lines=502  size=20518
+v600_cost_adjusted_reach_audit_BACKUP_fix1.py  lines=539  size=21878
+v600_cost_fix1.py  lines=117  size=3993
+v600_gen_fix_5m_cache.py  lines=83  size=2588
+v600_gen_fix_reach.py  lines=115  size=3961
+v600_gen_fix_reach2.py  lines=138  size=4975
+v600_gen_fix_stdout.py  lines=127  size=4263
+v600_generalization_2024_2025.py  lines=727  size=28786
+v600_generalization_2024_2025_BACKUP_5mcache.py  lines=729  size=29015
+v600_generalization_2024_2025_BACKUP_reach.py  lines=729  size=29015
+v600_generalization_2024_2025_BACKUP_reach2.py  lines=732  size=29181
+v600_generalization_2024_2025_BACKUP_stdout.py  lines=716  size=28299
+v600_generalization_other_tickers.py  lines=637  size=24378
+v600_hypothesis_lab.py  lines=1098  size=43846
+v600_hypothesis_lab_BACKUP_audit.py  lines=1087  size=43348
+v600_hypothesis_lab_BACKUP_close.py  lines=1096  size=43772
+v600_patch_audit.py  lines=137  size=4469
+v600_patch_close.py  lines=223  size=8966
+v600_path_analysis.py  lines=679  size=28071
+v600_path_analysis_BACKUP_fix2.py  lines=678  size=28055
+v600_path_analysis_BACKUP_fix3.py  lines=678  size=28055
+v600_path_analysis_BACKUP_stdout.py  lines=670  size=27672
+v600_path_fix2.py  lines=125  size=3662
+v600_path_fix3.py  lines=94  size=2650
+v600_path_fix_stdout.py  lines=129  size=4531
+v600_stability_check.py  lines=462  size=18540
+v600_stability_check_BACKUP_close.py  lines=405  size=15659
+v601_forensic_audit.py  lines=632  size=25226
+v601_predefined_entry_exit.py  lines=697  size=24031
+v602_edge_diagnostics.py  lines=679  size=26742
+v603_gross_definition_audit.py  lines=292  size=9426
+v603_readonly_followup.py  lines=169  size=6014
+v603_session_boundary_audit.py  lines=310  size=10710
+v604_final_consolidation.py  lines=442  size=19448
+
+==============================================================================
+BLOCK H: v600 PERIODS body (L55..L85)
+==============================================================================
+   55: # Horizons in 5M bars
+   56: HORIZONS = (1, 2, 3, 4, 6, 8, 12, 18, 24)
+   57: 
+   58: # Descriptive reach levels in % (NOT trading thresholds)
+   59: REACH_LEVELS = (0.10, 0.20, 0.30, 0.50)
+   60: 
+   61: # Period boundaries (must match v5.18 / v5.23)
+   62: PERIODS = (
+   63:     ("DISCOVERY",  "2025-09-15", "2026-02-28"),
+   64:     ("VALIDATION", "2026-03-01", "2026-05-31"),
+   65:     ("OOS",        "2026-06-01", "2026-09-14"),
+   66: )
+   67: 
+   68: 
+   69: # ============================================================
+   70: # IMPORT main.py
+   71: # ============================================================
+   72: 
+   73: def load_main_module():
+   74:     base = Path(__file__).resolve().parent
+   75:     main_path = base / MAIN_FILE
+   76:     if not main_path.exists():
+   77:         raise RuntimeError("main file not found: " + str(main_path))
+   78: 
+   79:     # Save current stdout/stderr as raw objects. We will NOT wrap them.
+   80:     # main.py itself wraps sys.stdout at import time. We simply keep
+   81:     # references to the wrappers so GC does not close the buffer.
+   82:     spec = importlib.util.spec_from_file_location("moex_main_v5", str(main_path))
+   83:     module = importlib.util.module_from_spec(spec)
+   84: 
+   85:     # Hold references on module so nothing gets GC'd
+
+==============================================================================
+BLOCK I: MIN_1M_CANDLES definition
+==============================================================================
+L85: MIN_1M_CANDLES = 50
+
+==============================================================================
+BLOCK J: SHA256 of key files
+==============================================================================
+main_v5.17_threshold_path_lab_v2.py  sha256=e8ddbd948cc996ed1f55f858d574d50de61cd9de6ec305c8b938ec5014e359bd  size=530947
+v600_hypothesis_lab.py  sha256=97efcdee3b5c299b985eddbba325f0c9753f48043fa8ddd3ed6eeb40de75d347  size=43846
+audit_h4_implementation_v1.py  sha256=ab0217cac39a17675447c7a146c06eb23577b95f61e8991f2ac592c2355cdde5  size=15818
+audit_h4_forensic_followup_v2_fast.py  sha256=4e50fe900ac3de97cab40cb3fc4374b80852a59abe59e4fdc0e5e970206b411d  size=12884
+audit_h4_forensic_followup_v1.py  sha256=bcfcf3610f193a3f2095afccba0885f1988a6a2ea5acaf4f310a0f8fc0647299  size=13904
+audit_research_roadmap_v1_h4_spec_v3_4_PROPOSED.md  sha256=9d042af6c09e39d1175549f4ab1f82bfce427a4ba49134277a557baaffe7561d  size=12499
+audit_research_roadmap_v1_h4_spec_v3_6_2_PROPOSED.md  sha256=a5015a6a7c82a848a138a983e7f682716315cbd3f34605c3530426fa16678ef9  size=12095
+
+==============================================================================
+FOOTER
+==============================================================================
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD IS OPTIMIZED. NO FILTER IS INSTALLED. NO LIVE ORDERS.
+OOS: SEALED. H4 EXECUTION: NOT AUTHORIZED.

@@ -1,0 +1,151 @@
+H4 FORENSIC AUDIT M5-1 and M5-2 -- READ ONLY
+audit_h4_m5_1_m5_2_forensic_v1.py
+
+STRATEGY LOGIC: UNCHANGED
+RESEARCH ONLY
+NO THRESHOLD IS OPTIMIZED
+NO FILTER IS INSTALLED
+NO LIVE ORDERS
+OOS SEALED -- NOT TOUCHED
+
+R-1: NOT DECIDED
+H4 EXECUTION: NOT AUTHORIZED
+
+==============================================================================
+M5-1 -- FROZEN THRESHOLD REPRODUCTION
+==============================================================================
+
+Frozen value under test: range_atr q25 = 0.54835695
+Discovery window: 2025-09-15 .. 2026-02-28
+
+Dataset under test: SBER_2025_2026
+Path: cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+Size: 2416569
+sha256: 33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+
+Rows in dataset: 25856
+Rows in DISCOVERY subset: 11615
+
+Computing ATR14 by reproducing main.calculate_indicators
+formula from source fragment (Wilder EWM, alpha=1/14,
+adjust=False, min_periods=14, close.shift(1) without
+session reset). Original function NOT called.
+
+ATR14 within DISCOVERY subset:
+  rows: 11615
+  NaN: 13
+  zero: 0
+  negative: 0
+  min finite ATR14: 0.0366635337
+  max finite ATR14: 1.6407746333
+
+range_atr within DISCOVERY (F1 formula):
+  total rows: 11615
+  finite values: 11602
+  NaN: 13
+
+Quantile computation:
+  method: pandas.Series.quantile(0.25, interpolation='linear')
+  values used: 11602
+  q25 (linear) = 0.5483569526
+
+Comparison with frozen value:
+  frozen: 0.54835695
+  reproduced: 0.5483569526
+  difference: +2.5646899049e-09
+  |difference|: 2.5646899049e-09
+  STATUS: REPRODUCED within 1e-6.
+
+Reference: q25 (nearest) = 0.5483271000
+
+==============================================================================
+M5-2 -- ROW-BY-ROW COMPARISON OF F1 AND F2
+==============================================================================
+
+Dataset: SBER_2025_2026
+Path: cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+  rows: 25856
+  ATR14 NaN: 13
+  ATR14 zero: 0
+  ATR14 negative: 0
+  ATR14 min finite: 0.0347955542
+  ATR14 max finite: 2.6170087738
+  F1/F2 finiteness split:
+    both finite: 25843
+    only F1 finite: 0
+    only F2 finite: 0
+    neither finite: 13
+  F1 vs F2 on common finite rows:
+    rows compared: 25843
+    rows with |F1 - F2| > 1e-12: 0
+    max abs diff: 0.0000000000e+00
+
+Dataset: SBER_2024_2025
+Path: cache_2024_2025/5m/SBER_TQBR_2024-09-15_2025-09-14_5m.csv
+  rows: 25453
+  ATR14 NaN: 13
+  ATR14 zero: 0
+  ATR14 negative: 0
+  ATR14 min finite: 0.0915698413
+  ATR14 max finite: 2.2614394735
+  F1/F2 finiteness split:
+    both finite: 25440
+    only F1 finite: 0
+    only F2 finite: 0
+    neither finite: 13
+  F1 vs F2 on common finite rows:
+    rows compared: 25440
+    rows with |F1 - F2| > 1e-12: 0
+    max abs diff: 0.0000000000e+00
+
+Dataset: GAZP_2025_2026
+Path: cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+  rows: 25862
+  ATR14 NaN: 13
+  ATR14 zero: 0
+  ATR14 negative: 0
+  ATR14 min finite: 0.0293070628
+  ATR14 max finite: 1.0204460646
+  F1/F2 finiteness split:
+    both finite: 25849
+    only F1 finite: 0
+    only F2 finite: 0
+    neither finite: 13
+  F1 vs F2 on common finite rows:
+    rows compared: 25849
+    rows with |F1 - F2| > 1e-12: 0
+    max abs diff: 0.0000000000e+00
+
+Dataset: LKOH_2025_2026
+Path: cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+  rows: 25893
+  ATR14 NaN: 13
+  ATR14 zero: 0
+  ATR14 negative: 0
+  ATR14 min finite: 1.1939238995
+  ATR14 max finite: 65.8423202871
+  F1/F2 finiteness split:
+    both finite: 25880
+    only F1 finite: 0
+    only F2 finite: 0
+    neither finite: 13
+  F1 vs F2 on common finite rows:
+    rows compared: 25880
+    rows with |F1 - F2| > 1e-12: 0
+    max abs diff: 0.0000000000e+00
+
+==============================================================================
+CONFIRMATION
+==============================================================================
+- No H4 effect was computed.
+- No bootstrap was executed.
+- No CI was computed.
+- No eligible-set count was computed.
+- OOS was not opened or analyzed.
+- No specification was modified.
+- No source file or data file was modified.
+- No live order was sent.
+
+R-1: NOT DECIDED.
+H4 EXECUTION: NOT AUTHORIZED.
+OOS: SEALED.

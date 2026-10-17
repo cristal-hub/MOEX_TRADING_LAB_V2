@@ -1,0 +1,1417 @@
+H4 SOURCE VERIFICATION v4 -- READ ONLY
+Generated: 2026-10-14T18:56:22.365789
+CWD: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD IS OPTIMIZED. NO FILTER IS INSTALLED.
+NO LIVE ORDERS. OOS: SEALED. H4 EXECUTION: NOT AUTHORIZED.
+
+==============================================================================
+FILE: audit_h4_m3_eligibility_comparison_v1.md
+ABS: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_m3_eligibility_comparison_v1.md
+SIZE: 12532
+SHA256: 0d2dfacd45c9c368e8f735a9fd8f7c809b36bd05deb6c42274e188c663f4dd7d
+ENCODING: utf-8
+LINES: 336
+------------------------------------------------------------------------------
+     1: # audit_h4_m3_eligibility_comparison_v1.md
+     2: 
+     3: H4 — M3 ELIGIBILITY COMPARISON v1
+     4: 
+     5: READ-ONLY COMPARISON OF ELIGIBILITY RULES.
+     6: 
+     7: STRATEGY LOGIC: UNCHANGED
+     8: RESEARCH ONLY
+     9: NO THRESHOLD IS OPTIMIZED
+    10: NO FILTER IS INSTALLED
+    11: NO LIVE ORDERS
+    12: OOS SEALED — NOT TOUCHED
+    13: 
+    14: M3: OPEN
+    15: R-1: NOT DECIDED
+    16: H4 EXECUTION: NOT AUTHORIZED
+    17: 
+    18: No H4 effect, no bootstrap, no CI, no eligible-set count was
+    19: computed. No specification, source, threshold or data file was
+    20: modified.
+    21: 
+    22: ---
+    23: 
+    24: ## 0. Sources available
+    25: 
+    26: Directly available in the conversation as full text:
+    27: 
+    28:   - v3.4 §5.2 (a)-(i) — full text, supplied by the user.
+    29:   - v3.4 §11 (D1-D7) — full text, supplied by the user.
+    30:   - v3.6.2 §6 (a)-(k) — full text, written and preserved.
+    31: 
+    32: Not available:
+    33: 
+    34:   - The full v3.4 and v3.6.2 files outside the sections listed
+    35:     above. M3 does not require them.
+    36:   - Any source-code implementation of eligibility, if one exists in
+    37:     the project.
+    38:   - Filesystem access.
+    39: 
+    40: No file was modified. This audit reads texts only.
+    41: 
+    42: ---
+    43: 
+    44: ## 1. Exact text of v3.4 §5.2
+    45: 
+    46: Verbatim:
+    47: 
+    48:   (a) session_key[t+h] == session_key[t]
+    49:   (b) open, high, low, close are finite and > 0 at every bar in
+    50:       [t+1, t+h]
+    51:   (c) high >= low, high >= open, high >= close, low <= open,
+    52:       low <= close at every bar in [t+1, t+h]
+    53:   (d) open[t], high[t], low[t], close[t] are finite and > 0
+    54:   (e) high[t] >= low[t], high[t] >= open[t], high[t] >= close[t],
+    55:       low[t] <= open[t], low[t] <= close[t]
+    56:   (f) atr14[t] is finite
+    57:   (g) range_atr[t] is finite
+    58:   (h) if x is an event: range_atr[t] < +0.54835695
+    59:   (i) if x is a control: range_atr[t] >= +0.54835695
+    60: 
+    61: ## 2. Exact text of v3.6.2 §6
+    62: 
+    63: Verbatim:
+    64: 
+    65:   (a) Event_tag(t) or Control_tag(t) is defined by range_atr[t]
+    66:       against the frozen threshold; the two are disjoint.
+    67:   (b) session_key[t] is defined and finite.
+    68:   (c) close[t] is finite and > 0.
+    69:   (d) atr14[t] is finite.
+    70:   (e) range_atr[t] is finite.
+    71:   (f) open[t], high[t], low[t], close[t] are finite and > 0.
+    72:   (g) high[t] >= low[t], high[t] >= open[t], high[t] >= close[t],
+    73:       low[t] <= open[t], low[t] <= close[t].
+    74:   (h) For every bar y in [t+1, t+h]:
+    75:       open[y], high[y], low[y], close[y] are finite and > 0.
+    76:   (i) For every bar y in [t+1, t+h]:
+    77:       high[y] >= low[y], high[y] >= open[y], high[y] >= close[y],
+    78:       low[y] <= open[y], low[y] <= close[y].
+    79:   (j) t+h is a valid index in the dataset.
+    80:   (k) For every k in [0, h]:
+    81:       session_key[t+k] == session_key[t].
+    82: 
+    83: ## 3. Comparison table
+    84: 
+    85: Legend:
+    86:   IDENTICAL           — same condition, same scope.
+    87:   TEXTUAL DIFFERENCE  — different wording, same meaning.
+    88:   SUBSTANTIVE DIFFERENCE — different set of admissible bars.
+    89:   MISSING IN ONE VERSION — rule present in one, absent in another.
+    90:   UNCLEAR             — insufficient text to classify.
+    91: 
+    92: | ID | v3.4 §5.2 | v3.6.2 §6 | Status | Impact on bar admissibility | Evidence needed |
+    93: |---|---|---|---|---|---|
+    94: | R1 — OHLC finite and > 0 at bar t | (d): open[t], high[t], low[t], close[t] are finite and > 0 | (f): open[t], high[t], low[t], close[t] are finite and > 0 | IDENTICAL | None | Texts identical |
+    95: | R2 — OHLC relations at bar t | (e): the five relations | (g): the same five relations | IDENTICAL | None | Texts identical |
+    96: | R3 — OHLC finite and > 0 in [t+1, t+h] | (b): at every bar in [t+1, t+h], finite and > 0 | (h): for every bar y in [t+1, t+h], finite and > 0 | IDENTICAL | None | Same meaning; list vs loop wording |
+    97: | R4 — OHLC relations in [t+1, t+h] | (c): relations at every bar in window | (i): same relations | IDENTICAL | None | Same meaning |
+    98: | R5 — atr14[t] finite | (f): atr14[t] is finite | (d): atr14[t] is finite | IDENTICAL | None | Exact match |
+    99: | R6 — range_atr[t] finite | (g): range_atr[t] is finite | (e): range_atr[t] is finite | IDENTICAL | None | Exact match |
+   100: | R7 — session_key constancy | (a): session_key[t+h] == session_key[t] (endpoints only) | (k): for every k in [0,h], session_key[t+k] == session_key[t] (full window) | SUBSTANTIVE DIFFERENCE | YES — v3.6.2 may exclude bars allowed by v3.4 | Text confirmed; actual affected-bar count requires T-1 |
+   101: | R8 — session_key[t] defined | not stated explicitly | (b): session_key[t] is defined and finite | MISSING IN v3.4 | No (expected always true in practice) | Text confirmed; effect requires T-1 |
+   102: | R9 — bounds t+h valid | not stated explicitly | (j): t+h is a valid index | MISSING IN v3.4 | YES — without it, session_key[t+h] and forward-window OHLC are undefined | Text confirmed; actual affected-bar count requires T-1 |
+   103: | R10 — event/control disjoint | (h) and (i): via strict < and >= | (a): declared disjoint | TEXTUAL DIFFERENCE | None | Same meaning |
+   104: | R11 — close[t] finite and > 0 as separate rule | not separated (covered by (d)) | (c): close[t] is finite and > 0 | TEXTUAL DIFFERENCE | None | Same meaning |
+   105: 
+   106: ## 4. Endpoint-only vs full-window session constancy
+   107: 
+   108: ### 4.1 Exact wording
+   109: 
+   110: v3.4 §5.2 (a), verbatim:
+   111: 
+   112:   session_key[t+h] == session_key[t]
+   113: 
+   114: v3.6.2 §6 (k), verbatim:
+   115: 
+   116:   For every k in [0, h]:
+   117:       session_key[t+k] == session_key[t].
+   118: 
+   119: Both rules use session_key as a function of the bar index. Neither
+   120: specification defines session_key. The working definition in the
+   121: project (from prior audits) is: session_key = begin.dt.date, with
+   122: weekend shifts as implemented in main.trading_session_key.
+   123: 
+   124: ### 4.2 Abstract example where the two rules diverge
+   125: 
+   126: Consider a sequence of session keys over bars 0..8:
+   127: 
+   128:   [S1, S1, S2, S1, S1, S1, S1, S1, S1]
+   129: 
+   130: i.e., bars 0-1 are S1, bar 2 is S2, bars 3-8 are S1.
+   131: 
+   132: Take t = 0, h = 6.
+   133: 
+   134:   session_key[t]   = session_key[0] = S1
+   135:   session_key[t+h] = session_key[6] = S1
+   136: 
+   137:   v3.4 (a): S1 == S1 → True. Bar 0 is admissible by this rule.
+   138: 
+   139:   v3.6.2 (k): check every k in [0, 6]:
+   140:     k=0: S1 == S1  True
+   141:     k=1: S1 == S1  True
+   142:     k=2: S2 != S1  False → rule fails.
+   143: 
+   144:   v3.6.2 (k): False. Bar 0 is not admissible.
+   145: 
+   146: So the two rules differ whenever:
+   147: 
+   148:   - session_key at the two endpoints t and t+h matches, AND
+   149:   - at least one interior bar has a different session_key.
+   150: 
+   151: Such a configuration can arise in principle if sessions interleave
+   152: inside the forward window (e.g., crossed sessions, short sessions).
+   153: 
+   154: ### 4.3 Effect on eligibility
+   155: 
+   156: Under all other conditions being equal, v3.6.2 (k) is strictly
+   157: stricter than v3.4 (a). v3.6.2 excludes bars that v3.4 admits when
+   158: the endpoints match but an interior bar does not.
+   159: 
+   160: ### 4.4 Direct textual verification
+   161: 
+   162: Confirmed by text: the two rules are not equivalent in wording.
+   163: 
+   164: Not confirmed by text alone: how many bars are affected on the four
+   165: audited datasets. This cannot be answered from the specifications
+   166: and requires a read-only audit on the datasets and horizons.
+   167: 
+   168: Open item: the definition of session_key. If session_key is
+   169: begin.dt.date, and trading sessions do not cross midnight in the
+   170: audited data (they end the same calendar day), then interleaving of
+   171: the form S1, S2, S1 inside [t, t+h] is unlikely but not proven
+   172: absent.
+   173: 
+   174: Status of R7: OPEN pending T-1.
+   175: 
+   176: ## 5. Additional differences addressed in the task
+   177: 
+   178: ### 5.1 Forward horizon and availability of future bars
+   179: 
+   180:   - v3.4 uses [t+1, t+h] in rules (b), (c).
+   181:   - v3.6.2 uses [t+1, t+h] in rules (h), (i).
+   182:   - Neither version explicitly states t+h < len(df).
+   183:   - v3.6.2 §6 (j) states it explicitly.
+   184: 
+   185: Practical difference: v3.6.2 requires a bounds check explicitly.
+   186: v3.4 implies it.
+   187: 
+   188: ### 5.2 Gaps and irregular time steps
+   189: 
+   190:   - Neither v3.4 nor v3.6.2 checks that
+   191:     begin[t+1] - begin[t] equals 5 minutes.
+   192:   - Neither checks that bars [t+1, t+h] are consecutive with no
+   193:     missing bar indices.
+   194:   - Neither checks for duplicate begin timestamps.
+   195: 
+   196: This is a common absence in both versions. Condition (l) in v3.6.2
+   197: §6.2 addresses it as PROPOSED CHANGE — NOT AUTHORIZED.
+   198: 
+   199: ### 5.3 NaN and partial forward windows
+   200: 
+   201:   - v3.4 §5.2: NaN in OHLC fails rules (b) or (c), because NaN is
+   202:     not finite and > 0.
+   203:   - v3.6.2 §6: the same, through (f) and (h).
+   204:   - Neither version states "NaN → not eligible" explicitly; the
+   205:     consequence follows from the finite-and-positive semantics.
+   206: 
+   207: No difference between versions on this point.
+   208: 
+   209: ### 5.4 Dataset boundaries
+   210: 
+   211:   - v3.4 §5.2: silent.
+   212:   - v3.6.2 §6 (j): explicit bounds check.
+   213: 
+   214: Difference: v3.6.2 explicit, v3.4 implicit.
+   215: 
+   216: ## 6. What can be resolved by text vs what requires data
+   217: 
+   218: Resolvable by text alone:
+   219: 
+   220:   - R1, R2, R3, R4, R5, R6, R10, R11 — IDENTICAL or TEXTUAL
+   221:     DIFFERENCE. No data check needed.
+   222:   - R7, R8, R9 — differences confirmed by text. Actual affected-bar
+   223:     counts require data.
+   224: 
+   225: Requiring data (T-1):
+   226: 
+   227:   - Number of bars where v3.4 admits and v3.6.2 rejects, due to R7
+   228:     (endpoint vs full-window).
+   229:   - Number of bars where v3.6.2 (j) excludes and v3.4 does not
+   230:     (bounds).
+   231:   - Number of bars where v3.6.2 (b) excludes and v3.4 does not
+   232:     (session_key[t] defined).
+   233: 
+   234: T-1 is not executed until separately authorized.
+   235: 
+   236: ## 7. Answers to the four questions in the task
+   237: 
+   238: ### 7.1 All substantive differences
+   239: 
+   240:   S1. R7 — session_key endpoint (v3.4) vs full window (v3.6.2).
+   241:       v3.6.2 stricter. May exclude bars that v3.4 admits.
+   242: 
+   243:   S2. R9 — bounds check t+h (v3.6.2 (j)). v3.4 does not state it.
+   244:       Expected effect on the audited data is zero, but not proven.
+   245: 
+   246:   S3. R8 — session_key[t] defined (v3.6.2 (b)). v3.4 does not state
+   247:       it. Expected effect on the audited data is zero, but not
+   248:       proven.
+   249: 
+   250: ### 7.2 Questions blocking unambiguous implementation of eligibility
+   251: 
+   252:   Q1. Which definition of session_key applies: begin.dt.date,
+   253:       main.trading_session_key, or another? Neither v3.4 nor v3.6.2
+   254:       defines it.
+   255: 
+   256:   Q2. Which session constancy rule is normative for H4: the
+   257:       endpoint-only rule of v3.4 §5.2 (a) or the full-window rule
+   258:       of v3.6.2 §6 (k)?
+   259: 
+   260:   Q3. Is the bounds check t+h < len(df) required explicitly
+   261:       (v3.6.2 (j)) or implied (v3.4)?
+   262: 
+   263:   Q4. Is session_key[t] required to be explicitly defined and finite
+   264:       (v3.6.2 (b)) or implied (v3.4)?
+   265: 
+   266: ### 7.3 What is resolved by text and what needs source/data
+   267: 
+   268: By text:
+   269:   - Q2, Q3, Q4 — resolvable by explicit choice between the two
+   270:     texts.
+   271:   - Q1 — not resolvable by text. Requires the session_key
+   272:     definition from the source code. The working definition is
+   273:     known from prior audits but is not frozen in the H4
+   274:     specification.
+   275: 
+   276: By source/data (T-1, read-only):
+   277:   - Actual affected-bar counts for S1, S2, S3.
+   278:   - Verification that sessions do not interleave within the forward
+   279:     window on the audited datasets.
+   280: 
+   281: ### 7.4 Minimum next step
+   282: 
+   283:   1. Resolve R-1 (definition of range_atr) to fix the input for
+   284:      eligibility.
+   285:   2. Answer Q1 (session_key definition).
+   286:   3. Choose between v3.4 §5.2 and v3.6.2 §6 as the normative
+   287:      eligibility rule, or freeze both and state which one applies
+   288:      in H4.
+   289:   4. Authorize T-1 to measure actual differences.
+   290: 
+   291: Until steps 1-3 are done, T-1 has no defined input. Without T-1,
+   292: M3 cannot be closed.
+   293: 
+   294: ## 8. Summary
+   295: 
+   296: Proven by the texts:
+   297: 
+   298:   - Eight of eleven rules are IDENTICAL or TEXTUAL DIFFERENCE and
+   299:     do not change bar admissibility.
+   300:   - Three substantive differences: R7 (endpoint vs full-window),
+   301:     R8 (session_key[t] defined), R9 (bounds t+h).
+   302:   - v3.6.2 is stricter than v3.4 on all three.
+   303:   - The differences are established by wording. Their effect on
+   304:     real data is not measured.
+   305: 
+   306: Required from the user:
+   307: 
+   308:   - Q2: which session constancy rule is normative?
+   309:   - Q3: is an explicit bounds check required?
+   310:   - Q4: is session_key[t] required to be explicitly defined?
+   311:   - Q1: freeze the session_key definition (begin.dt.date via
+   312:     main.trading_session_key, per prior audits).
+   313:   - R-1: definition of range_atr.
+   314: 
+   315: After these decisions:
+   316: 
+   317:   - T-1 is run read-only and reports actual affected-bar counts.
+   318:   - If zero differences, M3 can be closed.
+   319:   - If differences exist, the bars and reasons are reported.
+   320: 
+   321: ## 9. Confirmation
+   322: 
+   323:   - No H4 effect was computed.
+   324:   - No bootstrap was executed.
+   325:   - No CI was computed.
+   326:   - No eligible-set count was computed.
+   327:   - OOS was not opened or analyzed.
+   328:   - No specification was modified.
+   329:   - No source file or data file was modified.
+   330:   - No prior report was overwritten.
+   331:   - No live order was sent.
+   332: 
+   333: M3: OPEN.
+   334: R-1: NOT DECIDED.
+   335: H4 EXECUTION: NOT AUTHORIZED.
+   336: OOS: SEALED.
+
+==============================================================================
+FILE: audit_h4_final_predecision_audit_v1.md
+ABS: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_final_predecision_audit_v1.md
+SIZE: 15103
+SHA256: e9abf675dbc0609a383a2e7900c8c016f74d393dfcb142570efe4aa09549710e
+ENCODING: utf-8
+LINES: 323
+------------------------------------------------------------------------------
+     1: # audit_h4_final_predecision_audit_v1.md
+     2: 
+     3: H4 — FINAL PRE-DECISION AUDIT v1
+     4: 
+     5: READ-ONLY AUDIT OF THE OPEN-DECISIONS REGISTER.
+     6: 
+     7: STRATEGY LOGIC: UNCHANGED
+     8: RESEARCH ONLY
+     9: NO THRESHOLD IS OPTIMIZED
+    10: NO FILTER IS INSTALLED
+    11: NO LIVE ORDERS
+    12: OOS SEALED — NOT TOUCHED
+    13: 
+    14: No H4 calculation, no bootstrap, no CI, no effect estimation was
+    15: performed. No specification, register, source or data was modified.
+    16: 
+    17: ---
+    18: 
+    19: ## 0. Evidence and access
+    20: 
+    21: This audit has no filesystem access. It uses only text supplied in
+    22: the conversation:
+    23: 
+    24:   - audit_h4_consolidated_open_decisions_register_v1.md (register).
+    25:   - audit_h4_consolidated_open_decisions_register_v1_evidence_update.md.
+    26:   - audit_h4_remaining_open_items_v1.md.
+    27:   - audit_h4_m2_forensic_bootstrap_methodology_audit_v1.md.
+    28:   - v3.4 §5.5, §5.8, §7.1, §7.2, §8 excerpts.
+    29:   - v3.6.2 §10, §11, §14, §15 excerpts.
+    30:   - Prior M1, M2, M3 audit texts.
+    31: 
+    32: SHA-256 values for those files, where quoted, are reported by the
+    33: user and are not independently recomputed here.
+    34: 
+    35: ---
+    36: 
+    37: ## 1. Classification method
+    38: 
+    39: Each item is classified along four axes:
+    40: 
+    41:   A. Established facts — directly supported by supplied text or a
+    42:      verified artifact.
+    43:   B. Missing technical evidence — source code or document sections
+    44:      that would settle a technical question without a user choice.
+    45:   C. Methodological decisions — a choice that must be made by the
+    46:      user; not derivable from the documents.
+    47:   D. Resolvable by inspection — a question that can be closed by
+    48:      reading source code or comparing document versions, without a
+    49:      user decision.
+    50: 
+    51: A question is blocking for H4 execution if the missing item
+    52: prevents either (i) an unambiguous implementation of the confirmatory
+    53: bootstrap, or (ii) an unambiguous CONFIRMED / EVIDENCE AGAINST /
+    54: NOT CONFIRMED classification.
+    55: 
+    56: ---
+    57: 
+    58: ## 2. Register completeness check
+    59: 
+    60: ### 2.1 Are M1, M2, PC1-PC5, M3, QA-A1, QA-A2, Q-NEW all present?
+    61: 
+    62: Yes.
+    63: 
+    64:   - M1 : present in register as row M1.
+    65:   - M2 : present in register as M2-CALENDAR, M2-DUPLICATES,
+    66:          M2-STAT-UNDEF, M2-QUANTILE, M2-RNG.
+    67:   - PC1: present.
+    68:   - PC2: present.
+    69:   - PC3: present as PC3-TRIGGER and PC3-UNDEF.
+    70:   - PC4: present.
+    71:   - PC5: present.
+    72:   - M3 : present.
+    73:   - QA-A1: present, status PARTIALLY CLOSED.
+    74:   - QA-A2: present, status CLOSED WITHIN DOCUMENTED BOUNDS.
+    75:   - Q-NEW: present, status OPEN / NOT DECIDED.
+    76: 
+    77: No item from the task list is missing.
+    78: 
+    79: ### 2.2 Additional items not in the register but visible in supplied
+    80: material
+    81: 
+    82: The register does not contain rows for the following, and they may
+    83: matter for H4 execution:
+    84: 
+    85:   R-1. Aggregation over exploratory horizons in the equal-weight
+    86:        scheme. The register treats h=6 confirmatory only. Whether
+    87:        h=1,2,3,12 are aggregated across datasets in any way is not
+    88:        covered. The specification says only h=6 is confirmatory,
+    89:        so this may not be blocking. Status in register: implicitly
+    90:        covered by "Only h=6 is confirmatory".
+    91: 
+    92:   R-2. Reporting requirement for per-dataset confirmatory
+    93:        statistics in VALIDATION. v3.4 §8.1 states VALIDATION
+    94:        confirms the aggregate only, with per-dataset results as
+    95:        diagnostics. Whether the diagnostic per-dataset numbers are
+    96:        frozen in advance is not specified. Not currently in the
+    97:        register. Severity: reporting, not decision-rule.
+    98: 
+    99:   R-3. Interaction between PC2 (dataset coverage) and PC1
+   100:        (aggregation weights). The register lists them separately
+   101:        but does not explicitly state that PC1's equal-weight
+   102:        formula depends on the composition of D_P defined by PC2.
+   103:        The register's dependencies column mentions this only
+   104:        implicitly. Not blocking beyond PC1 and PC2 themselves.
+   105: 
+   106:   R-4. Pre-freeze of exploratory horizons is not explicitly
+   107:        required. The specification says exploratory results are
+   108:        reported, but does not state whether they must be reported
+   109:        regardless of outcome. The reporting requirement already
+   110:        says "all results regardless of outcome" in v3.6.2 §13.
+   111:        Not blocking.
+   112: 
+   113:   R-5. Recompute-of-Δ_h^d under partial participation of a dataset
+   114:        within a replicate (Case 1 of the earlier correction). The
+   115:        register's M2-CALENDAR covers this. Not missing.
+   116: 
+   117:   R-6. Treatment of end-of-data (the final bars of the last session
+   118:        of the dataset) is already covered by §5 last-bar argument.
+   119:        Not missing.
+   120: 
+   121:   R-7. Whether any component of the aggregate is computed on a
+   122:        filtered subset of bars when a group is empty at the
+   123:        per-replicate level. This is a refinement of PC3-UNDEF, not
+   124:        a new item.
+   125: 
+   126: No additional blocking items were found beyond the register's
+   127: existing rows.
+   128: 
+   129: ### 2.3 Potential omissions classified
+   130: 
+   131:   - R-1, R-2, R-3, R-4, R-5, R-6, R-7 are non-blocking, covered,
+   132:     or reporting-only. No new register row is required.
+   133: 
+   134: ---
+   135: 
+   136: ## 3. Full audit table
+   137: 
+   138: Classification legend for "Blocker for H4 execution":
+   139:   YES    — prevents either unambiguous implementation or
+   140:            unambiguous classification.
+   141:   PARTIAL— affects reporting or interpretation but not the primary
+   142:            decision rule.
+   143:   NO     — no impact on execution or on the primary decision.
+   144: 
+   145: | ID | Type | Evidence (source) | Established | Unknown | Who can resolve | Blocker |
+   146: |---|---|---|---|---|---|---|
+   147: | M1 | Methodology decision | v3.6.2 §3: "one-sided direction vs two-sided CI [q025, q975]. UNRESOLVED." | Direction is one-sided positive; reported CI is two-sided. | Which quantile is the criterion (q025 or q05); whether H0/H1 is formally stated; level alpha. | User decision (criterion); inspection can confirm wording only. | YES |
+   148: | M2-CALENDAR | Methodology decision | v3.4 §7.1 step 2; v3.6.2 §10 | S_all = union of session_keys; resampling with replacement. | Rule for dates present in only some datasets; how Δ_6^d is computed when d has no sampled sessions. | User decision. | YES |
+   149: | M2-DUPLICATES | Methodology decision | v3.4 §7.1 step 2; v3.6.2 §10 "unique bootstrap-copy identifiers" | Repeated draws produce draw occurrences; sampling with replacement preserves |S_k| = |S_all|. | Whether duplicate occurrences contribute bars once or multiple times; labelling scheme. | User decision. | YES |
+   150: | M2-STAT-UNDEF | Methodology decision | v3.4 §5.8 (only N_event>0 and N_control=0 covered) | Only the narrow invalid trigger is stated. | Fallback when a dataset-level statistic is undefined outside the narrow trigger (e.g., empty E_h^d). | User decision (whether to broaden §5.8). | YES |
+   151: | M2-QUANTILE | Methodology decision | not stated in v3.4 or v3.6.2 excerpts | — | Which quantile method; one-sided vs two-sided bound. | User decision. | YES |
+   152: | M2-RNG | Methodology decision (partly implementation) | v3.4 §7.1 "N_iter = 1000. seed = 42." | Proposed values exist, labeled PROPOSED. | Authorization of these values; whether a specific RNG is fixed. | User decision (authorization). | PARTIAL: reproducibility, not correctness of direction. |
+   153: | PC1 | Methodology decision | v3.6.2 §15 "PC1. Equal-weight per dataset aggregation." | Equal weighting is proposed. | Authorization. | User decision. | YES (defines estimand). |
+   154: | PC2 | Methodology decision | v3.6.2 §15 "PC2. Dataset / period coverage; '2 of 4' NOT changed silently." | Change from 2 of 4 to 3+1 is proposed. | Composition of confirmatory set; role of portability dataset. | User decision. | YES (affects dataset-level criterion). |
+   155: | PC3-TRIGGER | Methodology decision | v3.4 §7.1 step 5 (narrow trigger) | Trigger is exactly N_event>0 and N_control=0. | Whether to authorize this rule. | User decision. | YES (affects UNRESOLVED handling). |
+   156: | PC3-UNDEF | Methodology decision | v3.4 §7.1 step 4 (aggregate requires defined Δ) | Undefined Δ_6^d makes the aggregate undefined. | Fallback policy for such cases. | User decision. | YES |
+   157: | PC4 | Methodology decision | v3.6.2 §15 "PC4. Calendar-session joint bootstrap." | Scheme is proposed, not authorized. | Authorization and details (see M2-*). | User decision (after M2-* resolved). | YES |
+   158: | M3 | Textual inconsistency | v3.4 §5.2(a)-(i); v3.4 §11 D1-D7; v3.6.2 §6(a)-(k) | v3.6.2 §6 differs in: full-window session constancy (§6(k)), explicit session presence (§6(b)), explicit bounds (§6(j)). | Whether v3.6.2 §6 is a clarification or a change to the intended eligible set. | User decision (interpretation); inspection can confirm wording. | PARTIAL: affects sample if a change is adopted; on audited data no bars affected. |
+   159: | QA-A1 | Implementation verification | audit_h4_atr14_compare_v3_report.md | ATR14 uses Wilder EWM (alpha=1/14, adjust=False, min_periods=14). Reproduced on SBER/GAZP/LKOH. Historical array not saved. | Exact historical match impossible; already recorded. | Technical verification closed within bounds. | NO |
+   160: | QA-A2 | Implementation verification | audit_h4_forensic_followup_v2_fast_qa_a2.csv | Per-bar mismatch = 0 for the tested combinations. | Original function not called; equivalence at formula level, not executed. | Technical verification; user may request an EXACT MATCH run. | NO |
+   161: | Q-NEW | Methodology decision | v3.6.2 §14 U3, U4 | Unusual sessions exist; no classification rule adopted. | How to treat these sessions in H4. | User decision. | YES (affects sample) |
+   162: | PC5 | Methodology decision | v3.6.2 §6.2; audit_session_anomalies_v1 report | 255 non-5-minute steps per dataset; all at session boundaries; 0 intra-session. | Whether to adopt condition (l); tolerance choice. | User decision. | PARTIAL: no sample change on audited data if adopted inside sessions. |
+   163: 
+   164: ---
+   165: 
+   166: ## 4. What can be resolved by inspection (no user decision required)
+   167: 
+   168: The following items are technical and can be closed by reading
+   169: source code or comparing document versions, without a
+   170: methodological choice:
+   171: 
+   172:   I-1. Formal wording of §5.2, §5.5, §6, §7.1, §7.2: already read
+   173:        in the supplied excerpts. No further inspection needed for
+   174:        classification purposes; further inspection would only
+   175:        confirm the same text.
+   176: 
+   177:   I-2. Whether v3.6.2 §6 is identical in wording to v3.4 §5.2:
+   178:        already answered (no; differences enumerated in prior
+   179:        audit_h4_m3_full_eligibility_equivalence_v2.md).
+   180: 
+   181:   I-3. Whether D1-D7 alone fully defines eligibility in v3.4:
+   182:        already answered (no; §5.2 is the eligibility list; §11 is
+   183:        an exclusion-order classification scheme).
+   184: 
+   185:   I-4. Whether Q-NEW sessions exist in the data: already confirmed
+   186:        by prior audits (41 (dataset, session) entries, 36 distinct
+   187:        calendar dates).
+   188: 
+   189:   I-5. Whether PC5 steps exist intra-session: already confirmed (0).
+   190: 
+   191:   I-6. Whether the historical audit-side ATR14 array exists on
+   192:        disk: confirmed not saved; not recoverable.
+   193: 
+   194:   I-7. Whether v3.4 and v3.6.2 differ on session_key endpoint vs
+   195:        full window: confirmed (v3.6.2 §6(k) is stricter).
+   196: 
+   197: No further inspection is required to classify the register's
+   198: items.
+   199: 
+   200: ---
+   201: 
+   202: ## 5. Items that can only be resolved by user decision
+   203: 
+   204: Only the following items require explicit user authorization:
+   205: 
+   206:   D-1. M1: q025 > 0 vs q05 > 0 vs defer. And whether H0/H1 is
+   207:        formally stated.
+   208: 
+   209:   D-2. M2-CALENDAR: how to handle dates absent in some datasets.
+   210: 
+   211:   D-3. M2-DUPLICATES: how to handle repeated draw occurrences of
+   212:        the same session; labelling scheme.
+   213: 
+   214:   D-4. M2-STAT-UNDEF / PC3-UNDEF: fallback for undefined
+   215:        dataset-level statistics outside the narrow trigger.
+   216: 
+   217:   D-5. M2-QUANTILE: quantile method and side of the CI.
+   218: 
+   219:   D-6. M2-RNG / PC4: authorization of N_iter, seed, RNG choice,
+   220:        and the joint-scheme as a whole.
+   221: 
+   222:   D-7. PC1: authorize equal-weight aggregation.
+   223: 
+   224:   D-8. PC2: authorize 3+1 dataset coverage; specify per-dataset
+   225:        vs aggregate interaction.
+   226: 
+   227:   D-9. PC3-TRIGGER: authorize or reject the narrow invalid rule.
+   228: 
+   229:   D-10. PC4: authorize the joint bootstrap scheme.
+   230: 
+   231:   D-11. M3: declare v3.6.2 §6 to be a clarification or a change;
+   232:         or leave M3 OPEN.
+   233: 
+   234:   D-12. Q-NEW: classify unusual sessions.
+   235: 
+   236:   D-13. PC5: authorize condition (l).
+   237: 
+   238: Each decision must be recorded in writing before execution.
+   239: None of these can be decided from the documents alone.
+   240: 
+   241: ---
+   242: 
+   243: ## 6. Missing sources or data
+   244: 
+   245: The audit found no missing sources that would block classification
+   246: of the register items. The two previously flagged missing files
+   247: (audit_h4_remaining_open_items_v1.md and
+   248: audit_h4_m2_forensic_bootstrap_methodology_audit_v1.md) are now
+   249: confirmed to exist and are consistent with the register.
+   250: 
+   251: One item remains unavailable by definition:
+   252: 
+   253:   U-1. The historical audit-side ATR14 row array used in
+   254:        audit_h4_forensic_followup_v2_fast.py. Not saved. Cannot be
+   255:        recovered. This does not block H4, because QA-A1 has been
+   256:        closed as far as the source formula is concerned and the
+   257:        mismatch with the missing array is documented.
+   258: 
+   259: ---
+   260: 
+   261: ## 7. Errors or overstatements found in the register
+   262: 
+   263:   E-1. The register's row "M2-STAT-UNDEF" describes "empty E_h^d"
+   264:        as a distinct root cause. This is correct in substance. No
+   265:        overstatement found.
+   266: 
+   267:   E-2. The register's evidence limitation for the two files is
+   268:        removed by the evidence update. The register itself is not
+   269:        modified by this audit; the evidence update records the
+   270:        removal.
+   271: 
+   272:   E-3. The register lists PC1, PC2, PC3, PC4, PC5 with status
+   273:        PROPOSED — NOT AUTHORIZED. No overstatement.
+   274: 
+   275:   E-4. No item in the register claims authorization that has not
+   276:        been granted. No overstatement found.
+   277: 
+   278:   E-5. In the register's decision summary, item 3 mentions
+   279:        "§5.5 defines Δ_h^d in terms of bars, not precomputed
+   280:        per-session means". This is supported by the supplied §5.5.
+   281: 
+   282:   E-6. The register's claim that "on audited data no bars are
+   283:        affected" by the M3 differences is based on prior audits
+   284:        (audit_h4_forensic_followup_v2_fast_qa_a2.csv, 0 mismatches
+   285:        for §6(j)-(k)). It is an observation, not a proof of
+   286:        equivalence. The register states this as an observation. No
+   287:        overstatement.
+   288: 
+   289: No errors or overstatements requiring correction were identified.
+   290: 
+   291: ---
+   292: 
+   293: ## 8. Confirmation
+   294: 
+   295: - No H4 calculation was performed.
+   296: - No bootstrap was executed.
+   297: - No CI was computed.
+   298: - No effect estimation was performed.
+   299: - OOS was not opened or analyzed.
+   300: - No specification was modified.
+   301: - No source file or data file was modified.
+   302: - No prior report was overwritten.
+   303: - No live order was sent.
+   304: 
+   305: ---
+   306: 
+   307: ## 9. Final status
+   308: 
+   309: H4 EXECUTION: NOT AUTHORIZED.
+   310: OOS: SEALED.
+   311: NO H4 CALCULATIONS PERFORMED.
+   312: 
+   313: M1: OPEN.
+   314: M2: UNRESOLVED.
+   315: PC1: PROPOSED — NOT AUTHORIZED.
+   316: PC2: PROPOSED — NOT AUTHORIZED.
+   317: PC3: PROPOSED — NOT AUTHORIZED.
+   318: PC4: PROPOSED — NOT AUTHORIZED.
+   319: M3: OPEN.
+   320: PC5: PROPOSED — NOT AUTHORIZED.
+   321: Q-NEW: OPEN / NOT DECIDED.
+   322: QA-A1: PARTIALLY CLOSED.
+   323: QA-A2: CLOSED WITHIN DOCUMENTED BOUNDS.
+
+==============================================================================
+FILE: audit_h4_range_atr_definition_proposal_v1.md
+ABS: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_range_atr_definition_proposal_v1.md
+SIZE: 10549
+SHA256: de1854ad821131da82ec68b62400ed4cc24e9ca0e63dd10abae190efe72fd701
+ENCODING: utf-8
+LINES: 301
+------------------------------------------------------------------------------
+     1: # audit_h4_range_atr_definition_proposal_v1.md
+     2: 
+     3: H4 — RANGE_ATR DEFINITION PROPOSAL v1
+     4: 
+     5: PROPOSAL ONLY. NOT APPROVED. NOT AUTHORIZED.
+     6: 
+     7: STRATEGY LOGIC: UNCHANGED
+     8: RESEARCH ONLY
+     9: NO THRESHOLD IS OPTIMIZED
+    10: NO FILTER IS INSTALLED
+    11: NO LIVE ORDERS
+    12: OOS SEALED — NOT TOUCHED
+    13: 
+    14: H4 EXECUTION: NOT AUTHORIZED
+    15: 
+    16: This document is a proposal. It does not constitute an approved
+    17: specification. It does not authorize T-1 or any other H4
+    18: calculation. It does not modify any existing file.
+    19: 
+    20: No H4 effect, no bootstrap, no confidence interval and no
+    21: profitability metric was computed for this document.
+    22: 
+    23: ---
+    24: 
+    25: ## 1. Problem statement
+    26: 
+    27: The H4 specifications v3.4 and v3.6.2 both use the quantity
+    28: `range_atr`. Neither specification defines it.
+    29: 
+    30: Specifically:
+    31: 
+    32:   - v3.4 §2: event is `range_atr[t] < q25(range_atr) = +0.54835695`.
+    33:   - v3.4 §5.2 (g): eligibility requires `range_atr[t] is finite`.
+    34:   - v3.6.2 §2: event is `Event_tag(t) := range_atr[t] < 0.54835695`.
+    35:   - v3.6.2 §6 (e): eligibility requires `range_atr[t] is finite`.
+    36: 
+    37: No formula for `range_atr` appears in either specification. No
+    38: definition of `atr14` appears in either specification. No rule for
+    39: the case `atr14[t] == 0` appears in either specification. No rule
+    40: for session boundaries appears in either specification.
+    41: 
+    42: Consequently, the currently frozen threshold `0.54835695` is a
+    43: number whose inputs are not fully specified by the H4 documents.
+    44: 
+    45: ---
+    46: 
+    47: ## 2. Implementations found in the code
+    48: 
+    49: A read-only search of the project's Python files was performed. Five
+    50: distinct implementations of `range_atr`-like quantities were found
+    51: in active source files:
+    52: 
+    53: ### F1 — v600_hypothesis_lab.py, line 269
+    54: 
+    55:   add("range_atr", (d["high"].astype(float) - d["low"].astype(float)) / atr14.replace(0, np.nan))
+    56: 
+    57: Context: compute_discovery_quantiles. Purpose: computing the frozen
+    58: DISCOVERY quantiles for range_atr, including q25 = +0.54835695.
+    59: 
+    60: Zero ATR14 handling: atr14.replace(0, np.nan) — zero becomes NaN,
+    61: which propagates to NaN in the result.
+    62: 
+    63: Negative ATR14 handling: not explicitly guarded. On real data,
+    64: ATR14 is never negative (true_range = max(h-l, |h-pc|, |l-pc|) is
+    65: non-negative; ewm(alpha=1/14).mean() of non-negative values is
+    66: non-negative). So this is not exercised.
+    67: 
+    68: NaN ATR14 handling: not explicitly guarded. NaN in atr14 produces
+    69: NaN in the result.
+    70: 
+    71: ### F2 — v600_hypothesis_lab.py, line 479
+    72: 
+    73:   out["feat_range_atr"] = ((high - low) / atr) if atr and atr > 0 else np.nan
+    74: 
+    75: Context: build_state_tags. Purpose: computing feat_range_atr for
+    76: each 5M bar. This is the value that participates in state tags.
+    77: 
+    78: Zero ATR14 handling: atr > 0 is False, so result is NaN.
+    79: Negative ATR14 handling: atr > 0 is False, so result is NaN.
+    80: NaN ATR14 handling: atr > 0 is False (comparison with NaN is
+    81: False), so result is NaN.
+    82: 
+    83: ### F3 — v600_generalization_2024_2025.py, line 295
+    84: 
+    85:   work["feat_range_atr"] = (high - low) / atr.replace(0, np.nan)
+    86: 
+    87: Context: same conceptual role as F1 but for a different dataset
+    88: (SBER 2024-2025). Zero ATR14 handling: replace(0, np.nan).
+    89: 
+    90: ### F4 — main_v5.17_threshold_path_lab_v2.py, lines 757, 9226, 11094
+    91: 
+    92:   work["feature_candle_range_atr"] = candle_range / work["atr14"]
+    93: 
+    94: Context: feature_candle_range_atr. No zero-handling. If
+    95: candle_range > 0 and atr14 == 0, the result is inf (or NaN,
+    96: depending on pandas/numpy handling of 0/0). This column is not
+    97: directly used to construct the H4 event tag. It is used for
+    98: context and anatomical features in main. Not related to H4 event
+    99: construction.
+   100: 
+   101: ### F5 — main_v5.17_threshold_path_lab_v2.py, lines 11550, 11923
+   102: 
+   103:   range_atr = rng / atr_1m
+   104:   range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+   105: 
+   106: Context: entry_1m_range_atr and candle_range_atr. These operate on
+   107: 1-minute ATR (atr_1m), not on the 5-minute atr14 used by H4.
+   108: 
+   109: ### Relationship between F1, F2, F3
+   110: 
+   111: F1, F2, F3 all compute (high - low) / atr14 (or atr) on the 5M bar.
+   112: They differ only in the zero-ATR14 handling:
+   113: 
+   114:   - F1, F3: replace(0, np.nan) — zero becomes NaN.
+   115:   - F2: `if atr and atr > 0 else np.nan` — zero becomes NaN; also
+   116:     negative becomes NaN; also NaN becomes NaN.
+   117: 
+   118: On real data, atr14 is always non-negative (see above). Therefore
+   119: F1, F2, F3 produce identical values on real data.
+   120: 
+   121: ### Which implementation constructs the H4 Event_tag input
+   122: 
+   123: The H4 Event_tag is defined in v3.4 §2 and v3.6.2 §2 as
+   124: `range_atr[t] < 0.54835695`. The only source in the project that
+   125: produces a column literally called `range_atr` for 5M bars is v600
+   126: compute_discovery_quantiles (F1), and the value produced by
+   127: build_state_tags is `feat_range_atr` (F2). Both operate on the
+   128: same atr14 produced by main.calculate_indicators.
+   129: 
+   130: Therefore, for H4 purposes, the operative formula is the F1/F2
+   131: pair: (high - low) / atr14 with NaN when atr14 is zero or negative
+   132: or NaN.
+   133: 
+   134: ---
+   135: 
+   136: ## 3. Proposed definition for H4
+   137: 
+   138: The following definition is proposed. It is NOT adopted by this
+   139: document. It requires explicit user authorization.
+   140: 
+   141: ### 3.1 range_atr
+   142: 
+   143: For each 5M bar t:
+   144: 
+   145:   range_atr[t] = (high[t] - low[t]) / atr14[t]
+   146: 
+   147: provided atr14[t] is finite and atr14[t] > 0. Otherwise:
+   148: 
+   149:   range_atr[t] = NaN
+   150: 
+   151: ### 3.2 atr14
+   152: 
+   153: atr14[t] is computed by the formula found in
+   154: main_v5.17_threshold_path_lab_v2.calculate_indicators:
+   155: 
+   156:   previous_close = close.shift(1)   # across the whole dataframe,
+   157:                                     # no reset at session boundaries
+   158:   tr1 = high - low
+   159:   tr2 = abs(high - previous_close)
+   160:   tr3 = abs(low  - previous_close)
+   161:   true_range = max(tr1, tr2, tr3)
+   162:   atr14 = true_range.ewm(
+   163:       alpha = 1/14,
+   164:       adjust = False,
+   165:       min_periods = 14,
+   166:   ).mean()
+   167: 
+   168: Notes on the formula:
+   169: 
+   170:   - Smoothing is Wilder EWM (RMA), not a simple rolling mean.
+   171:   - adjust=False means the recursive EMA form is used.
+   172:   - min_periods=14 means the first 13 values are NaN.
+   173:   - previous_close uses close.shift(1) without session reset, so on
+   174:     the first bar of a session after a break, previous_close is the
+   175:     close of the last bar of the previous session. This can produce
+   176:     larger true_range at the first bar of a session. This is a
+   177:     property of the existing code, not a defect.
+   178: 
+   179: ### 3.3 Consequences if the proposal is adopted
+   180: 
+   181: If adopted:
+   182: 
+   183:   - range_atr is NaN whenever atr14 is zero, negative, or NaN.
+   184:   - The H4 event condition `range_atr[t] < 0.54835695` is False
+   185:     whenever range_atr[t] is NaN (comparison with NaN is False).
+   186:   - The H4 eligibility conditions §5.2 (g) / §6 (e), which require
+   187:     `range_atr[t] is finite`, exclude NaN range_atr values.
+   188:   - No bar is affected by the choice between F1 and F2, because F1
+   189:     and F2 produce identical values on real data.
+   190: 
+   191: No sample count, no eligibility-set count, and no numeric
+   192: consequence is computed in this proposal.
+   193: 
+   194: ---
+   195: 
+   196: ## 4. Relationship to the existing H4 specifications
+   197: 
+   198: This proposal is based on the code found in v600. It is NOT
+   199: explicitly frozen in v3.4 or v3.6.2. Neither document references
+   200: `compute_discovery_quantiles` or `build_state_tags` for the
+   201: purpose of defining range_atr.
+   202: 
+   203: Therefore:
+   204: 
+   205:   - The proposal is consistent with the code that generated the
+   206:     frozen threshold `0.54835695`.
+   207:   - The proposal is NOT explicitly stated as the intended
+   208:     definition in the H4 specifications.
+   209:   - Adoption of this proposal would be a clarification of what the
+   210:     specifications already implicitly require, not a change to the
+   211:     frozen threshold or to any strategy rule.
+   212: 
+   213: No modification is made to v3.4, v3.6.2, or any other file by this
+   214: proposal.
+   215: 
+   216: ---
+   217: 
+   218: ## 5. Relationship to M3
+   219: 
+   220: Adoption of this proposal does NOT close M3.
+   221: 
+   222: M3 is a comparison of the eligibility rules in v3.4 §5.2 and
+   223: v3.6.2 §6. The proposal defines the input quantity `range_atr`, but
+   224: does not address:
+   225: 
+   226:   - the difference between v3.4 §5.2 (a) endpoint session_key and
+   227:     v3.6.2 §6 (k) full-window session_key;
+   228:   - the explicit addition of session_key presence in §6 (b);
+   229:   - the explicit addition of the bounds check in §6 (j);
+   230:   - the difference in positivity requirements for open/high/low at
+   231:     bar t and in the window;
+   232:   - the eligibility-set comparison on real data, which has not
+   233:     been performed.
+   234: 
+   235: After the proposal is adopted (if the user so chooses), a separate
+   236: read-only audit of eligibility under both definitions can be
+   237: performed. That audit will be T-1 as previously described. Its
+   238: result will identify any actual differences in eligible sets.
+   239: 
+   240: M3 remains OPEN regardless of the status of this proposal.
+   241: 
+   242: ---
+   243: 
+   244: ## 6. What is not proposed
+   245: 
+   246:   - The proposal does not change the frozen threshold
+   247:     `0.54835695`.
+   248:   - The proposal does not change v3.4 or v3.6.2.
+   249:   - The proposal does not change any source code.
+   250:   - The proposal does not change any data file.
+   251:   - The proposal does not change any strategy rule.
+   252:   - The proposal does not authorize T-1 or any H4 calculation.
+   253:   - The proposal does not close M1, M2, M3, PC1, PC2, PC3, PC4,
+   254:     PC5, Q-NEW, QA-A1 or QA-A2.
+   255: 
+   256: ---
+   257: 
+   258: ## 7. Decisions required from the user
+   259: 
+   260: To adopt or reject this proposal, the following decision is
+   261: required from the user:
+   262: 
+   263:   Decision R-1: Adopt range_atr = (high - low) / atr14 with
+   264:                 atr14 from main.calculate_indicators (Wilder EWM,
+   265:                 alpha=1/14, adjust=False, min_periods=14,
+   266:                 prev_close = close.shift(1) without session reset),
+   267:                 and range_atr = NaN whenever atr14 is not finite
+   268:                 and positive.
+   269: 
+   270:     Options:
+   271:       R-1a: Accept as proposed.
+   272:       R-1b: Accept with a modification. The user states the
+   273:             modification.
+   274:       R-1c: Reject. The user states an alternative definition.
+   275:       R-1d: Defer. Range_atr remains unspecified for H4.
+   276: 
+   277: Adoption of R-1a or R-1b does not by itself authorize T-1. A
+   278: separate authorization is required to run the eligibility-set
+   279: comparison.
+   280: 
+   281: Adoption of R-1a or R-1b does not by itself close M3. The
+   282: eligibility-set comparison must be performed and reported.
+   283: 
+   284: ---
+   285: 
+   286: ## 8. Confirmation
+   287: 
+   288: - No H4 effect was computed.
+   289: - No bootstrap was executed.
+   290: - No confidence interval was computed.
+   291: - No profitability metric was computed.
+   292: - OOS was not opened or analyzed.
+   293: - No specification was modified.
+   294: - No source file or data file was modified.
+   295: - No prior report was overwritten.
+   296: - No live order was sent.
+   297: 
+   298: H4 EXECUTION: NOT AUTHORIZED.
+   299: OOS: SEALED.
+   300: 
+   301: Status of this proposal: PROPOSED — NOT ADOPTED.
+
+==============================================================================
+FILE: audit_h4_m5_report.txt
+ABS: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_m5_report.txt
+SIZE: 4312
+SHA256: 5d34c2e8f9a824c5ac7ae304f182898ba4aa0aeef21477c6ac3638ca598e77ec
+ENCODING: utf-8
+LINES: 152
+------------------------------------------------------------------------------
+     1: H4 FORENSIC AUDIT M5-1 and M5-2 -- READ ONLY
+     2: audit_h4_m5_1_m5_2_forensic_v1.py
+     3: 
+     4: STRATEGY LOGIC: UNCHANGED
+     5: RESEARCH ONLY
+     6: NO THRESHOLD IS OPTIMIZED
+     7: NO FILTER IS INSTALLED
+     8: NO LIVE ORDERS
+     9: OOS SEALED -- NOT TOUCHED
+    10: 
+    11: R-1: NOT DECIDED
+    12: H4 EXECUTION: NOT AUTHORIZED
+    13: 
+    14: ==============================================================================
+    15: M5-1 -- FROZEN THRESHOLD REPRODUCTION
+    16: ==============================================================================
+    17: 
+    18: Frozen value under test: range_atr q25 = 0.54835695
+    19: Discovery window: 2025-09-15 .. 2026-02-28
+    20: 
+    21: Dataset under test: SBER_2025_2026
+    22: Path: cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+    23: Size: 2416569
+    24: sha256: 33d964220ad480a49a4f4b674f5bc45afd22132475ef586b547360730b090690
+    25: 
+    26: Rows in dataset: 25856
+    27: Rows in DISCOVERY subset: 11615
+    28: 
+    29: Computing ATR14 by reproducing main.calculate_indicators
+    30: formula from source fragment (Wilder EWM, alpha=1/14,
+    31: adjust=False, min_periods=14, close.shift(1) without
+    32: session reset). Original function NOT called.
+    33: 
+    34: ATR14 within DISCOVERY subset:
+    35:   rows: 11615
+    36:   NaN: 13
+    37:   zero: 0
+    38:   negative: 0
+    39:   min finite ATR14: 0.0366635337
+    40:   max finite ATR14: 1.6407746333
+    41: 
+    42: range_atr within DISCOVERY (F1 formula):
+    43:   total rows: 11615
+    44:   finite values: 11602
+    45:   NaN: 13
+    46: 
+    47: Quantile computation:
+    48:   method: pandas.Series.quantile(0.25, interpolation='linear')
+    49:   values used: 11602
+    50:   q25 (linear) = 0.5483569526
+    51: 
+    52: Comparison with frozen value:
+    53:   frozen: 0.54835695
+    54:   reproduced: 0.5483569526
+    55:   difference: +2.5646899049e-09
+    56:   |difference|: 2.5646899049e-09
+    57:   STATUS: REPRODUCED within 1e-6.
+    58: 
+    59: Reference: q25 (nearest) = 0.5483271000
+    60: 
+    61: ==============================================================================
+    62: M5-2 -- ROW-BY-ROW COMPARISON OF F1 AND F2
+    63: ==============================================================================
+    64: 
+    65: Dataset: SBER_2025_2026
+    66: Path: cache/5m/SBER_TQBR_2025-09-15_2026-09-14_5m_v1.csv
+    67:   rows: 25856
+    68:   ATR14 NaN: 13
+    69:   ATR14 zero: 0
+    70:   ATR14 negative: 0
+    71:   ATR14 min finite: 0.0347955542
+    72:   ATR14 max finite: 2.6170087738
+    73:   F1/F2 finiteness split:
+    74:     both finite: 25843
+    75:     only F1 finite: 0
+    76:     only F2 finite: 0
+    77:     neither finite: 13
+    78:   F1 vs F2 on common finite rows:
+    79:     rows compared: 25843
+    80:     rows with |F1 - F2| > 1e-12: 0
+    81:     max abs diff: 0.0000000000e+00
+    82: 
+    83: Dataset: SBER_2024_2025
+    84: Path: cache_2024_2025/5m/SBER_TQBR_2024-09-15_2025-09-14_5m.csv
+    85:   rows: 25453
+    86:   ATR14 NaN: 13
+    87:   ATR14 zero: 0
+    88:   ATR14 negative: 0
+    89:   ATR14 min finite: 0.0915698413
+    90:   ATR14 max finite: 2.2614394735
+    91:   F1/F2 finiteness split:
+    92:     both finite: 25440
+    93:     only F1 finite: 0
+    94:     only F2 finite: 0
+    95:     neither finite: 13
+    96:   F1 vs F2 on common finite rows:
+    97:     rows compared: 25440
+    98:     rows with |F1 - F2| > 1e-12: 0
+    99:     max abs diff: 0.0000000000e+00
+   100: 
+   101: Dataset: GAZP_2025_2026
+   102: Path: cache_other_tickers/GAZP/5m/GAZP_TQBR_2025-09-15_2026-09-14_5m.csv
+   103:   rows: 25862
+   104:   ATR14 NaN: 13
+   105:   ATR14 zero: 0
+   106:   ATR14 negative: 0
+   107:   ATR14 min finite: 0.0293070628
+   108:   ATR14 max finite: 1.0204460646
+   109:   F1/F2 finiteness split:
+   110:     both finite: 25849
+   111:     only F1 finite: 0
+   112:     only F2 finite: 0
+   113:     neither finite: 13
+   114:   F1 vs F2 on common finite rows:
+   115:     rows compared: 25849
+   116:     rows with |F1 - F2| > 1e-12: 0
+   117:     max abs diff: 0.0000000000e+00
+   118: 
+   119: Dataset: LKOH_2025_2026
+   120: Path: cache_other_tickers/LKOH/5m/LKOH_TQBR_2025-09-15_2026-09-14_5m.csv
+   121:   rows: 25893
+   122:   ATR14 NaN: 13
+   123:   ATR14 zero: 0
+   124:   ATR14 negative: 0
+   125:   ATR14 min finite: 1.1939238995
+   126:   ATR14 max finite: 65.8423202871
+   127:   F1/F2 finiteness split:
+   128:     both finite: 25880
+   129:     only F1 finite: 0
+   130:     only F2 finite: 0
+   131:     neither finite: 13
+   132:   F1 vs F2 on common finite rows:
+   133:     rows compared: 25880
+   134:     rows with |F1 - F2| > 1e-12: 0
+   135:     max abs diff: 0.0000000000e+00
+   136: 
+   137: ==============================================================================
+   138: CONFIRMATION
+   139: ==============================================================================
+   140: - No H4 effect was computed.
+   141: - No bootstrap was executed.
+   142: - No CI was computed.
+   143: - No eligible-set count was computed.
+   144: - OOS was not opened or analyzed.
+   145: - No specification was modified.
+   146: - No source file or data file was modified.
+   147: - No live order was sent.
+   148: 
+   149: R-1: NOT DECIDED.
+   150: H4 EXECUTION: NOT AUTHORIZED.
+   151: OOS: SEALED.
+   152: 
+
+==============================================================================
+FILE: audit_h4_forensic_followup_v2_fast_qa_a2.csv
+ABS: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_forensic_followup_v2_fast_qa_a2.csv
+SIZE: 1093
+SHA256: 225ce133d30b74f7e7c71059c8ca1b67a64cc1a1aa7bbf2c2645459fda9249fb
+ENCODING: utf-8
+LINES: 17
+------------------------------------------------------------------------------
+     1: dataset,h,formal_ok,formal_fail_j,formal_fail_k,formal_fail_both,formal_sum,n,v600_recon_full,v600_recon_partial,per_bar_match,per_bar_mismatch
+     2: SBER_2025_2026,1,25600,0,255,1,25856,25856,25600,256,25856,0
+     3: SBER_2025_2026,2,25344,0,510,2,25856,25856,25344,512,25856,0
+     4: SBER_2025_2026,3,25088,0,765,3,25856,25856,25088,768,25856,0
+     5: SBER_2025_2026,6,24320,0,1530,6,25856,25856,24320,1536,25856,0
+     6: SBER_2025_2026,12,22784,0,3060,12,25856,25856,22784,3072,25856,0
+     7: GAZP_2025_2026,1,25606,0,255,1,25862,25862,25606,256,25862,0
+     8: GAZP_2025_2026,2,25350,0,510,2,25862,25862,25350,512,25862,0
+     9: GAZP_2025_2026,3,25094,0,765,3,25862,25862,25094,768,25862,0
+    10: GAZP_2025_2026,6,24326,0,1530,6,25862,25862,24326,1536,25862,0
+    11: GAZP_2025_2026,12,22790,0,3060,12,25862,25862,22790,3072,25862,0
+    12: LKOH_2025_2026,1,25637,0,255,1,25893,25893,25637,256,25893,0
+    13: LKOH_2025_2026,2,25381,0,510,2,25893,25893,25381,512,25893,0
+    14: LKOH_2025_2026,3,25125,0,765,3,25893,25893,25125,768,25893,0
+    15: LKOH_2025_2026,6,24357,0,1530,6,25893,25893,24357,1536,25893,0
+    16: LKOH_2025_2026,12,22821,0,3060,12,25893,25893,22821,3072,25893,0
+    17: 
+
+==============================================================================
+FILE: audit_h4_consolidated_open_decisions_register_v1.md
+ABS: C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_consolidated_open_decisions_register_v1.md
+SIZE: 17237
+SHA256: 9705f5b20ee9f8feca3524c2d72124f8e107b937f93801119f4d7ed4e0963bbf
+ENCODING: utf-8
+LINES: 222
+------------------------------------------------------------------------------
+     1: # audit_h4_consolidated_open_decisions_register_v1.md
+     2: 
+     3: H4 — CONSOLIDATED OPEN-DECISIONS REGISTER v1
+     4: 
+     5: TEXTUAL AUDIT AND DECISION REGISTER ONLY.
+     6: 
+     7: STRATEGY LOGIC: UNCHANGED
+     8: RESEARCH ONLY
+     9: NO THRESHOLD IS OPTIMIZED
+    10: NO FILTER IS INSTALLED
+    11: NO LIVE ORDERS
+    12: NO BOOTSTRAP EXECUTION
+    13: NO CI CALCULATION
+    14: NO H4-EFFECT CALCULATION
+    15: OOS SEALED — NOT TOUCHED
+    16: 
+    17: ---
+    18: 
+    19: ## 0. Evidence limitations
+    20: 
+    21: This register was produced from text supplied in the conversation
+    22: and from prior audit texts written in the same conversation. No
+    23: filesystem access was available for this audit. SHA-256 values,
+    24: sizes and file existence are not independently verified here.
+    25: 
+    26: Specifically:
+    27:   - v3.4 was supplied in full in the conversation.
+    28:   - v3.6.2 was written in the conversation and saved by the user;
+    29:     its content is available in the conversation.
+    30:   - v3.4 §5.5 and §5.8 were supplied verbatim in the conversation.
+    31:   - audit_h4_remaining_open_items_v1.md was NOT supplied.
+    32:   - audit_h4_m2_forensic_bootstrap_methodology_audit_v1.md was NOT
+    33:     supplied.
+    34:   - Any other audit file whose content is not in the conversation
+    35:     is treated as not available.
+    36: 
+    37: Where an item depends on text not supplied, it is marked
+    38: evidence limitation and the missing section is named.
+    39: 
+    40: ---
+    41: 
+    42: ## 1. Register table
+    43: 
+    44: | ID | Category | Current status | Specification evidence | What is established | What remains unresolved | Options | Decision authority | Dependencies | OOS impact | Next action |
+    45: |---|---|---|---|---|---|---|---|---|---|---|
+    46: | M1 | Methodology decision | OPEN | v3.6.2 §3 "M1 (open): one-sided direction vs two-sided CI [q025, q975]. UNRESOLVED." | Direction is one-sided positive. Reported CI is two-sided. | Whether the confirmatory criterion is q025 > 0 or q05 > 0; whether a formal H0/H1 is stated; whether alpha is written. | Keep two-sided and require q025 > 0; require q05 > 0 with one-sided reporting; defer. | Explicit user authorization required | none | must remain sealed | User to state the confirmatory criterion. |
+    47: | M2-CALENDAR | Methodology decision | UNRESOLVED | v3.4 §7.1 step 2; v3.6.2 §10 "dates present in only some instruments" | S_all is the union of session_keys; resampling is with replacement. | How a date present in only some datasets is handled during recomputation, and how a dataset with no sampled sessions contributes. | Include only instruments that have data; restrict to intersection; other. | Explicit user authorization required | none | must remain sealed | User to state the rule for dates missing in some datasets. |
+    48: | M2-DUPLICATES | Methodology decision | UNRESOLVED | v3.4 §7.1 step 2; v3.6.2 §10 "unique bootstrap-copy identifiers" | Sampling with replacement produces repeated draw occurrences. | Whether repeated draw occurrences of the same session contribute their eligible bars once or more than once; labelling scheme for copies. | Keep occurrences separate with multiplicity; deduplicate by original session; other. | Explicit user authorization required | none | must remain sealed | User to state the rule for duplicate session copies. |
+    49: | M2-STAT-UNDEF | Methodology decision | UNRESOLVED | v3.4 §5.8 (only N_event>0 and N_control=0 covered); v3.4 §7.1 step 4 | The only explicit non-estimability rule is the empty-control-group rule. | What happens when a dataset-level statistic is undefined for a reason other than N_event>0 and N_control=0 (for example empty E_h^d). | Define fallback as UNRESOLVED replicate; skip replicate; define additional non-estimability rules. | Explicit user authorization required | M2-CALENDAR, M2-DUPLICATES, PC3 | must remain sealed | User to state whether to broaden §5.8 or leave other undefined-statistic cases as UNRESOLVED. |
+    50: | M2-QUANTILE | Methodology decision | UNRESOLVED | not found in supplied v3.4 or v3.6.2 | Bootstrap scheme uses a CI95, but the quantile method is not stated. | Which quantile method is used; one-sided vs two-sided bound; how replicates enter the CI. | numpy linear; nearest-rank; other; and one-sided vs two-sided. | Explicit user authorization required | M1 | must remain sealed | User to state quantile method and side. |
+    51: | M2-RNG | Implementation detail | UNRESOLVED | v3.4 §7.1 "N_iter = 1000. seed = 42." (both labeled PROPOSED) | Proposed N_iter and seed exist. | Whether these values are authorized; whether a specific RNG is required. | Authorize as proposed; authorize with different values; defer. | Explicit user authorization required | PC4 | must remain sealed | User to authorize N_iter, seed and RNG. |
+    52: | PC2 | Methodology decision | PROPOSED — NOT AUTHORIZED | v3.6.2 §15 "PC2. Dataset / period coverage; '2 of 4' NOT changed silently." | The proposal involves a different number of confirmatory datasets. | Whether SBER 2024-2025 is confirmatory or portability only; how per-dataset and aggregate criteria interact. | Accept the 3+1 proposal; keep 2 of 4; other. | Explicit user authorization required | none | must remain sealed | User to decide dataset coverage and interaction rule. |
+    53: | PC3-TRIGGER | Methodology decision | PROPOSED — NOT AUTHORIZED | v3.4 §7.1 step 5 "N_event>0 and N_control=0 in the resampled data" | The trigger is exactly this condition. | Whether this rule is authorized; whether it should be broadened. | Authorize as proposed; broaden; reject. | Explicit user authorization required | none | must remain sealed | User to authorize or reject the invalid-replicate rule. |
+    54: | PC3-UNDEF | Methodology decision | UNRESOLVED | v3.4 §7.1 step 5 (narrow trigger); v3.4 §7.1 step 4 (aggregate requires defined Δ_h^d) | Only the narrow trigger is stated. | Handling of undefined dataset-level statistics outside that trigger, and of undefined aggregates. | See M2-STAT-UNDEF. | Explicit user authorization required | M2-STAT-UNDEF | must remain sealed | User to state the fallback for undefined statistics. |
+    55: | PC4 | Methodology decision | PROPOSED — NOT AUTHORIZED | v3.6.2 §15 "PC4. Calendar-session joint bootstrap." | The joint scheme is proposed. | Authorizing the scheme and its details. | Authorize with the resolutions of M2-CALENDAR, M2-DUPLICATES, M2-QUANTILE, M2-RNG; or defer. | Explicit user authorization required | M2-CALENDAR, M2-DUPLICATES, M2-QUANTILE, M2-RNG | must remain sealed | User to authorize PC4 after resolving M2 sub-questions. |
+    56: | M3 | Textual inconsistency | OPEN | v3.4 §5.2 (a)-(i); v3.4 §11 D1-D7; v3.6.2 §6 (a)-(k); prior M3 audit | v3.6.2 §6 differs from v3.4 §5.2 in: session_key full-window condition; explicit session_key presence; explicit bounds check. D1-D7 is an exclusion-order mechanism, not the eligibility list. | Whether the intended eligible set is identical across versions; whether §6 is a clarification or a change. | Declare §6 a clarification; declare §6 operative; leave M3 OPEN. | Explicit user authorization required | none | must remain sealed | User to decide interpretation. |
+    57: | QA-A1 | Implementation verification | PARTIALLY CLOSED | audit_h4_atr14_compare_v3_report.md | ATR14 in v600 uses Wilder EWM (alpha=1/14, adjust=False, min_periods=14). Reproduction on SBER, GAZP, LKOH matched. | Exact row-by-row match with the historical audit-side ATR14 array is not possible because the array was not saved. | Recompute from source and accept as control; accept PARTIALLY CLOSED. | technical verification only (no decision currently required) | none | must remain sealed | None further required unless a new historical array is produced. |
+    58: | QA-A2 | Implementation verification | CLOSED WITHIN DOCUMENTED BOUNDS | audit_h4_forensic_followup_v2_fast_qa_a2.csv | per-bar mismatch = 0 for the tested combinations. | The actual v600 function was not called; equivalence is at the level of the reproduced formula, not of an executed original function. | Accept as SOURCE-CODE + DATA-CHECK VERIFIED; or run the original function on a subset for EXACT MATCH. | technical verification only | none | must remain sealed | No decision required unless the user requests an EXACT MATCH run. |
+    59: | Q-NEW | Diagnostic observation / methodology | OPEN | v3.6.2 §14 U3, U4 | Unusual sessions exist in the data and are classified as unusual by prior audits; no classification rule has been adopted. | How these sessions should be treated inside H4. | Include all; exclude all; exclude a subset; other. | Explicit user authorization required | none | must remain sealed | User to decide the classification rule. |
+    60: | PC5 | Methodology decision | PROPOSED — NOT AUTHORIZED | v3.6.2 §6.2; audit_session_anomalies_v1 report | 255 non-5-minute steps per dataset; all at session boundaries; zero intra-session deviations. | Whether the 5-minute step condition is adopted; what tolerance to use. | Authorize as proposed; reject; defer. | Explicit user authorization required | none | must remain sealed | User to authorize or reject condition (l). |
+    61: | PC1 | Methodology decision | PROPOSED — NOT AUTHORIZED | v3.6.2 §15 "PC1. Equal-weight per dataset aggregation." | Equal-weight aggregation across datasets is proposed. | Whether equal-weight aggregation is authorized. | Authorize; change aggregation; defer. | Explicit user authorization required | none | must remain sealed | User to authorize or reject equal weighting. |
+    62: 
+    63: ---
+    64: 
+    65: ## 2. TEXTUAL CORRECTIONS — NOT METHODOLOGY DECISIONS
+    66: 
+    67: The following items are corrections to earlier audit reports.
+    68: They are not methodological decisions and do not authorize a
+    69: specification change.
+    70: 
+    71:   C-1. Incomplete-calendar aggregation framing.
+    72:     The prior M2 audit described the incomplete-calendar issue as a
+    73:     binary choice between "zero contribution" and "reduced
+    74:     denominator". That framing was withdrawn because v3.4 §7.1
+    75:     step 4 uses a fixed denominator |D_P| and the text does not
+    76:     adopt either of the two options.
+    77: 
+    78:   C-2. Erroneous [Δ_A, Δ_A] mean example.
+    79:     The prior M2 audit's abstract example used "mean of
+    80:     [Δ_A, Δ_A]". This was withdrawn. v3.4 §5.5 defines Δ_h^d in
+    81:     terms of bars, not precomputed per-session means. The correct
+    82:     statement is at the level of draw occurrences and eligibility
+    83:     bars.
+    84: 
+    85:   C-3. Invalid-replicate trigger.
+    86:     The prior M2 audit described the invalid trigger as
+    87:     "eligibility group missing or invalid". The correct statement
+    88:     is narrower: v3.4 §7.1 step 5 covers exactly
+    89:     N_event>0 AND N_control=0. Other undefined-statistic cases are
+    90:     not covered.
+    91: 
+    92:   C-4. Undefined aggregate reclassification.
+    93:     The prior M2 audit listed an undefined aggregate as an
+    94:     independent root cause. This was withdrawn. An undefined
+    95:     aggregate is a downstream consequence of an undefined
+    96:     dataset-level statistic. Root causes are R1-R4 as defined in
+    97:     audit_h4_m2_bootstrap_statistic_scope_correction_v3.md.
+    98: 
+    99: These corrections are labeled as audit-history items, not as
+   100: independently verified facts, because the underlying files were
+   101: not re-read from disk in this audit.
+   102: 
+   103: ---
+   104: 
+   105: ## 3. Decision summary for the user
+   106: 
+   107: Only the following items require an explicit user decision. Items
+   108: that are purely technical verification are excluded.
+   109: 
+   110: 1. Критерий подтверждающего теста (M1).
+   111:    Вопрос: использовать q025 > 0 (двусторонний CI как более
+   112:    строгий односторонний критерий) или q05 > 0 (односторонний
+   113:    критерий)?
+   114:    Методологическое следствие: q025 > 0 реже даёт CONFIRMED, чем
+   115:    q05 > 0, и не требует нового интервала.
+   116:    Можно оценить без OOS: да.
+   117:    Что проверить до решения: необходимо ли формально записать
+   118:    H0/H1 и уровень alpha.
+   119: 
+   120: 2. Правило для дат, отсутствующих в части датасетов (M2-CALENDAR).
+   121:    Вопрос: что делать, когда выбранная календарная сессия
+   122:    отсутствует в одном из датасетов?
+   123:    Методологическое следствие: влияет на то, какие Δ_6^{d,k}
+   124:    входят в агрегат в каждой реплике.
+   125:    Можно оценить без OOS: да.
+   126:    Что проверить до решения: как §5.5 применяется к датасету с
+   127:    нулевым числом sampled sessions.
+   128: 
+   129: 3. Правило для повторных копий сессий (M2-DUPLICATES).
+   130:    Вопрос: складывать повторные копии как отдельные вхождения
+   131:    или объединять по исходному session_key?
+   132:    Методологическое следствие: влияет на распределение
+   133:    bootstrap-статистики, если §5.5 применяется к мультимножеству
+   134:    bars.
+   135:    Можно оценить без OOS: да.
+   136:    Что проверить до решения: достаточно ли однозначно §5.5
+   137:    определяет, является ли объединение bars множеством или
+   138:    мультимножеством.
+   139: 
+   140: 4. Правило для undefined dataset-level statistics (M2-STAT-UNDEF
+   141:    и PC3-UNDEF).
+   142:    Вопрос: что делать, когда Δ_6^{d,k} не определена по причине,
+   143:    отличной от N_event>0 и N_control=0?
+   144:    Методологическое следствие: определяет, является ли такая
+   145:    реплика INVALID, пропускается ли она, или агрегат становится
+   146:    UNRESOLVED.
+   147:    Можно оценить без OOS: да.
+   148:    Что проверить до решения: согласованность с §5.8.
+   149: 
+   150: 5. Метод квантилей и тип CI (M2-QUANTILE).
+   151:    Вопрос: какой метод вычисления квантилей использовать и
+   152:    использовать ли односторонний или двусторонний CI в
+   153:    подтверждающем выводе?
+   154:    Методологическое следствие: влияет на воспроизводимость и на
+   155:    интерпретацию M1.
+   156:    Можно оценить без OOS: да.
+   157:    Что проверить до решения: согласованность с M1.
+   158: 
+   159: 6. Авторизация N_iter, seed и RNG (M2-RNG, PC4).
+   160:    Вопрос: авторизовать ли предложенные значения N_iter = 1000,
+   161:    seed = 42, а также конкретный RNG?
+   162:    Методологическое следствие: определяет воспроизводимость
+   163:    bootstrap.
+   164:    Можно оценить без OOS: да.
+   165:    Что проверить до решения: совместимость с платформой.
+   166: 
+   167: 7. Датасеты и агрегация (PC1, PC2).
+   168:    Вопрос: авторизовать ли equal-weight aggregation и состав
+   169:    confirmatory datasets (3 + portability)?
+   170:    Методологическое следствие: определяет estimand и правила
+   171:    dataset-level criteria.
+   172:    Можно оценить без OOS: да.
+   173:    Что проверить до решения: взаимодействие per-dataset и
+   174:    aggregate criteria.
+   175: 
+   176: 8. Классификация unusual sessions (Q-NEW).
+   177:    Вопрос: как обрабатывать сессии с last_begin = 15:20 или
+   178:    first_begin = 09:55?
+   179:    Методологическое следствие: определяет eligible sample.
+   180:    Можно оценить без OOS: да.
+   181:    Что проверить до решения: согласованность с §7.1.
+   182: 
+   183: 9. Условие (l) — проверка 5-минутного шага (PC5).
+   184:    Вопрос: авторизовать ли condition (l)?
+   185:    Методологическое следствие: на аудированных данных не
+   186:    изменяет sample; на других данных может исключать bars.
+   187:    Можно оценить без OOS: да.
+   188:    Что проверить до решения: согласованность с §6(k).
+   189: 
+   190: ---
+   191: 
+   192: ## 4. Final status block
+   193: 
+   194: M1: OPEN.
+   195: M2: UNRESOLVED.
+   196: PC1: PROPOSED — NOT AUTHORIZED.
+   197: PC2: PROPOSED — NOT AUTHORIZED.
+   198: PC3: PROPOSED — NOT AUTHORIZED.
+   199: PC4: PROPOSED — NOT AUTHORIZED.
+   200: M3: OPEN.
+   201: PC5: PROPOSED — NOT AUTHORIZED.
+   202: H4 EXECUTION: NOT AUTHORIZED.
+   203: OOS: SEALED.
+   204: 
+   205: No calculation was performed by this register. No status was
+   206: changed. This document does not authorize any H4 execution.
+   207: 
+   208: ---
+   209: 
+   210: ## 5. Confirmation
+   211: 
+   212: - No bootstrap was executed.
+   213: - No CI was computed.
+   214: - No H4 effect was computed.
+   215: - No market-data calculation was performed.
+   216: - OOS was not opened or analyzed.
+   217: - No specification was modified.
+   218: - No source file, data file, or prior report was modified.
+   219: - No live order was sent.
+   220: 
+   221: This register is a textual audit and decision record only. It does
+   222: not authorize any further analysis.
+
+==============================================================================
+FOOTER
+STRATEGY LOGIC: UNCHANGED. RESEARCH ONLY.
+NO THRESHOLD IS OPTIMIZED. NO FILTER IS INSTALLED.
+NO LIVE ORDERS. OOS: SEALED. H4 EXECUTION: NOT AUTHORIZED.

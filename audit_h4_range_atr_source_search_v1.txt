@@ -1,0 +1,1060 @@
+﻿
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_attach_causal_features.py
+LineNumber : 16
+Line       :       feature_candle_range_atr, feature_upper_wick_pct,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_attach_causal_features.py
+LineNumber : 123
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_attach_causal_features.py
+LineNumber : 224
+Line       :     print("  feature_candle_body_pct, feature_candle_range_atr,")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_bos_quality_lab.py
+LineNumber : 171
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_bos_quality_lab.py
+LineNumber : 275
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_bos_quality_lab.py
+LineNumber : 389
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_entry_location_lab.py
+LineNumber : 145
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_entry_location_lab.py
+LineNumber : 153
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_entry_location_lab.py
+LineNumber : 214
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\apply_patch_v518_entry_location_lab.py
+LineNumber : 344
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_atr14_compare_v3.py
+LineNumber : 393
+Line       :     add("    range_atr remains independent of this finding here; it was")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_forensic_followup_v1.py
+LineNumber : 18
+Line       :   QA-A1: compare v600 atr14 and range_atr against audit-side
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_forensic_followup_v1.py
+LineNumber : 283
+Line       :         add("QA-A1 -- ATR14 and range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 24
+Line       :     A2 -- atr14 and range_atr chain and edge cases
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 58
+Line       : Q25_RANGE_ATR = 0.54835695
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 120
+Line       : def compute_range_atr(df, atr):
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 123
+Line       :         range_atr = rng / atr.replace(0, np.nan)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 124
+Line       :     return range_atr
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 174
+Line       :     ra = compute_range_atr(df, atr)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 186
+Line       :     # event tag: range_atr < threshold
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 187
+Line       :     event = (ra < Q25_RANGE_ATR).fillna(False)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 188
+Line       :     # tag with invalid atr or range_atr:
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 201
+Line       :         "range_atr_negative": ra_neg,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 202
+Line       :         "range_atr_nan": ra_nan,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 203
+Line       :         "range_atr_inf": ra_inf,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 206
+Line       :         "tag_with_invalid_range_atr": tag_with_invalid_ra,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 323
+Line       :         add("AUDIT A2 -- atr14 and range_atr (audit-side recomputation)")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 377
+Line       :     add("    v600 does not redefine ATR14. range_atr is derived inside")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 382
+Line       :     add("    range_atr > 0.")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_h4_implementation_v1.py
+LineNumber : 431
+Line       :     add("- QA-A1: zero/negative atr14/range_atr -- partially evidenced by this audit.")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 133
+Line       :     # Specifically for H4 we need range_atr q25
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 137
+Line       :     if "range_atr" in q:
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 138
+Line       :         add("range_atr frozen q25 (from v600 DISCOVERY): "
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 139
+Line       :             + "{:+.8f}".format(q["range_atr"]["q25"]))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 140
+Line       :         add("range_atr frozen q50: "
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 141
+Line       :             + "{:+.8f}".format(q["range_atr"]["q50"]))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 142
+Line       :         add("range_atr frozen q75: "
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 143
+Line       :             + "{:+.8f}".format(q["range_atr"]["q75"]))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\audit_v600_frozen_quantiles_v1.py
+LineNumber : 145
+Line       :         add("range_atr not found in frozen quantiles")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 757
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 1231
+Line       :     work["ctx_candle_range_atr"] = pd.to_numeric(work["feature_candle_range_atr"], errors="coerce")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 1250
+Line       :     work["ctx_range_high"] = work["ctx_candle_range_atr"] >= 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 1251
+Line       :     work["ctx_range_normal"] = work["ctx_candle_range_atr"] < 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 1341
+Line       :         ("range_ATR", "ctx_candle_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 1422
+Line       :         "ctx_macd_delta_signed", "ctx_volume_ratio", "ctx_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 1468
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 6978
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7001
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7002
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7003
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7046
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7134
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7185
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7208
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7209
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7210
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7253
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7341
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7448
+Line       :         ("range_ATR", "anat_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 7509
+Line       :         "anat_volume", "anat_range_atr", "anat_geometry", "anat_premove",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 9226
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 9264
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr", "feature_upper_wick_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 11094
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 11542
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 11550
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 11611
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 11741
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 11923
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 12027
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 12141
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2.py
+LineNumber : 13333
+Line       :     "candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 757
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 1231
+Line       :     work["ctx_candle_range_atr"] = pd.to_numeric(work["feature_candle_range_atr"], errors="coerce")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 1250
+Line       :     work["ctx_range_high"] = work["ctx_candle_range_atr"] >= 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 1251
+Line       :     work["ctx_range_normal"] = work["ctx_candle_range_atr"] < 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 1341
+Line       :         ("range_ATR", "ctx_candle_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 1422
+Line       :         "ctx_macd_delta_signed", "ctx_volume_ratio", "ctx_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 1468
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 6978
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7001
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7002
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7003
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7046
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7134
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7185
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7208
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7209
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7210
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7253
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7341
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7448
+Line       :         ("range_ATR", "anat_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 7509
+Line       :         "anat_volume", "anat_range_atr", "anat_geometry", "anat_premove",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 9189
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 9227
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr", "feature_upper_wick_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11012
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11460
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11468
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11529
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11659
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11841
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 11945
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v519.py
+LineNumber : 12059
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 757
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 1231
+Line       :     work["ctx_candle_range_atr"] = pd.to_numeric(work["feature_candle_range_atr"], errors="coerce")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 1250
+Line       :     work["ctx_range_high"] = work["ctx_candle_range_atr"] >= 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 1251
+Line       :     work["ctx_range_normal"] = work["ctx_candle_range_atr"] < 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 1341
+Line       :         ("range_ATR", "ctx_candle_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 1422
+Line       :         "ctx_macd_delta_signed", "ctx_volume_ratio", "ctx_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 1468
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 6978
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7001
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7002
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7003
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7046
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7134
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7185
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7208
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7209
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7210
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7253
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7341
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7448
+Line       :         ("range_ATR", "anat_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 7509
+Line       :         "anat_volume", "anat_range_atr", "anat_geometry", "anat_premove",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 9198
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 9236
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr", "feature_upper_wick_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11030
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11478
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11486
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11547
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11677
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11859
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 11963
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v520.py
+LineNumber : 12077
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 757
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 1231
+Line       :     work["ctx_candle_range_atr"] = pd.to_numeric(work["feature_candle_range_atr"], errors="coerce")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 1250
+Line       :     work["ctx_range_high"] = work["ctx_candle_range_atr"] >= 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 1251
+Line       :     work["ctx_range_normal"] = work["ctx_candle_range_atr"] < 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 1341
+Line       :         ("range_ATR", "ctx_candle_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 1422
+Line       :         "ctx_macd_delta_signed", "ctx_volume_ratio", "ctx_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 1468
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 6978
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7001
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7002
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7003
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7046
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7134
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7185
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7208
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7209
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7210
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7253
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7341
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7448
+Line       :         ("range_ATR", "anat_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 7509
+Line       :         "anat_volume", "anat_range_atr", "anat_geometry", "anat_premove",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 9205
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 9243
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr", "feature_upper_wick_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11046
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11494
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11502
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11563
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11693
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11875
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 11979
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v521.py
+LineNumber : 12093
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 757
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 1231
+Line       :     work["ctx_candle_range_atr"] = pd.to_numeric(work["feature_candle_range_atr"], errors="coerce")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 1250
+Line       :     work["ctx_range_high"] = work["ctx_candle_range_atr"] >= 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 1251
+Line       :     work["ctx_range_normal"] = work["ctx_candle_range_atr"] < 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 1341
+Line       :         ("range_ATR", "ctx_candle_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 1422
+Line       :         "ctx_macd_delta_signed", "ctx_volume_ratio", "ctx_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 1468
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 6978
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7001
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7002
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7003
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7046
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7134
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7185
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7208
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7209
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7210
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7253
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7341
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7448
+Line       :         ("range_ATR", "anat_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 7509
+Line       :         "anat_volume", "anat_range_atr", "anat_geometry", "anat_premove",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 9212
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 9250
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr", "feature_upper_wick_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11062
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11510
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11518
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11579
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11709
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11891
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 11995
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 12109
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522.py
+LineNumber : 13301
+Line       :     "candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 757
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 1231
+Line       :     work["ctx_candle_range_atr"] = pd.to_numeric(work["feature_candle_range_atr"], errors="coerce")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 1250
+Line       :     work["ctx_range_high"] = work["ctx_candle_range_atr"] >= 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 1251
+Line       :     work["ctx_range_normal"] = work["ctx_candle_range_atr"] < 1.5
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 1341
+Line       :         ("range_ATR", "ctx_candle_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 1422
+Line       :         "ctx_macd_delta_signed", "ctx_volume_ratio", "ctx_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 1468
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 6978
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7001
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7002
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7003
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7046
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7134
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7185
+Line       :     work["anat_range_atr"] = num("feature_candle_range_atr")
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7208
+Line       :         [work["anat_range_atr"] < 0.75,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7209
+Line       :          work["anat_range_atr"].between(0.75, 1.50, inclusive="left"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7210
+Line       :          work["anat_range_atr"] >= 1.50],
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7253
+Line       :         ((work["anat_vwap_signed"] >= 0.35) | (work["anat_range_atr"] >= 1.5))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7341
+Line       :         "anat_body_pct", "anat_range_atr", "anat_upper_wick", "anat_lower_wick",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7448
+Line       :         ("range_ATR", "anat_range_atr"),
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 7509
+Line       :         "anat_volume", "anat_range_atr", "anat_geometry", "anat_premove",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 9219
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 9257
+Line       :         "feature_candle_body_pct", "feature_candle_range_atr", "feature_upper_wick_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 11078
+Line       :     work["feature_candle_range_atr"] = candle_range / work["atr14"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 11526
+Line       :     range_atr = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 11534
+Line       :                 range_atr = rng / atr_1m
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 11595
+Line       :         "entry_1m_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 11725
+Line       :         "distance_to_vwap_pct", "entry_1m_body_pct", "entry_1m_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 11907
+Line       :         range_atr = (rng / atr) if (pd.notna(atr) and atr > 0) else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 12011
+Line       :             "candle_range_atr": range_atr,
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 12125
+Line       :         "displacement_atr", "candle_range_atr", "candle_body_pct",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\main_v5.17_threshold_path_lab_v2_BACKUP_v522b.py
+LineNumber : 13317
+Line       :     "candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v521_block_b.py
+LineNumber : 12
+Line       :     "candle_range_atr",
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study.py
+LineNumber : 311
+Line       :     def _window_range_atr(bars_back):
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study.py
+LineNumber : 370
+Line       :     out["pre_bos_1m_range_atr_5m"] = _window_range_atr(5)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study.py
+LineNumber : 371
+Line       :     out["pre_bos_1m_range_atr_20m"] = _window_range_atr(20)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study.py
+LineNumber : 446
+Line       :     out["pre_bos_5m_range_atr_current"] = _safe_div(
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study.py
+LineNumber : 450
+Line       :         out["pre_bos_5m_range_atr_prev"] = _safe_div(
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study.py
+LineNumber : 454
+Line       :         out["pre_bos_5m_range_atr_prev"] = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study_BACKUP.py
+LineNumber : 299
+Line       :     def _window_range_atr(bars_back):
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study_BACKUP.py
+LineNumber : 358
+Line       :     out["pre_bos_1m_range_atr_5m"] = _window_range_atr(5)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study_BACKUP.py
+LineNumber : 359
+Line       :     out["pre_bos_1m_range_atr_20m"] = _window_range_atr(20)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study_BACKUP.py
+LineNumber : 434
+Line       :     out["pre_bos_5m_range_atr_current"] = _safe_div(
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study_BACKUP.py
+LineNumber : 438
+Line       :         out["pre_bos_5m_range_atr_prev"] = _safe_div(
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v523_regime_study_BACKUP.py
+LineNumber : 442
+Line       :         out["pre_bos_5m_range_atr_prev"] = np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025.py
+LineNumber : 76
+Line       :     "range_atr":             {"q25":  0.548357, "q75": 1.184550, "q90": 1.679872},
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025.py
+LineNumber : 295
+Line       :     work["feat_range_atr"] = (high - low) / atr.replace(0, np.nan)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_5mcache.py
+LineNumber : 74
+Line       :     "range_atr":             {"q25":  0.548357, "q75": 1.184550, "q90": 1.679872},
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_5mcache.py
+LineNumber : 291
+Line       :     work["feat_range_atr"] = (high - low) / atr.replace(0, np.nan)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_reach.py
+LineNumber : 74
+Line       :     "range_atr":             {"q25":  0.548357, "q75": 1.184550, "q90": 1.679872},
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_reach.py
+LineNumber : 291
+Line       :     work["feat_range_atr"] = (high - low) / atr.replace(0, np.nan)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_reach2.py
+LineNumber : 75
+Line       :     "range_atr":             {"q25":  0.548357, "q75": 1.184550, "q90": 1.679872},
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_reach2.py
+LineNumber : 294
+Line       :     work["feat_range_atr"] = (high - low) / atr.replace(0, np.nan)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_stdout.py
+LineNumber : 74
+Line       :     "range_atr":             {"q25":  0.548357, "q75": 1.184550, "q90": 1.679872},
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_2024_2025_BACKUP_stdout.py
+LineNumber : 286
+Line       :     work["feat_range_atr"] = (high - low) / atr.replace(0, np.nan)
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_generalization_other_tickers.py
+LineNumber : 65
+Line       :     "range_atr":             {"q25":  0.548357, "q75": 1.184550, "q90": 1.679872},
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab.py
+LineNumber : 269
+Line       :     add("range_atr", (d["high"].astype(float) - d["low"].astype(float)) / atr14.replace(0, np.nan))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab.py
+LineNumber : 479
+Line       :     out["feat_range_atr"] = ((high - low) / atr) if atr and atr > 0 else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab.py
+LineNumber : 541
+Line       :     q_rg = quantiles["range_atr"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab.py
+LineNumber : 542
+Line       :     rg = out["feat_range_atr"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_audit.py
+LineNumber : 267
+Line       :     add("range_atr", (d["high"].astype(float) - d["low"].astype(float)) / atr14.replace(0, np.nan))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_audit.py
+LineNumber : 477
+Line       :     out["feat_range_atr"] = ((high - low) / atr) if atr and atr > 0 else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_audit.py
+LineNumber : 539
+Line       :     q_rg = quantiles["range_atr"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_audit.py
+LineNumber : 540
+Line       :     rg = out["feat_range_atr"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_close.py
+LineNumber : 268
+Line       :     add("range_atr", (d["high"].astype(float) - d["low"].astype(float)) / atr14.replace(0, np.nan))
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_close.py
+LineNumber : 478
+Line       :     out["feat_range_atr"] = ((high - low) / atr) if atr and atr > 0 else np.nan
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_close.py
+LineNumber : 540
+Line       :     q_rg = quantiles["range_atr"]
+
+Path       : C:\Users\user\Desktop\MOEX_TRADING_LAB_V2\v600_hypothesis_lab_BACKUP_close.py
+LineNumber : 541
+Line       :     rg = out["feat_range_atr"]
+
+
+
